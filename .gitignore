@@ -1,0 +1,15 @@
+# Ignore credentials and sensitive files
+**/credentials.json
+**/*.env
+**/config/credentials/*
+**/vendor/phpmailer/phpmailer/get_oauth_token.php
+**/backend/src/vendor/phpmailer/phpmailer/get_oauth_token.php
+
+# Ignore common files
+node_modules/
+vendor/
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db 
