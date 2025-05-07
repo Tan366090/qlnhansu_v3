@@ -1,0 +1,59 @@
+/* Material Icons */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../webfonts/MaterialIcons-Regular.woff2') format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom icon classes */
+.fa-home:before { content: "\f015"; }
+.fa-users:before { content: "\f0c0"; }
+.fa-calendar:before { content: "\f133"; }
+.fa-chart-bar:before { content: "\f080"; }
+.fa-bell:before { content: "\f0f3"; }
+.fa-cog:before { content: "\f013"; }
+.fa-user-plus:before { content: "\f234"; }
+.fa-building:before { content: "\f1ad"; }
+.fa-user-check:before { content: "\f4fc"; }
+.fa-money-bill-wave:before { content: "\f53a"; }
+.fa-calendar-alt:before { content: "\f073"; }
+.fa-user-injured:before { content: "\f728"; }
+.fa-chevron-right:before { content: "\f054"; }
+.fa-search:before { content: "\f002"; }
+.fa-sun:before { content: "\f185"; }
+.fa-moon:before { content: "\f186"; }
+.fa-user-circle:before { content: "\f2bd"; }
+.fa-clock:before { content: "\f017"; }
+.fa-calendar-check:before { content: "\f274"; }
+.fa-exclamation-triangle:before { content: "\f071"; }
+.fa-procedures:before { content: "\f487"; }
+.fa-baby:before { content: "\f77c"; }
+.fa-female:before { content: "\f182"; }
+.fa-ambulance:before { content: "\f0f9"; }
+.fa-calendar-week:before { content: "\f784"; }
+.fa-calendar-day:before { content: "\f783"; }
+.fa-exchange-alt:before { content: "\f362"; }
+.fa-calendar-times:before { content: "\f273"; }
+.fa-ban:before { content: "\f05e"; }
+.fa-check-circle:before { content: "\f058"; }
+.fa-times:before { content: "\f00d"; }
+.fa-save:before { content: "\f0c7"; }
+.fa-spinner:before { content: "\f110"; }
+.fa-user:before { content: "\f007"; } 

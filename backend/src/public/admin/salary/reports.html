@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo lương - Hệ thống quản lý nhân sự</title>
+    <link rel="stylesheet" href="/admin/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dashboard">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/employees">
+                                <i class="fas fa-users"></i> Nhân viên
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/departments">
+                                <i class="fas fa-building"></i> Phòng ban
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/positions">
+                                <i class="fas fa-briefcase"></i> Vị trí công việc
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/attendance">
+                                <i class="fas fa-calendar-check"></i> Chấm công
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/leave">
+                                <i class="fas fa-calendar-times"></i> Nghỉ phép
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/training">
+                                <i class="fas fa-graduation-cap"></i> Đào tạo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/certificates">
+                                <i class="fas fa-certificate"></i> Bằng cấp
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/documents">
+                                <i class="fas fa-file-alt"></i> Tài liệu
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/equipment">
+                                <i class="fas fa-laptop"></i> Thiết bị
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/performance">
+                                <i class="fas fa-chart-line"></i> Hiệu suất
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admin/salary">
+                                <i class="fas fa-money-bill-wave"></i> Lương
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Báo cáo lương</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="exportExcel">
+                                <i class="fas fa-file-excel"></i> Xuất Excel
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="printReport">
+                                <i class="fas fa-print"></i> In báo cáo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form id="filterForm" class="row g-3">
+                            <div class="col-md-3">
+                                <label for="filterYear" class="form-label">Năm</label>
+                                <select class="form-select" id="filterYear">
+                                    <option value="">Tất cả</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterDepartment" class="form-label">Phòng ban</label>
+                                <select class="form-select" id="filterDepartment">
+                                    <option value="">Tất cả</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterReportType" class="form-label">Loại báo cáo</label>
+                                <select class="form-select" id="filterReportType">
+                                    <option value="monthly">Theo tháng</option>
+                                    <option value="quarterly">Theo quý</option>
+                                    <option value="yearly">Theo năm</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterChartType" class="form-label">Loại biểu đồ</label>
+                                <select class="form-select" id="filterChartType">
+                                    <option value="bar">Biểu đồ cột</option>
+                                    <option value="line">Biểu đồ đường</option>
+                                    <option value="pie">Biểu đồ tròn</option>
+                                </select>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="button" class="btn btn-secondary" id="resetFilters">
+                                    <i class="fas fa-undo"></i> Đặt lại
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> Tìm kiếm
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card text-white bg-primary">
+                            <div class="card-body">
+                                <h5 class="card-title">Tổng lương</h5>
+                                <h2 class="card-text" id="totalSalary">0</h2>
+                                <p class="card-text" id="totalSalaryChange">+0% so với tháng trước</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-success">
+                            <div class="card-body">
+                                <h5 class="card-title">Tổng phụ cấp</h5>
+                                <h2 class="card-text" id="totalAllowance">0</h2>
+                                <p class="card-text" id="totalAllowanceChange">+0% so với tháng trước</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-warning">
+                            <div class="card-body">
+                                <h5 class="card-title">Tổng thưởng</h5>
+                                <h2 class="card-text" id="totalBonus">0</h2>
+                                <p class="card-text" id="totalBonusChange">+0% so với tháng trước</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-white bg-danger">
+                            <div class="card-body">
+                                <h5 class="card-title">Tổng khấu trừ</h5>
+                                <h2 class="card-text" id="totalDeduction">0</h2>
+                                <p class="card-text" id="totalDeductionChange">+0% so với tháng trước</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Phân tích lương theo phòng ban</h5>
+                                <canvas id="departmentChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Xu hướng lương theo thời gian</h5>
+                                <canvas id="trendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Report -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Báo cáo chi tiết</h5>
+                        <div class="table-responsive">
+                            <table id="reportTable" class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Phòng ban</th>
+                                        <th>Số nhân viên</th>
+                                        <th>Tổng lương cơ bản</th>
+                                        <th>Tổng phụ cấp</th>
+                                        <th>Tổng thưởng</th>
+                                        <th>Tổng khấu trừ</th>
+                                        <th>Tổng lương</th>
+                                        <th>Lương trung bình</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message alert alert-danger" style="display: none;"></div>
+
+    <!-- Success Message -->
+    <div class="success-message alert alert-success" style="display: none;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="/admin/js/salary-reports.js"></script>
+</body>
+</html> 

@@ -1,0 +1,73 @@
+# Enable CORS
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Set base directory
+RewriteBase /
+
+# If the request is for a file or directory, serve it directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Rewrite API requests to the API directory
+RewriteRule ^api/(.*)$ api/$1 [QSA,L]
+
+# Rewrite all other URLs to index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Prevent directory listing
+Options -Indexes
+
+# Set default character set
+AddDefaultCharset UTF-8
+
+# Enable PHP error reporting
+php_flag display_errors on
+php_value error_reporting E_ALL
+
+# Security headers
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1; mode=block"
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Cache control
+<FilesMatch "\.(css|js|jpg|jpeg|png|gif|ico)$">
+    Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+
+# Prevent access to sensitive files
+<FilesMatch "^(\.htaccess|\.htpasswd|\.git|\.svn|\.env|composer\.json|composer\.lock|package\.json|package-lock\.json)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Set default directory index
+DirectoryIndex login_new.html index.html index.php
+
+# Custom error documents
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+# Allow access to HTML, JavaScript, and CSS files
+<FilesMatch "\.(html|js|css)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Content Security Policy
+<IfModule mod_headers.c>
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://code.jquery.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; img-src 'self' data: https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' http://localhost:* http://127.0.0.1:* https://cdn.jsdelivr.net ws://localhost:8080 ws://127.0.0.1:8080; worker-src 'self' blob:; frame-src 'self'; object-src 'none';"
+</IfModule>
+
+# Handle dashboard requests
+RewriteRule ^(admin|manager|hr|employee)/dashboard\.html$ $1/dashboard.html [L]
+
+# Check session for dashboard pages
+RewriteCond %{REQUEST_URI} ^/(admin|manager|hr|employee)/dashboard\.html$
+RewriteRule ^(.*)$ middleware/auth.php [L]

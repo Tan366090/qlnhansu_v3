@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Quản lý Bằng cấp - Hệ thống quản lý nhân sự</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="script-src 'self' 'nonce-abc123' https://cdn.jsdelivr.net https://unpkg.com; object-src 'none';"
+        />
+        <link rel="stylesheet" href="../assets/css/common.css" />
+        <link rel="stylesheet" href="../assets/css/Degree.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+
+        <script
+            nonce="abc123"
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"
+        ></script>
+        <script
+            nonce="abc123"
+            nomodule
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.js"
+        ></script>
+        <script src="../assets/js/common.js"></script>
+        <script src="../assets/js/Degree.js" defer></script>
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Quản lý bằng cấp</h2>
+                        <button
+                            class="btn btn-primary"
+                            onclick="window.location.href='Add_Degree.html'"
+                        >
+                            <i class="fas fa-plus"></i> Thêm bằng cấp
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="filters">
+                            <div class="form-group">
+                                <label class="form-label">Nhân viên</label>
+                                <select
+                                    class="form-control"
+                                    id="employeeFilter"
+                                >
+                                    <option value="">Tất cả nhân viên</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Loại bằng cấp</label>
+                                <select
+                                    class="form-control"
+                                    id="degreeTypeFilter"
+                                >
+                                    <option value="">Tất cả loại</option>
+                                    <option value="university">Đại học</option>
+                                    <option value="college">Cao đẳng</option>
+                                    <option value="certificate">
+                                        Chứng chỉ
+                                    </option>
+                                </select>
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                onclick="filterDegrees()"
+                            >
+                                <i class="fas fa-search"></i> Lọc
+                            </button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã NV</th>
+                                        <th>Họ tên</th>
+                                        <th>Loại bằng cấp</th>
+                                        <th>Tên bằng cấp</th>
+                                        <th>Nơi cấp</th>
+                                        <th>Ngày cấp</th>
+                                        <th>Ngày hết hạn</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="degreeList">
+                                    <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal xác nhận xóa -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Xác nhận xóa</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa bằng cấp này?</p>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        onclick="closeDeleteModal()"
+                    >
+                        Hủy
+                    </button>
+                    <button class="btn btn-danger" onclick="confirmDelete()">
+                        Xóa
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let currentDegreeId = null;
+
+            // Hàm tải danh sách nhân viên
+            async function loadEmployees() {
+                try {
+                    const response = await fetch("/api/employees");
+                    const employees = await response.json();
+
+                    const select = document.getElementById("employeeFilter");
+                    employees.forEach((emp) => {
+                        const option = document.createElement("option");
+                        option.value = emp.id;
+                        option.textContent = `${emp.employee_id} - ${emp.full_name}`;
+                        select.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách nhân viên:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách nhân viên",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm tải danh sách bằng cấp
+            async function loadDegrees() {
+                try {
+                    const employee =
+                        document.getElementById("employeeFilter").value;
+                    const type =
+                        document.getElementById("degreeTypeFilter").value;
+
+                    let url = "/api/degrees";
+                    if (employee || type) {
+                        url += "?";
+                        if (employee) url += `employee=${employee}`;
+                        if (type) url += `&type=${type}`;
+                    }
+
+                    const response = await fetch(url);
+                    const degrees = await response.json();
+
+                    const tbody = document.getElementById("degreeList");
+                    tbody.innerHTML = "";
+
+                    degrees.forEach((degree) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                            <td>${degree.employee_id}</td>
+                            <td>${degree.full_name}</td>
+                            <td>${getDegreeTypeName(degree.type)}</td>
+                            <td>${degree.name}</td>
+                            <td>${degree.issuing_organization}</td>
+                            <td>${formatDate(degree.issue_date)}</td>
+                            <td>${formatDate(degree.expiry_date)}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" onclick="viewDegree(${
+                                    degree.id
+                                })">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-warning btn-sm" onclick="editDegree(${
+                                    degree.id
+                                })">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="showDeleteModal(${
+                                    degree.id
+                                })">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách bằng cấp:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách bằng cấp",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm lấy tên loại bằng cấp
+            function getDegreeTypeName(type) {
+                const types = {
+                    university: "Đại học",
+                    college: "Cao đẳng",
+                    certificate: "Chứng chỉ",
+                };
+                return types[type] || type;
+            }
+
+            // Hàm xem chi tiết bằng cấp
+            function viewDegree(id) {
+                window.location.href = `view_degree.html?id=${id}`;
+            }
+
+            // Hàm sửa bằng cấp
+            function editDegree(id) {
+                window.location.href = `edit_degree.html?id=${id}`;
+            }
+
+            // Hàm hiển thị modal xóa
+            function showDeleteModal(id) {
+                currentDegreeId = id;
+                document.getElementById("deleteModal").style.display = "block";
+            }
+
+            // Hàm đóng modal xóa
+            function closeDeleteModal() {
+                document.getElementById("deleteModal").style.display = "none";
+            }
+
+            // Hàm xác nhận xóa
+            async function confirmDelete() {
+                if (!currentDegreeId) return;
+
+                try {
+                    const response = await fetch(
+                        `/api/degrees/${currentDegreeId}`,
+                        {
+                            method: "DELETE",
+                        }
+                    );
+
+                    if (response.ok) {
+                        showNotification("Xóa bằng cấp thành công", "success");
+                        closeDeleteModal();
+                        loadDegrees();
+                    } else {
+                        throw new Error("Xóa bằng cấp thất bại");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi xóa bằng cấp:", error);
+                    showNotification("Có lỗi xảy ra khi xóa bằng cấp", "error");
+                }
+            }
+
+            // Hàm lọc bằng cấp
+            function filterDegrees() {
+                loadDegrees();
+            }
+
+            // Tải dữ liệu khi trang được tải
+            document.addEventListener("DOMContentLoaded", () => {
+                loadEmployees();
+                loadDegrees();
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const degrees = await fetchData("getDegrees"); // Add 'getDegrees' case in API
+                const tbody = document.getElementById("degreeList");
+                tbody.innerHTML = ""; // Clear existing rows
+
+                degrees.forEach((degree) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${degree.employee_id}</td>
+                        <td>${degree.full_name}</td>
+                        <td>${degree.type}</td>
+                        <td>${degree.name}</td>
+                        <td>${degree.issuing_organization}</td>
+                        <td>${degree.issue_date}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

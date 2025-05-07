@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com http://localhost:4000 http://localhost; object-src 'none';"
+        />
+        <title>Chấm công hằng ngày - VNPT</title>
+        <link rel="stylesheet" href="../assets/css/attendance.css" />
+        <link rel="stylesheet" href="/assets/css/notifications.css">
+        <link rel="stylesheet" href="/assets/css/loading.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.js"
+        ></script>
+        <script
+            type="module"
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+        ></script>
+        <script src="../assets/js/common.js"></script>
+        <script src="../assets/js/attendance.js" defer></script>
+        <script type="module" src="/assets/js/main.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const attendance = await fetchData("getAttendance");
+                const tbody = document.getElementById("attendanceList");
+                tbody.innerHTML = ""; // Clear existing rows
+
+                attendance.forEach((record) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${record.employee_id}</td>
+                        <td>${record.date}</td>
+                        <td>${record.status}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editAttendance(${record.id})">
+                                <i class="fas fa-edit"></i> Sửa
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteAttendance(${record.id})">
+                                <i class="fas fa-trash"></i> Xóa
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+
+            async function editAttendance(attendanceId) {
+                // Redirect to edit attendance page with attendance ID
+                window.location.href = `edit_attendance.html?id=${attendanceId}`;
+            }
+
+            async function deleteAttendance(attendanceId) {
+                if (
+                    confirm("Bạn có chắc chắn muốn xóa bản ghi chấm công này?")
+                ) {
+                    const response = await fetch(
+                        `../api/data_loader.php?action=deleteAttendance&id=${attendanceId}`,
+                        { method: "DELETE" }
+                    );
+                    const result = await response.json();
+                    if (result.success) {
+                        alert("Xóa bản ghi chấm công thành công!");
+                        location.reload();
+                    } else {
+                        alert(
+                            "Lỗi khi xóa bản ghi chấm công: " + result.message
+                        );
+                    }
+                }
+            }
+        </script>
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <main class="main-content">
+                <div class="content-header">
+                    <h1>Bảng chấm công hằng ngày</h1>
+                </div>
+                <div class="controls-bar">
+                    <button class="btn btn-secondary">
+                        <ion-icon name="calendar-outline"></ion-icon> Lịch sử
+                        chấm công
+                    </button>
+                    <button
+                        class="btn btn-primary"
+                        id="addAttendanceButton"
+                        style="background-color: #0056b3; color: white"
+                    >
+                        <ion-icon name="add-circle-outline"></ion-icon> Thêm
+                        chấm công
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ngày</th>
+                                <th>Ký hiệu chấm công</th>
+                                <th>Ghi chú</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceList"></tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+        <div id="deleteModal" class="modal" style="display: none">
+            <h4>Xác nhận xóa</h4>
+            <p>Bạn có chắc chắn muốn xóa bản ghi này không?</p>
+            <div class="btn-container">
+                <button id="confirmDeleteButton" class="btn btn-danger">
+                    Xóa
+                </button>
+                <button id="cancelDeleteButton" class="btn btn-secondary">
+                    Hủy
+                </button>
+            </div>
+        </div>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

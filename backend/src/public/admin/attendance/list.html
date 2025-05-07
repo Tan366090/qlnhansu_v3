@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách chấm công</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/libs/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/libs/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/libs/roboto.css">
+    <link rel="stylesheet" href="../dashboard_admin.css">
+    
+    <style>
+        .attendance-list-container {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .filter-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .filter-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .search-group {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .attendance-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .attendance-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status-present {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-absent {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-late {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .export-btn {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="attendance-list-container">
+        <div class="header-section">
+            <h2><i class="fas fa-list"></i> Danh sách chấm công</h2>
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="window.location.href='../dashboard_admin_V1.php'">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </button>
+                <button class="btn btn-success export-btn" onclick="exportAttendance()">
+                    <i class="fas fa-file-export"></i> Xuất Excel
+                </button>
+            </div>
+        </div>
+        
+        <div class="filter-section">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="dateFilter">Lọc theo ngày</label>
+                    <select id="dateFilter" class="form-select">
+                        <option value="today">Hôm nay</option>
+                        <option value="yesterday">Hôm qua</option>
+                        <option value="week">Tuần này</option>
+                        <option value="month">Tháng này</option>
+                        <option value="custom">Tùy chọn</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group" id="customDateRange" style="display: none;">
+                    <label for="startDate">Từ ngày</label>
+                    <input type="date" id="startDate" class="form-control">
+                </div>
+                
+                <div class="filter-group" id="customDateRangeEnd" style="display: none;">
+                    <label for="endDate">Đến ngày</label>
+                    <input type="date" id="endDate" class="form-control">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="statusFilter">Trạng thái</label>
+                    <select id="statusFilter" class="form-select">
+                        <option value="all">Tất cả</option>
+                        <option value="present">Có mặt</option>
+                        <option value="absent">Vắng mặt</option>
+                        <option value="late">Đi muộn</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-row">
+                <div class="search-group">
+                    <label for="searchInput">Tìm kiếm nhân viên</label>
+                    <div class="input-group">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Nhập tên, mã nhân viên hoặc email...">
+                        <button class="btn btn-primary" onclick="searchAttendance()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Mã NV</th>
+                        <th>Tên nhân viên</th>
+                        <th>Phòng ban</th>
+                        <th>Ngày</th>
+                        <th>Giờ vào</th>
+                        <th>Giờ ra</th>
+                        <th>Trạng thái</th>
+                        <th>Ghi chú</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceTableBody">
+                    <!-- Dữ liệu sẽ được tải động -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="pagination">
+            <nav aria-label="Page navigation">
+                <ul class="pagination" id="pagination">
+                    <!-- Phân trang sẽ được tải động -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="../js/libs/jquery-3.7.1.min.js"></script>
+    <script src="../js/libs/bootstrap.bundle.min.js"></script>
+    <script>
+        // Biến toàn cục
+        let currentPage = 1;
+        let totalPages = 1;
+        let currentFilters = {
+            date: 'today',
+            startDate: '',
+            endDate: '',
+            status: 'all',
+            search: ''
+        };
+        
+        // Khởi tạo trang
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAttendanceData();
+            setupEventListeners();
+        });
+        
+        // Thiết lập event listeners
+        function setupEventListeners() {
+            // Xử lý thay đổi bộ lọc ngày
+            document.getElementById('dateFilter').addEventListener('change', function(e) {
+                const value = e.target.value;
+                currentFilters.date = value;
+                
+                if (value === 'custom') {
+                    document.getElementById('customDateRange').style.display = 'block';
+                    document.getElementById('customDateRangeEnd').style.display = 'block';
+                } else {
+                    document.getElementById('customDateRange').style.display = 'none';
+                    document.getElementById('customDateRangeEnd').style.display = 'none';
+                    currentFilters.startDate = '';
+                    currentFilters.endDate = '';
+                }
+                
+                loadAttendanceData();
+            });
+            
+            // Xử lý thay đổi ngày tùy chọn
+            document.getElementById('startDate').addEventListener('change', function(e) {
+                currentFilters.startDate = e.target.value;
+                loadAttendanceData();
+            });
+            
+            document.getElementById('endDate').addEventListener('change', function(e) {
+                currentFilters.endDate = e.target.value;
+                loadAttendanceData();
+            });
+            
+            // Xử lý thay đổi trạng thái
+            document.getElementById('statusFilter').addEventListener('change', function(e) {
+                currentFilters.status = e.target.value;
+                loadAttendanceData();
+            });
+            
+            // Xử lý tìm kiếm khi nhấn Enter
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchAttendance();
+                }
+            });
+        }
+        
+        // Tải dữ liệu chấm công
+        async function loadAttendanceData() {
+            try {
+                const params = new URLSearchParams({
+                    page: currentPage,
+                    date: currentFilters.date,
+                    startDate: currentFilters.startDate,
+                    endDate: currentFilters.endDate,
+                    status: currentFilters.status,
+                    search: currentFilters.search
+                });
+                
+                const response = await fetch(`/api/attendance/list.php?${params}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    renderAttendanceTable(data.records);
+                    renderPagination(data.totalPages);
+                } else {
+                    throw new Error(data.message || 'Có lỗi xảy ra khi tải dữ liệu');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi tải dữ liệu chấm công');
+            }
+        }
+        
+        // Hiển thị bảng chấm công
+        function renderAttendanceTable(records) {
+            const tbody = document.getElementById('attendanceTableBody');
+            tbody.innerHTML = '';
+            
+            records.forEach(record => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${record.employee_id}</td>
+                    <td>${record.employee_name}</td>
+                    <td>${record.department}</td>
+                    <td>${record.date}</td>
+                    <td>${record.check_in || '-'}</td>
+                    <td>${record.check_out || '-'}</td>
+                    <td><span class="status-badge status-${record.status.toLowerCase()}">${record.status}</span></td>
+                    <td>${record.notes || '-'}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        // Hiển thị phân trang
+        function renderPagination(total) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            // Nút Previous
+            const prevLi = document.createElement('li');
+            prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevLi.innerHTML = `
+                <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            `;
+            pagination.appendChild(prevLi);
+            
+            // Các nút trang
+            for (let i = 1; i <= total; i++) {
+                const li = document.createElement('li');
+                li.className = `page-item ${currentPage === i ? 'active' : ''}`;
+                li.innerHTML = `
+                    <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                `;
+                pagination.appendChild(li);
+            }
+            
+            // Nút Next
+            const nextLi = document.createElement('li');
+            nextLi.className = `page-item ${currentPage === total ? 'disabled' : ''}`;
+            nextLi.innerHTML = `
+                <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            `;
+            pagination.appendChild(nextLi);
+        }
+        
+        // Thay đổi trang
+        function changePage(page) {
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            loadAttendanceData();
+        }
+        
+        // Tìm kiếm chấm công
+        function searchAttendance() {
+            currentFilters.search = document.getElementById('searchInput').value.trim();
+            currentPage = 1;
+            loadAttendanceData();
+        }
+        
+        // Xuất dữ liệu ra Excel
+        async function exportAttendance() {
+            try {
+                const params = new URLSearchParams({
+                    date: currentFilters.date,
+                    startDate: currentFilters.startDate,
+                    endDate: currentFilters.endDate,
+                    status: currentFilters.status,
+                    search: currentFilters.search
+                });
+                
+                const response = await fetch(`/api/attendance/export.php?${params}`);
+                const blob = await response.blob();
+                
+                // Tạo link tải xuống
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `attendance_${new Date().toISOString().split('T')[0]}.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                a.remove();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi xuất dữ liệu');
+            }
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lịch sử chấm công - VNPT</title>
+        <!-- Updated title -->
+        <!-- <link rel="stylesheet" href="./css/common.css" /> -->
+        <!-- Assuming styles merged -->
+        <link rel="stylesheet" href="./css/attendance_History.css" />
+        <!-- CSS -->
+        <link rel="stylesheet" href="/assets/css/notifications.css">
+        <link rel="stylesheet" href="/assets/css/loading.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <!-- JavaScript -->
+        <script type="module" src="/assets/js/main.js"></script>
+
+        <!-- === Ionicons Scripts (Essential for Sidebar) === -->
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"
+            nonce="randomNonce123"
+        ></script>
+        <script
+            nomodule
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.js"
+            nonce="randomNonce123"
+        ></script>
+        <script
+            type="module"
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+            nonce="randomNonce123"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+            nonce="randomNonce123"
+        ></script>
+        <!-- ============================================ -->
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="
+                default-src 'self';
+                script-src 'self' 'nonce-randomNonce123' https://cdn.jsdelivr.net https://unpkg.com;
+                style-src 'self' 'unsafe-inline';
+                img-src 'self' data:;
+                font-src 'self' data:;
+                connect-src 'self' http://localhost http://localhost:4000 https://cdn.jsdelivr.net https://unpkg.com;
+            "
+        />
+        <!-- Ensure the nonce matches the one used in scripts -->
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <!-- Sidebar will be injected by common.js -->
+
+            <main class="main-content">
+                <!-- Standard Content Header -->
+                <div class="content-header">
+                    <h1>Lịch sử chấm công</h1>
+                </div>
+
+                <!-- Controls/Filter Bar -->
+                <div class="controls-bar">
+                    <div class="filter-group">
+                        <label for="month-select">Chọn tháng:</label>
+                        <select id="month-select" name="month">
+                            <option value="1">Tháng 1</option>
+                            <option value="2">Tháng 2</option>
+                            <option value="3">Tháng 3</option>
+                            <option value="4">Tháng 4</option>
+                            <option value="5">Tháng 5</option>
+                            <option value="6">Tháng 6</option>
+                            <option value="7">Tháng 7</option>
+                            <option value="8">Tháng 8</option>
+                            <option value="9">Tháng 9</option>
+                            <option value="10">Tháng 10</option>
+                            <option value="11">Tháng 11</option>
+                            <option value="12">Tháng 12</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="year-select">Chọn năm:</label>
+                        <input
+                            type="number"
+                            id="year-select"
+                            name="year"
+                            value="2025"
+                            min="2020"
+                            max="2030"
+                        />
+                    </div>
+                    <button class="btn btn-primary btn-filter">
+                        <ion-icon name="filter-outline"></ion-icon> Lọc
+                    </button>
+                    <button
+                        class="btn btn-secondary btn-reload"
+                        id="reloadButton"
+                    >
+                        <ion-icon name="refresh-outline"></ion-icon> Load lại dữ
+                        liệu
+                    </button>
+                </div>
+
+                <!-- Table Container for scrolling -->
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ngày</th>
+                                <th>Giờ</th>
+                                <th>Trạng thái</th>
+                                <th>Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceHistoryList">
+                            <!-- Dữ liệu lịch sử sẽ được render bởi JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Optional: Pagination Controls -->
+                <!-- <div class="pagination"> ... </div> -->
+            </main>
+        </div>
+        <script src="./js/common.js"></script>
+        <!-- Injects Sidebar -->
+        <script src="./js/attendance_History.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const attendanceHistory = await fetchData(
+                    "getAttendanceHistory"
+                ); // Add 'getAttendanceHistory' case in API
+                const tbody = document.getElementById("attendanceHistoryList");
+                tbody.innerHTML = ""; // Clear existing rows
+
+                attendanceHistory.forEach((record) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${record.employee_id}</td>
+                        <td>${record.date}</td>
+                        <td>${record.status}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

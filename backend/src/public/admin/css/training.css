@@ -1,0 +1,153 @@
+/* Training Module Styles */
+.training-card {
+    margin-bottom: 1.5rem;
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.training-card .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.training-card .card-title {
+    margin-bottom: 0;
+    color: #495057;
+}
+
+.training-status {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-planned {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-ongoing {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-completed {
+    background-color: #f5f5f5;
+    color: #616161;
+}
+
+.status-cancelled {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.training-table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+}
+
+.training-table td {
+    vertical-align: middle;
+}
+
+.training-form .form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.training-form .form-control:focus,
+.training-form .form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.training-modal .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.training-modal .modal-title {
+    color: #495057;
+    font-weight: 600;
+}
+
+.training-chart {
+    position: relative;
+    height: 300px;
+    margin-bottom: 1.5rem;
+}
+
+.training-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.training-metric-card {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.training-metric-card .metric-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #495057;
+}
+
+.training-metric-card .metric-label {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.training-filters {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.training-filters .form-group {
+    margin-bottom: 1rem;
+}
+
+.training-filters label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.training-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.training-actions .btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.training-actions .btn i {
+    font-size: 0.875rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .training-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .training-actions {
+        flex-direction: column;
+    }
+    
+    .training-actions .btn {
+        width: 100%;
+    }
+} 

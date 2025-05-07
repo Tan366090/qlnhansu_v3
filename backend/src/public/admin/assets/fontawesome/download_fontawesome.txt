@@ -1,0 +1,19 @@
+Để tải Font Awesome về local, hãy làm theo các bước sau:
+
+1. Truy cập trang web: https://fontawesome.com/download
+2. Tải xuống phiên bản Free
+3. Giải nén file tải xuống
+4. Sao chép các file sau vào thư mục assets/fontawesome:
+   - css/all.min.css
+   - webfonts/* (tất cả các file trong thư mục webfonts)
+5. Đảm bảo cấu trúc thư mục như sau:
+   backend/src/public/admin/assets/fontawesome/
+   ├── css/
+   │   └── all.min.css
+   └── webfonts/
+       ├── fa-brands-400.woff2
+       ├── fa-brands-400.ttf
+       ├── fa-regular-400.woff2
+       ├── fa-regular-400.ttf
+       ├── fa-solid-900.woff2
+       └── fa-solid-900.ttf 

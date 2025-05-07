@@ -1,0 +1,145 @@
+/* Enhanced Features Specific Styles */
+/* Enhanced Menu Search */
+.search-loading {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+/* Enhanced Data Tables */
+th[data-sortable] {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+th[data-sortable]:after {
+    content: '';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #666;
+    opacity: 0.5;
+}
+
+th[data-sortable][data-direction="asc"]:after {
+    border-bottom: none;
+    border-top: 4px solid #666;
+}
+
+.resizer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    cursor: col-resize;
+    background: transparent;
+}
+
+.resizer:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+tr.selected {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Enhanced Responsive Design */
+.touch-enabled {
+    touch-action: pan-x pan-y;
+}
+
+img[data-src] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+.responsive-text {
+    transition: font-size 0.3s ease;
+}
+
+/* Enhanced Accessibility */
+.skip-links {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.skip-links:focus-within {
+    top: 0;
+}
+
+.skip-link {
+    position: absolute;
+    left: 0;
+    padding: 8px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    outline: 2px solid #fff;
+}
+
+/* Enhanced Performance */
+.module-loader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+}
+
+.module-loader.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Enhanced Security */
+input.invalid {
+    border-color: #dc3545;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+/* Print Styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .print-only {
+        display: block !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .notification-container,
+    .loading-overlay {
+        display: none !important;
+    }
+} 

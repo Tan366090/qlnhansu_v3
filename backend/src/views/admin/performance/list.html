@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh giá hiệu suất - Hệ thống quản lý nhân sự</title>
+    <link rel="stylesheet" href="/admin/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dashboard">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/employees">
+                                <i class="fas fa-users"></i> Nhân viên
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/departments">
+                                <i class="fas fa-building"></i> Phòng ban
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/positions">
+                                <i class="fas fa-briefcase"></i> Vị trí công việc
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/attendance">
+                                <i class="fas fa-calendar-check"></i> Chấm công
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/leave">
+                                <i class="fas fa-calendar-times"></i> Nghỉ phép
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/training">
+                                <i class="fas fa-graduation-cap"></i> Đào tạo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/certificates">
+                                <i class="fas fa-certificate"></i> Bằng cấp
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/documents">
+                                <i class="fas fa-file-alt"></i> Tài liệu
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/equipment">
+                                <i class="fas fa-laptop"></i> Thiết bị
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admin/performance">
+                                <i class="fas fa-chart-line"></i> Hiệu suất
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/salary">
+                                <i class="fas fa-money-bill-wave"></i> Lương
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Đánh giá hiệu suất</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReviewModal">
+                            <i class="fas fa-plus"></i> Thêm đánh giá
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form id="filterForm" class="row g-3">
+                            <div class="col-md-3">
+                                <label for="filterEmployee" class="form-label">Nhân viên</label>
+                                <select class="form-select" id="filterEmployee">
+                                    <option value="">Tất cả</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterPeriod" class="form-label">Kỳ đánh giá</label>
+                                <select class="form-select" id="filterPeriod">
+                                    <option value="">Tất cả</option>
+                                    <option value="Q1">Quý 1</option>
+                                    <option value="Q2">Quý 2</option>
+                                    <option value="Q3">Quý 3</option>
+                                    <option value="Q4">Quý 4</option>
+                                    <option value="YEAR">Năm</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterYear" class="form-label">Năm</label>
+                                <input type="number" class="form-control" id="filterYear" min="2000" max="2100">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterScore" class="form-label">Điểm số</label>
+                                <select class="form-select" id="filterScore">
+                                    <option value="">Tất cả</option>
+                                    <option value="1">1 - Không đạt</option>
+                                    <option value="2">2 - Cần cải thiện</option>
+                                    <option value="3">3 - Đạt yêu cầu</option>
+                                    <option value="4">4 - Tốt</option>
+                                    <option value="5">5 - Xuất sắc</option>
+                                </select>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="button" class="btn btn-secondary" id="resetFilters">
+                                    <i class="fas fa-undo"></i> Đặt lại
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> Tìm kiếm
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Performance Chart -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Biểu đồ hiệu suất</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="performanceChart" height="300"></canvas>
+                    </div>
+                </div>
+
+                <!-- Performance Reviews Table -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="performanceTable" class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã NV</th>
+                                        <th>Họ tên</th>
+                                        <th>Kỳ đánh giá</th>
+                                        <th>Điểm số</th>
+                                        <th>Nhận xét</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message alert alert-danger" style="display: none;"></div>
+
+    <!-- Success Message -->
+    <div class="success-message alert alert-success" style="display: none;"></div>
+
+    <!-- Add Review Modal -->
+    <div class="modal fade" id="addReviewModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm đánh giá hiệu suất</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addReviewForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="employee" class="form-label">Nhân viên</label>
+                                <select class="form-select" id="employee" required>
+                                    <option value="">Chọn nhân viên</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="period" class="form-label">Kỳ đánh giá</label>
+                                <select class="form-select" id="period" required>
+                                    <option value="">Chọn kỳ đánh giá</option>
+                                    <option value="Q1">Quý 1</option>
+                                    <option value="Q2">Quý 2</option>
+                                    <option value="Q3">Quý 3</option>
+                                    <option value="Q4">Quý 4</option>
+                                    <option value="YEAR">Năm</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="year" class="form-label">Năm</label>
+                                <input type="number" class="form-control" id="year" min="2000" max="2100" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="score" class="form-label">Điểm số</label>
+                                <select class="form-select" id="score" required>
+                                    <option value="">Chọn điểm số</option>
+                                    <option value="1">1 - Không đạt</option>
+                                    <option value="2">2 - Cần cải thiện</option>
+                                    <option value="3">3 - Đạt yêu cầu</option>
+                                    <option value="4">4 - Tốt</option>
+                                    <option value="5">5 - Xuất sắc</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comments" class="form-label">Nhận xét</label>
+                            <textarea class="form-control" id="comments" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="strengths" class="form-label">Điểm mạnh</label>
+                            <textarea class="form-control" id="strengths" rows="2"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="improvements" class="form-label">Điểm cần cải thiện</label>
+                            <textarea class="form-control" id="improvements" rows="2"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="saveReview">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="/admin/js/performance.js"></script>
+</body>
+</html> 

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Import Employees</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .error-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .error-list li {
+            margin: 5px 0;
+            padding: 5px;
+            background-color: #fff;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Import Employees</h1>
+    
+    <form id="importForm">
+        <div>
+            <label for="file">Chọn file txt:</label>
+            <input type="file" id="file" name="file" accept=".txt" required>
+        </div>
+        <div style="margin-top: 10px;">
+            <button type="submit">Import</button>
+        </div>
+    </form>
+
+    <div id="result" class="result" style="display: none;"></div>
+
+    <script>
+        document.getElementById('importForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('file');
+            const resultDiv = document.getElementById('result');
+            
+            if (!fileInput.files.length) {
+                alert('Vui lòng chọn file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            try {
+                const response = await fetch('/qlnhansu_V2/backend/src/api/import_employees.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                resultDiv.style.display = 'block';
+                
+                if (data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `<h3>Thành công!</h3><p>${data.message}</p>`;
+                } else {
+                    resultDiv.className = 'result error';
+                    let errorHtml = '<h3>Lỗi!</h3>';
+                    
+                    if (data.errors) {
+                        errorHtml += '<ul class="error-list">';
+                        data.errors.forEach(error => {
+                            errorHtml += `<li>${error}</li>`;
+                        });
+                        errorHtml += '</ul>';
+                    } else if (data.error) {
+                        errorHtml += `<p>${data.error}</p>`;
+                    }
+                    
+                    resultDiv.innerHTML = errorHtml;
+                }
+            } catch (error) {
+                resultDiv.style.display = 'block';
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<h3>Lỗi!</h3><p>${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html> 

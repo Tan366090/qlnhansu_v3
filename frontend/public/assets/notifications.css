@@ -1,0 +1,75 @@
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transform: translateX(120%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 9999;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification i {
+    font-size: 20px;
+}
+
+.notification.success {
+    background-color: #e7f6ed;
+    color: #0a7c42;
+    border-left: 4px solid #0a7c42;
+}
+
+.notification.warning {
+    background-color: #fff8e6;
+    color: #b95000;
+    border-left: 4px solid #b95000;
+}
+
+.notification.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+}
+
+.notification .close-btn {
+    margin-left: 15px;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.notification .close-btn:hover {
+    opacity: 1;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(120%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(120%);
+    }
+} 

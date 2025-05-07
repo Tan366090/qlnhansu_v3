@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý nhân sự - Danh sách tài liệu</title>
+    <link rel="stylesheet" href="/assets/css/admin/documents.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>QLNS</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/admin/dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="/admin/employees/list.html"><i class="fas fa-users"></i> Nhân sự</a></li>
+                    <li><a href="/admin/attendance/list.html"><i class="fas fa-calendar-check"></i> Chấm công</a></li>
+                    <li><a href="/admin/salaries/list.html"><i class="fas fa-money-bill"></i> Lương</a></li>
+                    <li><a href="/admin/departments/list.html"><i class="fas fa-building"></i> Phòng ban</a></li>
+                    <li><a href="/admin/positions/list.html"><i class="fas fa-briefcase"></i> Vị trí</a></li>
+                    <li><a href="/admin/leaves/list.html"><i class="fas fa-calendar-times"></i> Nghỉ phép</a></li>
+                    <li><a href="/admin/trainings/list.html"><i class="fas fa-graduation-cap"></i> Đào tạo</a></li>
+                    <li><a href="/admin/certificates/list.html"><i class="fas fa-certificate"></i> Bằng cấp</a></li>
+                    <li class="active"><a href="/admin/documents/list.html"><i class="fas fa-file"></i> Tài liệu</a></li>
+                    <li><a href="/admin/equipments/list.html"><i class="fas fa-laptop"></i> Thiết bị</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header>
+                <div class="header-content">
+                    <h1>Danh sách tài liệu</h1>
+                    <div class="user-info">
+                        <span id="userName">Admin</span>
+                        <button id="logoutBtn" class="btn btn-danger">
+                            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Action Bar -->
+            <div class="action-bar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm tài liệu...">
+                    <button id="searchBtn" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="filters">
+                    <select id="departmentFilter">
+                        <option value="">Tất cả phòng ban</option>
+                    </select>
+                    <select id="employeeFilter">
+                        <option value="">Tất cả nhân viên</option>
+                    </select>
+                    <select id="typeFilter">
+                        <option value="">Tất cả loại</option>
+                        <option value="application/pdf">PDF</option>
+                        <option value="application/msword">Word</option>
+                    </select>
+                </div>
+                <button id="uploadBtn" class="btn btn-primary">
+                    <i class="fas fa-upload"></i> Tải lên
+                </button>
+            </div>
+
+            <!-- Statistics -->
+            <div class="statistics">
+                <div class="stat-card">
+                    <i class="fas fa-file"></i>
+                    <div class="stat-info">
+                        <h3>Tổng số tài liệu</h3>
+                        <p id="totalDocuments">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-file-pdf"></i>
+                    <div class="stat-info">
+                        <h3>Tài liệu PDF</h3>
+                        <p id="pdfDocuments">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-file-word"></i>
+                    <div class="stat-info">
+                        <h3>Tài liệu Word</h3>
+                        <p id="wordDocuments">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documents Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên tài liệu</th>
+                            <th>Loại</th>
+                            <th>Kích thước</th>
+                            <th>Nhân viên</th>
+                            <th>Phòng ban</th>
+                            <th>Ngày tải lên</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="documentsTableBody">
+                        <!-- Documents will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button id="prevPage" class="btn btn-secondary" disabled>
+                    <i class="fas fa-chevron-left"></i> Trước
+                </button>
+                <span id="pageInfo">Trang 1 / 1</span>
+                <button id="nextPage" class="btn btn-secondary" disabled>
+                    Sau <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Error Message -->
+    <div id="errorMessage" class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        <span id="errorText"></span>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h3>Xác nhận xóa</h3>
+            <p>Bạn có chắc chắn muốn xóa tài liệu này?</p>
+            <div class="modal-actions">
+                <button id="cancelDelete" class="btn btn-secondary">Hủy</button>
+                <button id="confirmDelete" class="btn btn-danger">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/admin/documents.js"></script>
+        <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html> 

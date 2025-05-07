@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chi tiết đánh giá</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 id="evaluationTitle">Chi tiết đánh giá</h2>
+                        <div class="header-actions">
+                            <button
+                                class="btn btn-secondary"
+                                onclick="window.history.back()"
+                            >
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </button>
+                            <button
+                                class="btn btn-primary"
+                                onclick="window.print()"
+                            >
+                                <i class="fas fa-print"></i> In
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="evaluation-detail">
+                            <div class="detail-section">
+                                <h3>Thông tin chung</h3>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <label>Mã NV:</label>
+                                        <span id="employeeCode"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Họ tên:</label>
+                                        <span id="employeeName"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Phòng ban:</label>
+                                        <span id="department"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Vị trí:</label>
+                                        <span id="position"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Loại đánh giá:</label>
+                                        <span id="evaluationType"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Thời gian:</label>
+                                        <span id="evaluationDate"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Người đánh giá:</label>
+                                        <span id="evaluator"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail-section">
+                                <h3>Kết quả đánh giá</h3>
+                                <div class="score-container">
+                                    <div class="score-circle">
+                                        <div
+                                            class="score-value"
+                                            id="scoreValue"
+                                        ></div>
+                                        <div class="score-label">Điểm số</div>
+                                    </div>
+                                    <div class="rating-info">
+                                        <h4>Xếp loại</h4>
+                                        <span
+                                            id="ratingBadge"
+                                            class="rating-badge"
+                                        ></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail-section">
+                                <h3>Nhận xét</h3>
+                                <div class="comment-box" id="comment"></div>
+                            </div>
+
+                            <div class="detail-section">
+                                <h3>Lịch sử đánh giá</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Thời gian</th>
+                                                <th>Loại</th>
+                                                <th>Điểm số</th>
+                                                <th>Xếp loại</th>
+                                                <th>Người đánh giá</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="evaluationHistory">
+                                            <!-- Dữ liệu sẽ được thêm vào đây -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/common.js"></script>
+        <script>
+            let evaluationId = null;
+            let evaluationData = null;
+
+            // Hàm tải thông tin đánh giá
+            async function loadEvaluation() {
+                try {
+                    const urlParams = new URLSearchParams(
+                        window.location.search
+                    );
+                    evaluationId = urlParams.get("id");
+
+                    if (!evaluationId) {
+                        showNotification("Không tìm thấy đánh giá", "error");
+                        return;
+                    }
+
+                    const response = await fetch(
+                        `/api/evaluations/${evaluationId}`
+                    );
+                    evaluationData = await response.json();
+
+                    // Hiển thị thông tin
+                    document.getElementById("employeeCode").textContent =
+                        evaluationData.employee_code;
+                    document.getElementById("employeeName").textContent =
+                        evaluationData.employee_name;
+                    document.getElementById("department").textContent =
+                        evaluationData.department_name;
+                    document.getElementById("position").textContent =
+                        evaluationData.position_name;
+                    document.getElementById("evaluationType").textContent =
+                        getEvaluationTypeText(evaluationData.type);
+                    document.getElementById("evaluationDate").textContent =
+                        formatDate(evaluationData.date);
+                    document.getElementById("evaluator").textContent =
+                        evaluationData.evaluator_name;
+
+                    // Hiển thị điểm số và xếp loại
+                    document.getElementById("scoreValue").textContent =
+                        evaluationData.score;
+                    const ratingBadge = document.getElementById("ratingBadge");
+                    ratingBadge.textContent = getRatingText(
+                        evaluationData.score
+                    );
+                    ratingBadge.classList.add(
+                        getRatingClass(evaluationData.score)
+                    );
+
+                    // Hiển thị nhận xét
+                    document.getElementById("comment").textContent =
+                        evaluationData.comment || "Không có nhận xét";
+
+                    // Tải lịch sử đánh giá
+                    loadEvaluationHistory();
+                } catch (error) {
+                    console.error("Lỗi khi tải thông tin đánh giá:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải thông tin đánh giá",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm tải lịch sử đánh giá
+            async function loadEvaluationHistory() {
+                try {
+                    const response = await fetch(
+                        `/api/evaluations/history?employee_id=${evaluationData.employee_id}`
+                    );
+                    const history = await response.json();
+
+                    const tbody = document.getElementById("evaluationHistory");
+                    tbody.innerHTML = "";
+
+                    history.forEach((item) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                        <td>${formatDate(item.date)}</td>
+                        <td>${getEvaluationTypeText(item.type)}</td>
+                        <td>${item.score}</td>
+                        <td><span class="rating-badge ${getRatingClass(
+                            item.score
+                        )}">${getRatingText(item.score)}</span></td>
+                        <td>${item.evaluator_name}</td>
+                    `;
+                        tbody.appendChild(tr);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải lịch sử đánh giá:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải lịch sử đánh giá",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm lấy text cho loại đánh giá
+            function getEvaluationTypeText(type) {
+                switch (type) {
+                    case "monthly":
+                        return "Tháng";
+                    case "quarterly":
+                        return "Quý";
+                    case "yearly":
+                        return "Năm";
+                    default:
+                        return type;
+                }
+            }
+
+            // Hàm lấy text cho xếp loại
+            function getRatingText(score) {
+                if (score >= 90) return "Xuất sắc";
+                if (score >= 80) return "Tốt";
+                if (score >= 70) return "Khá";
+                if (score >= 60) return "Trung bình";
+                return "Yếu";
+            }
+
+            // Hàm lấy class cho xếp loại
+            function getRatingClass(score) {
+                if (score >= 90) return "excellent";
+                if (score >= 80) return "good";
+                if (score >= 70) return "fair";
+                if (score >= 60) return "average";
+                return "poor";
+            }
+
+            // Hàm định dạng ngày
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return `${date.getMonth() + 1}/${date.getFullYear()}`;
+            }
+
+            // Tải dữ liệu khi trang được tải
+            document.addEventListener("DOMContentLoaded", loadEvaluation);
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const evaluationId = new URLSearchParams(
+                    window.location.search
+                ).get("id");
+                const evaluation = await fetchData(
+                    `getEvaluationDetails&id=${evaluationId}`
+                ); // Add 'getEvaluationDetails' case in API
+
+                if (evaluation) {
+                    document.getElementById("evaluationTitle").textContent =
+                        evaluation.title;
+                    document.getElementById("evaluationDate").textContent =
+                        evaluation.date;
+                    document.getElementById("evaluationContent").textContent =
+                        evaluation.content;
+                }
+            });
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

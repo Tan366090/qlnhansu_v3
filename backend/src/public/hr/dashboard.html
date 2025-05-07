@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard HR - Hệ Thống Quản Lý Nhân Sự</title>
+    
+    <!-- Import shared scripts -->
+    <script src="/QLNhanSu_version1/public/shared/js/auth_utils.js"></script>
+    <script src="/QLNhanSu_version1/public/shared/js/permission.js"></script>
+    <script src="/QLNhanSu_version1/public/shared/js/common.js"></script>
+    
+    <script>
+        // Kiểm tra session khi trang được tải
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const response = await fetch('/QLNhanSu_version1/backend/src/api/auth/check.php', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                const data = await response.json();
+                if (!data.authenticated) {
+                    window.location.href = '/QLNhanSu_version1/public/login_new.html';
+                    return;
+                }
+
+                // Kiểm tra role
+                if (data.role.toLowerCase() !== 'hr') {
+                    window.location.href = data.dashboardUrl || '/QLNhanSu_version1/public/login_new.html';
+                    return;
+                }
+
+                // Hiển thị thông tin người dùng
+                document.getElementById('userFullName').textContent = data.full_name || data.username;
+            } catch (error) {
+                console.error('Lỗi kiểm tra session:', error);
+                window.location.href = '/QLNhanSu_version1/public/login_new.html';
+            }
+        });
+
+        // Kiểm tra session định kỳ
+        setInterval(async function() {
+            try {
+                const response = await fetch('/QLNhanSu_version1/backend/src/api/auth/check.php', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                const data = await response.json();
+                if (!data.authenticated) {
+                    window.location.href = '/QLNhanSu_version1/public/login_new.html';
+                }
+            } catch (error) {
+                console.error('Lỗi kiểm tra session:', error);
+            }
+        }, 300000); // Kiểm tra mỗi 5 phút
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background-color: #343a40;
+            color: white;
+        }
+        .sidebar .nav-link {
+            color: rgba(255,255,255,.75);
+        }
+        .sidebar .nav-link:hover {
+            color: white;
+        }
+        .sidebar .nav-link.active {
+            color: white;
+            background-color: rgba(255,255,255,.1);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .stat-card {
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+            color: white;
+        }
+        .activity-item {
+            border-left: 3px solid #2193b0;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0 sidebar">
+                <div class="p-3">
+                    <h4>HR Dashboard</h4>
+                    <hr>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-tachometer-alt me-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-users me-2"></i>
+                                Quản lý nhân viên
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-file-alt me-2"></i>
+                                Đơn xin nghỉ phép
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-briefcase me-2"></i>
+                                Tuyển dụng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-key me-2"></i>
+                                Đổi mật khẩu
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../logout.php">
+                                <i class="fas fa-sign-out-alt me-2"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="col-md-9 col-lg-10 px-4 py-3">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Xin chào, HR</h2>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-2"></i>
+                            HR
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-key me-2"></i>Đổi mật khẩu</a></li>
+                            <li><a class="dropdown-item" href="../logout.php"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Stats cards -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card stat-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Tổng số nhân viên</h5>
+                                <h2 class="card-text">150</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card stat-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Nhân viên mới tháng này</h5>
+                                <h2 class="card-text">5</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card stat-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Đang tuyển dụng</h5>
+                                <h2 class="card-text">3</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent activities -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Hoạt động gần đây</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-item">
+                            <p class="mb-1">Nhân viên A đã được thêm vào hệ thống</p>
+                            <small class="text-muted">2 giờ trước</small>
+                        </div>
+                        <div class="activity-item">
+                            <p class="mb-1">Nhân viên B đã được cập nhật thông tin</p>
+                            <small class="text-muted">4 giờ trước</small>
+                        </div>
+                        <div class="activity-item">
+                            <p class="mb-1">Đơn xin nghỉ phép của nhân viên C đã được phê duyệt</p>
+                            <small class="text-muted">1 ngày trước</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

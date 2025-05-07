@@ -1,0 +1,28 @@
+{
+    "presets": [
+        ["@babel/preset-env", {
+            "targets": {
+                "browsers": [
+                    "last 2 versions",
+                    "> 1%",
+                    "not dead"
+                ]
+            },
+            "useBuiltIns": "usage",
+            "corejs": 3,
+            "modules": "commonjs"
+        }]
+    ],
+    "plugins": [
+        ["@babel/plugin-transform-runtime", {
+            "regenerator": true
+        }],
+        "@babel/plugin-transform-class-properties",
+        "@babel/plugin-transform-object-rest-spread"
+    ],
+    "env": {
+        "test": {
+            "plugins": ["@babel/plugin-transform-modules-commonjs"]
+        }
+    }
+} 

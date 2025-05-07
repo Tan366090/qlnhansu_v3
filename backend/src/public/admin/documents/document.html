@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quản lý tài liệu</title>
+        <link rel="stylesheet" href="../assets/css/common.css" />
+        <link rel="stylesheet" href="../assets/css/document.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <script src="../assets/js/common.js"></script>
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Quản lý tài liệu</h2>
+                        <button
+                            class="btn btn-primary"
+                            onclick="showAddDocumentModal()"
+                        >
+                            <i class="fas fa-plus"></i> Thêm tài liệu
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="filters">
+                            <div class="form-group">
+                                <label>Loại tài liệu</label>
+                                <select id="documentType">
+                                    <option value="">Tất cả</option>
+                                    <option value="policy">Chính sách</option>
+                                    <option value="procedure">Quy trình</option>
+                                    <option value="form">Biểu mẫu</option>
+                                    <option value="report">Báo cáo</option>
+                                    <option value="other">Khác</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Phòng ban</label>
+                                <select id="department">
+                                    <option value="">Tất cả</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tìm kiếm</label>
+                                <input
+                                    type="text"
+                                    id="search"
+                                    placeholder="Nhập từ khóa..."
+                                />
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                onclick="filterDocuments()"
+                            >
+                                <i class="fas fa-search"></i> Tìm kiếm
+                            </button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã tài liệu</th>
+                                        <th>Tên tài liệu</th>
+                                        <th>Loại</th>
+                                        <th>Phòng ban</th>
+                                        <th>Người tạo</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Phiên bản</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="documentList">
+                                    <!-- Dữ liệu sẽ được thêm vào đây -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal thêm/sửa tài liệu -->
+        <div class="modal" id="documentModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Thêm tài liệu mới</h3>
+                    <button class="close" onclick="hideDocumentModal()">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="documentForm">
+                        <div class="form-group">
+                            <label>Mã tài liệu</label>
+                            <input type="text" id="documentCode" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Tên tài liệu</label>
+                            <input type="text" id="documentName" required />
+                        </div>
+                        <div class="form-group">
+                            <label>Loại tài liệu</label>
+                            <select id="modalDocumentType" required>
+                                <option value="policy">Chính sách</option>
+                                <option value="procedure">Quy trình</option>
+                                <option value="form">Biểu mẫu</option>
+                                <option value="report">Báo cáo</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Phòng ban</label>
+                            <select id="modalDepartment" required>
+                                <option value="">Chọn phòng ban</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <textarea id="description" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>File tài liệu</label>
+                            <input
+                                type="file"
+                                id="documentFile"
+                                accept=".pdf,.doc,.docx,.xls,.xlsx"
+                            />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        onclick="hideDocumentModal()"
+                    >
+                        Hủy
+                    </button>
+                    <button class="btn btn-primary" onclick="saveDocument()">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal xác nhận xóa -->
+        <div class="modal" id="deleteModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Xác nhận xóa</h3>
+                    <button class="close" onclick="hideDeleteModal()">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa tài liệu này?</p>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        onclick="hideDeleteModal()"
+                    >
+                        Hủy
+                    </button>
+                    <button class="btn btn-danger" onclick="confirmDelete()">
+                        Xóa
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let currentDocumentId = null;
+            let documents = [];
+
+            // Hàm tải danh sách tài liệu
+            async function loadDocuments() {
+                try {
+                    const response = await fetch("/api/documents");
+                    documents = await response.json();
+                    displayDocuments(documents);
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách tài liệu:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách tài liệu",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm hiển thị danh sách tài liệu
+            function displayDocuments(docs) {
+                const tbody = document.getElementById("documentList");
+                tbody.innerHTML = "";
+
+                docs.forEach((doc) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                    <td>${doc.code}</td>
+                    <td>${doc.name}</td>
+                    <td>${getDocumentTypeText(doc.type)}</td>
+                    <td>${doc.department_name}</td>
+                    <td>${doc.creator_name}</td>
+                    <td>${formatDate(doc.created_at)}</td>
+                    <td>${doc.version}</td>
+                    <td><span class="status-badge ${
+                        doc.status
+                    }">${getStatusText(doc.status)}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="viewDocument(${
+                            doc.id
+                        })">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-warning" onclick="editDocument(${
+                            doc.id
+                        })">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="showDeleteModal(${
+                            doc.id
+                        })">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Hàm lọc tài liệu
+            function filterDocuments() {
+                const type = document.getElementById("documentType").value;
+                const department = document.getElementById("department").value;
+                const search = document
+                    .getElementById("search")
+                    .value.toLowerCase();
+
+                const filtered = documents.filter((doc) => {
+                    const matchType = !type || doc.type === type;
+                    const matchDepartment =
+                        !department || doc.department_id === department;
+                    const matchSearch =
+                        !search ||
+                        doc.name.toLowerCase().includes(search) ||
+                        doc.code.toLowerCase().includes(search);
+
+                    return matchType && matchDepartment && matchSearch;
+                });
+
+                displayDocuments(filtered);
+            }
+
+            // Hàm hiển thị modal thêm tài liệu
+            function showAddDocumentModal() {
+                currentDocumentId = null;
+                document.getElementById("modalTitle").textContent =
+                    "Thêm tài liệu mới";
+                document.getElementById("documentForm").reset();
+                document.getElementById("documentModal").style.display =
+                    "block";
+            }
+
+            // Hàm hiển thị modal sửa tài liệu
+            async function editDocument(id) {
+                try {
+                    const response = await fetch(`/api/documents/${id}`);
+                    const doc = await response.json();
+
+                    currentDocumentId = id;
+                    document.getElementById("modalTitle").textContent =
+                        "Sửa tài liệu";
+                    document.getElementById("documentCode").value = doc.code;
+                    document.getElementById("documentName").value = doc.name;
+                    document.getElementById("modalDocumentType").value =
+                        doc.type;
+                    document.getElementById("modalDepartment").value =
+                        doc.department_id;
+                    document.getElementById("description").value =
+                        doc.description;
+
+                    document.getElementById("documentModal").style.display =
+                        "block";
+                } catch (error) {
+                    console.error("Lỗi khi tải thông tin tài liệu:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải thông tin tài liệu",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm ẩn modal tài liệu
+            function hideDocumentModal() {
+                document.getElementById("documentModal").style.display = "none";
+            }
+
+            // Hàm lưu tài liệu
+            async function saveDocument() {
+                try {
+                    const form = document.getElementById("documentForm");
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return;
+                    }
+
+                    const formData = new FormData();
+                    formData.append(
+                        "code",
+                        document.getElementById("documentCode").value
+                    );
+                    formData.append(
+                        "name",
+                        document.getElementById("documentName").value
+                    );
+                    formData.append(
+                        "type",
+                        document.getElementById("modalDocumentType").value
+                    );
+                    formData.append(
+                        "department_id",
+                        document.getElementById("modalDepartment").value
+                    );
+                    formData.append(
+                        "description",
+                        document.getElementById("description").value
+                    );
+
+                    const fileInput = document.getElementById("documentFile");
+                    if (fileInput.files.length > 0) {
+                        formData.append("file", fileInput.files[0]);
+                    }
+
+                    const url = currentDocumentId
+                        ? `/api/documents/${currentDocumentId}`
+                        : "/api/documents";
+
+                    const method = currentDocumentId ? "PUT" : "POST";
+
+                    const response = await fetch(url, {
+                        method: method,
+                        body: formData,
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Lỗi khi lưu tài liệu");
+                    }
+
+                    showNotification("Lưu tài liệu thành công", "success");
+                    hideDocumentModal();
+                    loadDocuments();
+                } catch (error) {
+                    console.error("Lỗi khi lưu tài liệu:", error);
+                    showNotification("Có lỗi xảy ra khi lưu tài liệu", "error");
+                }
+            }
+
+            // Hàm hiển thị modal xóa
+            function showDeleteModal(id) {
+                currentDocumentId = id;
+                document.getElementById("deleteModal").style.display = "block";
+            }
+
+            // Hàm ẩn modal xóa
+            function hideDeleteModal() {
+                document.getElementById("deleteModal").style.display = "none";
+            }
+
+            // Hàm xác nhận xóa
+            async function confirmDelete() {
+                try {
+                    const response = await fetch(
+                        `/api/documents/${currentDocumentId}`,
+                        {
+                            method: "DELETE",
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error("Lỗi khi xóa tài liệu");
+                    }
+
+                    showNotification("Xóa tài liệu thành công", "success");
+                    hideDeleteModal();
+                    loadDocuments();
+                } catch (error) {
+                    console.error("Lỗi khi xóa tài liệu:", error);
+                    showNotification("Có lỗi xảy ra khi xóa tài liệu", "error");
+                }
+            }
+
+            // Hàm xem tài liệu
+            function viewDocument(id) {
+                window.location.href = `/view_document.html?id=${id}`;
+            }
+
+            // Hàm lấy text cho loại tài liệu
+            function getDocumentTypeText(type) {
+                switch (type) {
+                    case "policy":
+                        return "Chính sách";
+                    case "procedure":
+                        return "Quy trình";
+                    case "form":
+                        return "Biểu mẫu";
+                    case "report":
+                        return "Báo cáo";
+                    case "other":
+                        return "Khác";
+                    default:
+                        return type;
+                }
+            }
+
+            // Hàm lấy text cho trạng thái
+            function getStatusText(status) {
+                switch (status) {
+                    case "active":
+                        return "Đang áp dụng";
+                    case "draft":
+                        return "Bản nháp";
+                    case "expired":
+                        return "Hết hiệu lực";
+                    default:
+                        return status;
+                }
+            }
+
+            // Hàm định dạng ngày
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString("vi-VN");
+            }
+
+            // Tải dữ liệu khi trang được tải
+            document.addEventListener("DOMContentLoaded", () => {
+                loadDocuments();
+                loadDepartments();
+            });
+
+            document.addEventListener("DOMContentLoaded", async () => {
+                const documents = await fetchData("getDocuments");
+                const tbody = document.getElementById("documentList");
+                tbody.innerHTML = ""; // Clear existing rows
+
+                documents.forEach((doc) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${doc.id}</td>
+                        <td>${doc.title}</td>
+                        <td>${doc.type}</td>
+                        <td>${doc.created_at}</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" onclick="viewDocument(${doc.id})">
+                                <i class="fas fa-eye"></i> Xem
+                            </button>
+                            <button class="btn btn-warning btn-sm" onclick="editDocument(${doc.id})">
+                                <i class="fas fa-edit"></i> Sửa
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+
+            function viewDocument(documentId) {
+                // Redirect to view document page with document ID
+                window.location.href = `view_document.html?id=${documentId}`;
+            }
+
+            function editDocument(documentId) {
+                // Redirect to edit document page with document ID
+                window.location.href = `edit_document.html?id=${documentId}`;
+            }
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý bằng cấp - Hệ thống quản lý nhân sự</title>
+    <link rel="stylesheet" href="/admin/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dashboard">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/employees">
+                                <i class="fas fa-users"></i> Nhân viên
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/departments">
+                                <i class="fas fa-building"></i> Phòng ban
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/positions">
+                                <i class="fas fa-briefcase"></i> Vị trí công việc
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/attendance">
+                                <i class="fas fa-calendar-check"></i> Chấm công
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/leave">
+                                <i class="fas fa-calendar-times"></i> Nghỉ phép
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/training">
+                                <i class="fas fa-graduation-cap"></i> Đào tạo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admin/certificates">
+                                <i class="fas fa-certificate"></i> Bằng cấp
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/salary">
+                                <i class="fas fa-money-bill-wave"></i> Lương
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Quản lý bằng cấp</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCertificateModal">
+                            <i class="fas fa-plus"></i> Thêm bằng cấp
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form id="filterForm" class="row g-3">
+                            <div class="col-md-3">
+                                <label for="filterEmployee" class="form-label">Nhân viên</label>
+                                <select class="form-select" id="filterEmployee">
+                                    <option value="">Tất cả</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterType" class="form-label">Loại bằng</label>
+                                <select class="form-select" id="filterType">
+                                    <option value="">Tất cả</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterStatus" class="form-label">Trạng thái</label>
+                                <select class="form-select" id="filterStatus">
+                                    <option value="">Tất cả</option>
+                                    <option value="active">Còn hiệu lực</option>
+                                    <option value="expired">Hết hạn</option>
+                                    <option value="revoked">Đã thu hồi</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="filterDate" class="form-label">Ngày cấp</label>
+                                <input type="text" class="form-control" id="filterDate" placeholder="Chọn khoảng thời gian">
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="button" class="btn btn-secondary" id="resetFilters">
+                                    <i class="fas fa-undo"></i> Đặt lại
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> Tìm kiếm
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Certificates table -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="certificatesTable" class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã NV</th>
+                                        <th>Họ tên</th>
+                                        <th>Loại bằng</th>
+                                        <th>Ngày cấp</th>
+                                        <th>Nơi cấp</th>
+                                        <th>File đính kèm</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message alert alert-danger" style="display: none;"></div>
+
+    <!-- Success Message -->
+    <div class="success-message alert alert-success" style="display: none;"></div>
+
+    <!-- Add Certificate Modal -->
+    <div class="modal fade" id="addCertificateModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm bằng cấp mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCertificateForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="employee" class="form-label">Nhân viên</label>
+                                <select class="form-select" id="employee" required>
+                                    <option value="">Chọn nhân viên</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="certificateType" class="form-label">Loại bằng</label>
+                                <select class="form-select" id="certificateType" required>
+                                    <option value="">Chọn loại bằng</option>
+                                    <option value="degree">Bằng đại học</option>
+                                    <option value="master">Bằng thạc sĩ</option>
+                                    <option value="doctor">Bằng tiến sĩ</option>
+                                    <option value="certificate">Chứng chỉ</option>
+                                    <option value="license">Giấy phép</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="issueDate" class="form-label">Ngày cấp</label>
+                                <input type="text" class="form-control" id="issueDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="expiryDate" class="form-label">Ngày hết hạn</label>
+                                <input type="text" class="form-control" id="expiryDate">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="issuingOrganization" class="form-label">Nơi cấp</label>
+                                <input type="text" class="form-control" id="issuingOrganization" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="certificateNumber" class="form-label">Số bằng</label>
+                                <input type="text" class="form-control" id="certificateNumber">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">File đính kèm</label>
+                            <input type="file" class="form-control" id="file" accept=".pdf,.jpg,.jpeg,.png">
+                            <small class="text-muted">Chỉ chấp nhận file PDF, JPG, PNG. Tối đa 5MB.</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Ghi chú</label>
+                            <textarea class="form-control" id="notes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="saveCertificate">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Details Modal -->
+    <div class="modal fade" id="certificateDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chi tiết bằng cấp</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Mã NV:</label>
+                            <p id="modalEmployeeCode"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Họ tên:</label>
+                            <p id="modalEmployeeName"></p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Loại bằng:</label>
+                            <p id="modalCertificateType"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Ngày cấp:</label>
+                            <p id="modalIssueDate"></p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Ngày hết hạn:</label>
+                            <p id="modalExpiryDate"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Nơi cấp:</label>
+                            <p id="modalIssuingOrganization"></p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Số bằng:</label>
+                            <p id="modalCertificateNumber"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Trạng thái:</label>
+                            <p id="modalStatus"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">File đính kèm:</label>
+                        <div id="modalFile"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Ghi chú:</label>
+                        <p id="modalNotes"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <div id="modalActions" class="btn-group">
+                        <!-- Action buttons will be added dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/vn.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/admin/js/certificates.js"></script>
+</body>
+</html> 

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cấp phát thiết bị - Hệ thống quản lý nhân sự</title>
+        <link rel="stylesheet" href="/admin/css/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <!-- <div class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/dashboard">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/employees">
+                                <i class="fas fa-users"></i> Nhân viên
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/departments">
+                                <i class="fas fa-building"></i> Phòng ban
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/positions">
+                                <i class="fas fa-briefcase"></i> Vị trí công việc
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/attendance">
+                                <i class="fas fa-calendar-check"></i> Chấm công
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/leave">
+                                <i class="fas fa-calendar-times"></i> Nghỉ phép
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/training">
+                                <i class="fas fa-graduation-cap"></i> Đào tạo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/certificates">
+                                <i class="fas fa-certificate"></i> Bằng cấp
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/documents">
+                                <i class="fas fa-file-alt"></i> Tài liệu
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/admin/equipment">
+                                <i class="fas fa-laptop"></i> Thiết bị
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/salary">
+                                <i class="fas fa-money-bill-wave"></i> Lương
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
+
+                <!-- Main content -->
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+                    >
+                        <h1 class="h2">Cấp phát thiết bị</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <a
+                                href="/admin/equipment"
+                                class="btn btn-secondary"
+                            >
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Assignment form -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <form id="assignForm">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="employee" class="form-label"
+                                            >Nhân viên</label
+                                        >
+                                        <select
+                                            class="form-select"
+                                            id="employee"
+                                            required
+                                        >
+                                            <option value="">
+                                                Chọn nhân viên
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label
+                                            for="equipment"
+                                            class="form-label"
+                                            >Thiết bị</label
+                                        >
+                                        <select
+                                            class="form-select"
+                                            id="equipment"
+                                            required
+                                        >
+                                            <option value="">
+                                                Chọn thiết bị
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label
+                                            for="assignDate"
+                                            class="form-label"
+                                            >Ngày cấp phát</label
+                                        >
+                                        <input
+                                            type="date"
+                                            class="form-control"
+                                            id="assignDate"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label
+                                            for="returnDate"
+                                            class="form-label"
+                                            >Ngày trả dự kiến</label
+                                        >
+                                        <input
+                                            type="date"
+                                            class="form-control"
+                                            id="returnDate"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="purpose" class="form-label"
+                                        >Mục đích sử dụng</label
+                                    >
+                                    <textarea
+                                        class="form-control"
+                                        id="purpose"
+                                        rows="2"
+                                        required
+                                    ></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="condition" class="form-label"
+                                        >Tình trạng thiết bị</label
+                                    >
+                                    <textarea
+                                        class="form-control"
+                                        id="condition"
+                                        rows="2"
+                                        required
+                                    ></textarea>
+                                </div>
+                                <div class="text-end">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                    >
+                                        Cấp phát
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Assignment history -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Lịch sử cấp phát</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table
+                                    id="assignmentHistoryTable"
+                                    class="table table-striped table-hover"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th>Mã thiết bị</th>
+                                            <th>Tên thiết bị</th>
+                                            <th>Người sử dụng</th>
+                                            <th>Ngày cấp phát</th>
+                                            <th>Ngày trả</th>
+                                            <th>Trạng thái</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Data will be loaded dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" style="display: none">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div
+            class="error-message alert alert-danger"
+            style="display: none"
+        ></div>
+
+        <!-- Success Message -->
+        <div
+            class="success-message alert alert-success"
+            style="display: none"
+        ></div>
+
+        <!-- Return Equipment Modal -->
+        <div class="modal fade" id="returnEquipmentModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Trả thiết bị</h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="returnForm">
+                            <input type="hidden" id="returnAssignmentId" />
+                            <div class="mb-3">
+                                <label for="returnDate" class="form-label"
+                                    >Ngày trả</label
+                                >
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="returnDate"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label for="returnCondition" class="form-label"
+                                    >Tình trạng khi trả</label
+                                >
+                                <textarea
+                                    class="form-control"
+                                    id="returnCondition"
+                                    rows="3"
+                                    required
+                                ></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="returnNotes" class="form-label"
+                                    >Ghi chú</label
+                                >
+                                <textarea
+                                    class="form-control"
+                                    id="returnNotes"
+                                    rows="2"
+                                ></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Hủy
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="saveReturn"
+                        >
+                            Lưu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Maintenance Modal -->
+        <div class="modal fade" id="maintenanceModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Bảo trì thiết bị</h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="maintenanceForm">
+                            <input type="hidden" id="maintenanceEquipmentId" />
+                            <div class="mb-3">
+                                <label for="maintenanceDate" class="form-label"
+                                    >Ngày bảo trì</label
+                                >
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="maintenanceDate"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label for="maintenanceType" class="form-label"
+                                    >Loại bảo trì</label
+                                >
+                                <select
+                                    class="form-select"
+                                    id="maintenanceType"
+                                    required
+                                >
+                                    <option value="">Chọn loại bảo trì</option>
+                                    <option value="preventive">
+                                        Bảo trì phòng ngừa
+                                    </option>
+                                    <option value="corrective">
+                                        Bảo trì sửa chữa
+                                    </option>
+                                    <option value="upgrade">Nâng cấp</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label
+                                    for="maintenanceDescription"
+                                    class="form-label"
+                                    >Mô tả</label
+                                >
+                                <textarea
+                                    class="form-control"
+                                    id="maintenanceDescription"
+                                    rows="3"
+                                    required
+                                ></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="maintenanceCost" class="form-label"
+                                    >Chi phí</label
+                                >
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="maintenanceCost"
+                                />
+                            </div>
+                            <div class="mb-3">
+                                <label
+                                    for="maintenanceProvider"
+                                    class="form-label"
+                                    >Nhà cung cấp</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="maintenanceProvider"
+                                />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Hủy
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="saveMaintenance"
+                        >
+                            Lưu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+        <script src="/admin/js/equipment.js"></script>
+    </body>
+</html>

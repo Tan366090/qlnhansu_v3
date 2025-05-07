@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Thêm Bằng Cấp</title>
+        <style>
+            body {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #eef2f7;
+                margin: 0;
+                padding: 20px;
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 20%;
+                min-width: 300px;
+                background: linear-gradient(135deg, #ffffff, #f8f9fa);
+                border-radius: 16px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+                padding: 30px;
+                border: 1px solid #e0e0e0;
+                margin: 20px 0;
+            }
+            .btn {
+                margin-top: 20px;
+                width: 100%;
+                padding: 12px;
+                font-size: 14px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                flex: 1; /* Ensure buttons are evenly spaced */
+                max-width: 30%; /* Limit button width */
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                transform: translateY(-2px);
+            }
+
+            .btn-secondary {
+                background-color: #6c757d;
+                color: #fff;
+                margin-right: 10px;
+            }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                transform: translateY(-2px);
+            }
+
+            h4 {
+                text-align: center;
+                margin: 0 0 25px 0;
+                font-size: clamp(18px, 2vw, 22px);
+                font-weight: bold;
+                color: #333;
+            }
+
+            label {
+                font-size: clamp(13px, 1.5vw, 14px);
+                font-weight: 600;
+                margin-bottom: 8px;
+                display: block;
+                color: #555;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            input[type="file"] {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                font-size: 14px;
+                transition: border-color 0.3s ease;
+                box-sizing: border-box;
+            }
+
+            input[type="text"]:focus,
+            input[type="date"]:focus,
+            input[type="file"]:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+            }
+
+            .btn {
+                margin-top: 20px;
+                width: 100%;
+                padding: 12px;
+                font-size: 14px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                transform: translateY(-2px);
+            }
+
+            .btn-secondary {
+                background-color: #6c757d;
+                color: #fff;
+                margin-right: 10px;
+            }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                transform: translateY(-2px);
+            }
+
+            .btn-container {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .table-container {
+                margin-top: 20px;
+                width: 100%;
+                max-width: 800px;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+                padding: 20px;
+                border: 1px solid #e0e0e0;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            th {
+                background-color: #f8f9fa;
+                font-weight: bold;
+            }
+
+            .modal {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+                padding: 20px;
+                border: 1px solid #e0e0e0;
+                z-index: 1000;
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .container {
+                    padding: 20px;
+                    border-radius: 12px;
+                }
+
+                .btn-container {
+                    flex-direction: column;
+                }
+
+                .btn-secondary {
+                    margin-right: 0;
+                    margin-bottom: 10px;
+                }
+
+                .btn {
+                    width: 100%;
+                }
+            }
+
+            @media (max-width: 480px) {
+                body {
+                    padding: 10px;
+                    align-items: flex-start;
+                }
+
+                .container {
+                    padding: 15px;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                }
+
+                input[type="text"],
+                input[type="date"],
+                input[type="file"] {
+                    padding: 10px;
+                }
+            }
+        </style>
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <script>
+            // Check authentication status
+            /*async function checkAuth() {
+                try {
+                    // Get token from localStorage
+                    const token = localStorage.getItem('token');
+                    if (!token) {
+                        window.location.href = 'login.html';
+                        return;
+                    }
+
+                    const response = await fetch('http://localhost/QLNhanSu/api/check-auth.php', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include'
+                    });
+
+                    if (response.status === 401) {
+                        // Token expired or invalid
+                        localStorage.removeItem('token');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+
+                    const data = await response.json();
+                    
+                    if (!data.authenticated) {
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    
+                    // Store user info
+                    window.userRole = data.role;
+                    window.userId = data.id;
+                    
+                    // Show/hide features based on role
+                    const adminOnlyElements = document.querySelectorAll('.admin-only');
+                    const userOnlyElements = document.querySelectorAll('.user-only');
+                    
+                    if (data.role === 'admin') {
+                        adminOnlyElements.forEach(el => el.style.display = 'block');
+                        userOnlyElements.forEach(el => el.style.display = 'none');
+                    } else if (data.role === 'user') {
+                        adminOnlyElements.forEach(el => el.style.display = 'none');
+                        userOnlyElements.forEach(el => el.style.display = 'block');
+                    } else {
+                        // Hide all restricted elements for other roles
+                        adminOnlyElements.forEach(el => el.style.display = 'none');
+                        userOnlyElements.forEach(el => el.style.display = 'none');
+                    }
+                    
+                    // Add role-specific classes to body for CSS targeting
+                    document.body.classList.add(`role-${data.role}`);
+                    
+                } catch (error) {
+                    console.error('Auth check failed:', error);
+                    window.location.href = 'login.html';
+                }
+            }
+
+            // Run auth check when page loads
+            checkAuth();*/
+        </script>
+
+        <div class="container">
+            <h4>Thêm bằng cấp</h4>
+            <form id="addDegreeForm" enctype="multipart/form-data">
+                <label for="tenBangCap">Tên bằng cấp</label>
+                <input
+                    type="text"
+                    id="tenBangCap"
+                    name="degreeName"
+                    placeholder="Chứng chỉ AWS"
+                    required
+                />
+                <label for="degreeFile">Minh chứng (nếu có)</label>
+                <input 
+                    type="file" 
+                    id="degreeFile" 
+                    name="file"
+                    required 
+                />
+                <label for="ngayCap">Ngày cấp</label>
+                <input 
+                    type="date" 
+                    id="ngayCap" 
+                    name="issueDate"
+                    required 
+                />
+                <label for="hieuLuc">Hiệu lực</label>
+                <input type="text" id="hieuLuc" placeholder="3 năm" />
+                <div class="btn-container">
+                    <button type="submit" class="btn btn-primary">Thêm</button>
+                    <button type="button" class="btn btn-secondary" id="cancelAddButton">Hủy</button>
+                </div>
+            </form>
+        </div>
+
+        <script nonce="abc123">
+            async function saveToDatabase(degreeData) {
+                try {
+                    console.log('Sending data to database:', degreeData);
+                    
+                    // Add user role to the request
+                    const requestData = {
+                        ...degreeData,
+                        user_role: window.userRole
+                    };
+                    
+                    const response = await fetch('http://localhost/QLNhanSu/api/saveDegree.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(requestData),
+                        credentials: 'include'
+                    });
+
+                    const responseText = await response.text();
+                    console.log('Raw response:', responseText);
+
+                    let result;
+                    try {
+                        result = JSON.parse(responseText);
+                    } catch (e) {
+                        console.error('Failed to parse JSON:', responseText);
+                        throw new Error('Server response was not valid JSON');
+                    }
+
+                    if (!response.ok) {
+                        throw new Error(result.message || `HTTP error! status: ${response.status}`);
+                    }
+
+                    if (!result.success) {
+                        throw new Error(result.message || 'Unknown error occurred');
+                    }
+
+                    return result;
+                } catch (error) {
+                    console.error('Error saving to database:', error);
+                    throw error;
+                }
+            }
+
+            document.getElementById("addDegreeForm").addEventListener("submit", async function(event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+                
+                try {
+                    // Validate form data
+                    const degreeName = document.getElementById('tenBangCap').value.trim();
+                    const issueDate = document.getElementById('ngayCap').value;
+                    const degreeFile = document.getElementById('degreeFile').files[0];
+                    const validityPeriod = document.getElementById('hieuLuc').value.trim();
+
+                    if (!degreeName) {
+                        throw new Error('Vui lòng nhập tên bằng cấp');
+                    }
+                    if (!issueDate) {
+                        throw new Error('Vui lòng chọn ngày cấp');
+                    }
+                    if (!degreeFile) {
+                        throw new Error('Vui lòng chọn file minh chứng');
+                    }
+
+                    // File size validation (10MB limit as per requirements)
+                    if (degreeFile.size > 10 * 1024 * 1024) {
+                        throw new Error('Kích thước file không được vượt quá 10MB');
+                    }
+
+                    // Disable submit button and show loading state
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon> Đang xử lý...';
+
+                    // Upload file to Google Drive
+                    const response = await fetch(
+                        "http://localhost/QLNhanSu/api/uploadToDrive.php",
+                        {
+                            method: "POST",
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json',
+                            },
+                            credentials: 'include'
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error('Lỗi khi tải file lên: ' + response.statusText);
+                    }
+
+                    const result = await response.json();
+                    console.log('Upload result:', result);
+
+                    if (!result.success) {
+                        throw new Error(result.message || 'Không thể tải lên file');
+                    }
+
+                    // Save to database with audit log
+                    const dbResult = await saveToDatabase({
+                        degree_name: degreeName,
+                        issue_date: issueDate,
+                        validity_period: validityPeriod,
+                        attachment_url: result.url
+                    });
+
+                    // Log the action
+                    await logUserAction({
+                        action: 'add_degree',
+                        details: {
+                            degree_name: degreeName,
+                            issue_date: issueDate,
+                            validity_period: validityPeriod
+                        }
+                    });
+
+                    console.log('Database save result:', dbResult);
+
+                    // Show success message
+                    alert('Bằng cấp đã được thêm thành công!');
+                    
+                    // Close the form and refresh the main page
+                    window.location.href = 'Degree.html';
+                    
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("Đã xảy ra lỗi: " + error.message);
+                } finally {
+                    // Re-enable submit button and restore original text
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                }
+            });
+
+            // Add function to log user actions
+            async function logUserAction(actionData) {
+                try {
+                    const response = await fetch('http://localhost/QLNhanSu/api/log-action.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(actionData),
+                        credentials: 'include'
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to log action');
+                    }
+
+                    return await response.json();
+                } catch (error) {
+                    console.error('Error logging action:', error);
+                }
+            }
+
+            // Handle cancel button
+            document.getElementById("cancelAddButton").addEventListener("click", function() {
+                window.location.href = 'Degree.html';
+            });
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

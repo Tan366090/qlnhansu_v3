@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Nhân Viên</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .btn-option {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: left;
+        }
+        .btn-option i {
+            margin-right: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .preview-table {
+            margin-top: 20px;
+        }
+        .preview-table th {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">Thêm Nhân Viên</h2>
+        
+        <div class="card">
+            <div class="card-header">
+                Chọn phương thức thêm nhân viên
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-outline-primary btn-option" onclick="showFormOption()">
+                            <i class="fas fa-user-plus"></i> Thêm bằng Form
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-outline-success btn-option" onclick="showFileOption()">
+                            <i class="fas fa-file-upload"></i> Thêm bằng File
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form thêm nhân viên -->
+        <div id="formOption" class="card hidden">
+            <div class="card-header">
+                Thêm nhân viên bằng Form
+            </div>
+            <div class="card-body">
+                <!-- Include form thêm nhân viên hiện tại -->
+                <form id="addEmployeeForm">
+                    <!-- Các trường form hiện tại -->
+                </form>
+            </div>
+        </div>
+
+        <!-- Upload file -->
+        <div id="fileOption" class="card hidden">
+            <div class="card-header">
+                Thêm nhân viên bằng File
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="employeeFile" class="form-label">Chọn file txt chứa thông tin nhân viên</label>
+                    <input type="file" class="form-control" id="employeeFile" accept=".txt">
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary" onclick="previewFile()">Xem trước</button>
+                    <button class="btn btn-success" onclick="uploadFile()">Tải lên</button>
+                </div>
+                <div id="previewSection" class="hidden">
+                    <h5>Xem trước dữ liệu</h5>
+                    <div class="table-responsive">
+                        <table class="table table-bordered preview-table">
+                            <thead>
+                                <tr>
+                                    <th>Tên</th>
+                                    <th>Họ và tên đầy đủ</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Phòng ban</th>
+                                    <th>Chức vụ</th>
+                                    <th>Loại hợp đồng</th>
+                                    <th>Lương cơ bản</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Ngày kết thúc</th>
+                                </tr>
+                            </thead>
+                            <tbody id="previewTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="uploadStatus" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="js/employee-form.js"></script>
+    <script src="js/file-upload.js"></script>
+</body>
+</html> 

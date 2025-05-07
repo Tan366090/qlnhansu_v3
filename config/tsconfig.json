@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["frontend/src/*"]
+    },
+    "types": ["node", "react", "react-dom", "antd"],
+    "typeRoots": ["./node_modules/@types", "./frontend/src/types"],
+    "allowJs": true,
+    "checkJs": false,
+    "lib": ["dom", "dom.iterable", "esnext"]
+  },
+  "include": ["frontend/src/**/*", "backend/**/*"],
+  "exclude": ["node_modules", "build", "dist", "coverage"]
+} 

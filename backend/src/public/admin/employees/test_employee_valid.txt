@@ -1,0 +1,9 @@
+EMP|Nguyen Van A|Nguyễn Văn A|nguyenvana@company.com|0987654321|01/01/1990|123 Đường ABC, Quận 1, TP.HCM|IT|Nhân viên IT|Permanent|10000000|01/01/2024|31/12/2024
+FAM|Nguyen Thi B|Vợ|01/01/1992|Giáo viên|1
+FAM|Nguyen Van C|Con|01/01/2015|Học sinh|1
+
+EMP|Tran Thi B|Trần Thị B|tranthib@company.com|0987654322|15/05/1991|456 Đường XYZ, Quận 2, TP.HCM|HR|Nhân viên HR|Fixed-Term|8000000|01/02/2024|31/01/2025
+FAM|Tran Van D|Chồng|15/05/1989|Kỹ sư|1
+
+EMP|Le Thi C|Lê Thị C|lethic@company.com|0987654323|20/10/1992|789 Đường DEF, Quận 3, TP.HCM|Finance|Kế toán|Permanent|9000000|01/03/2024|31/12/2024
+FAM|Le Van E|Con|20/10/2016|Học sinh|1 

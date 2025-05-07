@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chấm công - Hệ thống Quản lý Nhân sự</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .attendance-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .attendance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .attendance-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .attendance-symbols {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .symbol-btn {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .symbol-btn.active {
+            background: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .btn-submit {
+            background: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-submit:hover {
+            background: #218838;
+        }
+
+        /* New styles */
+        .employee-search {
+            position: relative;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .search-result-item {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .search-result-item:hover {
+            background: #f5f5f5;
+        }
+
+        .attendance-history {
+            margin-top: 30px;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .history-table th {
+            background: #f5f5f5;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            margin-right: 5px;
+            background: #f5f5f5;
+        }
+
+        .tab.active {
+            background: #fff;
+            border-bottom: 1px solid #fff;
+            margin-bottom: -1px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="attendance-container">
+        <div class="tabs">
+            <div class="tab active" data-tab="check-in">Chấm công</div>
+            <div class="tab" data-tab="history">Lịch sử chấm công</div>
+        </div>
+
+        <div id="check-in" class="tab-content active">
+            <div class="attendance-header">
+                <h2>Chấm công nhân viên</h2>
+                <button class="btn-submit" onclick="submitAttendance()">
+                    <i class="fas fa-save"></i> Lưu
+                </button>
+            </div>
+
+            <form id="attendanceForm" class="attendance-form">
+                <div class="form-group employee-search">
+                    <label for="employeeSearch">Tìm kiếm nhân viên</label>
+                    <input type="text" id="employeeSearch" class="form-control" placeholder="Nhập tên hoặc mã nhân viên">
+                    <div class="search-results" id="searchResults"></div>
+                    <div class="error-message" id="employeeError">Nhân viên không tồn tại</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="employeeId">Mã nhân viên</label>
+                    <input type="text" id="employeeId" class="form-control" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="employeeName">Tên nhân viên</label>
+                    <input type="text" id="employeeName" class="form-control" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="attendanceDate">Ngày chấm công</label>
+                    <input type="date" id="attendanceDate" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="recordedTime">Thời gian chấm công</label>
+                    <input type="time" id="recordedTime" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Ký hiệu chấm công</label>
+                    <div class="attendance-symbols">
+                        <button type="button" class="symbol-btn" data-symbol="P">P - Có mặt</button>
+                        <button type="button" class="symbol-btn" data-symbol="A">A - Vắng mặt</button>
+                        <button type="button" class="symbol-btn" data-symbol="L">L - Nghỉ phép</button>
+                        <button type="button" class="symbol-btn" data-symbol="H">H - Nghỉ lễ</button>
+                    </div>
+                    <input type="hidden" id="attendanceSymbol" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Ghi chú</label>
+                    <textarea id="notes" class="form-control" rows="3"></textarea>
+                </div>
+            </form>
+        </div>
+
+        <div id="history" class="tab-content">
+            <div class="attendance-header">
+                <h2>Lịch sử chấm công</h2>
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <input type="date" id="historyDate" class="form-control">
+                    <button class="btn-submit" onclick="loadAttendanceHistory()">
+                        <i class="fas fa-search"></i> Tìm kiếm
+                    </button>
+                </div>
+            </div>
+
+            <div class="attendance-history">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Mã NV</th>
+                            <th>Tên nhân viên</th>
+                            <th>Ngày</th>
+                            <th>Thời gian</th>
+                            <th>Ký hiệu</th>
+                            <th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set default date to today
+        document.getElementById('attendanceDate').valueAsDate = new Date();
+        document.getElementById('recordedTime').value = new Date().toTimeString().slice(0,5);
+        document.getElementById('historyDate').valueAsDate = new Date();
+
+        // Handle attendance symbol selection
+        const symbolButtons = document.querySelectorAll('.symbol-btn');
+        symbolButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                symbolButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById('attendanceSymbol').value = button.dataset.symbol;
+            });
+        });
+
+        // Handle tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Employee search functionality
+        let searchTimeout;
+        document.getElementById('employeeSearch').addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            const searchTerm = e.target.value.trim();
+            
+            if (searchTerm.length < 2) {
+                document.getElementById('searchResults').style.display = 'none';
+                return;
+            }
+
+            searchTimeout = setTimeout(() => {
+                fetch(`/api/employees/search?q=${encodeURIComponent(searchTerm)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const resultsContainer = document.getElementById('searchResults');
+                        resultsContainer.innerHTML = '';
+                        
+                        if (data.length > 0) {
+                            data.forEach(employee => {
+                                const div = document.createElement('div');
+                                div.className = 'search-result-item';
+                                div.textContent = `${employee.employee_id} - ${employee.full_name}`;
+                                div.onclick = () => selectEmployee(employee);
+                                resultsContainer.appendChild(div);
+                            });
+                            resultsContainer.style.display = 'block';
+                        } else {
+                            resultsContainer.style.display = 'none';
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }, 300);
+        });
+
+        function selectEmployee(employee) {
+            document.getElementById('employeeId').value = employee.employee_id;
+            document.getElementById('employeeName').value = employee.full_name;
+            document.getElementById('employeeSearch').value = '';
+            document.getElementById('searchResults').style.display = 'none';
+            document.getElementById('employeeError').style.display = 'none';
+        }
+
+        function submitAttendance() {
+            const form = document.getElementById('attendanceForm');
+            if (!form.checkValidity()) {
+                alert('Vui lòng điền đầy đủ thông tin');
+                return;
+            }
+
+            const employeeId = document.getElementById('employeeId').value;
+            if (!employeeId) {
+                document.getElementById('employeeError').style.display = 'block';
+                return;
+            }
+
+            const attendanceData = {
+                user_id: employeeId,
+                attendance_date: document.getElementById('attendanceDate').value,
+                recorded_at: `${document.getElementById('attendanceDate').value} ${document.getElementById('recordedTime').value}`,
+                attendance_symbol: document.getElementById('attendanceSymbol').value,
+                notes: document.getElementById('notes').value
+            };
+
+            fetch('/api/attendance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(attendanceData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Chấm công thành công!');
+                    form.reset();
+                    loadAttendanceHistory();
+                } else {
+                    alert('Có lỗi xảy ra: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi lưu dữ liệu');
+            });
+        }
+
+        function loadAttendanceHistory() {
+            const date = document.getElementById('historyDate').value;
+            fetch(`/api/attendance/history?date=${date}`)
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('historyTableBody');
+                    tbody.innerHTML = '';
+                    
+                    data.forEach(record => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${record.user_id}</td>
+                            <td>${record.employee_name}</td>
+                            <td>${record.attendance_date}</td>
+                            <td>${record.recorded_at.split(' ')[1]}</td>
+                            <td>${record.attendance_symbol}</td>
+                            <td>${record.notes || ''}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Load initial history
+        loadAttendanceHistory();
+    </script>
+</body>
+</html> 

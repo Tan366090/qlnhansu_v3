@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quản lý đánh giá</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Quản lý đánh giá</h2>
+                        <button
+                            class="btn btn-primary"
+                            onclick="showAddEvaluationModal()"
+                        >
+                            <i class="fas fa-plus"></i> Thêm đánh giá
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="filters">
+                            <div class="form-group">
+                                <label class="form-label">Nhân viên</label>
+                                <select
+                                    class="form-control"
+                                    id="employeeFilter"
+                                >
+                                    <option value="">Tất cả nhân viên</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Loại đánh giá</label>
+                                <select class="form-control" id="typeFilter">
+                                    <option value="">Tất cả loại</option>
+                                    <option value="monthly">Tháng</option>
+                                    <option value="quarterly">Quý</option>
+                                    <option value="yearly">Năm</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Thời gian</label>
+                                <input
+                                    type="month"
+                                    class="form-control"
+                                    id="dateFilter"
+                                />
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                onclick="loadEvaluations()"
+                            >
+                                <i class="fas fa-search"></i> Tìm kiếm
+                            </button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã NV</th>
+                                        <th>Họ tên</th>
+                                        <th>Loại đánh giá</th>
+                                        <th>Thời gian</th>
+                                        <th>Điểm số</th>
+                                        <th>Xếp loại</th>
+                                        <th>Người đánh giá</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="evaluationTableBody">
+                                    <!-- Dữ liệu sẽ được thêm vào đây -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal thêm/sửa đánh giá -->
+        <div id="evaluationModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Thêm đánh giá mới</h3>
+                    <span class="close" onclick="closeEvaluationModal()"
+                        >&times;</span
+                    >
+                </div>
+                <div class="modal-body">
+                    <form id="evaluationForm">
+                        <div class="form-group">
+                            <label class="form-label">Nhân viên</label>
+                            <select class="form-control" id="employee" required>
+                                <option value="">Chọn nhân viên</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Loại đánh giá</label>
+                            <select class="form-control" id="type" required>
+                                <option value="">Chọn loại đánh giá</option>
+                                <option value="monthly">Tháng</option>
+                                <option value="quarterly">Quý</option>
+                                <option value="yearly">Năm</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Thời gian</label>
+                            <input
+                                type="month"
+                                class="form-control"
+                                id="date"
+                                required
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Điểm số</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="score"
+                                min="0"
+                                max="100"
+                                step="0.5"
+                                required
+                            />
+                            <div class="score-info">
+                                <span id="scoreText">Chưa có điểm</span>
+                                <span
+                                    id="ratingBadge"
+                                    class="rating-badge"
+                                ></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Nhận xét</label>
+                            <textarea
+                                class="form-control"
+                                id="comment"
+                                rows="3"
+                            ></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        onclick="closeEvaluationModal()"
+                    >
+                        Hủy
+                    </button>
+                    <button class="btn btn-primary" onclick="saveEvaluation()">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/common.js"></script>
+        <script>
+            let currentEvaluationId = null;
+
+            // Hàm tải danh sách nhân viên
+            async function loadEmployees() {
+                try {
+                    const response = await fetch("/api/employees");
+                    const employees = await response.json();
+
+                    const selects = document.querySelectorAll(
+                        "#employee, #employeeFilter"
+                    );
+                    selects.forEach((select) => {
+                        select.innerHTML =
+                            '<option value="">Tất cả nhân viên</option>';
+                        employees.forEach((emp) => {
+                            const option = document.createElement("option");
+                            option.value = emp.id;
+                            option.textContent = `${emp.code} - ${emp.name}`;
+                            select.appendChild(option);
+                        });
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách nhân viên:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách nhân viên",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm tải danh sách đánh giá
+            async function loadEvaluations() {
+                try {
+                    const employee =
+                        document.getElementById("employeeFilter").value;
+                    const type = document.getElementById("typeFilter").value;
+                    const date = document.getElementById("dateFilter").value;
+
+                    const response = await fetch(
+                        `/api/evaluations?employee=${employee}&type=${type}&date=${date}`
+                    );
+                    const evaluations = await response.json();
+
+                    const tbody = document.getElementById(
+                        "evaluationTableBody"
+                    );
+                    tbody.innerHTML = "";
+
+                    evaluations.forEach((eval) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                        <td>${eval.employee_code}</td>
+                        <td>${eval.employee_name}</td>
+                        <td>${getEvaluationTypeText(eval.type)}</td>
+                        <td>${formatDate(eval.date)}</td>
+                        <td>${eval.score}</td>
+                        <td><span class="rating-badge ${getRatingClass(
+                            eval.score
+                        )}">${getRatingText(eval.score)}</span></td>
+                        <td>${eval.evaluator_name}</td>
+                        <td>
+                            <button class="btn btn-sm btn-info" onclick="viewEvaluation(${
+                                eval.id
+                            })">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-primary" onclick="editEvaluation(${
+                                eval.id
+                            })">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteEvaluation(${
+                                eval.id
+                            })">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                        tbody.appendChild(tr);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách đánh giá:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách đánh giá",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm hiển thị modal thêm đánh giá
+            function showAddEvaluationModal() {
+                currentEvaluationId = null;
+                document.getElementById("modalTitle").textContent =
+                    "Thêm đánh giá mới";
+                document.getElementById("evaluationForm").reset();
+                document.getElementById("scoreText").textContent =
+                    "Chưa có điểm";
+                document.getElementById("ratingBadge").textContent = "";
+                document.getElementById("ratingBadge").className =
+                    "rating-badge";
+                document.getElementById("evaluationModal").style.display =
+                    "block";
+            }
+
+            // Hàm hiển thị modal sửa đánh giá
+            async function editEvaluation(id) {
+                try {
+                    const response = await fetch(`/api/evaluations/${id}`);
+                    const evaluation = await response.json();
+
+                    currentEvaluationId = id;
+                    document.getElementById("modalTitle").textContent =
+                        "Sửa đánh giá";
+                    document.getElementById("employee").value =
+                        evaluation.employee_id;
+                    document.getElementById("type").value = evaluation.type;
+                    document.getElementById("date").value = evaluation.date;
+                    document.getElementById("score").value = evaluation.score;
+                    document.getElementById("comment").value =
+                        evaluation.comment || "";
+                    updateScoreInfo(evaluation.score);
+
+                    document.getElementById("evaluationModal").style.display =
+                        "block";
+                } catch (error) {
+                    console.error("Lỗi khi tải thông tin đánh giá:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải thông tin đánh giá",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm xem đánh giá
+            function viewEvaluation(id) {
+                window.location.href = `view_evaluation.html?id=${id}`;
+            }
+
+            // Hàm đóng modal
+            function closeEvaluationModal() {
+                document.getElementById("evaluationModal").style.display =
+                    "none";
+            }
+
+            // Hàm cập nhật thông tin điểm số
+            function updateScoreInfo(score) {
+                const scoreText = document.getElementById("scoreText");
+                const ratingBadge = document.getElementById("ratingBadge");
+
+                scoreText.textContent = `Điểm số: ${score}`;
+                ratingBadge.textContent = getRatingText(score);
+                ratingBadge.className = `rating-badge ${getRatingClass(score)}`;
+            }
+
+            // Hàm lưu đánh giá
+            async function saveEvaluation() {
+                const form = document.getElementById("evaluationForm");
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                const data = {
+                    employee_id: document.getElementById("employee").value,
+                    type: document.getElementById("type").value,
+                    date: document.getElementById("date").value,
+                    score: parseFloat(document.getElementById("score").value),
+                    comment: document.getElementById("comment").value,
+                };
+
+                try {
+                    const url = currentEvaluationId
+                        ? `/api/evaluations/${currentEvaluationId}`
+                        : "/api/evaluations";
+
+                    const response = await fetch(url, {
+                        method: currentEvaluationId ? "PUT" : "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                        showNotification("Lưu đánh giá thành công", "success");
+                        closeEvaluationModal();
+                        loadEvaluations();
+                    } else {
+                        throw new Error("Lưu đánh giá thất bại");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi lưu đánh giá:", error);
+                    showNotification("Có lỗi xảy ra khi lưu đánh giá", "error");
+                }
+            }
+
+            // Hàm xóa đánh giá
+            async function deleteEvaluation(id) {
+                if (!confirm("Bạn có chắc chắn muốn xóa đánh giá này?")) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/api/evaluations/${id}`, {
+                        method: "DELETE",
+                    });
+
+                    if (response.ok) {
+                        showNotification("Xóa đánh giá thành công", "success");
+                        loadEvaluations();
+                    } else {
+                        throw new Error("Xóa đánh giá thất bại");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi xóa đánh giá:", error);
+                    showNotification("Có lỗi xảy ra khi xóa đánh giá", "error");
+                }
+            }
+
+            // Hàm lấy text cho loại đánh giá
+            function getEvaluationTypeText(type) {
+                switch (type) {
+                    case "monthly":
+                        return "Tháng";
+                    case "quarterly":
+                        return "Quý";
+                    case "yearly":
+                        return "Năm";
+                    default:
+                        return type;
+                }
+            }
+
+            // Hàm lấy text cho xếp loại
+            function getRatingText(score) {
+                if (score >= 90) return "Xuất sắc";
+                if (score >= 80) return "Tốt";
+                if (score >= 70) return "Khá";
+                if (score >= 60) return "Trung bình";
+                return "Yếu";
+            }
+
+            // Hàm lấy class cho xếp loại
+            function getRatingClass(score) {
+                if (score >= 90) return "excellent";
+                if (score >= 80) return "good";
+                if (score >= 70) return "fair";
+                if (score >= 60) return "average";
+                return "poor";
+            }
+
+            // Hàm định dạng ngày
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return `${date.getMonth() + 1}/${date.getFullYear()}`;
+            }
+
+            // Xử lý sự kiện khi thay đổi điểm số
+            document
+                .getElementById("score")
+                .addEventListener("input", function (e) {
+                    updateScoreInfo(parseFloat(this.value) || 0);
+                });
+
+            // Tải dữ liệu khi trang được tải
+            document.addEventListener("DOMContentLoaded", () => {
+                loadEmployees();
+                loadEvaluations();
+            });
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

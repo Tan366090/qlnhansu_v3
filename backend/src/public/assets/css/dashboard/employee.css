@@ -1,0 +1,123 @@
+@import url('styles.css');
+
+/* Employee Theme Overrides */
+.sidebar {
+    width: 260px;
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-sm);
+}
+
+.sidebar-header h2 {
+    color: var(--color-text);
+}
+
+.nav-link {
+    color: var(--color-gray-600);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: var(--color-employee);
+    color: var(--color-white);
+}
+
+.header-left h1 {
+    color: var(--color-employee);
+}
+
+.user-avatar {
+    background-color: var(--color-employee);
+}
+
+/* Employee Quick Actions */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.action-card {
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+}
+
+.action-card ion-icon {
+    font-size: 2.5rem;
+    color: var(--color-employee);
+    margin-bottom: var(--spacing-md);
+}
+
+.action-btn {
+    background-color: var(--color-employee);
+    color: var(--color-white);
+}
+
+.action-btn:hover {
+    background-color: #00a884;
+}
+
+/* Employee Status Overview */
+.status-overview {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.status-header {
+    border-bottom: 2px solid var(--color-employee);
+}
+
+.status-item {
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.3s ease;
+}
+
+.status-item:hover {
+    background-color: var(--color-gray-100);
+}
+
+/* Employee Leave Balance */
+.leave-balance {
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.leave-balance .value {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--color-employee);
+    line-height: 1;
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Employee Recent Activities */
+.activity-item {
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    background-color: var(--color-gray-100);
+    transition: transform 0.3s ease;
+}
+
+.activity-item:hover {
+    transform: translateX(5px);
+    background-color: var(--color-gray-200);
+}
+
+.activity-content strong {
+    color: var(--color-employee);
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+    .quick-actions,
+    .status-overview {
+        grid-template-columns: 1fr;
+    }
+} 

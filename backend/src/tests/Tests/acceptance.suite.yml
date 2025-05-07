@@ -1,0 +1,11 @@
+actor: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+            url: 'http://localhost/QLNhanSu_version1'
+            browser: 'chrome'
+            window_size: false
+            capabilities:
+                chromeOptions:
+                    args: ["--headless", "--disable-gpu"]
+        - \Helper\Acceptance 

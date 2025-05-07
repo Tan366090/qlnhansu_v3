@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Quản lý lương thưởng</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Common styles -->
+        <link rel="stylesheet" href="../assets/css/common.css" />
+        <link rel="stylesheet" href="../assets/css/salary.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <!-- Page-specific styles -->
+        <link rel="stylesheet" href="../assets/css/salary.css" />
+        <!-- Ionicons -->
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.js"
+        ></script>
+        <!-- SheetJS Library for Excel Export -->
+        <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+        <!-- jsPDF Libraries for PDF Export -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+        <!-- IMPORTANT: Add your custom font JS file here if needed for Vietnamese -->
+        <!-- <script src="./js/fonts/Roboto-Regular-normal.js"></script> -->
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Quản lý lương thưởng</h2>
+                        <div class="header-actions">
+                            <button
+                                class="btn btn-primary"
+                                onclick="showAddSalaryModal()"
+                            >
+                                <i class="fas fa-plus"></i> Thêm bảng lương
+                            </button>
+                            <button
+                                class="btn btn-success"
+                                onclick="exportSalary()"
+                            >
+                                <i class="fas fa-file-export"></i> Xuất Excel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="filters">
+                            <div class="form-group">
+                                <label class="form-label">Tháng</label>
+                                <input
+                                    type="month"
+                                    class="form-control"
+                                    id="monthFilter"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Phòng ban</label>
+                                <select
+                                    class="form-control"
+                                    id="departmentFilter"
+                                >
+                                    <option value="">Tất cả phòng ban</option>
+                                </select>
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                onclick="filterSalaries()"
+                            >
+                                <i class="fas fa-search"></i> Lọc
+                            </button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã NV</th>
+                                        <th>Họ tên</th>
+                                        <th>Phòng ban</th>
+                                        <th>Lương cơ bản</th>
+                                        <th>Phụ cấp</th>
+                                        <th>Thưởng</th>
+                                        <th>Khấu trừ</th>
+                                        <th>Tổng lương</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="salaryList">
+                                    <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal thêm/sửa bảng lương -->
+        <div id="salaryModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Thêm bảng lương</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="salaryForm">
+                        <div class="form-group">
+                            <label class="form-label">Nhân viên</label>
+                            <select class="form-control" id="employee" required>
+                                <option value="">Chọn nhân viên</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tháng</label>
+                            <input
+                                type="month"
+                                class="form-control"
+                                id="month"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Lương cơ bản</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="baseSalary"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phụ cấp</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="allowance"
+                                value="0"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Thưởng</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="bonus"
+                                value="0"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Khấu trừ</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="deduction"
+                                value="0"
+                            />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        onclick="closeSalaryModal()"
+                    >
+                        Hủy
+                    </button>
+                    <button class="btn btn-primary" onclick="saveSalary()">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="../assets/js/common.js"></script>
+        <!-- Salary.js comes AFTER PDF/SheetJS libraries -->
+        <script src="./js/Salary.js"></script>
+        <script>
+            let currentSalaryId = null;
+
+            // Hàm tải danh sách nhân viên
+            async function loadEmployees() {
+                try {
+                    const response = await fetch("/api/employees");
+                    const employees = await response.json();
+
+                    const select = document.getElementById("employee");
+                    employees.forEach((emp) => {
+                        const option = document.createElement("option");
+                        option.value = emp.id;
+                        option.textContent = `${emp.employee_id} - ${emp.full_name}`;
+                        select.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách nhân viên:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách nhân viên",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm tải danh sách phòng ban
+            async function loadDepartments() {
+                try {
+                    const response = await fetch("/api/departments");
+                    const departments = await response.json();
+
+                    const select = document.getElementById("departmentFilter");
+                    departments.forEach((dept) => {
+                        const option = document.createElement("option");
+                        option.value = dept.id;
+                        option.textContent = dept.name;
+                        select.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách phòng ban:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách phòng ban",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm tải danh sách lương
+            async function loadSalaries() {
+                try {
+                    const month = document.getElementById("monthFilter").value;
+                    const department =
+                        document.getElementById("departmentFilter").value;
+
+                    let url = "/api/salaries";
+                    if (month || department) {
+                        url += "?";
+                        if (month) url += `month=${month}`;
+                        if (department) url += `&department=${department}`;
+                    }
+
+                    const response = await fetch(url);
+                    const salaries = await response.json();
+
+                    const tbody = document.getElementById("salaryList");
+                    tbody.innerHTML = "";
+
+                    salaries.forEach((salary) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                            <td>${salary.employee_id}</td>
+                            <td>${salary.full_name}</td>
+                            <td>${salary.department_name}</td>
+                            <td>${formatCurrency(salary.base_salary)}</td>
+                            <td>${formatCurrency(salary.allowance)}</td>
+                            <td>${formatCurrency(salary.bonus)}</td>
+                            <td>${formatCurrency(salary.deduction)}</td>
+                            <td>${formatCurrency(salary.total_salary)}</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm" onclick="editSalary(${
+                                    salary.id
+                                })">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteSalary(${
+                                    salary.id
+                                })">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách lương:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách lương",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm hiển thị modal thêm/sửa
+            function showAddSalaryModal() {
+                currentSalaryId = null;
+                document.getElementById("modalTitle").textContent =
+                    "Thêm bảng lương";
+                document.getElementById("salaryForm").reset();
+                document.getElementById("salaryModal").style.display = "block";
+            }
+
+            // Hàm đóng modal
+            function closeSalaryModal() {
+                document.getElementById("salaryModal").style.display = "none";
+            }
+
+            // Hàm lưu bảng lương
+            async function saveSalary() {
+                const form = document.getElementById("salaryForm");
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                const data = {
+                    employee_id: document.getElementById("employee").value,
+                    month: document.getElementById("month").value,
+                    base_salary: document.getElementById("baseSalary").value,
+                    allowance: document.getElementById("allowance").value,
+                    bonus: document.getElementById("bonus").value,
+                    deduction: document.getElementById("deduction").value,
+                };
+
+                try {
+                    const url = currentSalaryId
+                        ? `/api/salaries/${currentSalaryId}`
+                        : "/api/salaries";
+                    const method = currentSalaryId ? "PUT" : "POST";
+
+                    const response = await fetch(url, {
+                        method: method,
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                        showNotification(
+                            currentSalaryId
+                                ? "Cập nhật lương thành công"
+                                : "Thêm lương thành công",
+                            "success"
+                        );
+                        closeSalaryModal();
+                        loadSalaries();
+                    } else {
+                        throw new Error("Lưu lương thất bại");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi lưu lương:", error);
+                    showNotification("Có lỗi xảy ra khi lưu lương", "error");
+                }
+            }
+
+            // Hàm sửa bảng lương
+            async function editSalary(id) {
+                try {
+                    const response = await fetch(`/api/salaries/${id}`);
+                    const salary = await response.json();
+
+                    currentSalaryId = id;
+                    document.getElementById("modalTitle").textContent =
+                        "Sửa bảng lương";
+                    document.getElementById("employee").value =
+                        salary.employee_id;
+                    document.getElementById("month").value = salary.month;
+                    document.getElementById("baseSalary").value =
+                        salary.base_salary;
+                    document.getElementById("allowance").value =
+                        salary.allowance;
+                    document.getElementById("bonus").value = salary.bonus;
+                    document.getElementById("deduction").value =
+                        salary.deduction;
+
+                    document.getElementById("salaryModal").style.display =
+                        "block";
+                } catch (error) {
+                    console.error("Lỗi khi tải thông tin lương:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải thông tin lương",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm xóa bảng lương
+            async function deleteSalary(id) {
+                if (!confirm("Bạn có chắc chắn muốn xóa bảng lương này?")) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/api/salaries/${id}`, {
+                        method: "DELETE",
+                    });
+
+                    if (response.ok) {
+                        showNotification("Xóa lương thành công", "success");
+                        loadSalaries();
+                    } else {
+                        throw new Error("Xóa lương thất bại");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi xóa lương:", error);
+                    showNotification("Có lỗi xảy ra khi xóa lương", "error");
+                }
+            }
+
+            // Hàm lọc bảng lương
+            function filterSalaries() {
+                loadSalaries();
+            }
+
+            // Hàm xuất Excel
+            async function exportSalary() {
+                try {
+                    const month = document.getElementById("monthFilter").value;
+                    const department =
+                        document.getElementById("departmentFilter").value;
+
+                    let url = "/api/salaries/export";
+                    if (month || department) {
+                        url += "?";
+                        if (month) url += `month=${month}`;
+                        if (department) url += `&department=${department}`;
+                    }
+
+                    const response = await fetch(url);
+                    const blob = await response.blob();
+
+                    const link = document.createElement("a");
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = `bang_luong_${month || "all"}.xlsx`;
+                    link.click();
+                } catch (error) {
+                    console.error("Lỗi khi xuất Excel:", error);
+                    showNotification("Có lỗi xảy ra khi xuất Excel", "error");
+                }
+            }
+
+            // Tải dữ liệu khi trang được tải
+            document.addEventListener("DOMContentLoaded", () => {
+                loadEmployees();
+                loadDepartments();
+                loadSalaries();
+            });
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const salaries = await fetchData("getSalaries"); // Add 'getSalaries' case in API
+                const tbody = document.getElementById("salaryList");
+                tbody.innerHTML = ""; // Clear existing rows
+
+                salaries.forEach((salary) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${salary.employee_id}</td>
+                        <td>${salary.full_name}</td>
+                        <td>${salary.amount}</td>
+                        <td>${salary.date}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

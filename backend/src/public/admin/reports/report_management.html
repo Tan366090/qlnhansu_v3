@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý báo cáo</title>
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Quản lý báo cáo</h3>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" id="generateReportBtn">
+                                <i class="fas fa-plus"></i> Tạo báo cáo mới
+                            </button>
+                            <button class="btn btn-success" id="exportReportBtn">
+                                <i class="fas fa-download"></i> Xuất báo cáo
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Báo cáo nhân sự</h5>
+                                        <canvas id="employeeChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Báo cáo tài chính</h5>
+                                        <canvas id="financeChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Báo cáo hiệu suất</h5>
+                                        <canvas id="performanceChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="reportTable">
+                                <thead>
+                                    <tr>
+                                        <th>Mã báo cáo</th>
+                                        <th>Loại báo cáo</th>
+                                        <th>Thời gian</th>
+                                        <th>Người tạo</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reportList">
+                                    <!-- Dữ liệu sẽ được thêm vào đây -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal tạo báo cáo -->
+    <div class="modal fade" id="reportModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Tạo báo cáo mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="reportForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Loại báo cáo</label>
+                                    <select class="form-control" id="reportType" required>
+                                        <option value="">Chọn loại báo cáo</option>
+                                        <option value="employee">Báo cáo nhân sự</option>
+                                        <option value="finance">Báo cáo tài chính</option>
+                                        <option value="performance">Báo cáo hiệu suất</option>
+                                        <option value="attendance">Báo cáo chấm công</option>
+                                        <option value="training">Báo cáo đào tạo</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Thời gian bắt đầu</label>
+                                    <input type="date" class="form-control" id="startDate" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Định dạng</label>
+                                    <select class="form-control" id="reportFormat" required>
+                                        <option value="pdf">PDF</option>
+                                        <option value="excel">Excel</option>
+                                        <option value="word">Word</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Thời gian kết thúc</label>
+                                    <input type="date" class="form-control" id="endDate" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ghi chú</label>
+                            <textarea class="form-control" id="notes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="generateReportBtn">Tạo báo cáo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class ReportManager {
+            constructor() {
+                this.reportModal = new bootstrap.Modal(document.getElementById('reportModal'));
+                this.charts = {};
+                this.setupEventListeners();
+                this.loadReports();
+                this.initCharts();
+            }
+
+            setupEventListeners() {
+                document.getElementById('generateReportBtn').addEventListener('click', () => this.showGenerateModal());
+                document.getElementById('exportReportBtn').addEventListener('click', () => this.exportReports());
+            }
+
+            initCharts() {
+                // Initialize employee chart
+                const employeeCtx = document.getElementById('employeeChart');
+                this.charts.employee = new Chart(employeeCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Số lượng nhân viên',
+                            data: [],
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+
+                // Initialize finance chart
+                const financeCtx = document.getElementById('financeChart');
+                this.charts.finance = new Chart(financeCtx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Chi phí',
+                            data: [],
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+
+                // Initialize performance chart
+                const performanceCtx = document.getElementById('performanceChart');
+                this.charts.performance = new Chart(performanceCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            data: [],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            async loadReports() {
+                try {
+                    const response = await fetch('/qlnhansu_V2/backend/src/public/api/reports/list');
+                    const data = await response.json();
+                    
+                    const tbody = document.getElementById('reportList');
+                    tbody.innerHTML = data.map(report => `
+                        <tr>
+                            <td>${report.id}</td>
+                            <td>${this.getReportTypeLabel(report.type)}</td>
+                            <td>${report.start_date} - ${report.end_date}</td>
+                            <td>${report.creator_name}</td>
+                            <td>${this.getStatusLabel(report.status)}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="reportManager.viewReport(${report.id})">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-success" onclick="reportManager.downloadReport(${report.id})">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="reportManager.deleteReport(${report.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('');
+
+                    // Update charts
+                    this.updateCharts(data);
+                } catch (error) {
+                    console.error('Error loading reports:', error);
+                    this.showNotification('Lỗi khi tải danh sách báo cáo', 'error');
+                }
+            }
+
+            updateCharts(data) {
+                // Update employee chart
+                const employeeData = this.processEmployeeData(data);
+                this.charts.employee.data.labels = employeeData.labels;
+                this.charts.employee.data.datasets[0].data = employeeData.values;
+                this.charts.employee.update();
+
+                // Update finance chart
+                const financeData = this.processFinanceData(data);
+                this.charts.finance.data.labels = financeData.labels;
+                this.charts.finance.data.datasets[0].data = financeData.values;
+                this.charts.finance.update();
+
+                // Update performance chart
+                const performanceData = this.processPerformanceData(data);
+                this.charts.performance.data.labels = performanceData.labels;
+                this.charts.performance.data.datasets[0].data = performanceData.values;
+                this.charts.performance.update();
+            }
+
+            processEmployeeData(data) {
+                // Process employee data for chart
+                return {
+                    labels: data.map(report => report.start_date),
+                    values: data.map(report => report.employee_count || 0)
+                };
+            }
+
+            processFinanceData(data) {
+                // Process finance data for chart
+                return {
+                    labels: data.map(report => report.start_date),
+                    values: data.map(report => report.total_cost || 0)
+                };
+            }
+
+            processPerformanceData(data) {
+                // Process performance data for chart
+                return {
+                    labels: ['Tốt', 'Khá', 'Trung bình'],
+                    values: [
+                        data.filter(report => report.performance_rating >= 4).length,
+                        data.filter(report => report.performance_rating >= 3 && report.performance_rating < 4).length,
+                        data.filter(report => report.performance_rating < 3).length
+                    ]
+                };
+            }
+
+            showGenerateModal() {
+                document.getElementById('modalTitle').textContent = 'Tạo báo cáo mới';
+                document.getElementById('reportForm').reset();
+                this.reportModal.show();
+            }
+
+            async generateReport() {
+                const form = document.getElementById('reportForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                const report = {
+                    type: document.getElementById('reportType').value,
+                    format: document.getElementById('reportFormat').value,
+                    start_date: document.getElementById('startDate').value,
+                    end_date: document.getElementById('endDate').value,
+                    notes: document.getElementById('notes').value
+                };
+
+                try {
+                    const response = await fetch('/qlnhansu_V2/backend/src/public/api/reports/generate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(report)
+                    });
+
+                    if (response.ok) {
+                        this.reportModal.hide();
+                        this.loadReports();
+                        this.showNotification('Tạo báo cáo thành công', 'success');
+                    } else {
+                        throw new Error('Failed to generate report');
+                    }
+                } catch (error) {
+                    console.error('Error generating report:', error);
+                    this.showNotification('Lỗi khi tạo báo cáo', 'error');
+                }
+            }
+
+            async exportReports() {
+                try {
+                    const response = await fetch('/qlnhansu_V2/backend/src/public/api/reports/export', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'reports.zip';
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        a.remove();
+                    } else {
+                        throw new Error('Failed to export reports');
+                    }
+                } catch (error) {
+                    console.error('Error exporting reports:', error);
+                    this.showNotification('Lỗi khi xuất báo cáo', 'error');
+                }
+            }
+
+            async viewReport(id) {
+                window.location.href = `/qlnhansu_V2/backend/src/public/admin/reports/view.html?id=${id}`;
+            }
+
+            async downloadReport(id) {
+                try {
+                    const response = await fetch(`/qlnhansu_V2/backend/src/public/api/reports/${id}/download`);
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `report_${id}.pdf`;
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        a.remove();
+                    } else {
+                        throw new Error('Failed to download report');
+                    }
+                } catch (error) {
+                    console.error('Error downloading report:', error);
+                    this.showNotification('Lỗi khi tải báo cáo', 'error');
+                }
+            }
+
+            async deleteReport(id) {
+                if (!confirm('Bạn có chắc chắn muốn xóa báo cáo này?')) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/qlnhansu_V2/backend/src/public/api/reports/${id}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (response.ok) {
+                        this.loadReports();
+                        this.showNotification('Xóa báo cáo thành công', 'success');
+                    } else {
+                        throw new Error('Failed to delete report');
+                    }
+                } catch (error) {
+                    console.error('Error deleting report:', error);
+                    this.showNotification('Lỗi khi xóa báo cáo', 'error');
+                }
+            }
+
+            getReportTypeLabel(type) {
+                const typeLabels = {
+                    'employee': 'Báo cáo nhân sự',
+                    'finance': 'Báo cáo tài chính',
+                    'performance': 'Báo cáo hiệu suất',
+                    'attendance': 'Báo cáo chấm công',
+                    'training': 'Báo cáo đào tạo'
+                };
+                return typeLabels[type] || type;
+            }
+
+            getStatusLabel(status) {
+                const statusLabels = {
+                    'pending': 'Đang chờ',
+                    'processing': 'Đang xử lý',
+                    'completed': 'Hoàn thành',
+                    'failed': 'Thất bại'
+                };
+                return statusLabels[status] || status;
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 3000);
+            }
+        }
+
+        const reportManager = new ReportManager();
+    </script>
+</body>
+</html> 

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API - QLNS V2</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+        }
+        .loading-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+        .api-result {
+            margin-top: 20px;
+        }
+        .table-responsive {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Test API - QLNS V2</h1>
+        
+        <div class="text-center mb-4">
+            <button id="testAllBtn" class="btn btn-primary">Test Tất Cả API</button>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="loading-content">
+                <div class="spinner-border text-light" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Đang tải dữ liệu...</p>
+            </div>
+        </div>
+
+        <div id="results" class="row"></div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:3000/api';
+        const tables = [
+            'activities', 'audit_logs', 'bonuses', 'degrees', 'departments',
+            'documents', 'email_verification_tokens', 'employee_positions',
+            'employee_trainings', 'employees', 'equipment_assignments',
+            'family_members', 'holidays', 'leaves', 'login_attempts',
+            'notifications', 'password_reset_tokens', 'payroll', 'payrolls',
+            'performances', 'permissions', 'positions', 'rate_limits',
+            'role_permissions', 'roles', 'salary_history', 'sessions',
+            'tasks', 'trainings', 'user_profiles', 'users', 'work_schedules'
+        ];
+
+        document.getElementById('testAllBtn').addEventListener('click', async () => {
+            const loading = document.getElementById('loading');
+            const results = document.getElementById('results');
+            loading.style.display = 'block';
+            results.innerHTML = '';
+
+            try {
+                const promises = tables.map(table => fetch(`${API_BASE_URL}/${table}`));
+                const responses = await Promise.all(promises);
+                const data = await Promise.all(responses.map(res => res.json()));
+
+                tables.forEach((table, index) => {
+                    const result = data[index];
+                    const card = document.createElement('div');
+                    card.className = 'col-md-6 col-lg-4';
+                    card.innerHTML = `
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">${table}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Số lượng bản ghi: ${result.length}</p>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                ${Object.keys(result[0] || {}).map(key => `<th>${key}</th>`).join('')}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${result.slice(0, 5).map(row => `
+                                                <tr>
+                                                    ${Object.values(row).map(value => `<td>${value}</td>`).join('')}
+                                                </tr>
+                                            `).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                ${result.length > 5 ? `<p class="text-muted">Hiển thị 5 bản ghi đầu tiên...</p>` : ''}
+                            </div>
+                        </div>
+                    `;
+                    results.appendChild(card);
+                });
+            } catch (error) {
+                results.innerHTML = `
+                    <div class="col-12">
+                        <div class="alert alert-danger">
+                            <h4 class="alert-heading">Lỗi!</h4>
+                            <p>${error.message}</p>
+                        </div>
+                    </div>
+                `;
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html> 

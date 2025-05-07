@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết khóa đào tạo</title>
+    <link rel="stylesheet" href="../../css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+                    <h1>Chi tiết khóa đào tạo</h1>
+                    <div class="btn-group">
+                        <button class="btn btn-secondary" onclick="window.history.back()">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </button>
+                        <button class="btn btn-primary" onclick="window.location.href='courses.html'">
+                            <i class="fas fa-list"></i> Danh sách
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thông tin cơ bản -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Thông tin cơ bản</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <th style="width: 200px">Mã khóa:</th>
+                                        <td id="courseId"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tên khóa đào tạo:</th>
+                                        <td id="courseName"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Loại đào tạo:</th>
+                                        <td id="courseType"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Thời lượng:</th>
+                                        <td id="courseDuration"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Số lượng học viên tối đa:</th>
+                                        <td id="courseCapacity"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <th style="width: 200px">Ngày bắt đầu:</th>
+                                        <td id="startDate"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ngày kết thúc:</th>
+                                        <td id="endDate"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Giảng viên:</th>
+                                        <td id="instructor"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Địa điểm:</th>
+                                        <td id="location"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Trạng thái:</th>
+                                        <td id="status"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mô tả và điều kiện -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Mô tả</h5>
+                            </div>
+                            <div class="card-body">
+                                <p id="description"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Điều kiện tiên quyết</h5>
+                            </div>
+                            <div class="card-body">
+                                <p id="prerequisites"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danh sách học viên -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Danh sách học viên</h5>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+                            <i class="fas fa-plus"></i> Thêm học viên
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="studentTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Mã NV</th>
+                                        <th>Họ tên</th>
+                                        <th>Phòng ban</th>
+                                        <th>Ngày đăng ký</th>
+                                        <th>Trạng thái</th>
+                                        <th>Kết quả</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dữ liệu sẽ được load từ API -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lịch học -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Lịch học</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="scheduleTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Buổi học</th>
+                                        <th>Ngày học</th>
+                                        <th>Thời gian</th>
+                                        <th>Nội dung</th>
+                                        <th>Giảng viên</th>
+                                        <th>Địa điểm</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dữ liệu sẽ được load từ API -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thêm học viên -->
+    <div class="modal fade" id="addStudentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm học viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addStudentForm">
+                        <div class="mb-3">
+                            <label for="employeeId" class="form-label">Nhân viên</label>
+                            <select class="form-select" id="employeeId" required>
+                                <option value="">Chọn nhân viên</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="saveStudent">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const courseId = new URLSearchParams(window.location.search).get('id');
+            if (!courseId) {
+                window.location.href = 'courses.html';
+                return;
+            }
+
+            // Load thông tin khóa học
+            $.ajax({
+                url: `/api/trainings/courses/${courseId}`,
+                method: 'GET',
+                success: function(data) {
+                    $('#courseId').text(data.id);
+                    $('#courseName').text(data.name);
+                    $('#courseType').text({
+                        'technical': 'Kỹ thuật',
+                        'softskill': 'Kỹ năng mềm',
+                        'management': 'Quản lý'
+                    }[data.type] || data.type);
+                    $('#courseDuration').text(`${data.duration} giờ`);
+                    $('#courseCapacity').text(data.capacity);
+                    $('#startDate').text(new Date(data.start_date).toLocaleDateString('vi-VN'));
+                    $('#endDate').text(new Date(data.end_date).toLocaleDateString('vi-VN'));
+                    $('#instructor').text(data.instructor);
+                    $('#location').text(data.location);
+                    $('#description').text(data.description || 'Không có mô tả');
+                    $('#prerequisites').text(data.prerequisites || 'Không có điều kiện tiên quyết');
+                    
+                    const statusClass = {
+                        'planned': 'info',
+                        'ongoing': 'success',
+                        'completed': 'secondary',
+                        'cancelled': 'danger'
+                    };
+                    const statusText = {
+                        'planned': 'Dự kiến',
+                        'ongoing': 'Đang diễn ra',
+                        'completed': 'Đã hoàn thành',
+                        'cancelled': 'Đã hủy'
+                    };
+                    $('#status').html(`<span class="badge bg-${statusClass[data.status]}">${statusText[data.status]}</span>`);
+                },
+                error: function() {
+                    window.location.href = 'courses.html';
+                }
+            });
+
+            // Khởi tạo bảng học viên
+            const studentTable = $('#studentTable').DataTable({
+                ajax: {
+                    url: `/api/trainings/courses/${courseId}/students`,
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'employee_id' },
+                    { data: 'employee_name' },
+                    { data: 'department' },
+                    { 
+                        data: 'registration_date',
+                        render: function(data) {
+                            return new Date(data).toLocaleDateString('vi-VN');
+                        }
+                    },
+                    { 
+                        data: 'status',
+                        render: function(data) {
+                            const statusClass = {
+                                'registered': 'info',
+                                'attending': 'success',
+                                'completed': 'secondary',
+                                'dropped': 'danger'
+                            };
+                            const statusText = {
+                                'registered': 'Đã đăng ký',
+                                'attending': 'Đang tham gia',
+                                'completed': 'Đã hoàn thành',
+                                'dropped': 'Đã bỏ học'
+                            };
+                            return `<span class="badge bg-${statusClass[data]}">${statusText[data]}</span>`;
+                        }
+                    },
+                    { 
+                        data: 'result',
+                        render: function(data) {
+                            if (!data) return '-';
+                            const resultClass = {
+                                'excellent': 'success',
+                                'good': 'info',
+                                'average': 'warning',
+                                'poor': 'danger'
+                            };
+                            const resultText = {
+                                'excellent': 'Xuất sắc',
+                                'good': 'Tốt',
+                                'average': 'Trung bình',
+                                'poor': 'Kém'
+                            };
+                            return `<span class="badge bg-${resultClass[data]}">${resultText[data]}</span>`;
+                        }
+                    },
+                    {
+                        data: null,
+                        render: function(data) {
+                            return `
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-info" onclick="viewStudentDetails(${data.id})">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" onclick="removeStudent(${data.id})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            `;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json'
+                }
+            });
+
+            // Khởi tạo bảng lịch học
+            const scheduleTable = $('#scheduleTable').DataTable({
+                ajax: {
+                    url: `/api/trainings/courses/${courseId}/schedule`,
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'session_number' },
+                    { 
+                        data: 'date',
+                        render: function(data) {
+                            return new Date(data).toLocaleDateString('vi-VN');
+                        }
+                    },
+                    { 
+                        data: null,
+                        render: function(data) {
+                            return `${data.start_time} - ${data.end_time}`;
+                        }
+                    },
+                    { data: 'content' },
+                    { data: 'instructor' },
+                    { data: 'location' }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json'
+                }
+            });
+
+            // Load danh sách nhân viên cho modal thêm học viên
+            function loadEmployees() {
+                $.ajax({
+                    url: '/api/employees',
+                    method: 'GET',
+                    success: function(response) {
+                        const select = $('#employeeId');
+                        select.empty().append('<option value="">Chọn nhân viên</option>');
+                        response.forEach(emp => {
+                            select.append(`<option value="${emp.id}">${emp.employee_id} - ${emp.full_name}</option>`);
+                        });
+                    }
+                });
+            }
+
+            // Xử lý thêm học viên
+            $('#saveStudent').click(function() {
+                const employeeId = $('#employeeId').val();
+                if (!employeeId) {
+                    alert('Vui lòng chọn nhân viên');
+                    return;
+                }
+
+                $.ajax({
+                    url: `/api/trainings/courses/${courseId}/students`,
+                    method: 'POST',
+                    data: JSON.stringify({ employee_id: employeeId }),
+                    contentType: 'application/json',
+                    success: function() {
+                        studentTable.ajax.reload();
+                        $('#addStudentModal').modal('hide');
+                        alert('Thêm học viên thành công!');
+                    },
+                    error: function(xhr) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseJSON.message);
+                    }
+                });
+            });
+
+            // Xử lý xóa học viên
+            window.removeStudent = function(id) {
+                if (confirm('Bạn có chắc chắn muốn xóa học viên này?')) {
+                    $.ajax({
+                        url: `/api/trainings/courses/${courseId}/students/${id}`,
+                        method: 'DELETE',
+                        success: function() {
+                            studentTable.ajax.reload();
+                            alert('Xóa học viên thành công!');
+                        },
+                        error: function(xhr) {
+                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.message);
+                        }
+                    });
+                }
+            };
+
+            // Xử lý xem chi tiết học viên
+            window.viewStudentDetails = function(id) {
+                window.location.href = `student-details.html?course_id=${courseId}&student_id=${id}`;
+            };
+
+            // Load danh sách nhân viên khi mở modal
+            $('#addStudentModal').on('show.bs.modal', function() {
+                loadEmployees();
+                $('#addStudentForm')[0].reset();
+            });
+        });
+    </script>
+</body>
+</html> 

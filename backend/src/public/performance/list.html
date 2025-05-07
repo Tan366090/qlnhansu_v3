@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý hiệu suất - Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <script src="../js/main.js" type="module"></script>
+    <style>
+        /* Performance Management Styles */
+        .performance-card {
+            transition: all 0.3s ease;
+        }
+        .performance-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .performance-score {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .performance-score.excellent { color: #28a745; }
+        .performance-score.good { color: #17a2b8; }
+        .performance-score.average { color: #ffc107; }
+        .performance-score.poor { color: #dc3545; }
+        
+        .performance-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .badge-excellent { background-color: #28a745; color: white; }
+        .badge-good { background-color: #17a2b8; color: white; }
+        .badge-average { background-color: #ffc107; color: black; }
+        .badge-poor { background-color: #dc3545; color: white; }
+
+        /* Table Styles */
+        .performance-table th {
+            background-color: #f8f9fa;
+            position: sticky;
+            top: 0;
+        }
+        .performance-table td {
+            vertical-align: middle;
+        }
+        .action-buttons .btn {
+            margin: 0 2px;
+        }
+
+        /* Modal Styles */
+        .performance-modal .form-label {
+            font-weight: 500;
+        }
+        .performance-modal .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .performance-card {
+                margin-bottom: 1rem;
+            }
+            .table-responsive {
+                font-size: 0.9rem;
+            }
+            .action-buttons .btn {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="page-title">Quản lý hiệu suất</h1>
+            <button class="btn btn-primary" data-action="add-performance">
+                <i class="fas fa-plus me-2"></i>Thêm đánh giá
+            </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form id="performanceFilterForm">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Nhân viên</label>
+                            <select class="form-select" name="employee_id">
+                                <option value="">Tất cả</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Phòng ban</label>
+                            <select class="form-select" name="department_id">
+                                <option value="">Tất cả</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Kỳ đánh giá</label>
+                            <select class="form-select" name="period">
+                                <option value="">Tất cả</option>
+                                <option value="monthly">Hàng tháng</option>
+                                <option value="quarterly">Hàng quý</option>
+                                <option value="yearly">Hàng năm</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Thời gian</label>
+                            <input type="month" class="form-control" name="date">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Performance List -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover performance-table" id="performanceTable">
+                        <thead>
+                            <tr>
+                                <th>Mã NV</th>
+                                <th>Họ tên</th>
+                                <th>Phòng ban</th>
+                                <th>Kỳ đánh giá</th>
+                                <th>Thời gian</th>
+                                <th>Điểm số</th>
+                                <th>Xếp loại</th>
+                                <th>Ghi chú</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Performance records will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Modal -->
+    <div class="modal fade performance-modal" id="performanceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đánh giá hiệu suất</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="performanceForm">
+                        <div class="mb-3">
+                            <label class="form-label">Nhân viên</label>
+                            <select class="form-select" name="employee_id" required>
+                                <option value="">Chọn nhân viên</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Kỳ đánh giá</label>
+                            <select class="form-select" name="period" required>
+                                <option value="monthly">Hàng tháng</option>
+                                <option value="quarterly">Hàng quý</option>
+                                <option value="yearly">Hàng năm</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Thời gian</label>
+                            <input type="month" class="form-control" name="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Điểm số (1-10)</label>
+                            <input type="number" class="form-control" name="score" min="1" max="10" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ghi chú</label>
+                            <textarea class="form-control" name="notes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="savePerformance">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize DataTables
+        $(document).ready(function() {
+            const performanceTable = $('#performanceTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json'
+                },
+                order: [[4, 'desc'], [0, 'asc']],
+                pageLength: 10,
+                responsive: true
+            });
+
+            // Handle filter form changes
+            $('#performanceFilterForm').on('change', 'select, input', function() {
+                performanceTable.ajax.reload();
+            });
+
+            // Handle add performance button
+            $('[data-action="add-performance"]').click(function() {
+                $('#performanceModal').modal('show');
+            });
+
+            // Handle save performance
+            $('#savePerformance').click(function() {
+                const form = $('#performanceForm');
+                const formData = new FormData(form[0]);
+
+                $.ajax({
+                    url: '/admin/api/performance/save.php',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            showNotification('success', 'Lưu đánh giá thành công');
+                            $('#performanceModal').modal('hide');
+                            performanceTable.ajax.reload();
+                        } else {
+                            showNotification('error', response.message || 'Có lỗi xảy ra');
+                        }
+                    },
+                    error: function() {
+                        showNotification('error', 'Có lỗi xảy ra khi lưu đánh giá');
+                    }
+                });
+            });
+
+            // Handle edit performance
+            $(document).on('click', '[data-action="edit"]', function() {
+                const id = $(this).data('id');
+                $.ajax({
+                    url: `/admin/api/performance/get.php?id=${id}`,
+                    method: 'GET',
+                    success: function(response) {
+                        if (response.success) {
+                            const data = response.data;
+                            $('#performanceForm input[name="id"]').val(data.id);
+                            $('#performanceForm select[name="employee_id"]').val(data.employee_id);
+                            $('#performanceForm select[name="period"]').val(data.period);
+                            $('#performanceForm input[name="date"]').val(data.date);
+                            $('#performanceForm input[name="score"]').val(data.score);
+                            $('#performanceForm textarea[name="notes"]').val(data.notes);
+                            $('#performanceModal').modal('show');
+                        } else {
+                            showNotification('error', response.message || 'Có lỗi xảy ra');
+                        }
+                    },
+                    error: function() {
+                        showNotification('error', 'Có lỗi xảy ra khi tải dữ liệu');
+                    }
+                });
+            });
+
+            // Handle delete performance
+            $(document).on('click', '[data-action="delete"]', function() {
+                const id = $(this).data('id');
+                if (confirm('Bạn có chắc chắn muốn xóa đánh giá này?')) {
+                    $.ajax({
+                        url: `/admin/api/performance/delete.php?id=${id}`,
+                        method: 'DELETE',
+                        success: function(response) {
+                            if (response.success) {
+                                showNotification('success', 'Xóa đánh giá thành công');
+                                performanceTable.ajax.reload();
+                            } else {
+                                showNotification('error', response.message || 'Có lỗi xảy ra');
+                            }
+                        },
+                        error: function() {
+                            showNotification('error', 'Có lỗi xảy ra khi xóa đánh giá');
+                        }
+                    });
+                }
+            });
+
+            // Utility function to show notifications
+            function showNotification(type, message) {
+                const toast = `
+                    <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                ${message}
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                `;
+                $('.toast-container').append(toast);
+                const toastElement = $('.toast').last();
+                const bsToast = new bootstrap.Toast(toastElement);
+                bsToast.show();
+                setTimeout(() => toastElement.remove(), 5000);
+            }
+        });
+    </script>
+</body>
+</html> 

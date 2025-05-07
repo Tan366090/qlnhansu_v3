@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <title>VNPT Lịch sử Lương</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://cdn.sheetjs.com https://cdnjs.cloudflare.com; object-src 'none';"
+        />
+        <link rel="stylesheet" href="../assets/css/common.css" />
+        <link rel="stylesheet" href="../assets/css/SalaryHistory.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+
+        <!-- External Libraries -->
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.js"
+        ></script>
+        <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+        <script src="js/checkFeatures.js"></script>
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <main class="content">
+                <div class="content-header">
+                    <h1>Lịch sử Tăng lương</h1>
+                </div>
+
+                <div class="form-container">
+                    <div class="controls-bar">
+                        <button
+                            class="btn btn-primary btn-filter"
+                            id="filterButton"
+                        >
+                            <ion-icon name="filter-outline"></ion-icon> Lọc
+                        </button>
+                        <button
+                            class="btn btn-secondary btn-reload"
+                            id="reloadButton"
+                        >
+                            <ion-icon name="refresh-outline"></ion-icon> Load
+                            lại dữ liệu
+                        </button>
+                    </div>
+                    <div class="salary-history-list">
+                        <div class="list-header">
+                            <h3>Danh sách Lịch sử Lương</h3>
+                            <div class="button-group">
+                                <button
+                                    class="btn btn-export"
+                                    id="btnExportSalaryHistory"
+                                >
+                                    Xuất Excel
+                                </button>
+                                <button
+                                    class="btn btn-pdf"
+                                    id="btnExportSalaryPdf"
+                                >
+                                    Xuất PDF
+                                </button>
+                            </div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID Lịch sử</th>
+                                    <th>ID Nhân viên</th>
+                                    <th>Tên nhân viên</th>
+                                    <th>Lương cũ</th>
+                                    <th>Lương mới</th>
+                                    <th>Hệ số cũ</th>
+                                    <th>Hệ số mới</th>
+                                    <th>Ngày hiệu lực</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                <tr class="filter-row">
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="historyId"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="employeeId"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="employeeName"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="oldSalary"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="newSalary"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="oldCoefficient"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="newCoefficient"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="effectiveDate"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th><!-- No filter for actions --></th>
+                                </tr>
+                            </thead>
+                            <tbody id="salaryHistoryTableBody">
+                                <!-- Data rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- External Scripts -->
+        <script src="../assets/js/common.js"></script>
+        <script src="../assets/js/SalaryHistory.js" defer></script>
+
+        <!-- Nút xuất báo cáo - Đang phát triển -->
+        <button class="btn btn-primary" data-feature="export-salary">
+            <i class="fas fa-file-export"></i> Xuất báo cáo
+        </button>
+
+        <!-- Nút khiếu nại - Đang phát triển -->
+        <button class="btn btn-warning" data-feature="salary-complaint">
+            <i class="fas fa-exclamation-circle"></i> Gửi khiếu nại
+        </button>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const salaryHistory = await fetchData("getSalaryHistory"); // Add 'getSalaryHistory' case in API
+                const tbody = document.getElementById("salaryHistoryList");
+                tbody.innerHTML = ""; // Clear existing rows
+
+                salaryHistory.forEach((record) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${record.employee_id}</td>
+                        <td>${record.full_name}</td>
+                        <td>${record.amount}</td>
+                        <td>${record.date}</td>
+                        <td>${record.reason}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

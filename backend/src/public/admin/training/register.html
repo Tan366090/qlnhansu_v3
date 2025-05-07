@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký đào tạo</title>
+    <link rel="stylesheet" href="../../css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mt-4 mb-4">Đăng ký đào tạo</h1>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <form id="trainingRegisterForm">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="employeeId" class="form-label">Mã nhân viên</label>
+                                    <input type="text" class="form-control" id="employeeId" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="employeeName" class="form-label">Họ tên nhân viên</label>
+                                    <input type="text" class="form-control" id="employeeName" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="trainingCourse" class="form-label">Khóa đào tạo</label>
+                                    <select class="form-select" id="trainingCourse" required>
+                                        <option value="">Chọn khóa đào tạo</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="trainingDate" class="form-label">Ngày đào tạo</label>
+                                    <input type="date" class="form-control" id="trainingDate" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="trainer" class="form-label">Giảng viên</label>
+                                    <input type="text" class="form-control" id="trainer" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="location" class="form-label">Địa điểm</label>
+                                    <input type="text" class="form-control" id="location" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Mô tả</label>
+                                <textarea class="form-control" id="description" rows="3"></textarea>
+                            </div>
+
+                            <div class="text-end">
+                                <button type="button" class="btn btn-secondary me-2" onclick="window.history.back()">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Đăng ký</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Load danh sách khóa đào tạo
+            $.ajax({
+                url: '/api/trainings',
+                method: 'GET',
+                success: function(response) {
+                    const select = $('#trainingCourse');
+                    response.forEach(course => {
+                        select.append(`<option value="${course.id}">${course.name}</option>`);
+                    });
+                }
+            });
+
+            // Tự động điền tên nhân viên khi nhập mã
+            $('#employeeId').on('change', function() {
+                const employeeId = $(this).val();
+                if (employeeId) {
+                    $.ajax({
+                        url: `/api/employees/${employeeId}`,
+                        method: 'GET',
+                        success: function(response) {
+                            $('#employeeName').val(response.full_name);
+                        }
+                    });
+                }
+            });
+
+            // Xử lý đăng ký
+            $('#trainingRegisterForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                const data = {
+                    employee_id: $('#employeeId').val(),
+                    training_id: $('#trainingCourse').val(),
+                    training_date: $('#trainingDate').val(),
+                    trainer: $('#trainer').val(),
+                    location: $('#location').val(),
+                    description: $('#description').val()
+                };
+
+                $.ajax({
+                    url: '/api/trainings/register',
+                    method: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        alert('Đăng ký thành công!');
+                        window.location.href = 'list.html';
+                    },
+                    error: function(xhr) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseJSON.message);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

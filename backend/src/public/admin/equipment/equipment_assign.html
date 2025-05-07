@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cấp Phát Thiết Bị - Hệ thống Quản lý Nhân sự</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Copy sidebar từ dashboard.html -->
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <!-- Copy top-nav từ dashboard.html -->
+            </header>
+
+            <!-- Equipment Assign Content -->
+            <div class="content">
+                <div class="page-header">
+                    <h1>Cấp Phát Thiết Bị</h1>
+                    <div class="breadcrumb">
+                        <span>Home</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Quản lý thiết bị</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Cấp phát thiết bị</span>
+                    </div>
+                </div>
+
+                <!-- Equipment Assignment Form -->
+                <div class="assignment-form">
+                    <form id="equipmentAssignForm">
+                        <div class="form-group">
+                            <label for="equipmentSelect">Chọn thiết bị</label>
+                            <select id="equipmentSelect" required>
+                                <option value="">-- Chọn thiết bị --</option>
+                                <option value="1">Laptop Dell XPS 13 (LAP001)</option>
+                                <option value="2">Desktop HP EliteDesk (DESK001)</option>
+                                <option value="3">Máy in HP LaserJet (PRINT001)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="employeeSelect">Chọn nhân viên</label>
+                            <select id="employeeSelect" required>
+                                <option value="">-- Chọn nhân viên --</option>
+                                <option value="1">Nguyễn Văn A</option>
+                                <option value="2">Trần Thị B</option>
+                                <option value="3">Lê Văn C</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="assignDate">Ngày cấp phát</label>
+                            <input type="date" id="assignDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="returnDate">Ngày dự kiến trả</label>
+                            <input type="date" id="returnDate">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="purpose">Mục đích sử dụng</label>
+                            <textarea id="purpose" rows="4" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="condition">Tình trạng thiết bị</label>
+                            <textarea id="condition" rows="4" required></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Cấp phát</button>
+                            <button type="button" class="btn btn-secondary">Hủy</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Assignment History -->
+                <div class="assignment-history">
+                    <h2>Lịch sử cấp phát</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Thiết bị</th>
+                                <th>Người sử dụng</th>
+                                <th>Ngày cấp phát</th>
+                                <th>Ngày trả</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Laptop Dell XPS 13</td>
+                                <td>Nguyễn Văn A</td>
+                                <td>01/01/2024</td>
+                                <td>-</td>
+                                <td><span class="status active">Đang sử dụng</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary">Chi tiết</button>
+                                    <button class="btn btn-sm btn-danger">Thu hồi</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Desktop HP EliteDesk</td>
+                                <td>Trần Thị B</td>
+                                <td>15/12/2023</td>
+                                <td>31/12/2023</td>
+                                <td><span class="status completed">Đã trả</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary">Chi tiết</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+        <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html> 

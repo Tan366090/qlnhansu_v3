@@ -1,0 +1,35 @@
+{
+    "name": "qlnhansu/version1",
+    "description": "QLNhanSu Version 1",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "ext-pdo": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5",
+        "facebook/webdriver": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "backend/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "process-timeout": 2000
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

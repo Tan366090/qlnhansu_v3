@@ -1,0 +1,596 @@
+{"level":"info","message":"API routes đã được cấu hình","timestamp":"2025-04-24T12:49:09.453Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /admin HTTP/1.1\" 301 155 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.133Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /admin/ HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.197Z"}
+{"level":"info","message":"Truy cập trang admin: /admin/css/dashboard.css","timestamp":"2025-04-24T12:49:46.643Z"}
+{"level":"info","message":"Truy cập trang admin: /admin/js/dashboard.js","timestamp":"2025-04-24T12:49:46.645Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /assets/css/notifications.css HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.652Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /assets/css/loading.css HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.657Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /assets/css/style.css HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.667Z"}
+{"level":"warn","message":"404 - Không tìm thấy: GET /shared/images/logo.png","timestamp":"2025-04-24T12:49:46.673Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /shared/images/logo.png HTTP/1.1\" 404 76 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.679Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /assets/js/main.js HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.684Z"}
+{"level":"warn","message":"404 - Không tìm thấy: GET /shared/images/avatar.png","timestamp":"2025-04-24T12:49:46.687Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /shared/images/avatar.png HTTP/1.1\" 404 78 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.690Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /admin/css/dashboard.css HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.698Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /admin/js/dashboard.js HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.700Z"}
+{"level":"warn","message":"404 - Không tìm thấy: GET /assets/js/services/NotificationSounds.js","timestamp":"2025-04-24T12:49:46.714Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /assets/js/services/NotificationSounds.js HTTP/1.1\" 404 94 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.715Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /assets/js/services/LoadingService.js HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.722Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /assets/js/services/NotificationService.js HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.727Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:46 +0000] \"GET /assets/js/services/NetworkErrorHandler.js HTTP/1.1\" 200 - \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:46.730Z"}
+{"level":"warn","message":"404 - Không tìm thấy: GET /favicon.ico","timestamp":"2025-04-24T12:49:47.246Z"}
+{"level":"info","message":"::1 - - [24/Apr/2025:12:49:47 +0000] \"GET /favicon.ico HTTP/1.1\" 404 65 \"-\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36\"","timestamp":"2025-04-24T12:49:47.248Z"}
+{"level":"info","message":"API routes đã được cấu hình","timestamp":"2025-04-24 19:52:28"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:12:53:02ms","status":null,"timestamp":"2025-04-24 19:53:02","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:12:53:02ms","status":null,"timestamp":"2025-04-24 19:53:02","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:12:53:02ms","status":null,"timestamp":"2025-04-24 19:53:02","url":"-"}
+{"level":"info","message":"Truy cập trang admin","path":"/admin/css/dashboard.css","timestamp":"2025-04-24 19:53:02"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:12:53:02ms","status":null,"timestamp":"2025-04-24 19:53:02","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-24 20:02:55"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:03:09ms","status":null,"timestamp":"2025-04-24 20:03:09","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:03:09ms","status":null,"timestamp":"2025-04-24 20:03:09","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:03:09ms","status":null,"timestamp":"2025-04-24 20:03:09","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:03:58ms","status":null,"timestamp":"2025-04-24 20:03:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:03:58ms","status":null,"timestamp":"2025-04-24 20:03:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:03:58ms","status":null,"timestamp":"2025-04-24 20:03:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:03:58ms","status":null,"timestamp":"2025-04-24 20:03:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:03:58ms","status":null,"timestamp":"2025-04-24 20:03:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:03:58ms","status":null,"timestamp":"2025-04-24 20:03:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:03:58ms","status":null,"timestamp":"2025-04-24 20:03:58","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-24 20:13:15"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:13:25ms","status":null,"timestamp":"2025-04-24 20:13:25","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-24 20:15:18"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:15:24ms","status":null,"timestamp":"2025-04-24 20:15:24","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:15:24ms","status":null,"timestamp":"2025-04-24 20:15:24","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:15:24ms","status":null,"timestamp":"2025-04-24 20:15:24","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:15:24ms","status":null,"timestamp":"2025-04-24 20:15:24","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:15:24ms","status":null,"timestamp":"2025-04-24 20:15:24","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:15:24ms","status":null,"timestamp":"2025-04-24 20:15:24","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:15:24ms","status":null,"timestamp":"2025-04-24 20:15:24","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:15:24ms","status":null,"timestamp":"2025-04-24 20:15:24","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:15:31ms","status":null,"timestamp":"2025-04-24 20:15:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:40ms","status":null,"timestamp":"2025-04-24 20:17:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:40ms","status":null,"timestamp":"2025-04-24 20:17:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:40ms","status":null,"timestamp":"2025-04-24 20:17:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:40ms","status":null,"timestamp":"2025-04-24 20:17:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:40ms","status":null,"timestamp":"2025-04-24 20:17:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:40ms","status":null,"timestamp":"2025-04-24 20:17:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:40ms","status":null,"timestamp":"2025-04-24 20:17:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:40ms","status":null,"timestamp":"2025-04-24 20:17:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:41ms","status":null,"timestamp":"2025-04-24 20:17:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:41ms","status":null,"timestamp":"2025-04-24 20:17:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:41ms","status":null,"timestamp":"2025-04-24 20:17:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:41ms","status":null,"timestamp":"2025-04-24 20:17:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:41ms","status":null,"timestamp":"2025-04-24 20:17:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:41ms","status":null,"timestamp":"2025-04-24 20:17:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:41ms","status":null,"timestamp":"2025-04-24 20:17:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:41ms","status":null,"timestamp":"2025-04-24 20:17:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:44ms","status":null,"timestamp":"2025-04-24 20:17:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:17:44ms","status":null,"timestamp":"2025-04-24 20:17:44","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-24 20:18:45"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:18:49ms","status":null,"timestamp":"2025-04-24 20:18:49","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:18:49ms","status":null,"timestamp":"2025-04-24 20:18:49","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:18:49ms","status":null,"timestamp":"2025-04-24 20:18:49","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:13:18:49ms","status":null,"timestamp":"2025-04-24 20:18:49","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:14:19:47ms","status":null,"timestamp":"2025-04-24 21:19:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:14:19:47ms","status":null,"timestamp":"2025-04-24 21:19:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:14:19:47ms","status":null,"timestamp":"2025-04-24 21:19:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[24/Apr/2025:14:19:47ms","status":null,"timestamp":"2025-04-24 21:19:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:53:33ms","status":null,"timestamp":"2025-04-25 07:53:33","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 07:54:04"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 07:54:04"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 07:55:14"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 07:55:14"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 07:56:23"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 07:56:23"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:29ms","status":null,"timestamp":"2025-04-25 07:56:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:29ms","status":null,"timestamp":"2025-04-25 07:56:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:33ms","status":null,"timestamp":"2025-04-25 07:56:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:33ms","status":null,"timestamp":"2025-04-25 07:56:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:33ms","status":null,"timestamp":"2025-04-25 07:56:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:33ms","status":null,"timestamp":"2025-04-25 07:56:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:33ms","status":null,"timestamp":"2025-04-25 07:56:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:00:56:34ms","status":null,"timestamp":"2025-04-25 07:56:34","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 08:00:11"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 08:00:11"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:23ms","status":null,"timestamp":"2025-04-25 08:00:23","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:30ms","status":null,"timestamp":"2025-04-25 08:00:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:30ms","status":null,"timestamp":"2025-04-25 08:00:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:00:41ms","status":null,"timestamp":"2025-04-25 08:00:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:02:57ms","status":null,"timestamp":"2025-04-25 08:02:57","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:07:58ms","status":null,"timestamp":"2025-04-25 08:07:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:07:58ms","status":null,"timestamp":"2025-04-25 08:07:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:07:58ms","status":null,"timestamp":"2025-04-25 08:07:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:07:58ms","status":null,"timestamp":"2025-04-25 08:07:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:07:58ms","status":null,"timestamp":"2025-04-25 08:07:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:18ms","status":null,"timestamp":"2025-04-25 08:09:18","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:09:20ms","status":null,"timestamp":"2025-04-25 08:09:20","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:12:58ms","status":null,"timestamp":"2025-04-25 08:12:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:12:58ms","status":null,"timestamp":"2025-04-25 08:12:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:12:58ms","status":null,"timestamp":"2025-04-25 08:12:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:12:58ms","status":null,"timestamp":"2025-04-25 08:12:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:12:58ms","status":null,"timestamp":"2025-04-25 08:12:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:17:58ms","status":null,"timestamp":"2025-04-25 08:17:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:17:58ms","status":null,"timestamp":"2025-04-25 08:17:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:17:58ms","status":null,"timestamp":"2025-04-25 08:17:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:17:58ms","status":null,"timestamp":"2025-04-25 08:17:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:17:58ms","status":null,"timestamp":"2025-04-25 08:17:58","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:01ms","status":null,"timestamp":"2025-04-25 08:48:01","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:01ms","status":null,"timestamp":"2025-04-25 08:48:01","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng activities:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng audit_logs:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng departments:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng documents:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng bonuses:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng degrees:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng email_verification_tokens:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng employee_positions:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng employee_trainings:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng equipment_assignments:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng family_members:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng holidays:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng leaves:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng notifications:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng employees:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng password_reset_tokens:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng payroll:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng payrolls:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng login_attempts:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng performances:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng permissions:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng positions:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng rate_limits:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng role_permissions:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng roles:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng salary_history:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng sessions:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng tasks:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng trainings:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng user_profiles:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng users:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng work_schedules:","timestamp":"2025-04-25 08:48:03"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:03ms","status":null,"timestamp":"2025-04-25 08:48:03","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng activities:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng audit_logs:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng bonuses:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng degrees:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng departments:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng documents:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng email_verification_tokens:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng employee_positions:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng employee_trainings:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng employees:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng equipment_assignments:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng family_members:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng holidays:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng leaves:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng login_attempts:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng notifications:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng password_reset_tokens:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng payroll:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng payrolls:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng performances:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng permissions:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng positions:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng rate_limits:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng role_permissions:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:07ms","status":null,"timestamp":"2025-04-25 08:48:07","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng roles:","timestamp":"2025-04-25 08:48:07"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng salary_history:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng sessions:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng tasks:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng trainings:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng user_profiles:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng users:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng work_schedules:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng activities:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng audit_logs:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng bonuses:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng degrees:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng departments:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng documents:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng email_verification_tokens:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng employee_positions:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng employee_trainings:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng employees:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng equipment_assignments:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng family_members:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng holidays:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng leaves:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng login_attempts:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng notifications:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng password_reset_tokens:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng payroll:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng payrolls:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng performances:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng permissions:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng positions:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng rate_limits:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:08ms","status":null,"timestamp":"2025-04-25 08:48:08","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng role_permissions:","timestamp":"2025-04-25 08:48:08"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:09ms","status":null,"timestamp":"2025-04-25 08:48:09","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng roles:","timestamp":"2025-04-25 08:48:09"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:09ms","status":null,"timestamp":"2025-04-25 08:48:09","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng salary_history:","timestamp":"2025-04-25 08:48:09"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:09ms","status":null,"timestamp":"2025-04-25 08:48:09","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng sessions:","timestamp":"2025-04-25 08:48:09"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:09ms","status":null,"timestamp":"2025-04-25 08:48:09","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng tasks:","timestamp":"2025-04-25 08:48:09"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:09ms","status":null,"timestamp":"2025-04-25 08:48:09","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng trainings:","timestamp":"2025-04-25 08:48:09"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:09ms","status":null,"timestamp":"2025-04-25 08:48:09","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng user_profiles:","timestamp":"2025-04-25 08:48:09"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:09ms","status":null,"timestamp":"2025-04-25 08:48:09","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng users:","timestamp":"2025-04-25 08:48:09"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:09ms","status":null,"timestamp":"2025-04-25 08:48:09","url":"-"}
+{"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng work_schedules:","timestamp":"2025-04-25 08:48:09"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:01:48:09ms","status":null,"timestamp":"2025-04-25 08:48:09","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 15:35:29"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 15:35:29"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:35:41ms","status":null,"timestamp":"2025-04-25 15:35:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:35:41ms","status":null,"timestamp":"2025-04-25 15:35:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:35:41ms","status":null,"timestamp":"2025-04-25 15:35:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:35:42ms","status":null,"timestamp":"2025-04-25 15:35:42","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 15:41:00"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 15:41:00"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:41:48ms","status":null,"timestamp":"2025-04-25 15:41:48","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:41:48ms","status":null,"timestamp":"2025-04-25 15:41:48","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:41:48ms","status":null,"timestamp":"2025-04-25 15:41:48","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:41:48ms","status":null,"timestamp":"2025-04-25 15:41:48","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 15:44:01"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 15:44:01"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:44:11ms","status":null,"timestamp":"2025-04-25 15:44:11","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:44:11ms","status":null,"timestamp":"2025-04-25 15:44:11","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:44:11ms","status":null,"timestamp":"2025-04-25 15:44:11","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:44:11ms","status":null,"timestamp":"2025-04-25 15:44:11","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:44:11ms","status":null,"timestamp":"2025-04-25 15:44:11","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 15:45:23"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 15:45:23"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 15:46:11"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 15:46:11"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:47:01ms","status":null,"timestamp":"2025-04-25 15:47:01","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 15:49:15"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 15:49:15"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:49:26ms","status":null,"timestamp":"2025-04-25 15:49:26","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:49:26ms","status":null,"timestamp":"2025-04-25 15:49:26","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:49:26ms","status":null,"timestamp":"2025-04-25 15:49:26","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:49:26ms","status":null,"timestamp":"2025-04-25 15:49:26","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:49:26ms","status":null,"timestamp":"2025-04-25 15:49:26","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:49:51ms","status":null,"timestamp":"2025-04-25 15:49:51","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:52:28ms","status":null,"timestamp":"2025-04-25 15:52:28","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 15:55:28"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 15:55:28"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:55:52ms","status":null,"timestamp":"2025-04-25 15:55:52","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:55:52ms","status":null,"timestamp":"2025-04-25 15:55:52","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:55:52ms","status":null,"timestamp":"2025-04-25 15:55:52","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:55:52ms","status":null,"timestamp":"2025-04-25 15:55:52","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 15:57:00"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 15:57:00"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:57:07ms","status":null,"timestamp":"2025-04-25 15:57:07","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:57:07ms","status":null,"timestamp":"2025-04-25 15:57:07","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:57:07ms","status":null,"timestamp":"2025-04-25 15:57:07","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:57:07ms","status":null,"timestamp":"2025-04-25 15:57:07","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:57:07ms","status":null,"timestamp":"2025-04-25 15:57:07","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 15:57:39"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 15:57:39"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:57:45ms","status":null,"timestamp":"2025-04-25 15:57:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:57:45ms","status":null,"timestamp":"2025-04-25 15:57:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:57:45ms","status":null,"timestamp":"2025-04-25 15:57:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:57:45ms","status":null,"timestamp":"2025-04-25 15:57:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:57:45ms","status":null,"timestamp":"2025-04-25 15:57:45","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 15:59:32"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 15:59:32"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:59:44ms","status":null,"timestamp":"2025-04-25 15:59:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:59:44ms","status":null,"timestamp":"2025-04-25 15:59:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:59:45ms","status":null,"timestamp":"2025-04-25 15:59:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:59:45ms","status":null,"timestamp":"2025-04-25 15:59:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:08:59:45ms","status":null,"timestamp":"2025-04-25 15:59:45","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:01:02"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:01:02"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:01:16ms","status":null,"timestamp":"2025-04-25 16:01:16","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:01:16ms","status":null,"timestamp":"2025-04-25 16:01:16","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:01:16ms","status":null,"timestamp":"2025-04-25 16:01:16","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:01:16ms","status":null,"timestamp":"2025-04-25 16:01:16","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:01:16ms","status":null,"timestamp":"2025-04-25 16:01:16","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:01:47ms","status":null,"timestamp":"2025-04-25 16:01:47","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:09:25"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:09:25"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:11:02"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:11:02"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:15:39"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:15:39"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:15:52ms","status":null,"timestamp":"2025-04-25 16:15:52","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:15:52ms","status":null,"timestamp":"2025-04-25 16:15:52","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:15:52ms","status":null,"timestamp":"2025-04-25 16:15:52","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:15:52ms","status":null,"timestamp":"2025-04-25 16:15:52","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:16:40"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:16:41"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:17:37"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:17:37"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:17:51ms","status":null,"timestamp":"2025-04-25 16:17:51","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:17:51ms","status":null,"timestamp":"2025-04-25 16:17:51","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:17:51ms","status":null,"timestamp":"2025-04-25 16:17:51","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:17:51ms","status":null,"timestamp":"2025-04-25 16:17:51","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:17:51ms","status":null,"timestamp":"2025-04-25 16:17:51","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:19:09"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:19:09"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:19:21ms","status":null,"timestamp":"2025-04-25 16:19:21","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:19:21ms","status":null,"timestamp":"2025-04-25 16:19:21","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:19:21ms","status":null,"timestamp":"2025-04-25 16:19:21","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:19:21ms","status":null,"timestamp":"2025-04-25 16:19:21","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:19:21ms","status":null,"timestamp":"2025-04-25 16:19:21","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:19:21ms","status":null,"timestamp":"2025-04-25 16:19:21","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:19:21ms","status":null,"timestamp":"2025-04-25 16:19:21","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:19:21ms","status":null,"timestamp":"2025-04-25 16:19:21","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:19:21ms","status":null,"timestamp":"2025-04-25 16:19:21","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:20:43"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:20:43"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:21:00ms","status":null,"timestamp":"2025-04-25 16:21:00","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:21:00ms","status":null,"timestamp":"2025-04-25 16:21:00","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:21:00ms","status":null,"timestamp":"2025-04-25 16:21:00","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:21:00ms","status":null,"timestamp":"2025-04-25 16:21:00","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:21:00ms","status":null,"timestamp":"2025-04-25 16:21:00","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:21:44"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:21:44"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:22:08ms","status":null,"timestamp":"2025-04-25 16:22:08","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:23:51"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:23:51"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:03ms","status":null,"timestamp":"2025-04-25 16:24:03","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:03ms","status":null,"timestamp":"2025-04-25 16:24:03","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:03ms","status":null,"timestamp":"2025-04-25 16:24:03","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:04ms","status":null,"timestamp":"2025-04-25 16:24:04","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:04ms","status":null,"timestamp":"2025-04-25 16:24:04","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:24:41"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:24:41"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:44ms","status":null,"timestamp":"2025-04-25 16:24:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:46ms","status":null,"timestamp":"2025-04-25 16:24:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:46ms","status":null,"timestamp":"2025-04-25 16:24:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:46ms","status":null,"timestamp":"2025-04-25 16:24:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:52ms","status":null,"timestamp":"2025-04-25 16:24:52","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:52ms","status":null,"timestamp":"2025-04-25 16:24:52","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:52ms","status":null,"timestamp":"2025-04-25 16:24:52","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:52ms","status":null,"timestamp":"2025-04-25 16:24:52","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:24:52ms","status":null,"timestamp":"2025-04-25 16:24:52","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:26:42"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:26:42"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:26:49ms","status":null,"timestamp":"2025-04-25 16:26:49","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:26:49ms","status":null,"timestamp":"2025-04-25 16:26:49","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:26:49ms","status":null,"timestamp":"2025-04-25 16:26:49","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:26:49ms","status":null,"timestamp":"2025-04-25 16:26:49","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:26:49ms","status":null,"timestamp":"2025-04-25 16:26:49","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-26 08:09:41"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-26 08:09:41"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-26 11:21:10"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-26 11:21:10"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[26/Apr/2025:04:21:25ms","status":null,"timestamp":"2025-04-26 11:21:25","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[26/Apr/2025:04:21:25ms","status":null,"timestamp":"2025-04-26 11:21:25","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[26/Apr/2025:04:21:25ms","status":null,"timestamp":"2025-04-26 11:21:25","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[26/Apr/2025:04:21:25ms","status":null,"timestamp":"2025-04-26 11:21:25","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[26/Apr/2025:04:21:25ms","status":null,"timestamp":"2025-04-26 11:21:25","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-26 12:08:37"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-26 12:08:37"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-26 19:13:39"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-26 19:13:39"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-26 19:53:04"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-26 19:53:04"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[26/Apr/2025:14:10:47ms","status":null,"timestamp":"2025-04-26 21:10:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[26/Apr/2025:14:10:47ms","status":null,"timestamp":"2025-04-26 21:10:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[26/Apr/2025:14:10:47ms","status":null,"timestamp":"2025-04-26 21:10:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[26/Apr/2025:14:10:48ms","status":null,"timestamp":"2025-04-26 21:10:48","url":"-"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[26/Apr/2025:14:10:48ms","status":null,"timestamp":"2025-04-26 21:10:48","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-26 22:12:23"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-26 22:12:23"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-27 09:17:52"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-27 09:17:52"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-27 20:22:36"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-27 20:22:36"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-27 23:35:10"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-27 23:35:10"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-29 16:29:13"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-29 16:29:14"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-29 16:37:36"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-29 16:37:36"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-29 20:34:54"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-29 20:34:55"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-30 10:12:40"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-30 10:12:40"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-30 10:26:48"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-30 10:26:48"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-01 10:27:17"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-01 10:27:17"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-01 20:31:59"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-01 20:31:59"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-01 21:44:45"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-01 21:44:45"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-02 11:55:33"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-02 11:55:33"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-02 14:17:02"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-02 14:17:02"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-02 14:17:09"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-02 14:17:09"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-02 14:52:54"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-02 14:52:54"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-04 13:23:19"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-04 13:23:19"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-06 01:04:23"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-06 01:04:23"}

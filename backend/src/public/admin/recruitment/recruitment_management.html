@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý tuyển dụng</title>
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Quản lý tuyển dụng</h3>
+                        <button class="btn btn-primary" id="addRecruitmentBtn">
+                            <i class="fas fa-plus"></i> Thêm tin tuyển dụng
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <canvas id="recruitmentChart"></canvas>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Thống kê tuyển dụng</h5>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p>Tổng số tin: <span id="totalJobs">0</span></p>
+                                                <p>Đang tuyển: <span id="activeJobs">0</span></p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p>Ứng viên: <span id="totalCandidates">0</span></p>
+                                                <p>Đã tuyển: <span id="hiredCandidates">0</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="recruitmentTable">
+                                <thead>
+                                    <tr>
+                                        <th>Mã tin</th>
+                                        <th>Vị trí</th>
+                                        <th>Phòng ban</th>
+                                        <th>Số lượng</th>
+                                        <th>Ngày đăng</th>
+                                        <th>Hạn nộp</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recruitmentList">
+                                    <!-- Dữ liệu sẽ được thêm vào đây -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thêm/sửa tin tuyển dụng -->
+    <div class="modal fade" id="recruitmentModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Thêm tin tuyển dụng mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="recruitmentForm">
+                        <input type="hidden" id="recruitmentId">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Vị trí tuyển dụng</label>
+                                    <input type="text" class="form-control" id="position" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Phòng ban</label>
+                                    <select class="form-control" id="department" required>
+                                        <option value="">Chọn phòng ban</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Số lượng</label>
+                                    <input type="number" class="form-control" id="quantity" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Ngày đăng</label>
+                                    <input type="date" class="form-control" id="postDate" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Hạn nộp</label>
+                                    <input type="date" class="form-control" id="deadline" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Trạng thái</label>
+                                    <select class="form-control" id="status" required>
+                                        <option value="draft">Nháp</option>
+                                        <option value="active">Đang tuyển</option>
+                                        <option value="closed">Đã đóng</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mô tả công việc</label>
+                            <textarea class="form-control" id="description" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Yêu cầu</label>
+                            <textarea class="form-control" id="requirements" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Quyền lợi</label>
+                            <textarea class="form-control" id="benefits" rows="4" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="saveRecruitmentBtn">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class RecruitmentManager {
+            constructor() {
+                this.recruitmentModal = new bootstrap.Modal(document.getElementById('recruitmentModal'));
+                this.recruitmentChart = null;
+                this.setupEventListeners();
+                this.loadDepartments();
+                this.loadRecruitmentList();
+                this.initChart();
+            }
+
+            setupEventListeners() {
+                document.getElementById('addRecruitmentBtn').addEventListener('click', () => this.showAddModal());
+                document.getElementById('saveRecruitmentBtn').addEventListener('click', () => this.saveRecruitment());
+            }
+
+            async loadDepartments() {
+                try {
+                    const response = await fetch('/qlnhansu_V2/backend/src/public/api/departments/list');
+                    const data = await response.json();
+                    
+                    const select = document.getElementById('department');
+                    select.innerHTML = '<option value="">Chọn phòng ban</option>' +
+                        data.map(dept => `
+                            <option value="${dept.id}">${dept.name}</option>
+                        `).join('');
+                } catch (error) {
+                    console.error('Error loading departments:', error);
+                }
+            }
+
+            async loadRecruitmentList() {
+                try {
+                    const response = await fetch('/qlnhansu_V2/backend/src/public/api/recruitment/list');
+                    const data = await response.json();
+                    
+                    const tbody = document.getElementById('recruitmentList');
+                    tbody.innerHTML = data.map(job => `
+                        <tr>
+                            <td>${job.id}</td>
+                            <td>${job.position}</td>
+                            <td>${job.department_name}</td>
+                            <td>${job.quantity}</td>
+                            <td>${job.post_date}</td>
+                            <td>${job.deadline}</td>
+                            <td>${this.getStatusLabel(job.status)}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="recruitmentManager.editRecruitment(${job.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-info" onclick="recruitmentManager.viewCandidates(${job.id})">
+                                    <i class="fas fa-users"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="recruitmentManager.deleteRecruitment(${job.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('');
+
+                    // Update statistics
+                    this.updateStatistics(data);
+                } catch (error) {
+                    console.error('Error loading recruitment list:', error);
+                    this.showNotification('Lỗi khi tải danh sách tuyển dụng', 'error');
+                }
+            }
+
+            updateStatistics(data) {
+                const totalJobs = data.length;
+                const activeJobs = data.filter(job => job.status === 'active').length;
+                const totalCandidates = data.reduce((sum, job) => sum + (job.candidates || 0), 0);
+                const hiredCandidates = data.reduce((sum, job) => sum + (job.hired || 0), 0);
+
+                document.getElementById('totalJobs').textContent = totalJobs;
+                document.getElementById('activeJobs').textContent = activeJobs;
+                document.getElementById('totalCandidates').textContent = totalCandidates;
+                document.getElementById('hiredCandidates').textContent = hiredCandidates;
+
+                // Update chart
+                this.updateChart(data);
+            }
+
+            initChart() {
+                const ctx = document.getElementById('recruitmentChart');
+                this.recruitmentChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Số lượng ứng viên',
+                            data: [],
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            updateChart(data) {
+                const labels = data.map(job => job.position);
+                const candidates = data.map(job => job.candidates || 0);
+
+                this.recruitmentChart.data.labels = labels;
+                this.recruitmentChart.data.datasets[0].data = candidates;
+                this.recruitmentChart.update();
+            }
+
+            showAddModal() {
+                document.getElementById('modalTitle').textContent = 'Thêm tin tuyển dụng mới';
+                document.getElementById('recruitmentForm').reset();
+                document.getElementById('recruitmentId').value = '';
+                this.recruitmentModal.show();
+            }
+
+            async editRecruitment(id) {
+                try {
+                    const response = await fetch(`/qlnhansu_V2/backend/src/public/api/recruitment/${id}`);
+                    const job = await response.json();
+                    
+                    document.getElementById('modalTitle').textContent = 'Sửa tin tuyển dụng';
+                    document.getElementById('recruitmentId').value = job.id;
+                    document.getElementById('position').value = job.position;
+                    document.getElementById('department').value = job.department_id;
+                    document.getElementById('quantity').value = job.quantity;
+                    document.getElementById('postDate').value = job.post_date;
+                    document.getElementById('deadline').value = job.deadline;
+                    document.getElementById('status').value = job.status;
+                    document.getElementById('description').value = job.description;
+                    document.getElementById('requirements').value = job.requirements;
+                    document.getElementById('benefits').value = job.benefits;
+                    
+                    this.recruitmentModal.show();
+                } catch (error) {
+                    console.error('Error loading recruitment details:', error);
+                    this.showNotification('Lỗi khi tải thông tin tuyển dụng', 'error');
+                }
+            }
+
+            async saveRecruitment() {
+                const form = document.getElementById('recruitmentForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                const job = {
+                    id: document.getElementById('recruitmentId').value,
+                    position: document.getElementById('position').value,
+                    department_id: document.getElementById('department').value,
+                    quantity: document.getElementById('quantity').value,
+                    post_date: document.getElementById('postDate').value,
+                    deadline: document.getElementById('deadline').value,
+                    status: document.getElementById('status').value,
+                    description: document.getElementById('description').value,
+                    requirements: document.getElementById('requirements').value,
+                    benefits: document.getElementById('benefits').value
+                };
+
+                try {
+                    const url = job.id 
+                        ? `/qlnhansu_V2/backend/src/public/api/recruitment/${job.id}`
+                        : '/qlnhansu_V2/backend/src/public/api/recruitment';
+                    
+                    const response = await fetch(url, {
+                        method: job.id ? 'PUT' : 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(job)
+                    });
+
+                    if (response.ok) {
+                        this.recruitmentModal.hide();
+                        this.loadRecruitmentList();
+                        this.showNotification('Lưu tin tuyển dụng thành công', 'success');
+                    } else {
+                        throw new Error('Failed to save recruitment');
+                    }
+                } catch (error) {
+                    console.error('Error saving recruitment:', error);
+                    this.showNotification('Lỗi khi lưu tin tuyển dụng', 'error');
+                }
+            }
+
+            async deleteRecruitment(id) {
+                if (!confirm('Bạn có chắc chắn muốn xóa tin tuyển dụng này?')) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/qlnhansu_V2/backend/src/public/api/recruitment/${id}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (response.ok) {
+                        this.loadRecruitmentList();
+                        this.showNotification('Xóa tin tuyển dụng thành công', 'success');
+                    } else {
+                        throw new Error('Failed to delete recruitment');
+                    }
+                } catch (error) {
+                    console.error('Error deleting recruitment:', error);
+                    this.showNotification('Lỗi khi xóa tin tuyển dụng', 'error');
+                }
+            }
+
+            async viewCandidates(id) {
+                // Implement candidate view functionality
+                window.location.href = `/qlnhansu_V2/backend/src/public/admin/recruitment/candidates.html?job_id=${id}`;
+            }
+
+            getStatusLabel(status) {
+                const statusLabels = {
+                    'draft': 'Nháp',
+                    'active': 'Đang tuyển',
+                    'closed': 'Đã đóng'
+                };
+                return statusLabels[status] || status;
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 3000);
+            }
+        }
+
+        const recruitmentManager = new RecruitmentManager();
+    </script>
+</body>
+</html> 

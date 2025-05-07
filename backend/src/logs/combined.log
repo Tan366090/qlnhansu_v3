@@ -1,0 +1,902 @@
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-04-08T01:26:37.522Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2025-04-19T12:39:48.684Z"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-19 19:41:51"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-19 19:41:51"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-19 19:41:51"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-19 19:41:51"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-19 19:41:51"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-19 19:46:02"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-19 19:46:02"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-19 19:46:02"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-19 19:46:02"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-19 19:46:02"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-19 20:07:40"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-19 20:07:40"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-19 20:07:40"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-19 20:07:40"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-19 20:07:40"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-19 20:52:06"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-19 20:52:06"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-19 20:52:06"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-19 20:52:06"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-19 20:52:06"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 01:11:27"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 01:11:27"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 01:11:27"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 01:11:27"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 01:11:27"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 01:13:00"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 01:13:00"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 01:13:00"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 01:13:00"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 01:13:00"}
+{"error":"Cannot set property query of #<IncomingMessage> which has only a getter","level":"error","message":"Error:","method":"GET","params":{},"path":"/","query":{},"service":"qlnhansu-api","stack":"TypeError: Cannot set property query of #<IncomingMessage> which has only a getter\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\xss-clean\\lib\\index.js:8:30\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9\n    at processParams (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:582:12)\n    at next (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:291:5)\n    at internalNext (file:///C:/xampp/htdocs/QLNhanSu_version1/node_modules/helmet/index.mjs:527:6)\n    at xXssProtectionMiddleware (file:///C:/xampp/htdocs/QLNhanSu_version1/node_modules/helmet/index.mjs:307:3)\n    at internalNext (file:///C:/xampp/htdocs/QLNhanSu_version1/node_modules/helmet/index.mjs:525:6)\n    at xPoweredByMiddleware (file:///C:/xampp/htdocs/QLNhanSu_version1/node_modules/helmet/index.mjs:300:3)","timestamp":"2025-04-20 01:13:18"}
+{"error":"Cannot set property query of #<IncomingMessage> which has only a getter","level":"error","message":"Error:","method":"GET","params":{},"path":"/favicon.ico","query":{},"service":"qlnhansu-api","stack":"TypeError: Cannot set property query of #<IncomingMessage> which has only a getter\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\xss-clean\\lib\\index.js:8:30\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9\n    at processParams (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:582:12)\n    at next (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:291:5)\n    at internalNext (file:///C:/xampp/htdocs/QLNhanSu_version1/node_modules/helmet/index.mjs:527:6)\n    at xXssProtectionMiddleware (file:///C:/xampp/htdocs/QLNhanSu_version1/node_modules/helmet/index.mjs:307:3)\n    at internalNext (file:///C:/xampp/htdocs/QLNhanSu_version1/node_modules/helmet/index.mjs:525:6)\n    at xPoweredByMiddleware (file:///C:/xampp/htdocs/QLNhanSu_version1/node_modules/helmet/index.mjs:300:3)","timestamp":"2025-04-20 01:13:18"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 01:14:10"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 01:14:10"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 01:14:10"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 01:14:10"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 01:14:10"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 01:14:39"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 01:14:39"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 01:14:39"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 01:14:39"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 01:14:39"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 01:53:34"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 01:53:34"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 01:53:34"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 01:53:34"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 01:53:34"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 02:22:43"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 02:22:43"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 02:22:43"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 02:22:43"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 02:22:43"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 02:35:07"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 02:35:07"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 02:35:07"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 02:35:07"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 02:35:07"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:24"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:24"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:24"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:24"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:24"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:43"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:43"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:43"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:43"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:43"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:53"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:53"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:53"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:53"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 03:47:53"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 04:01:24"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 04:01:24"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 04:01:24"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 04:01:24"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 04:01:24"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 04:15:14"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 04:15:14"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 04:15:14"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 04:15:14"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 04:15:14"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 04:22:10"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 04:22:10"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 04:22:10"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 04:22:10"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 04:22:10"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 04:49:06"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 04:49:06"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 04:49:06"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 04:49:06"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 04:49:06"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 10:33:43"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 10:33:43"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 10:33:43"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 10:33:43"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 10:33:43"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 16:59:30"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 16:59:30"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 16:59:30"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 16:59:30"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 16:59:30"}
+{"body":{"password":"admin","username":"admin"},"error":"invalid csrf token","level":"error","message":"Error:","method":"POST","params":{},"path":"/api/auth/login","query":{},"service":"qlnhansu-api","stack":"ForbiddenError: invalid csrf token\n    at csrf (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\csurf\\index.js:112:19)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9\n    at processParams (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:582:12)\n    at next (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:291:5)\n    at compression (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\compression\\index.js:243:5)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9","timestamp":"2025-04-20 18:11:36"}
+{"body":{"password":"admin","username":"admin"},"error":"invalid csrf token","level":"error","message":"Error:","method":"POST","params":{},"path":"/api/auth/login","query":{},"service":"qlnhansu-api","stack":"ForbiddenError: invalid csrf token\n    at csrf (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\csurf\\index.js:112:19)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9\n    at processParams (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:582:12)\n    at next (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:291:5)\n    at compression (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\compression\\index.js:243:5)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9","timestamp":"2025-04-20 18:12:09"}
+{"body":{"password":"admin","username":"admin"},"error":"invalid csrf token","level":"error","message":"Error:","method":"POST","params":{},"path":"/api/auth/login","query":{},"service":"qlnhansu-api","stack":"ForbiddenError: invalid csrf token\n    at csrf (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\csurf\\index.js:112:19)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9\n    at processParams (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:582:12)\n    at next (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:291:5)\n    at compression (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\compression\\index.js:243:5)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9","timestamp":"2025-04-20 18:14:14"}
+{"body":{"password":"admin","username":"admin"},"error":"invalid csrf token","level":"error","message":"Error:","method":"POST","params":{},"path":"/api/auth/login","query":{},"service":"qlnhansu-api","stack":"ForbiddenError: invalid csrf token\n    at csrf (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\csurf\\index.js:112:19)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9\n    at processParams (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:582:12)\n    at next (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:291:5)\n    at compression (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\compression\\index.js:243:5)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9","timestamp":"2025-04-20 18:18:49"}
+{"body":{"_csrf":"ka62GSKkxf2DL5GnJFaCFKId","password":"admin","username":"admin"},"error":"invalid csrf token","level":"error","message":"Error:","method":"POST","params":{},"path":"/api/auth/login","query":{},"service":"qlnhansu-api","stack":"ForbiddenError: invalid csrf token\n    at csrf (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\csurf\\index.js:112:19)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9\n    at processParams (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:582:12)\n    at next (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:291:5)\n    at compression (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\compression\\index.js:243:5)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9","timestamp":"2025-04-20 18:20:02"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 18:23:48"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 18:23:48"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 18:23:48"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 18:23:48"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 18:23:48"}
+{"body":{"_csrf":"DdwlSkyMV5CS8De_RBHlkLeM","password":"admin","username":"admin"},"error":"invalid csrf token","level":"error","message":"Error:","method":"POST","params":{},"path":"/api/auth/login","query":{},"service":"qlnhansu-api","stack":"ForbiddenError: invalid csrf token\n    at csrf (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\csurf\\index.js:112:19)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9\n    at processParams (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:582:12)\n    at next (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:291:5)\n    at compression (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\compression\\index.js:243:5)\n    at Layer.handleRequest (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\lib\\layer.js:152:17)\n    at trimPrefix (C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:342:13)\n    at C:\\xampp\\htdocs\\QLNhanSu_version1\\node_modules\\router\\index.js:297:9","timestamp":"2025-04-20 18:24:17"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 19:14:12"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 19:14:12"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 19:14:12"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 19:14:12"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 19:14:12"}
+{"cookies":{"XSRF-TOKEN":"0O9hDoqAFY-Y12iRpzBtM5Ss","_csrf":"HJdif6r_zsE0wfoeiWQEBtTU"},"headers":{"accept":"*/*","accept-encoding":"gzip, deflate, br, zstd","accept-language":"vi-VN,vi;q=0.9,en-VN;q=0.8,en;q=0.7,fr-FR;q=0.6,fr;q=0.5,en-US;q=0.4","connection":"keep-alive","content-length":"39","content-type":"application/json","cookie":"_csrf=HJdif6r_zsE0wfoeiWQEBtTU; XSRF-TOKEN=0O9hDoqAFY-Y12iRpzBtM5Ss","csrf-token":"0O9hDoqAFY-Y12iRpzBtM5Ss","host":"localhost:3000","origin":"http://localhost:3000","referer":"http://localhost:3000/login.html","sec-ch-ua":"\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","sec-fetch-dest":"empty","sec-fetch-mode":"cors","sec-fetch-site":"same-origin","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36","x-requested-with":"XMLHttpRequest"},"level":"error","message":"CSRF Token error:","method":"POST","path":"/api/auth/login","service":"qlnhansu-api","timestamp":"2025-04-20 19:21:56"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 20:00:31"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 20:00:31"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 20:00:31"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 20:00:31"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 20:00:31"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 21:25:50"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 21:25:50"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 21:25:50"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 21:25:50"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 21:25:50"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 21:46:47"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 21:46:47"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 21:46:47"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 21:46:47"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 21:46:47"}
+{"cookies":{"XSRF-TOKEN":"prObNAEl5LDdvkm1xDORY3BD"},"headers":{"accept":"*/*","accept-encoding":"gzip, deflate, br, zstd","accept-language":"vi-VN,vi;q=0.9,en-VN;q=0.8,en;q=0.7,fr-FR;q=0.6,fr;q=0.5,en-US;q=0.4","connection":"keep-alive","content-length":"40","content-type":"application/json","cookie":"XSRF-TOKEN=prObNAEl5LDdvkm1xDORY3BD","host":"localhost:3000","origin":"http://localhost:3000","referer":"http://localhost:3000/login.html","sec-ch-ua":"\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"","sec-ch-ua-mobile":"?0","sec-ch-ua-platform":"\"Windows\"","sec-fetch-dest":"empty","sec-fetch-mode":"cors","sec-fetch-site":"same-origin","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"},"level":"error","message":"CSRF Token error:","method":"POST","path":"/QLNhanSu_version1/api/auth/login.php","service":"qlnhansu-api","timestamp":"2025-04-20 21:47:25"}
+{"cookies":{"XSRF-TOKEN":"prObNAEl5LDdvkm1xDORY3BD"},"headers":{"accept":"*/*","accept-encoding":"gzip, deflate, br, zstd","accept-language":"vi-VN,vi;q=0.9,en-VN;q=0.8,en;q=0.7,fr-FR;q=0.6,fr;q=0.5,en-US;q=0.4","connection":"keep-alive","content-length":"40","content-type":"application/json","cookie":"XSRF-TOKEN=prObNAEl5LDdvkm1xDORY3BD","host":"localhost:3000","origin":"http://localhost:3000","referer":"http://localhost:3000/login.html","sec-ch-ua":"\"Google Chrome\";v=\"135\", \"Not-A.Brand\";v=\"8\", \"Chromium\";v=\"135\"","sec-ch-ua-mobile":"?1","sec-ch-ua-platform":"\"Android\"","sec-fetch-dest":"empty","sec-fetch-mode":"cors","sec-fetch-site":"same-origin","user-agent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36"},"level":"error","message":"CSRF Token error:","method":"POST","path":"/api/auth/login","service":"qlnhansu-api","timestamp":"2025-04-20 21:49:12"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 21:52:47"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 21:52:47"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 21:52:47"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 21:52:47"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 21:52:47"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 22:34:30"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 22:34:30"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 22:34:30"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 22:34:30"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 22:34:30"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 23:15:31"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 23:15:31"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 23:15:31"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 23:15:31"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 23:15:31"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-20 23:24:53"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-20 23:24:53"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-20 23:24:53"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-20 23:24:53"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-20 23:24:53"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 00:46:13"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 00:46:13"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 00:46:13"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 00:46:13"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 00:46:13"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 01:04:11"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 01:04:11"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 01:04:11"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 01:04:11"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 01:04:11"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 01:43:13"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 01:43:13"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 01:43:13"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 01:43:13"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 01:43:13"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 07:27:03"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 07:27:03"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 07:27:03"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 07:27:03"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 07:27:03"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 07:27:15"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 07:27:15"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 07:27:15"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 07:27:15"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 07:27:15"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 13:44:52"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 13:44:52"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 13:44:52"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 13:44:52"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 13:44:52"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 15:17:24"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 15:17:24"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 15:17:24"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 15:17:24"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 15:17:24"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 15:40:53"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 15:40:53"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 15:40:53"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 15:40:53"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 15:40:53"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 16:58:31"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 16:58:31"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 16:58:31"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 16:58:31"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 16:58:31"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 17:06:41"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 17:06:41"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 17:06:41"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 17:06:41"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 17:06:41"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 17:35:43"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 17:35:43"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 17:35:43"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 17:35:43"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 17:35:43"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 17:47:56"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 17:47:56"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 17:47:56"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 17:47:56"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 17:47:56"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-21 19:06:02"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-21 19:06:02"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-21 19:06:02"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-21 19:06:02"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-21 19:06:02"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-22 02:53:52"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-22 02:53:52"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-22 02:53:52"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-22 02:53:52"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-22 02:53:52"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-22 03:48:04"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-22 03:48:04"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-22 03:48:04"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-22 03:48:04"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-22 03:48:04"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-22 07:53:12"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-22 07:53:12"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-22 07:53:12"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-22 07:53:12"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-22 07:53:12"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-22 14:21:23"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-22 14:21:23"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-22 14:21:23"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-22 14:21:23"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-22 14:21:23"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-22 14:26:42"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-22 14:26:42"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-22 14:26:42"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-22 14:26:42"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-22 14:26:42"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-22 14:40:38"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-22 14:40:38"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-22 14:40:38"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-22 14:40:38"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-22 14:40:38"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-22 15:25:48"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-22 15:25:48"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-22 15:25:48"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-22 15:25:48"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-22 15:25:48"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-22 19:28:26"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-22 19:28:26"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-22 19:28:26"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-22 19:28:26"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-22 19:28:26"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-22 20:56:41"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-22 20:56:41"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-22 20:56:41"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-22 20:56:41"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-22 20:56:41"}
+{"body":{},"error":"ENOENT: no such file or directory, stat 'C:\\xampp\\htdocs\\QLNhanSu_version1\\public\\login.html'","level":"error","message":"Error:","method":"GET","params":{},"path":"/","query":{},"service":"qlnhansu-api","stack":"Error: ENOENT: no such file or directory, stat 'C:\\xampp\\htdocs\\QLNhanSu_version1\\public\\login.html'","timestamp":"2025-04-22 22:03:57"}
+{"body":{},"error":"ENOENT: no such file or directory, stat 'C:\\xampp\\htdocs\\QLNhanSu_version1\\public\\login.html'","level":"error","message":"Error:","method":"GET","params":{},"path":"/","query":{},"service":"qlnhansu-api","stack":"Error: ENOENT: no such file or directory, stat 'C:\\xampp\\htdocs\\QLNhanSu_version1\\public\\login.html'","timestamp":"2025-04-22 22:06:12"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-22 22:18:34"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-22 22:18:34"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-22 22:18:34"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-22 22:18:34"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-22 22:18:34"}
+{"level":"info","message":"Swagger documentation loaded successfully","service":"qlnhansu-api","timestamp":"2025-04-23 08:00:20"}
+{"level":"info","message":"Server is running on port 3000","service":"qlnhansu-api","timestamp":"2025-04-23 08:00:20"}
+{"level":"info","message":"Environment: development","service":"qlnhansu-api","timestamp":"2025-04-23 08:00:20"}
+{"level":"info","message":"API Documentation: http://localhost:3000/api-docs","service":"qlnhansu-api","timestamp":"2025-04-23 08:00:20"}
+{"level":"info","message":"CORS Origin: http://localhost:4000","service":"qlnhansu-api","timestamp":"2025-04-23 08:00:20"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:07:38"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:07:39"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-04-25 16:07:53"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:07:53"}
+{"level":"info","message":"HTTP Request","method":"::1","responseTime":"[25/Apr/2025:09:08:09ms","status":null,"timestamp":"2025-04-25 16:08:09","url":"-"}
+{"level":"info","message":"Server đang chạy tại port 3002","timestamp":"2025-04-25 16:13:22"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-04-25 16:13:22"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:29ms","status":null,"timestamp":"2025-04-25 16:13:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:29ms","status":null,"timestamp":"2025-04-25 16:13:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:29ms","status":null,"timestamp":"2025-04-25 16:13:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:29ms","status":null,"timestamp":"2025-04-25 16:13:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:29ms","status":null,"timestamp":"2025-04-25 16:13:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:29ms","status":null,"timestamp":"2025-04-25 16:13:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:29ms","status":null,"timestamp":"2025-04-25 16:13:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:29ms","status":null,"timestamp":"2025-04-25 16:13:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:29ms","status":null,"timestamp":"2025-04-25 16:13:29","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:30ms","status":null,"timestamp":"2025-04-25 16:13:30","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:31ms","status":null,"timestamp":"2025-04-25 16:13:31","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:32ms","status":null,"timestamp":"2025-04-25 16:13:32","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:33ms","status":null,"timestamp":"2025-04-25 16:13:33","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:34ms","status":null,"timestamp":"2025-04-25 16:13:34","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:35ms","status":null,"timestamp":"2025-04-25 16:13:35","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:36ms","status":null,"timestamp":"2025-04-25 16:13:36","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:37ms","status":null,"timestamp":"2025-04-25 16:13:37","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:38ms","status":null,"timestamp":"2025-04-25 16:13:38","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:39ms","status":null,"timestamp":"2025-04-25 16:13:39","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:40ms","status":null,"timestamp":"2025-04-25 16:13:40","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:41ms","status":null,"timestamp":"2025-04-25 16:13:41","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:42ms","status":null,"timestamp":"2025-04-25 16:13:42","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:43ms","status":null,"timestamp":"2025-04-25 16:13:43","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:44ms","status":null,"timestamp":"2025-04-25 16:13:44","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:45ms","status":null,"timestamp":"2025-04-25 16:13:45","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:46ms","status":null,"timestamp":"2025-04-25 16:13:46","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}
+{"level":"info","message":"HTTP Request","method":"127.0.0.1","responseTime":"[25/Apr/2025:09:13:47ms","status":null,"timestamp":"2025-04-25 16:13:47","url":"-"}

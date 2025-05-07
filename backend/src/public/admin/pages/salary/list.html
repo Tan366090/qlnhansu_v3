@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách lương</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/notifications.css">
+    <link rel="stylesheet" href="/assets/css/loading.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- JavaScript -->
+    <script type="module" src="/assets/js/main.js"></script>
+</head>
+
+<!-- Salary List Page -->
+<div class="page-transition">
+    <header class="content-header">
+        <h1>Bảng lương nhân viên</h1>
+        <div class="header-actions">
+            <button class="btn btn-success" onclick="exportSalary()">
+                <i class="fas fa-file-excel"></i> Xuất Excel
+            </button>
+            <button class="btn btn-primary" onclick="calculateSalary()">
+                <i class="fas fa-calculator"></i> Tính lương
+            </button>
+        </div>
+    </header>
+
+    <div class="content-filters">
+        <div class="filter-group">
+            <select id="monthFilter">
+                <option value="">Chọn tháng</option>
+                <option value="1">Tháng 1</option>
+                <option value="2">Tháng 2</option>
+                <option value="3">Tháng 3</option>
+                <option value="4">Tháng 4</option>
+                <option value="5">Tháng 5</option>
+                <option value="6">Tháng 6</option>
+                <option value="7">Tháng 7</option>
+                <option value="8">Tháng 8</option>
+                <option value="9">Tháng 9</option>
+                <option value="10">Tháng 10</option>
+                <option value="11">Tháng 11</option>
+                <option value="12">Tháng 12</option>
+            </select>
+            <select id="yearFilter">
+                <option value="">Chọn năm</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+            </select>
+            <select id="departmentFilter">
+                <option value="">Tất cả phòng ban</option>
+                <option value="hr">Nhân sự</option>
+                <option value="it">CNTT</option>
+                <option value="finance">Tài chính</option>
+            </select>
+        </div>
+        <div class="search-box">
+            <input type="text" id="salarySearch" placeholder="Tìm kiếm nhân viên...">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+
+    <div class="content-summary">
+        <div class="summary-card">
+            <div class="summary-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="summary-info">
+                <h3>Tổng nhân viên</h3>
+                <p id="totalEmployees">0</p>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-icon">
+                <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <div class="summary-info">
+                <h3>Tổng lương</h3>
+                <p id="totalSalary">0 VNĐ</p>
+            </div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="summary-info">
+                <h3>Lương bình quân</h3>
+                <p id="averageSalary">0 VNĐ</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã NV</th>
+                    <th>Họ tên</th>
+                    <th>Phòng ban</th>
+                    <th>Lương cơ bản</th>
+                    <th>Phụ cấp</th>
+                    <th>Thưởng</th>
+                    <th>Khấu trừ</th>
+                    <th>Thực lãnh</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="salaryList">
+                <!-- Data will be loaded dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="content-pagination">
+        <button class="btn btn-outline-primary" onclick="prevPage()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <span id="pageInfo">Trang 1 / 5</span>
+        <button class="btn btn-outline-primary" onclick="nextPage()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<script>
+    let currentPage = 1;
+    const itemsPerPage = 10;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initializePage();
+    });
+
+    function initializePage() {
+        // Set default month and year
+        const now = new Date();
+        document.getElementById('monthFilter').value = now.getMonth() + 1;
+        document.getElementById('yearFilter').value = now.getFullYear();
+
+        // Load initial data
+        loadSalaryData();
+        
+        // Initialize event listeners
+        initializeEventListeners();
+    }
+
+    function initializeEventListeners() {
+        // Filter changes
+        document.getElementById('monthFilter').addEventListener('change', () => {
+            currentPage = 1;
+            loadSalaryData();
+        });
+        
+        document.getElementById('yearFilter').addEventListener('change', () => {
+            currentPage = 1;
+            loadSalaryData();
+        });
+        
+        document.getElementById('departmentFilter').addEventListener('change', () => {
+            currentPage = 1;
+            loadSalaryData();
+        });
+
+        // Search input
+        let searchTimeout;
+        document.getElementById('salarySearch').addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                currentPage = 1;
+                loadSalaryData();
+            }, 300);
+        });
+    }
+
+    async function loadSalaryData() {
+        try {
+            showLoading('Đang tải bảng lương...');
+            
+            const month = document.getElementById('monthFilter').value;
+            const year = document.getElementById('yearFilter').value;
+            const department = document.getElementById('departmentFilter').value;
+            const search = document.getElementById('salarySearch').value;
+            
+            const response = await fetch(`/QLNhanSu_version1/public/api/salary/list.php?page=${currentPage}&limit=${itemsPerPage}&month=${month}&year=${year}&department=${department}&search=${search}`);
+            
+            if (!response.ok) throw new Error('Failed to load salary data');
+            
+            const data = await response.json();
+            if (data.success) {
+                renderSalaryList(data.salaries);
+                updateSummary(data.summary);
+                updatePagination(data.totalPages);
+            } else {
+                throw new Error(data.message || 'Failed to load salary data');
+            }
+        } catch (error) {
+            console.error('Error loading salary data:', error);
+            showNotification('Không thể tải bảng lương', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    function renderSalaryList(salaries) {
+        const tbody = document.getElementById('salaryList');
+        tbody.innerHTML = '';
+        
+        salaries.forEach(salary => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${salary.employeeId}</td>
+                <td>${salary.employeeName}</td>
+                <td>${salary.department}</td>
+                <td>${formatCurrency(salary.baseSalary)}</td>
+                <td>${formatCurrency(salary.allowance)}</td>
+                <td>${formatCurrency(salary.bonus)}</td>
+                <td>${formatCurrency(salary.deduction)}</td>
+                <td class="net-salary">${formatCurrency(salary.netSalary)}</td>
+                <td>
+                    <span class="status-badge ${salary.status}">
+                        ${getSalaryStatus(salary.status)}
+                    </span>
+                </td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="btn btn-sm btn-info" onclick="viewSalaryDetail(${salary.id})">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary" onclick="editSalary(${salary.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-success" onclick="printPayslip(${salary.id})">
+                            <i class="fas fa-print"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    function updateSummary(summary) {
+        document.getElementById('totalEmployees').textContent = summary.totalEmployees;
+        document.getElementById('totalSalary').textContent = formatCurrency(summary.totalSalary);
+        document.getElementById('averageSalary').textContent = formatCurrency(summary.averageSalary);
+    }
+
+    function updatePagination(totalPages) {
+        document.getElementById('pageInfo').textContent = `Trang ${currentPage} / ${totalPages}`;
+        document.querySelector('.content-pagination button:first-child').disabled = currentPage === 1;
+        document.querySelector('.content-pagination button:last-child').disabled = currentPage === totalPages;
+    }
+
+    async function calculateSalary() {
+        try {
+            const month = document.getElementById('monthFilter').value;
+            const year = document.getElementById('yearFilter').value;
+            
+            if (!month || !year) {
+                showNotification('Vui lòng chọn tháng và năm', 'warning');
+                return;
+            }
+            
+            showLoading('Đang tính lương...');
+            
+            const response = await fetch('/QLNhanSu_version1/public/api/salary/calculate.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ month, year })
+            });
+            
+            if (!response.ok) throw new Error('Failed to calculate salary');
+            
+            const data = await response.json();
+            if (data.success) {
+                showNotification('Tính lương thành công', 'success');
+                loadSalaryData();
+            } else {
+                throw new Error(data.message || 'Failed to calculate salary');
+            }
+        } catch (error) {
+            console.error('Error calculating salary:', error);
+            showNotification('Không thể tính lương', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    async function exportSalary() {
+        try {
+            const month = document.getElementById('monthFilter').value;
+            const year = document.getElementById('yearFilter').value;
+            const department = document.getElementById('departmentFilter').value;
+            
+            if (!month || !year) {
+                showNotification('Vui lòng chọn tháng và năm', 'warning');
+                return;
+            }
+            
+            showLoading('Đang xuất bảng lương...');
+            
+            const response = await fetch(`/QLNhanSu_version1/public/api/salary/export.php?month=${month}&year=${year}&department=${department}`);
+            
+            if (!response.ok) throw new Error('Failed to export salary');
+            
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `bangluong_${month}_${year}.xlsx`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            showNotification('Xuất bảng lương thành công', 'success');
+        } catch (error) {
+            console.error('Error exporting salary:', error);
+            showNotification('Không thể xuất bảng lương', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    function viewSalaryDetail(id) {
+        router.navigateToPage(`salary/detail?id=${id}`);
+    }
+
+    function editSalary(id) {
+        router.navigateToPage(`salary/edit?id=${id}`);
+    }
+
+    async function printPayslip(id) {
+        try {
+            showLoading('Đang tạo phiếu lương...');
+            
+            const response = await fetch(`/QLNhanSu_version1/public/api/salary/payslip.php?id=${id}`);
+            
+            if (!response.ok) throw new Error('Failed to generate payslip');
+            
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            
+            // Open in new window for printing
+            const printWindow = window.open(url);
+            printWindow.onload = function() {
+                printWindow.print();
+            };
+        } catch (error) {
+            console.error('Error printing payslip:', error);
+            showNotification('Không thể in phiếu lương', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            loadSalaryData();
+        }
+    }
+
+    function nextPage() {
+        currentPage++;
+        loadSalaryData();
+    }
+
+    // Helper functions
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        }).format(amount);
+    }
+
+    function getSalaryStatus(status) {
+        const statusMap = {
+            'pending': 'Chờ duyệt',
+            'approved': 'Đã duyệt',
+            'paid': 'Đã thanh toán',
+            'rejected': 'Từ chối'
+        };
+        return statusMap[status] || status;
+    }
+</script>
+
+<style>
+    .content-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .content-filters {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .filter-group {
+        display: flex;
+        gap: 10px;
+    }
+
+    .filter-group select {
+        padding: 8px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        min-width: 150px;
+    }
+
+    .search-box {
+        position: relative;
+        flex: 1;
+        max-width: 300px;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 8px 35px 8px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .search-box i {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+    }
+
+    .content-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .summary-card {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .summary-icon {
+        width: 50px;
+        height: 50px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #007bff;
+    }
+
+    .summary-info h3 {
+        margin: 0;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .summary-info p {
+        margin: 5px 0 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .table {
+        background: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .table thead th {
+        background: #f8f9fa;
+        padding: 12px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .table tbody td {
+        padding: 12px;
+        vertical-align: middle;
+    }
+
+    .net-salary {
+        font-weight: 600;
+        color: #28a745;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
+
+    .status-badge.pending {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    .status-badge.approved {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .status-badge.paid {
+        background-color: #cce5ff;
+        color: #004085;
+    }
+
+    .status-badge.rejected {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+    }
+
+    .content-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    #pageInfo {
+        min-width: 100px;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .content-filters {
+            flex-direction: column;
+        }
+
+        .filter-group {
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            max-width: 100%;
+        }
+
+        .table {
+            display: block;
+            overflow-x: auto;
+        }
+    }
+</style> 

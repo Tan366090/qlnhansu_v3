@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self' https: file:;
+    font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com https://cdnjs.cloudflare.com https://*.googleapis.com https://*.gstatic.com https://*.cloudflare.com data:;
+    style-src 'self' 'unsafe-inline' https://*.googleapis.com https://*.jsdelivr.net https://*.cloudflare.com;
+    script-src 'self' 'nonce-random123' 'wasm-unsafe-eval' https://*.jsdelivr.net https://*.cloudflare.com https://*.jquery.com;
+    img-src 'self' data: blob: https: file:;
+    connect-src 'self' https: file:;
+    worker-src 'self' blob:;
+    child-src 'self' blob:;
+">
+
+    <title>Quản lý lương thưởng - Hệ thống quản lý nhân sự</title>
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/qlnhansu_V2/backend/src/public/css/notifications.css">
+    <link rel="stylesheet" href="/qlnhansu_V2/backend/src/public/css/loading.css">
+    <link rel="stylesheet" href="payroll.css">
+    
+    <!-- Thêm Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === Payroll Modal 80% Width Improvement === */
+        .modal-content {
+            width: 80vw;
+            max-width: 1400px;
+            min-width: 320px;
+            margin: 32px auto;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(44,62,80,0.12);
+            background: #fff;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalFadeIn 0.3s;
+        }
+
+        /* Chart Section Styles */
+        .chart-section {
+            margin: 20px 0;
+        }
+        .chart-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px;
+            height: 350px; /* Reduced height */
+            margin-bottom: 15px;
+        }
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+            color: #333;
+        }
+        .chart-filters {
+            display: flex;
+            gap: 8px;
+        }
+        .chart-filters select {
+            font-size: 0.85rem;
+            padding: 4px 8px;
+        }
+        .chart-wrapper {
+            height: 250px; /* Reduced height */
+            position: relative;
+        }
+        .chart-info {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 8px;
+        }
+        .chart-legend {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+            font-size: 0.8rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 1200px) {
+            .modal-content {
+                width: 95vw;
+                max-width: 99vw;
+            }
+        }
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 99vw;
+                margin: 0;
+                border-radius: 0;
+            }
+        }
+
+        /* Cải thiện lưới form bên trong nếu muốn tận dụng chiều ngang */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* --- Chuyên nghiệp hóa khối thông tin lương --- */
+        .salary-info-section {
+            background: #f8fafc;
+            border: 1.5px solid #e3e8ee;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+            padding: 32px 24px 18px 24px;
+            margin-bottom: 32px;
+        }
+        .salary-info-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 18px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .salary-info-section .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px 24px;
+        }
+        .salary-info-section .form-group label {
+            font-weight: 600;
+            color: #22223b;
+            margin-bottom: 7px;
+            font-size: 1rem;
+        }
+        .salary-info-section .form-control,
+        .salary-info-section .form-select {
+            background: #fff;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            padding: 10px 14px;
+            transition: border-color 0.2s;
+        }
+        .salary-info-section .form-control:focus,
+        .salary-info-section .form-select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px #2563eb22;
+        }
+        .salary-info-section .input-group-text {
+            background: #f1f5f9;
+            border: 1.5px solid #cbd5e1;
+            border-left: none;
+            color: #64748b;
+            font-weight: 500;
+            border-radius: 0 8px 8px 0;
+        }
+        .salary-info-section .allowance-total,
+        .salary-info-section .bonus-total,
+        .salary-info-section .deduction-total {
+            color: #475569;
+            font-size: 0.95rem;
+            margin-top: 6px;
+        }
+        @media (max-width: 700px) {
+            .salary-info-section .form-grid {
+                grid-template-columns: 1fr;
+                gap: 18px 0;
+            }
+            .salary-info-section {
+                padding: 18px 6px 10px 6px;
+            }
+        }
+    </style>
+   
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Nút quay lại Dashboard -->
+        <a href="../dashboard_admin_V1.php" class="btn btn-outline-primary mb-3 d-inline-flex align-items-center" style="font-weight:600;font-size:1rem;gap:8px;">
+            <img src="pic/back.png" alt="Back" class="action-icon" style="width:20px;height:20px;"> Quay lại Dashboard
+        </a>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Error Message -->
+            <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+
+            <!-- Loading Overlay -->
+            <div id="loadingOverlay" class="loading-overlay">
+                <span class="loader"></span>
+            </div>
+
+            <!-- Notification Container -->
+            <div id="notificationContainer"></div>
+
+            <!-- Page Header -->
+            <header class="page-header">
+                <div class="header-content" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                    <div class="header-text">
+                        <h2>Quản lý lương thưởng</h2>
+                    </div>
+                    <div class="header-text">
+                        <p style="color: white" class="text-muted">Quản lý thông tin lương và thưởng của nhân viên</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Cards -->
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                            <img src="pic/salary (1).png" alt="Total Salary" class="card-icon-img">
+                        </div>
+                        <div>
+                            <h6 class="card-title">Tổng lương tháng</h6>
+                            <h3 class="card-value" id="totalSalary">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+                            <img src="pic/present.png" alt="Total Bonus" class="card-icon-img">
+                        </div>
+                        <div>
+                            <h6 class="card-title">Tổng thưởng</h6>
+                            <h3 class="card-value" id="totalBonus">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #f1c40f, #f39c12);">
+                            <img src="pic/money.png" alt="Average Salary" class="card-icon-img">
+                        </div>
+                        <div>
+                            <h6 class="card-title">Lương trung bình</h6>
+                            <h3 class="card-value" id="averageSalary">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #ff7e5f, #feb47b);">
+                            <img src="pic/bill.png" alt="Total Payrolls" class="card-icon-img">
+                        </div>
+                        <div>
+                            <h6 class="card-title">Tổng số phiếu lương</h6>
+                            <h3 class="card-value" id="totalPayrolls">0</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="chart-section">
+                <div class="row">
+                    <!-- Monthly Salary Chart -->
+                    <div class="col-md-6 mb-4">
+                        <div class="chart-container h-100">
+                            <div class="chart-header">
+                                <h5 class="chart-title">Biểu đồ lương theo tháng</h5>
+                                <div class="chart-filters">
+                                    <select id="chartYearFilter" class="form-select form-select-sm">
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                    <select id="chartMonthRange" class="form-select form-select-sm">
+                                        <option value="3">3 tháng gần nhất</option>
+                                        <option value="6">6 tháng gần nhất</option>
+                                        <option value="12">12 tháng gần nhất</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="monthlySalaryChart"></canvas>
+                            </div>
+                            <div class="chart-legend">
+                                <!-- <div class="legend-item">
+                                    <span class="legend-color" style="background: #3498db;"></span>
+                                    <span>Tổng lương</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #e74c3c;"></span>
+                                    <span>Tổng thưởng</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #2ecc71;"></span>
+                                    <span>Lương trung bình</span>
+                                </div> -->
+                            </div>
+                            <div class="chart-info">
+                                <p>Biểu đồ hiển thị tổng lương, thưởng và lương trung bình theo tháng. Dữ liệu được cập nhật tự động khi thay đổi bộ lọc.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Department Salary Chart -->
+                    <div class="col-md-6 mb-4">
+                        <div class="chart-container h-100">
+                            <div class="chart-header">
+                                <h5 class="chart-title">Phân bố lương theo phòng ban</h5>
+                                <div class="chart-filters">
+                                    <select id="departmentChartYear" class="form-select form-select-sm">
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                    <select id="departmentChartMonth" class="form-select form-select-sm">
+                                        <option value="">Tất cả các tháng</option>
+                                        <option value="1">Tháng 1</option>
+                                        <option value="2">Tháng 2</option>
+                                        <option value="3">Tháng 3</option>
+                                        <option value="4">Tháng 4</option>
+                                        <option value="5">Tháng 5</option>
+                                        <option value="6">Tháng 6</option>
+                                        <option value="7">Tháng 7</option>
+                                        <option value="8">Tháng 8</option>
+                                        <option value="9">Tháng 9</option>
+                                        <option value="10">Tháng 10</option>
+                                        <option value="11">Tháng 11</option>
+                                        <option value="12">Tháng 12</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="departmentSalaryChart"></canvas>
+                            </div>
+                            <div class="chart-legend">
+                                <!-- <div class="legend-item">
+                                    <span class="legend-color" style="background: #3498db;"></span>
+                                    <span>Lương trung bình</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #e74c3c;"></span>
+                                    <span>Tổng thưởng</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #f1c40f;"></span>
+                                    <span>Số nhân viên</span>
+                                </div> -->
+                            </div>
+                            <div class="chart-info">
+                                <p>Biểu đồ hiển thị phân bố lương và thưởng theo từng phòng ban. Có thể lọc theo năm và tháng cụ thể.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Salary Trend Chart -->
+                    <div class="col-md-6 mb-4">
+                        <div class="chart-container h-100">
+                            <div class="chart-header">
+                                <h5 class="chart-title">Xu hướng lương</h5>
+                                <div class="chart-filters">
+                                    <select id="trendChartYear" class="form-select form-select-sm">
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                    <select id="trendChartType" class="form-select form-select-sm">
+                                        <option value="all">Tất cả thành phần</option>
+                                        <option value="base">Lương cơ bản</option>
+                                        <option value="allowance">Phụ cấp</option>
+                                        <option value="bonus">Thưởng</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="salaryTrendChart"></canvas>
+                            </div>
+                            <div class="chart-legend">
+                                <!-- <div class="legend-item">
+                                    <span class="legend-color" style="background: #3498db;"></span>
+                                    <span>Lương cơ bản</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #2ecc71;"></span>
+                                    <span>Phụ cấp</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #e74c3c;"></span>
+                                    <span>Thưởng</span>
+                                </div> -->
+                            </div>
+                            <div class="chart-info">
+                                <p>Biểu đồ theo dõi xu hướng thay đổi của các thành phần lương theo thời gian. Có thể chọn xem từng thành phần riêng lẻ.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Salary Component Chart -->
+                    <div class="col-md-6 mb-4">
+                        <div class="chart-container h-100">
+                            <div class="chart-header">
+                                <h5 class="chart-title">Phân tích thành phần lương</h5>
+                                <div class="chart-filters">
+                                    <select id="componentChartYear" class="form-select form-select-sm">
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                    </select>
+                                    <select id="componentChartMonth" class="form-select form-select-sm">
+                                        <option value="">Tất cả các tháng</option>
+                                        <option value="1">Tháng 1</option>
+                                        <option value="2">Tháng 2</option>
+                                        <option value="3">Tháng 3</option>
+                                        <option value="4">Tháng 4</option>
+                                        <option value="5">Tháng 5</option>
+                                        <option value="6">Tháng 6</option>
+                                        <option value="7">Tháng 7</option>
+                                        <option value="8">Tháng 8</option>
+                                        <option value="9">Tháng 9</option>
+                                        <option value="10">Tháng 10</option>
+                                        <option value="11">Tháng 11</option>
+                                        <option value="12">Tháng 12</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="salaryComponentChart"></canvas>
+                            </div>
+                            <div class="chart-legend">
+                                <!-- <div class="legend-item">
+                                    <span class="legend-color" style="background: #3498db;"></span>
+                                    <span>Lương cơ bản</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #2ecc71;"></span>
+                                    <span>Phụ cấp</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #e74c3c;"></span>
+                                    <span>Thưởng</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #f1c40f;"></span>
+                                    <span>Khấu trừ</span>
+                                </div> -->
+                            </div>
+                            <div class="chart-info">
+                                <p>Biểu đồ phân tích tỷ lệ giữa các thành phần lương. Hiển thị phần trăm đóng góp của mỗi thành phần vào tổng lương.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="search-filter">
+                <div class="filter-group">
+                    <div class="search-box">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <img src="pic/reload.png" alt="Search" class="search-icon">
+                            </span>
+                            <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm nhân viên...">
+                        </div>
+                    </div>
+                    <select class="form-select filter-select" id="departmentFilter">
+                        <option value="">Tất cả phòng ban</option>
+                    </select>
+                    <select class="form-select filter-select" id="monthFilter">
+                        <option value="">Chọn tháng</option>
+                        <option value="1">Tháng 1</option>
+                        <option value="2">Tháng 2</option>
+                        <option value="3">Tháng 3</option>
+                        <option value="4">Tháng 4</option>
+                        <option value="5">Tháng 5</option>
+                        <option value="6">Tháng 6</option>
+                        <option value="7">Tháng 7</option>
+                        <option value="8">Tháng 8</option>
+                        <option value="9">Tháng 9</option>
+                        <option value="10">Tháng 10</option>
+                        <option value="11">Tháng 11</option>
+                        <option value="12">Tháng 12</option>
+                    </select>
+                    <select class="form-select filter-select" id="yearFilter">
+                        <option value="">Chọn năm</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Payroll Table -->
+            <div class="payroll-table">
+                <div class="table-header">
+                    <h5 class="table-title">Danh sách lương thưởng</h5>
+                    <div class="table-actions">
+                        <button class="btn btn-success me-2" id="exportBtn">
+                            <img src="pic/share.png" alt="Export" class="action-icon">
+                            Xuất Excel
+                        </button>
+                        <button class="btn btn-primary" id="addPayrollBtn">
+                            <img src="pic/add.png" alt="Add" class="action-icon">
+                            Thêm phiếu lương
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã NV</th>
+                                <th>Họ tên</th>
+                                <th>Phòng ban</th>
+                                <th>Kỳ lương</th>
+                                <th>Lương cơ bản</th>
+                                <th>Phụ cấp</th>
+                                <th>Thưởng</th>
+                                <th>Khấu trừ</th>
+                                <th>Thực lĩnh</th>
+                                <th>Người tạo</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payrollTableBody">
+                            <!-- Template for table row -->
+                            <template id="payrollRowTemplate">
+                                <tr>
+                                    <td class="stt"></td>
+                                    <td class="employee-code"></td>
+                                    <td class="employee-name"></td>
+                                    <td class="department"></td>
+                                    <td class="payroll-period"></td>
+                                    <td class="basic-salary"></td>
+                                    <td class="allowance"></td>
+                                    <td class="bonus"></td>
+                                    <td class="deduction"></td>
+                                    <td class="net-salary"></td>
+                                    <td class="created-by"></td>
+                                    <td class="status"></td>
+                                    <td class="actions">
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-info view-btn" title="Xem chi tiết">
+                                                <img src="pic/money.png" alt="View" class="action-icon" style="width:16px;height:16px;">
+                                            </button>
+                                            <button class="btn btn-sm btn-warning edit-btn" title="Chỉnh sửa">
+                                                <img src="pic/edit.png" alt="Edit" class="action-icon" style="width:16px;height:16px;">
+                                            </button>
+                                            <button class="btn btn-sm btn-danger delete-btn" title="Xóa">
+                                                <img src="pic/delete.png" alt="Delete" class="action-icon" style="width:16px;height:16px;">
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                            <!-- Data will be loaded here -->
+                            <tr id="noResultsRow" style="display: none;">
+                                <td colspan="13" class="text-center">Không có kết quả</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul id="pagination" class="pagination justify-content-center">
+                    <!-- Pagination will be loaded here -->
+                </ul>
+            </nav>
+        </main>
+    </div>
+
+    <!-- Add Payroll Modal -->
+    <div id="addPayrollModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Thêm phiếu lương</h3>
+                <div class="header-actions">
+                    <!-- <button type="button" class="btn btn-outline-primary btn-sm" id="saveDraftBtn">
+                        <i class="fas fa-save"></i> Lưu nháp
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="importTemplateBtn">
+                        <i class="fas fa-file-import"></i> Import
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="exportTemplateBtn">
+                        <i class="fas fa-file-export"></i> Export
+                    </button> -->
+                    <span style="color: red; " class="close">&times;</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form id="addPayrollForm">
+                    <!-- Thông tin nhân viên -->
+                    <div class="form-section">
+                        <h4><i></i> Thông tin nhân viên</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="employeeCode" class="required-field">Mã nhân viên</label>
+                                <div class="input-group">
+                                    <input type="text" id="employeeCode" name="employee_id" class="form-control" required>
+                                    <button type="button" class="btn btn-outline-primary" id="searchEmployeeBtn">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback">Vui lòng chọn nhân viên</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeName" class="required-field">Họ tên</label>
+                                <input type="text" id="employeeName" class="form-control" required readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="department" class="required-field">Phòng ban</label>
+                                <input type="text" id="department" class="form-control" required readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="position" class="required-field">Chức vụ</label>
+                                <input type="text" id="position" class="form-control" required readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thêm container hiển thị lịch sử lương -->
+                    <div class="form-section" id="payrollHistorySection" style="display: none;">
+                        <h4><i class="fas fa-history"></i> Lịch sử lương thưởng</h4>
+                        <div id="payrollHistoryContainer" class="table-responsive">
+                            <!-- Bảng lịch sử lương sẽ được thêm vào đây -->
+                        </div>
+                    </div>
+
+                    <!-- Thông tin lương -->
+                    <div class="form-section salary-info-section">
+                        <h4><i></i> Thông tin lương</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="basicSalary" class="required-field">Lương cơ bản</label>
+                                <div class="input-group">
+                                    <input type="text" id="basicSalary" name="basicSalary" class="form-control" required 
+                                           pattern="[0-9]*" inputmode="numeric" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                                <div class="invalid-feedback">Vui lòng nhập lương cơ bản</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="allowance">Phụ cấp</label>
+                                <div class="input-group">
+                                    <input type="text" id="allowance" name="allowance" class="form-control"
+                                           pattern="[0-9]*" inputmode="numeric" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bonus">Thưởng</label>
+                                <div class="input-group">
+                                    <input type="text" id="bonus" name="bonus" class="form-control"
+                                           pattern="[0-9]*" inputmode="numeric" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="deduction">Khấu trừ</label>
+                                <div class="input-group">
+                                    <input type="text" id="deduction" name="deduction" class="form-control"
+                                           pattern="[0-9]*" inputmode="numeric" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="payrollPeriod" class="required-field">Kỳ lương</label>
+                                <select id="payrollPeriod" name="payrollPeriod" class="form-control" required>
+                                    <option value="">Chọn kỳ lương</option>
+                                    <!-- Sẽ được điền bằng JavaScript -->
+                                </select>
+                                <div class="invalid-feedback">Vui lòng chọn kỳ lương</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preview kết quả -->
+                    <div class="form-section">
+                        <h4><i></i> Kết quả tính toán</h4>
+                        <div class="preview-grid">
+                            <div class="preview-item">
+                                <label>Tổng thu nhập:</label>
+                                <span id="totalIncome">0</span> VNĐ
+                            </div>
+                            <div class="preview-item">
+                                <label>Tổng khấu trừ:</label>
+                                <span id="totalDeductions">0</span> VNĐ
+                            </div>
+                            <div class="preview-item highlight">
+                                <label>Thực lĩnh:</label>
+                                <span id="netSalary">0</span> VNĐ
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button style="background-color: #27ae60;" type="submit" class="btn btn-primary">
+                            <i style="background-color: #27ae60;"></i> Lưu
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">
+                            <i></i> Hủy
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Payroll Details Modal -->
+    <div id="viewPayrollModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Chi tiết phiếu lương</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="payroll-details">
+                    <div class="detail-section">
+                        <h4>Thông tin nhân viên</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>Mã nhân viên:</label>
+                                <span id="detailEmployeeCode"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Họ tên:</label>
+                                <span id="detailEmployeeName"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Phòng ban:</label>
+                                <span id="detailDepartment"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Chức vụ:</label>
+                                <span id="detailPosition"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Thông tin lương</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>Kỳ lương:</label>
+                                <span id="detailPeriod"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Lương cơ bản:</label>
+                                <span id="detailBaseSalary"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Phụ cấp:</label>
+                                <span id="detailAllowances"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Thưởng:</label>
+                                <span id="detailBonuses"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Khấu trừ:</label>
+                                <span id="detailDeductions"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Thực lĩnh:</label>
+                                <span id="detailNetSalary"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Thông tin thanh toán</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>Ngày thanh toán:</label>
+                                <span id="detailPaymentDate"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Phương thức:</label>
+                                <span id="detailPaymentMethod"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Mã tham chiếu:</label>
+                                <span id="detailPaymentReference"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Thông tin khác</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>Người tạo:</label>
+                                <span id="detailCreatedBy"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Ngày tạo:</label>
+                                <span id="detailCreatedAt"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Trạng thái:</label>
+                                <span id="detailStatus"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Ghi chú:</label>
+                                <span id="detailNotes"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Payroll Modal -->
+    <div id="editPayrollModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Sửa phiếu lương</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="editPayrollForm">
+                    <input type="hidden" id="editPayrollId">
+                    
+                    <!-- Thông tin nhân viên -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-user"></i> Thông tin nhân viên</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="editEmployeeCode">Mã nhân viên</label>
+                                <input type="text" id="editEmployeeCode" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="editEmployeeName">Họ tên</label>
+                                <input type="text" id="editEmployeeName" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="editDepartment">Phòng ban</label>
+                                <input type="text" id="editDepartment" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="editPosition">Chức vụ</label>
+                                <input type="text" id="editPosition" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thông tin lương -->
+                    <div class="form-section salary-info-section">
+                        <h4><i class="fas fa-money-bill-wave"></i> Thông tin lương</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="editBasicSalary" class="required-field">Lương cơ bản</label>
+                                <div class="input-group">
+                                    <input type="text" id="editBasicSalary" name="basicSalary" class="form-control" required>
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editAllowance">Phụ cấp</label>
+                                <div class="input-group">
+                                    <input type="text" id="editAllowance" name="allowance" class="form-control">
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editBonus">Thưởng</label>
+                                <div class="input-group">
+                                    <input type="text" id="editBonus" name="bonus" class="form-control">
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editDeduction">Khấu trừ</label>
+                                <div class="input-group">
+                                    <input type="text" id="editDeduction" name="deduction" class="form-control">
+                                    <span class="input-group-text">VNĐ</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editPayrollPeriod" class="required-field">Kỳ lương</label>
+                                <select id="editPayrollPeriod" name="payrollPeriod" class="form-control" required>
+                                    <option value="">Chọn kỳ lương</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ghi chú -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-sticky-note"></i> Ghi chú</h4>
+                        <div class="form-group">
+                            <textarea id="editNotes" name="notes" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Lưu thay đổi
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('editPayrollModal').style.display='none'">
+                            <i class="fas fa-times"></i> Hủy
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" nonce="random123"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" nonce="random123"></script>
+    <script src="/qlnhansu_V3/backend/src/public/assets/js/services/NotificationService.js" nonce="random123"></script>
+    <script src="/qlnhansu_V3/backend/src/public/js/modules/loading-overlay.js" nonce="random123"></script>
+    <script src="payroll.js" nonce="random123"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" nonce="random123"></script>
+    <script src="payroll-actions.js" nonce="random123"></script>
+    
+    <!-- Thêm script xử lý nhập số -->
+    <script>
+        // Hàm định dạng số tiền
+        function formatCurrency(input) {
+            // Xóa tất cả ký tự không phải số
+            let value = input.value.replace(/[^\d]/g, '');
+            
+            // Định dạng số với dấu phẩy ngăn cách hàng nghìn
+            if (value !== '') {
+                value = parseInt(value, 10).toLocaleString('vi-VN');
+            }
+            
+            // Cập nhật giá trị input
+            input.value = value;
+        }
+
+        // Hàm lấy giá trị số từ chuỗi đã định dạng
+        function getNumericValue(formattedValue) {
+            return parseInt(formattedValue.replace(/[^\d]/g, ''), 10) || 0;
+        }
+
+        // Xử lý sự kiện input cho các trường tiền
+        document.addEventListener('DOMContentLoaded', function() {
+            const salaryInputs = ['basicSalary', 'allowance', 'bonus', 'deduction'];
+            
+            salaryInputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    // Xử lý khi nhập
+                    input.addEventListener('input', function(e) {
+                        formatCurrency(this);
+                    });
+
+                    // Xử lý khi focus
+                    input.addEventListener('focus', function(e) {
+                        // Lưu giá trị gốc khi focus
+                        this.dataset.originalValue = this.value;
+                        // Xóa định dạng khi focus
+                        this.value = getNumericValue(this.value);
+                    });
+
+                    // Xử lý khi blur
+                    input.addEventListener('blur', function(e) {
+                        // Định dạng lại khi blur
+                        formatCurrency(this);
+                    });
+
+                    // Ngăn chặn nhập ký tự không phải số
+                    input.addEventListener('keypress', function(e) {
+                        if (!/[0-9]/.test(e.key)) {
+                            e.preventDefault();
+                        }
+                    });
+                }
+            });
+
+            // Cập nhật tổng thu nhập và thực lĩnh
+            function updateTotals() {
+                const basicSalary = getNumericValue(document.getElementById('basicSalary').value);
+                const allowance = getNumericValue(document.getElementById('allowance').value);
+                const bonus = getNumericValue(document.getElementById('bonus').value);
+                const deduction = getNumericValue(document.getElementById('deduction').value);
+
+                const totalIncome = basicSalary + allowance + bonus;
+                const netSalary = totalIncome - deduction;
+
+                // Cập nhật hiển thị
+                document.getElementById('totalIncome').textContent = totalIncome.toLocaleString('vi-VN');
+                document.getElementById('totalDeductions').textContent = deduction.toLocaleString('vi-VN');
+                document.getElementById('netSalary').textContent = netSalary.toLocaleString('vi-VN');
+            }
+
+            // Thêm sự kiện cập nhật tổng khi thay đổi giá trị
+            salaryInputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.addEventListener('input', updateTotals);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+

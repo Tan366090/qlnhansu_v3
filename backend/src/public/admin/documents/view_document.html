@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chi tiết tài liệu</title>
+        <link rel="stylesheet" href="../assets/css/common.css" />
+        <link rel="stylesheet" href="../assets/css/view_document.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 id="documentTitle">Chi tiết tài liệu</h2>
+                        <div class="header-actions">
+                            <button
+                                class="btn btn-secondary"
+                                onclick="window.history.back()"
+                            >
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </button>
+                            <button
+                                class="btn btn-primary"
+                                onclick="window.print()"
+                            >
+                                <i class="fas fa-print"></i> In
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="document-detail">
+                            <div class="detail-section">
+                                <h3>Thông tin chung</h3>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <label>Mã tài liệu:</label>
+                                        <span id="documentCode"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Tên tài liệu:</label>
+                                        <span id="documentName"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Loại tài liệu:</label>
+                                        <span id="documentType"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Phòng ban:</label>
+                                        <span id="department"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Người tạo:</label>
+                                        <span id="creator"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Ngày tạo:</label>
+                                        <span id="createdAt"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Phiên bản:</label>
+                                        <span id="version"></span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>Trạng thái:</label>
+                                        <span
+                                            id="status"
+                                            class="status-badge"
+                                        ></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail-section">
+                                <h3>Mô tả</h3>
+                                <div
+                                    class="description-box"
+                                    id="description"
+                                ></div>
+                            </div>
+
+                            <div class="detail-section">
+                                <h3>Tệp đính kèm</h3>
+                                <div class="file-info">
+                                    <div class="file-name" id="fileName"></div>
+                                    <button
+                                        class="btn btn-primary"
+                                        onclick="downloadFile()"
+                                    >
+                                        <i class="fas fa-download"></i> Tải
+                                        xuống
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="detail-section">
+                                <h3>Lịch sử phiên bản</h3>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Phiên bản</th>
+                                                <th>Ngày cập nhật</th>
+                                                <th>Người cập nhật</th>
+                                                <th>Thay đổi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="versionHistory">
+                                            <!-- Dữ liệu sẽ được thêm vào đây -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../assets/js/common.js"></script>
+        <script>
+            let documentId = null;
+            let documentData = null;
+
+            // Hàm tải thông tin tài liệu
+            async function loadDocument() {
+                try {
+                    const urlParams = new URLSearchParams(
+                        window.location.search
+                    );
+                    documentId = urlParams.get("id");
+
+                    if (!documentId) {
+                        showNotification("Không tìm thấy tài liệu", "error");
+                        return;
+                    }
+
+                    const response = await fetch(
+                        `/api/documents/${documentId}`
+                    );
+                    documentData = await response.json();
+
+                    // Hiển thị thông tin
+                    document.getElementById("documentCode").textContent =
+                        documentData.code;
+                    document.getElementById("documentName").textContent =
+                        documentData.name;
+                    document.getElementById("documentType").textContent =
+                        getDocumentTypeText(documentData.type);
+                    document.getElementById("department").textContent =
+                        documentData.department_name;
+                    document.getElementById("creator").textContent =
+                        documentData.creator_name;
+                    document.getElementById("createdAt").textContent =
+                        formatDate(documentData.created_at);
+                    document.getElementById("version").textContent =
+                        documentData.version;
+                    document.getElementById("description").textContent =
+                        documentData.description || "Không có mô tả";
+
+                    // Hiển thị trạng thái
+                    const statusBadge = document.getElementById("status");
+                    statusBadge.textContent = getStatusText(
+                        documentData.status
+                    );
+                    statusBadge.classList.add(
+                        getStatusClass(documentData.status)
+                    );
+
+                    // Hiển thị thông tin file
+                    if (documentData.file_name) {
+                        document.getElementById("fileName").textContent =
+                            documentData.file_name;
+                    } else {
+                        document.getElementById("fileName").textContent =
+                            "Không có tệp đính kèm";
+                        document.querySelector(".btn-primary").style.display =
+                            "none";
+                    }
+
+                    // Tải lịch sử phiên bản
+                    loadVersionHistory();
+                } catch (error) {
+                    console.error("Lỗi khi tải thông tin tài liệu:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải thông tin tài liệu",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm tải lịch sử phiên bản
+            async function loadVersionHistory() {
+                try {
+                    const response = await fetch(
+                        `/api/documents/${documentId}/versions`
+                    );
+                    const versions = await response.json();
+
+                    const tbody = document.getElementById("versionHistory");
+                    tbody.innerHTML = "";
+
+                    versions.forEach((version) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                        <td>${version.version}</td>
+                        <td>${formatDate(version.updated_at)}</td>
+                        <td>${version.updater_name}</td>
+                        <td>${version.changes || "Không có thay đổi"}</td>
+                    `;
+                        tbody.appendChild(tr);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải lịch sử phiên bản:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải lịch sử phiên bản",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm tải file
+            function downloadFile() {
+                if (documentData && documentData.file_url) {
+                    window.open(documentData.file_url, "_blank");
+                }
+            }
+
+            // Hàm lấy text cho loại tài liệu
+            function getDocumentTypeText(type) {
+                switch (type) {
+                    case "policy":
+                        return "Chính sách";
+                    case "procedure":
+                        return "Quy trình";
+                    case "form":
+                        return "Biểu mẫu";
+                    case "report":
+                        return "Báo cáo";
+                    case "other":
+                        return "Khác";
+                    default:
+                        return type;
+                }
+            }
+
+            // Hàm lấy text cho trạng thái
+            function getStatusText(status) {
+                switch (status) {
+                    case "active":
+                        return "Đang áp dụng";
+                    case "draft":
+                        return "Bản nháp";
+                    case "expired":
+                        return "Hết hiệu lực";
+                    default:
+                        return status;
+                }
+            }
+
+            // Hàm lấy class cho trạng thái
+            function getStatusClass(status) {
+                switch (status) {
+                    case "active":
+                        return "success";
+                    case "draft":
+                        return "warning";
+                    case "expired":
+                        return "danger";
+                    default:
+                        return "secondary";
+                }
+            }
+
+            // Hàm định dạng ngày
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return `${date.getDate()}/${
+                    date.getMonth() + 1
+                }/${date.getFullYear()}`;
+            }
+
+            // Tải dữ liệu khi trang được tải
+            document.addEventListener("DOMContentLoaded", loadDocument);
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const documentId = new URLSearchParams(
+                    window.location.search
+                ).get("id");
+                const documentDetails = await fetchData(
+                    `getDocumentDetails&id=${documentId}`
+                ); // Add 'getDocumentDetails' case in API
+
+                if (documentDetails) {
+                    document.getElementById("documentTitle").textContent =
+                        documentDetails.title;
+                    document.getElementById("documentType").textContent =
+                        documentDetails.type;
+                    document.getElementById("documentContent").textContent =
+                        documentDetails.content;
+                }
+            });
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

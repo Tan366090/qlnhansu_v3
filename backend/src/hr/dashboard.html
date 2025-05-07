@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HR Dashboard - Quản lý nhân sự</title>
+        <link rel="stylesheet" href="../assets/css/dashboard.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <img src="male.png" alt="Logo" class="logo" />
+                    <h2>HR Dashboard</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li class="active">
+                            <a href="dashboard.html">
+                                <i class="fas fa-home"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="menu-item has-submenu">
+                            <a href="#recruitment">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Tuyển dụng</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/api/hr/candidates"
+                                        >Danh sách ứng viên</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/api/hr/employees/create"
+                                        >Thêm nhân viên mới</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/api/hr/employees/update"
+                                        >Cập nhật thông tin</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item has-submenu">
+                            <a href="#employees">
+                                <i class="fas fa-users"></i>
+                                <span>Quản lý nhân viên</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/api/hr/employees"
+                                        >Danh sách nhân viên</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/api/hr/contracts">Hợp đồng</a>
+                                </li>
+                                <li><a href="/api/hr/salary">Lương</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item has-submenu">
+                            <a href="#training">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Đào tạo</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/api/certificates">Chứng chỉ</a>
+                                </li>
+                                <li><a href="/api/degrees">Bằng cấp</a></li>
+                                <li>
+                                    <a href="/api/training">Khóa đào tạo</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item has-submenu">
+                            <a href="#payroll">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Lương thưởng</span>
+                            </a>
+                            <ul class="submenu">
+                                <li><a href="/api/salary">Quản lý lương</a></li>
+                                <li>
+                                    <a href="/api/bonuses">Quản lý thưởng</a>
+                                </li>
+                                <li><a href="/api/payroll">Tính lương</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item has-submenu">
+                            <a href="#benefits">
+                                <i class="fas fa-hand-holding-usd"></i>
+                                <span>Phúc lợi</span>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/api/benefits/policies"
+                                        >Chính sách</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/api/benefits/claims"
+                                        >Đăng ký phúc lợi</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../login.html" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Đăng xuất</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <header class="top-nav">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Tìm kiếm..." />
+                    </div>
+                    <div class="user-info">
+                        <div class="notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge">3</span>
+                        </div>
+                        <div class="user-profile">
+                            <img src="male.png" alt="Avatar" />
+                            <span class="username">HR</span>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="content">
+                    <div class="page-header">
+                        <h1>Dashboard HR</h1>
+                        <div class="breadcrumb">
+                            <span>Home</span>
+                            <i class="fas fa-chevron-right"></i>
+                            <span>Dashboard</span>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="stats-cards">
+                        <div class="card">
+                            <div class="card-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>Ứng viên mới</h3>
+                                <p class="number" id="newCandidates">0</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>Hợp đồng sắp hết hạn</h3>
+                                <p class="number" id="expiringContracts">0</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>Khóa đào tạo đang diễn ra</h3>
+                                <p class="number" id="activeTrainings">0</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <div class="card-info">
+                                <h3>Đăng ký phúc lợi mới</h3>
+                                <p class="number" id="newBenefits">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activities -->
+                    <div class="recent-activities">
+                        <h3>Hoạt động gần đây</h3>
+                        <div class="activity-list" id="activityList">
+                            <!-- Activities will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script type="module" src="../assets/js/hr/dashboard.js"></script>
+    </body>
+</html>

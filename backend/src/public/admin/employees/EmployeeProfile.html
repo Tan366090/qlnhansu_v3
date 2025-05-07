@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hồ sơ cá nhân - VNPT</title>
+        <!-- Consistent title -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <link rel="stylesheet" href="./css/common.css" /> -->
+        <!-- Load common styles via EmployeeProfile.css potentially -->
+        <link rel="stylesheet" href="./css/EmployeeProfile.css" />
+        <!-- CSS -->
+        <link rel="stylesheet" href="/assets/css/notifications.css">
+        <link rel="stylesheet" href="/assets/css/loading.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <!-- JavaScript -->
+        <script type="module" src="/assets/js/main.js"></script>
+
+        <!-- === Ionicons Scripts === -->
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.js"
+        ></script>
+        <script
+            type="module"
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+        ></script>
+        <!-- ======================== -->
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <!-- Sidebar will be injected by common.js -->
+            <main class="content">
+                <div class="content-header">
+                    <h1>Hồ sơ cá nhân</h1>
+                </div>
+
+                <div class="profile-form-container">
+                    <!-- Renamed for clarity -->
+
+                    <!-- === Personal Info Section === -->
+                    <section class="personal-info-section">
+                        <h2>Thông tin cá nhân</h2>
+                        <div class="profile-layout">
+                            <div class="avatar-wrapper">
+                                <img
+                                    src="./img/avatar_Profile.png"
+                                    alt="Ảnh đại diện"
+                                    id="avatarPreview"
+                                />
+                                <label
+                                    for="avatarUpload"
+                                    class="camera-icon"
+                                    title="Đổi ảnh đại diện"
+                                >
+                                    <ion-icon name="camera-outline"></ion-icon>
+                                    <input
+                                        type="file"
+                                        id="avatarUpload"
+                                        accept="image/*"
+                                        style="display: none"
+                                    />
+                                </label>
+                            </div>
+                            <div class="user-details">
+                                <div class="form-row">
+                                    <div class="form-item">
+                                        <label for="fullName">Họ và tên</label>
+                                        <input
+                                            type="text"
+                                            id="fullName"
+                                            placeholder="Nguyễn Văn A"
+                                            value="Nguyễn Văn A"
+                                            readonly
+                                        />
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="dob"
+                                            >Ngày tháng năm sinh</label
+                                        >
+                                        <input
+                                            type="date"
+                                            id="dob"
+                                            value="1990-10-25"
+                                            readonly
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-item">
+                                        <label for="address"
+                                            >Địa chỉ thường trú</label
+                                        >
+                                        <input
+                                            type="text"
+                                            id="address"
+                                            placeholder="Nhập địa chỉ"
+                                            value="123 Đường ABC, Phường XYZ, Quận G, TP. Hồ Chí Minh"
+                                            readonly
+                                        />
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="workplace"
+                                            >Nơi làm việc</label
+                                        >
+                                        <input
+                                            type="text"
+                                            id="workplace"
+                                            placeholder="Nhập nơi làm việc"
+                                            value="VNPT Vinaphone"
+                                            readonly
+                                        />
+                                    </div>
+                                </div>
+                                <!-- Add more fields like Email, Phone, ID Number etc. as needed -->
+                                <!-- Example:
+                                 <div class="form-row">
+                                    <div class="form-item">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" placeholder="email@example.com" readonly/>
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="phone">Số điện thoại</label>
+                                        <input type="tel" id="phone" placeholder="0123456789" readonly/>
+                                    </div>
+                                </div>
+                                -->
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Divider -->
+                    <hr class="section-divider" />
+
+                    <!-- === Family Info Section === -->
+                    <section class="family-info-section">
+                        <h2>Thông tin gia đình</h2>
+                        <div class="add-member-form">
+                            <input
+                                type="text"
+                                id="memberName"
+                                placeholder="Tên thành viên"
+                                aria-label="Tên thành viên"
+                            />
+                            <select
+                                id="memberRelation"
+                                aria-label="Mối quan hệ"
+                            >
+                                <option value="" disabled selected>
+                                    Chọn quan hệ
+                                </option>
+                                <option value="Cha">Cha</option>
+                                <option value="Mẹ">Mẹ</option>
+                                <option value="Vợ">Vợ</option>
+                                <option value="Chồng">Chồng</option>
+                                <option value="Con">Con</option>
+                                <option value="Anh">Anh</option>
+                                <option value="Chị">Chị</option>
+                                <option value="Em">Em</option>
+                                <option value="Khác">Khác</option>
+                            </select>
+                            <input
+                                type="date"
+                                id="memberDOB"
+                                aria-label="Năm sinh"
+                            />
+                            <button
+                                class="btn btn-add"
+                                id="btnAddMember"
+                                type="button"
+                            >
+                                <ion-icon name="add-circle-outline"></ion-icon>
+                                Thêm
+                            </button>
+                        </div>
+                        <div class="table-container family-table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Tên thành viên</th>
+                                        <th>Mối quan hệ</th>
+                                        <th>Năm sinh</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="familyTableBody">
+                                    <!-- Dữ liệu gia đình sẽ được render bởi JavaScript -->
+                                    <!-- Example Row (JS will generate this structure):
+                                    <tr>
+                                        <td data-label="Tên thành viên">Nguyễn Văn B</td>
+                                        <td data-label="Mối quan hệ">Cha</td>
+                                        <td data-label="Năm sinh">1965-05-20</td>
+                                        <td data-label="Hành động">
+                                            <button class="action-btn edit-btn" title="Chỉnh sửa"><ion-icon name="create-outline"></ion-icon></button>
+                                            <button class="action-btn delete-btn" title="Xoá"><ion-icon name="trash-outline"></ion-icon></button>
+                                        </td>
+                                    </tr>
+                                    -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Divider -->
+                    <hr class="section-divider" />
+
+                    <!-- === Form Actions === -->
+                    <div class="form-actions">
+                        <button
+                            type="button"
+                            class="btn btn-secondary btn-cancel"
+                            style="display: none"
+                        >
+                            <!-- Initially hidden -->
+                            Huỷ
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-primary btn-save"
+                            style="display: none"
+                        >
+                            <!-- Initially hidden -->
+                            Lưu thay đổi
+                        </button>
+                        <button type="button" class="btn btn-edit">
+                            <ion-icon name="create-outline"></ion-icon> Chỉnh
+                            sửa
+                        </button>
+                        <!-- Removed update button, will toggle save button -->
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script src="./js/common.js"></script>
+        <!-- Injects Sidebar -->
+        <script src="./js/EmployeeProfile.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const employeeId = new URLSearchParams(
+                    window.location.search
+                ).get("id");
+                const profile = await fetchData(
+                    `getEmployeeProfile&id=${employeeId}`
+                ); // Add 'getEmployeeProfile' case in API
+
+                if (profile) {
+                    document.getElementById("employeeName").textContent =
+                        profile.name;
+                    document.getElementById("employeeEmail").textContent =
+                        profile.email;
+                    document.getElementById("employeeDepartment").textContent =
+                        profile.department;
+                    document.getElementById("employeeRole").textContent =
+                        profile.role;
+                }
+            });
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

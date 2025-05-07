@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Test với CSP cho font khi mở file trực tiếp -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self' 'unsafe-inline' https: file:;
+        font-src 'self' data: https: file:;
+        style-src 'self' 'unsafe-inline' https: file:;
+        script-src 'self' 'unsafe-inline' https: file:;
+        img-src 'self' data: https: file:;
+        connect-src 'self' https: file:;
+    ">
+    <title>Test Font Loading</title>
+
+    <!-- Test các nguồn font khác nhau -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* Test các font family */
+        .test-roboto {
+            font-family: 'Roboto', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .test-fontawesome {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .font-source {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        /* Thêm style để hiển thị rõ các icon */
+        .fas {
+            font-size: 24px;
+            margin: 0 10px;
+        }
+        .fa-check { color: green; }
+        .fa-times { color: red; }
+        .fa-user { color: #3498db; }
+    </style>
+</head>
+<body>
+    <h1>Test Font Loading với CSP (File System)</h1>
+
+    <!-- Test Google Fonts -->
+    <div class="test-roboto">
+        <h2>Test Google Font (Roboto)</h2>
+        <p>Đây là đoạn văn bản sử dụng font Roboto</p>
+        <div class="font-source">Font source: Google Fonts</div>
+        <div id="robotoStatus"></div>
+    </div>
+
+    <!-- Test Font Awesome -->
+    <div class="test-fontawesome">
+        <h2>Test Font Awesome Icons</h2>
+        <i class="fas fa-check"></i> Icon 1 (Check)
+        <i class="fas fa-times"></i> Icon 2 (Times)
+        <i class="fas fa-user"></i> Icon 3 (User)
+        <div class="font-source">Font source: Font Awesome via jsDelivr</div>
+        <div id="fontAwesomeStatus"></div>
+    </div>
+
+    <script>
+        // Kiểm tra font đã load thành công chưa
+        document.fonts.ready.then(function() {
+            // Kiểm tra Roboto
+            if(document.fonts.check('1em Roboto')) {
+                document.getElementById('robotoStatus').innerHTML = 
+                    '<span class="success">✓ Font Roboto đã load thành công</span>';
+            } else {
+                document.getElementById('robotoStatus').innerHTML = 
+                    '<span class="error">✗ Font Roboto chưa load được</span>';
+            }
+
+            // Kiểm tra Font Awesome
+            if(document.querySelector('.fa-check').offsetHeight > 0) {
+                document.getElementById('fontAwesomeStatus').innerHTML = 
+                    '<span class="success">✓ Font Awesome đã load thành công</span>';
+            } else {
+                document.getElementById('fontAwesomeStatus').innerHTML = 
+                    '<span class="error">✗ Font Awesome chưa load được</span>';
+            }
+
+            // Log tất cả các font đã load
+            console.log('Các font đã load:', 
+                Array.from(document.fonts)
+                    .map(font => font.family)
+                    .filter((v, i, a) => a.indexOf(v) === i)
+            );
+        });
+
+        // Bắt lỗi CSP
+        document.addEventListener('securitypolicyviolation', (e) => {
+            console.error('CSP violation:', {
+                'Violated directive': e.violatedDirective,
+                'Blocked URI': e.blockedURI,
+                'Original policy': e.originalPolicy
+            });
+        });
+    </script>
+</body>
+</html> 

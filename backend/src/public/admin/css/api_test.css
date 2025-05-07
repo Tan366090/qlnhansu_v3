@@ -1,0 +1,85 @@
+.api-test-section {
+    margin-top: 2rem;
+}
+
+.api-test-results {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.test-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.status-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.status-indicator {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.status-indicator.pending {
+    background: #ffc107;
+    color: #000;
+}
+
+.status-indicator.success {
+    background: #28a745;
+    color: #fff;
+}
+
+.status-indicator.error {
+    background: #dc3545;
+    color: #fff;
+}
+
+.test-details {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.test-details pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#runApiTests, #autoTestToggle {
+    margin-right: 0.5rem;
+}
+
+#autoTestToggle.active {
+    background: #28a745;
+    color: #fff;
+}
+
+/* Loading animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading {
+    animation: spin 1s linear infinite;
+} 

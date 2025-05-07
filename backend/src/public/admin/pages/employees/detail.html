@@ -1,0 +1,438 @@
+<!-- Employee Detail Page -->
+<div class="page-transition">
+    <div class="detail-view">
+        <div class="detail-view-header">
+            <h2>Thông tin nhân viên</h2>
+            <div class="header-actions">
+                <button class="btn btn-outline-primary" onclick="router.navigateToPage('employees/list')">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </button>
+                <button class="btn btn-primary" onclick="router.navigateToPage(`employees/edit?id=${employeeId}`)">
+                    <i class="fas fa-edit"></i> Chỉnh sửa
+                </button>
+            </div>
+        </div>
+
+        <div class="detail-view-content">
+            <!-- Basic Information -->
+            <div class="detail-view-section">
+                <h3>Thông tin cơ bản</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Mã nhân viên:</label>
+                        <span id="employeeId"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Họ tên:</label>
+                        <span id="employeeName"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Ngày sinh:</label>
+                        <span id="employeeBirthday"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Giới tính:</label>
+                        <span id="employeeGender"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Email:</label>
+                        <span id="employeeEmail"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Số điện thoại:</label>
+                        <span id="employeePhone"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Work Information -->
+            <div class="detail-view-section">
+                <h3>Thông tin công việc</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Phòng ban:</label>
+                        <span id="employeeDepartment"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Chức vụ:</label>
+                        <span id="employeePosition"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Ngày vào làm:</label>
+                        <span id="employeeJoinDate"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Trạng thái:</label>
+                        <span id="employeeStatus"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Mức lương:</label>
+                        <span id="employeeSalary"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="detail-view-section">
+                <h3>Thông tin khác</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>CMND/CCCD:</label>
+                        <span id="employeeIdNumber"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Ngày cấp:</label>
+                        <span id="employeeIdDate"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Nơi cấp:</label>
+                        <span id="employeeIdPlace"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>Địa chỉ:</label>
+                        <span id="employeeAddress"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs for related information -->
+        <div class="detail-tabs">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#attendance">
+                        <i class="fas fa-clock"></i> Chấm công
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#salary">
+                        <i class="fas fa-money-bill-wave"></i> Lương
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#leave">
+                        <i class="fas fa-calendar-alt"></i> Nghỉ phép
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#documents">
+                        <i class="fas fa-file-alt"></i> Tài liệu
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="attendance">
+                    <!-- Attendance content will be loaded here -->
+                </div>
+                <div class="tab-pane fade" id="salary">
+                    <!-- Salary content will be loaded here -->
+                </div>
+                <div class="tab-pane fade" id="leave">
+                    <!-- Leave content will be loaded here -->
+                </div>
+                <div class="tab-pane fade" id="documents">
+                    <!-- Documents content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let employeeId = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Get employee ID from URL
+        const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
+        employeeId = urlParams.get('id');
+        
+        if (employeeId) {
+            loadEmployeeDetails(employeeId);
+        } else {
+            showNotification('Không tìm thấy thông tin nhân viên', 'error');
+            router.navigateToPage('employees/list');
+        }
+
+        // Initialize tabs
+        initTabs();
+    });
+
+    async function loadEmployeeDetails(id) {
+        try {
+            showLoading('Đang tải thông tin nhân viên...');
+            
+            const response = await fetch(`/QLNhanSu_version1/public/api/employees/detail.php?id=${id}`);
+            if (!response.ok) throw new Error('Failed to load employee details');
+            
+            const data = await response.json();
+            if (data.success) {
+                renderEmployeeDetails(data.employee);
+            } else {
+                throw new Error(data.message || 'Failed to load employee details');
+            }
+        } catch (error) {
+            console.error('Error loading employee details:', error);
+            showNotification('Không thể tải thông tin nhân viên', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    function renderEmployeeDetails(employee) {
+        // Basic Information
+        document.getElementById('employeeId').textContent = employee.id;
+        document.getElementById('employeeName').textContent = employee.name;
+        document.getElementById('employeeBirthday').textContent = formatDate(employee.birthday);
+        document.getElementById('employeeGender').textContent = employee.gender === 'M' ? 'Nam' : 'Nữ';
+        document.getElementById('employeeEmail').textContent = employee.email;
+        document.getElementById('employeePhone').textContent = employee.phone;
+
+        // Work Information
+        document.getElementById('employeeDepartment').textContent = employee.department;
+        document.getElementById('employeePosition').textContent = employee.position;
+        document.getElementById('employeeJoinDate').textContent = formatDate(employee.joinDate);
+        document.getElementById('employeeStatus').innerHTML = `
+            <span class="status-badge ${employee.status}">
+                ${employee.status === 'active' ? 'Đang làm việc' : 'Đã nghỉ việc'}
+            </span>
+        `;
+        document.getElementById('employeeSalary').textContent = formatCurrency(employee.salary);
+
+        // Additional Information
+        document.getElementById('employeeIdNumber').textContent = employee.idNumber;
+        document.getElementById('employeeIdDate').textContent = formatDate(employee.idDate);
+        document.getElementById('employeeIdPlace').textContent = employee.idPlace;
+        document.getElementById('employeeAddress').textContent = employee.address;
+    }
+
+    function initTabs() {
+        // Load initial tab content
+        loadTabContent('attendance');
+
+        // Add tab change listeners
+        document.querySelectorAll('.nav-link').forEach(tab => {
+            tab.addEventListener('shown.bs.tab', (e) => {
+                const tabId = e.target.getAttribute('href').slice(1);
+                loadTabContent(tabId);
+            });
+        });
+    }
+
+    async function loadTabContent(tabId) {
+        try {
+            showLoading(`Đang tải thông tin ${getTabName(tabId)}...`);
+            
+            const response = await fetch(`/QLNhanSu_version1/public/api/employees/${tabId}.php?id=${employeeId}`);
+            if (!response.ok) throw new Error(`Failed to load ${tabId} data`);
+            
+            const data = await response.json();
+            if (data.success) {
+                renderTabContent(tabId, data);
+            } else {
+                throw new Error(data.message || `Failed to load ${tabId} data`);
+            }
+        } catch (error) {
+            console.error(`Error loading ${tabId} data:`, error);
+            showNotification(`Không thể tải thông tin ${getTabName(tabId)}`, 'error');
+            document.getElementById(tabId).innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Không thể tải dữ liệu. Vui lòng thử lại sau.</p>
+                </div>
+            `;
+        } finally {
+            hideLoading();
+        }
+    }
+
+    function renderTabContent(tabId, data) {
+        const container = document.getElementById(tabId);
+        
+        switch(tabId) {
+            case 'attendance':
+                renderAttendanceTab(container, data.attendance);
+                break;
+            case 'salary':
+                renderSalaryTab(container, data.salary);
+                break;
+            case 'leave':
+                renderLeaveTab(container, data.leave);
+                break;
+            case 'documents':
+                renderDocumentsTab(container, data.documents);
+                break;
+        }
+    }
+
+    function getTabName(tabId) {
+        const tabNames = {
+            'attendance': 'chấm công',
+            'salary': 'lương',
+            'leave': 'nghỉ phép',
+            'documents': 'tài liệu'
+        };
+        return tabNames[tabId] || tabId;
+    }
+
+    // Helper functions
+    function formatDate(dateString) {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('vi-VN');
+    }
+
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        }).format(amount);
+    }
+
+    // Tab content renderers
+    function renderAttendanceTab(container, data) {
+        // Implement attendance tab rendering
+    }
+
+    function renderSalaryTab(container, data) {
+        // Implement salary tab rendering
+    }
+
+    function renderLeaveTab(container, data) {
+        // Implement leave tab rendering
+    }
+
+    function renderDocumentsTab(container, data) {
+        // Implement documents tab rendering
+    }
+</script>
+
+<style>
+    .detail-view {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .detail-view-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .detail-view-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .detail-view-section {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .detail-view-section h3 {
+        margin-bottom: 15px;
+        color: #333;
+        font-size: 1.2em;
+    }
+
+    .info-grid {
+        display: grid;
+        gap: 15px;
+    }
+
+    .info-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info-item label {
+        font-weight: 500;
+        color: #666;
+        margin-bottom: 5px;
+    }
+
+    .info-item span {
+        color: #333;
+    }
+
+    .detail-tabs {
+        margin-top: 30px;
+    }
+
+    .nav-tabs {
+        border-bottom: 2px solid #dee2e6;
+        margin-bottom: 20px;
+    }
+
+    .nav-tabs .nav-link {
+        border: none;
+        color: #666;
+        padding: 10px 20px;
+        margin-right: 5px;
+        border-radius: 4px 4px 0 0;
+    }
+
+    .nav-tabs .nav-link:hover {
+        border-color: transparent;
+        background: #f8f9fa;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #007bff;
+        border-bottom: 2px solid #007bff;
+        background: transparent;
+    }
+
+    .nav-tabs .nav-link i {
+        margin-right: 5px;
+    }
+
+    .tab-content {
+        padding: 20px;
+        background: #fff;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
+
+    .status-badge.active {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .status-badge.inactive {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .error-state {
+        text-align: center;
+        padding: 30px;
+        color: #666;
+    }
+
+    .error-state i {
+        font-size: 48px;
+        color: #dc3545;
+        margin-bottom: 15px;
+    }
+</style> 

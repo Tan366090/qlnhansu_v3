@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'self' https: http://localhost:* cdn.jsdelivr.net cdnjs.cloudflare.com fonts.googleapis.com fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:* cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https: fonts.googleapis.com cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' http://localhost:* https:;"
+        />
+        <title>Thêm nhân viên - Quản lý nhân sự</title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/admin/css/admin-dashboard.css">
+        <link rel="stylesheet" href="/admin/css/employee-form.css">
+        <!-- Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/css/notifications.css">
+        <link rel="stylesheet" href="/assets/css/loading.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+    </head>
+    <body>
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Sidebar content from dashboard_admin.html -->
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Header -->
+                <header class="header">
+                    <div class="header-left">
+                        <h1>Thêm nhân viên</h1>
+                    </div>
+                    <div class="header-right">
+                        <div class="header-controls">
+                            <a href="/admin/employees/list.html" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Employee Form -->
+                <div class="employee-form-container">
+                    <form id="employeeForm" class="employee-form" enctype="multipart/form-data">
+                        <!-- Personal Information Section -->
+                        <section class="form-section">
+                            <h2><i class="fas fa-user"></i> Thông tin cá nhân</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fullName">Họ và tên <span class="required">*</span></label>
+                                        <input type="text" id="fullName" name="full_name" class="form-control" required>
+                                        <div class="invalid-feedback">Vui lòng nhập họ và tên</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="gender">Giới tính <span class="required">*</span></label>
+                                        <select id="gender" name="gender" class="form-select" required>
+                                            <option value="">Chọn giới tính</option>
+                                            <option value="male">Nam</option>
+                                            <option value="female">Nữ</option>
+                                            <option value="other">Khác</option>
+                                        </select>
+                                        <div class="invalid-feedback">Vui lòng chọn giới tính</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="birthDate">Ngày sinh <span class="required">*</span></label>
+                                        <input type="date" id="birthDate" name="birth_date" class="form-control" required>
+                                        <div class="invalid-feedback">Vui lòng chọn ngày sinh</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone">Số điện thoại <span class="required">*</span></label>
+                                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                                        <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email <span class="required">*</span></label>
+                                        <input type="email" id="email" name="email" class="form-control" required>
+                                        <div class="invalid-feedback">Vui lòng nhập email hợp lệ</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="address">Địa chỉ</label>
+                                        <input type="text" id="address" name="address" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Work Information Section -->
+                        <section class="form-section">
+                            <h2><i class="fas fa-briefcase"></i> Thông tin công việc</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="department">Phòng ban <span class="required">*</span></label>
+                                        <select id="department" name="department_id" class="form-select" required>
+                                            <option value="">Chọn phòng ban</option>
+                                            <!-- Departments will be loaded dynamically -->
+                                        </select>
+                                        <div class="invalid-feedback">Vui lòng chọn phòng ban</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="position">Vị trí <span class="required">*</span></label>
+                                        <select id="position" name="position_id" class="form-select" required>
+                                            <option value="">Chọn vị trí</option>
+                                            <!-- Positions will be loaded dynamically -->
+                                        </select>
+                                        <div class="invalid-feedback">Vui lòng chọn vị trí</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Account Information Section -->
+                        <section class="form-section">
+                            <h2><i class="fas fa-user-shield"></i> Thông tin tài khoản</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="username">Tên đăng nhập <span class="required">*</span></label>
+                                        <input type="text" id="username" name="username" class="form-control" required>
+                                        <div class="invalid-feedback">Vui lòng nhập tên đăng nhập</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="password">Mật khẩu <span class="required">*</span></label>
+                                        <input type="password" id="password" name="password" class="form-control" required>
+                                        <div class="invalid-feedback">Vui lòng nhập mật khẩu</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Profile Picture Section -->
+                        <section class="form-section">
+                            <h2><i class="fas fa-camera"></i> Ảnh đại diện</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="profilePicture">Ảnh đại diện</label>
+                                        <input type="file" id="profilePicture" name="profile_picture" class="form-control" accept="image/*">
+                                        <div class="invalid-feedback">Vui lòng chọn ảnh hợp lệ</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="profile-picture-preview">
+                                        <img id="profilePicturePreview" src="/assets/images/default-avatar.png" alt="Ảnh đại diện">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Lưu
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                <i class="fas fa-undo"></i> Đặt lại
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="loading-spinner">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="errorText"></span>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message">
+            <i class="fas fa-check-circle"></i>
+            <span id="successText"></span>
+        </div>
+
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/admin/js/employee-form.js"></script>
+    </body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self' 'unsafe-inline' https: file:;
+        font-src *;
+        style-src 'self' 'unsafe-inline' https://*.googleapis.com https://*.jsdelivr.net https://*.cloudflare.com;
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' 'inline-speculation-rules' https://*.jsdelivr.net https://*.cloudflare.com https://*.jquery.com;
+        img-src 'self' data: blob: https: file:;
+        connect-src 'self' https: file:;
+        worker-src 'self' blob:;
+        child-src 'self' blob:;
+    ">
+    <title>Test Thêm Nhân Viên</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-case {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .test-result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .test-button {
+            margin-right: 10px;
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0,0,0,.1);
+            border-radius: 50%;
+            border-top-color: #3498db;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .error-details {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Test Thêm Nhân Viên</h1>
+        
+        <!-- Test Case 1: Thêm nhân viên với dữ liệu hợp lệ -->
+        <div class="test-case" id="testCase1">
+            <div class="test-title">Test Case 1: Thêm nhân viên với dữ liệu hợp lệ</div>
+            <button class="btn btn-primary test-button" onclick="runTest(1)">Chạy Test</button>
+            <div class="test-result" id="result1"></div>
+        </div>
+
+        <!-- Test Case 2: Thêm nhân viên với email không hợp lệ -->
+        <div class="test-case" id="testCase2">
+            <div class="test-title">Test Case 2: Thêm nhân viên với email không hợp lệ</div>
+            <button class="btn btn-primary test-button" onclick="runTest(2)">Chạy Test</button>
+            <div class="test-result" id="result2"></div>
+        </div>
+
+        <!-- Test Case 3: Thêm nhân viên với số điện thoại không hợp lệ -->
+        <div class="test-case" id="testCase3">
+            <div class="test-title">Test Case 3: Thêm nhân viên với số điện thoại không hợp lệ</div>
+            <button class="btn btn-primary test-button" onclick="runTest(3)">Chạy Test</button>
+            <div class="test-result" id="result3"></div>
+        </div>
+
+        <!-- Test Case 4: Thêm nhân viên với chức vụ mới -->
+        <div class="test-case" id="testCase4">
+            <div class="test-title">Test Case 4: Thêm nhân viên với chức vụ mới</div>
+            <button class="btn btn-primary test-button" onclick="runTest(4)">Chạy Test</button>
+            <div class="test-result" id="result4"></div>
+        </div>
+
+        <!-- Test Case 5: Thêm nhân viên với thông tin gia đình -->
+        <div class="test-case" id="testCase5">
+            <div class="test-title">Test Case 5: Thêm nhân viên với thông tin gia đình</div>
+            <button class="btn btn-primary test-button" onclick="runTest(5)">Chạy Test</button>
+            <div class="test-result" id="result5"></div>
+        </div>
+
+        <!-- Nút chạy tất cả test -->
+        <div class="mt-4">
+            <button class="btn btn-success" onclick="runAllTests()">Chạy Tất Cả Test</button>
+        </div>
+    </div>
+
+    <script>
+        // Hàm hiển thị loading
+        function showLoading(element) {
+            element.innerHTML = '<span class="loading"></span> Đang chạy test...';
+            element.className = 'test-result';
+        }
+
+        // Hàm hiển thị kết quả
+        function showResult(element, isSuccess, message, errorDetails = null) {
+            element.innerHTML = message;
+            element.className = `test-result ${isSuccess ? 'success' : 'error'}`;
+            
+            if (errorDetails) {
+                const detailsDiv = document.createElement('div');
+                detailsDiv.className = 'error-details';
+                detailsDiv.textContent = errorDetails;
+                element.appendChild(detailsDiv);
+            }
+        }
+
+        // Hàm gửi request thêm nhân viên
+        async function addEmployee(employeeData) {
+            try {
+                const response = await fetch('/qlnhansu_V2/backend/src/api/employees.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(employeeData)
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(result.message || 'HTTP error! status: ' + response.status);
+                }
+
+                return result;
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        // Test Case 1: Thêm nhân viên với dữ liệu hợp lệ
+        async function runTest(caseNumber) {
+            const resultElement = document.getElementById(`result${caseNumber}`);
+            showLoading(resultElement);
+
+            try {
+                let testData;
+                switch(caseNumber) {
+                    case 1:
+                        testData = {
+                            full_name: "Nguyễn Văn A",
+                            gender: "Male",
+                            birth_date: "1990-01-01",
+                            phone: "0987654321",
+                            email: "test1@example.com",
+                            address: "123 Đường ABC",
+                            department_id: 1,
+                            position_id: 4,
+                            hire_date: "2024-01-01",
+                            contract_type: "Permanent",
+                            contract_start_date: "2024-01-01"
+                        };
+                        break;
+                    case 2:
+                        testData = {
+                            full_name: "Nguyễn Văn B",
+                            gender: "Male",
+                            birth_date: "1990-01-01",
+                            phone: "0987654321",
+                            email: "test2@example.com",
+                            address: "123 Đường ABC",
+                            department_id: 1,
+                            position_id: 4,
+                            hire_date: "2024-01-01",
+                            contract_type: "Permanent",
+                            contract_start_date: "2024-01-01"
+                        };
+                        break;
+                    case 3:
+                        testData = {
+                            full_name: "Nguyễn Văn C",
+                            gender: "Male",
+                            birth_date: "1990-01-01",
+                            phone: "0987654321",
+                            email: "test3@example.com",
+                            address: "123 Đường ABC",
+                            department_id: 1,
+                            position_id: 4,
+                            hire_date: "2024-01-01",
+                            contract_type: "Permanent",
+                            contract_start_date: "2024-01-01"
+                        };
+                        break;
+                    case 4:
+                        testData = {
+                            full_name: "Nguyễn Văn D",
+                            gender: "Male",
+                            birth_date: "1990-01-01",
+                            phone: "0987654321",
+                            email: "test4@example.com",
+                            address: "123 Đường ABC",
+                            department_id: 1,
+                            position_id: 4,
+                            hire_date: "2024-01-01",
+                            contract_type: "Permanent",
+                            contract_start_date: "2024-01-01"
+                        };
+                        break;
+                    case 5:
+                        testData = {
+                            full_name: "Nguyễn Văn E",
+                            gender: "Male",
+                            birth_date: "1990-01-01",
+                            phone: "0987654321",
+                            email: "test5@example.com",
+                            address: "123 Đường ABC",
+                            department_id: 1,
+                            position_id: 4,
+                            hire_date: "2024-01-01",
+                            contract_type: "Permanent",
+                            contract_start_date: "2024-01-01",
+                            family_members: [
+                                {
+                                    name: "Nguyễn Thị F",
+                                    relationship: "Vợ",
+                                    date_of_birth: "1990-01-01",
+                                    occupation: "Giáo viên",
+                                    is_dependent: true
+                                }
+                            ]
+                        };
+                        break;
+                }
+
+                const result = await addEmployee(testData);
+                
+                if (result.success) {
+                    showResult(resultElement, true, 
+                        `Test thành công! ID: ${result.data.id} Mã NV: ${result.data.employee_code}`);
+                } else {
+                    showResult(resultElement, false, 
+                        `Test thất bại! Lỗi: ${result.message || 'Unknown error'}`, 
+                        JSON.stringify(result, null, 2));
+                }
+            } catch (error) {
+                showResult(resultElement, false, 
+                    `Test thất bại! Lỗi: ${error.message}`, 
+                    error.stack);
+            }
+        }
+
+        // Hàm chạy tất cả test
+        async function runAllTests() {
+            for (let i = 1; i <= 5; i++) {
+                await runTest(i);
+            }
+        }
+    </script>
+</body>
+</html> 

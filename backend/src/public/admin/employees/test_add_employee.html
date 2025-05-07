@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Thêm Nhân Viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .validation-message {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .validation-message.valid {
+            color: green;
+        }
+        .validation-message.invalid {
+            color: red;
+        }
+        .validation-message.pending {
+            color: orange;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            color: white;
+            z-index: 1000;
+        }
+        .notification.success {
+            background-color: #4CAF50;
+        }
+        .notification.error {
+            background-color: #f44336;
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Thêm Nhân Viên</h1>
+    
+    <form id="addEmployeeForm">
+        <div class="form-group">
+            <label for="employeeName">Tên:</label>
+            <input type="text" id="employeeName" name="employeeName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="employeeFullName">Họ và tên đầy đủ:</label>
+            <input type="text" id="employeeFullName" name="employeeFullName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="employeeEmail">Email:</label>
+            <input type="email" id="employeeEmail" name="employeeEmail" required>
+        </div>
+
+        <div class="form-group">
+            <label for="employeePhone">Số điện thoại:</label>
+            <input type="tel" id="employeePhone" name="employeePhone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="employeeBirthday">Ngày sinh:</label>
+            <input type="date" id="employeeBirthday" name="employeeBirthday" required>
+        </div>
+
+        <div class="form-group">
+            <label for="employeeAddress">Địa chỉ:</label>
+            <input type="text" id="employeeAddress" name="employeeAddress" required>
+        </div>
+
+        <div class="form-group">
+            <label for="departmentId">Phòng ban:</label>
+            <select id="departmentId" name="departmentId" required>
+                <option value="">Chọn phòng ban</option>
+                <option value="1" selected>Phòng Nhân sự</option>
+                <option value="2">Phòng Kế toán</option>
+                <option value="3">Phòng Kỹ thuật</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="positionId">Chức vụ:</label>
+            <select id="positionId" name="positionId" required>
+                <option value="">Chọn chức vụ</option>
+                <option value="1" selected>Nhân viên</option>
+                <option value="2">Trưởng phòng</option>
+                <option value="3">Phó phòng</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="newPositionGroup" style="display: none;">
+            <label for="newPosition">Tên chức vụ mới:</label>
+            <input type="text" id="newPosition" name="newPosition" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="contractType">Loại hợp đồng:</label>
+            <select id="contractType" name="contractType" required>
+                <option value="">Chọn loại hợp đồng</option>
+                <option value="1" selected>Hợp đồng thử việc</option>
+                <option value="2">Hợp đồng chính thức</option>
+                <option value="3">Hợp đồng thời vụ</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="baseSalary">Lương cơ bản:</label>
+            <input type="number" id="baseSalary" name="baseSalary" required>
+        </div>
+
+        <div class="form-group">
+            <label for="contractStartDate">Ngày bắt đầu hợp đồng:</label>
+            <input type="date" id="contractStartDate" name="contractStartDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="contractEndDate">Ngày kết thúc hợp đồng:</label>
+            <input type="date" class="form-control" id="contractEndDate" name="contractEndDate">
+        </div>
+
+        <div class="form-group">
+            <h3>Thông tin gia đình</h3>
+            <div class="family-member">
+                <div class="form-group">
+                    <label for="member-name">Tên thành viên:</label>
+                    <input type="text" class="member-name" name="member-name">
+                </div>
+                <div class="form-group">
+                    <label for="relationship">Mối quan hệ:</label>
+                    <select class="relationship" name="relationship">
+                        <option value="">Chọn mối quan hệ</option>
+                        <option value="father">Bố</option>
+                        <option value="mother">Mẹ</option>
+                        <option value="spouse">Vợ/Chồng</option>
+                        <option value="child">Con</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="member-birthday">Ngày sinh:</label>
+                    <input type="date" class="member-birthday" name="member-birthday">
+                </div>
+                <div class="form-group">
+                    <label for="member-occupation">Nghề nghiệp:</label>
+                    <input type="text" class="member-occupation" name="member-occupation">
+                </div>
+            </div>
+        </div>
+
+        <!-- Thêm các nút test -->
+        <div class="form-group" style="margin-top: 20px;">
+            <h4>Test Cases</h4>
+            <div class="test-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button type="button" class="btn btn-primary" onclick="fillFormData(testCases[0].data)">Test 1: Dữ liệu hợp lệ</button>
+                <button type="button" class="btn btn-warning" onclick="fillFormData(testCases[1].data)">Test 2: Thiếu trường bắt buộc</button>
+                <button type="button" class="btn btn-warning" onclick="fillFormData(testCases[2].data)">Test 3: Email không hợp lệ</button>
+                <button type="button" class="btn btn-warning" onclick="fillFormData(testCases[3].data)">Test 4: Số điện thoại không hợp lệ</button>
+                <button type="button" class="btn btn-warning" onclick="fillFormData(testCases[4].data)">Test 5: Lương không hợp lệ</button>
+                <button type="button" class="btn btn-danger" onclick="document.getElementById('addEmployeeForm').reset()">Reset Form</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='NhanVien_List.html'">Hủy</button>
+        </div>
+    </form>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script src="js/employee-form.js"></script>
+    <script src="js/test-employee-form.js"></script>
+</body>
+</html> 

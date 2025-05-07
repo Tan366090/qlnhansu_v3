@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .test-section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .pass {
+            color: green;
+        }
+        .fail {
+            color: red;
+        }
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Authentication Tests</h1>
+    
+    <div class="test-section">
+        <h2>CORS Test</h2>
+        <button onclick="testCORS()">Test CORS</button>
+        <div id="cors-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Login Test</h2>
+        <div>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="testLogin()">Test Login</button>
+        </div>
+        <div id="login-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Session Test</h2>
+        <button onclick="testSession()">Test Session</button>
+        <div id="session-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Error Handling Test</h2>
+        <button onclick="testErrorHandling()">Test Error Handling</button>
+        <div id="error-result"></div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost/QLNhanSu_version1/api/auth/login.php';
+        
+        async function testCORS() {
+            const resultDiv = document.getElementById('cors-result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'OPTIONS',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                const headers = response.headers;
+                const requiredHeaders = [
+                    'access-control-allow-origin',
+                    'access-control-allow-methods',
+                    'access-control-allow-headers',
+                    'access-control-allow-credentials'
+                ];
+                
+                let allPresent = true;
+                let result = '<ul>';
+                
+                for (const header of requiredHeaders) {
+                    const value = headers.get(header);
+                    if (value) {
+                        result += `<li class="pass">${header}: ${value}</li>`;
+                    } else {
+                        result += `<li class="fail">Missing: ${header}</li>`;
+                        allPresent = false;
+                    }
+                }
+                
+                result += '</ul>';
+                resultDiv.innerHTML = result;
+                
+                if (allPresent) {
+                    resultDiv.innerHTML += '<p class="pass">All CORS headers present</p>';
+                } else {
+                    resultDiv.innerHTML += '<p class="fail">Some CORS headers missing</p>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="fail">Error: ${error.message}</p>`;
+            }
+        }
+        
+        async function testLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const resultDiv = document.getElementById('login-result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    credentials: 'include',
+                    mode: 'cors',
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                let result = '<ul>';
+                
+                if (response.ok) {
+                    if (data.success) {
+                        result += `<li class="pass">Login successful</li>`;
+                        result += `<li class="pass">User data received</li>`;
+                        result += `<li class="pass">Session ID: ${data.session_id}</li>`;
+                    } else {
+                        result += `<li class="fail">Login failed: ${data.message}</li>`;
+                    }
+                } else {
+                    result += `<li class="fail">Server error: ${response.status}</li>`;
+                }
+                
+                result += '</ul>';
+                resultDiv.innerHTML = result;
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="fail">Error: ${error.message}</p>`;
+            }
+        }
+        
+        function testSession() {
+            const resultDiv = document.getElementById('session-result');
+            const user = localStorage.getItem('user');
+            const sessionId = localStorage.getItem('session_id');
+            
+            let result = '<ul>';
+            
+            if (user) {
+                result += `<li class="pass">User data stored in localStorage</li>`;
+            } else {
+                result += `<li class="fail">No user data in localStorage</li>`;
+            }
+            
+            if (sessionId) {
+                result += `<li class="pass">Session ID stored in localStorage</li>`;
+            } else {
+                result += `<li class="fail">No session ID in localStorage</li>`;
+            }
+            
+            result += '</ul>';
+            resultDiv.innerHTML = result;
+        }
+        
+        async function testErrorHandling() {
+            const resultDiv = document.getElementById('error-result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            // Test invalid JSON
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: 'invalid json'
+                });
+                
+                const data = await response.json();
+                let result = '<ul>';
+                
+                if (response.status === 400) {
+                    result += `<li class="pass">Invalid JSON handled correctly</li>`;
+                } else {
+                    result += `<li class="fail">Invalid JSON not handled correctly</li>`;
+                }
+                
+                // Test missing credentials
+                const response2 = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                });
+                
+                const data2 = await response2.json();
+                
+                if (response2.status === 400) {
+                    result += `<li class="pass">Missing credentials handled correctly</li>`;
+                } else {
+                    result += `<li class="fail">Missing credentials not handled correctly</li>`;
+                }
+                
+                result += '</ul>';
+                resultDiv.innerHTML = result;
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="fail">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html> 

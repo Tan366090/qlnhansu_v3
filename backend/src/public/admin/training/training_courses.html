@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khóa Đào Tạo - Hệ thống Quản lý Nhân sự</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Copy sidebar từ dashboard.html -->
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <!-- Copy top-nav từ dashboard.html -->
+            </header>
+
+            <!-- Training Courses Content -->
+            <div class="content">
+                <div class="page-header">
+                    <h1>Khóa Đào Tạo</h1>
+                    <div class="breadcrumb">
+                        <span>Home</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Quản lý đào tạo</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Khóa đào tạo</span>
+                    </div>
+                </div>
+
+                <!-- Search and Filter -->
+                <div class="search-filter">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Tìm kiếm khóa học...">
+                    </div>
+                    <div class="filter-options">
+                        <select id="departmentFilter">
+                            <option value="">Tất cả phòng ban</option>
+                            <option value="it">IT</option>
+                            <option value="hr">Nhân sự</option>
+                            <option value="finance">Tài chính</option>
+                        </select>
+                        <select id="statusFilter">
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="upcoming">Sắp diễn ra</option>
+                            <option value="ongoing">Đang diễn ra</option>
+                            <option value="completed">Đã hoàn thành</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Training Courses List -->
+                <div class="training-courses">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h3>Khóa học Quản lý dự án</h3>
+                            <span class="status upcoming">Sắp diễn ra</span>
+                        </div>
+                        <div class="course-info">
+                            <p><i class="fas fa-calendar"></i> 15/01/2024 - 20/01/2024</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Phòng họp A</p>
+                            <p><i class="fas fa-users"></i> 20/30 người đăng ký</p>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary">Đăng ký</button>
+                            <button class="btn btn-secondary">Chi tiết</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h3>Kỹ năng giao tiếp</h3>
+                            <span class="status ongoing">Đang diễn ra</span>
+                        </div>
+                        <div class="course-info">
+                            <p><i class="fas fa-calendar"></i> 10/01/2024 - 12/01/2024</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Phòng họp B</p>
+                            <p><i class="fas fa-users"></i> 25/25 người đăng ký</p>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-secondary">Chi tiết</button>
+                        </div>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h3>Quản lý thời gian</h3>
+                            <span class="status completed">Đã hoàn thành</span>
+                        </div>
+                        <div class="course-info">
+                            <p><i class="fas fa-calendar"></i> 05/01/2024 - 07/01/2024</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Phòng họp C</p>
+                            <p><i class="fas fa-users"></i> 18/20 người đăng ký</p>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-secondary">Chi tiết</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="btn btn-outline"><i class="fas fa-chevron-left"></i></button>
+                    <button class="btn btn-outline active">1</button>
+                    <button class="btn btn-outline">2</button>
+                    <button class="btn btn-outline">3</button>
+                    <button class="btn btn-outline"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+        <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html> 

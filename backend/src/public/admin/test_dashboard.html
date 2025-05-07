@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dashboard Data</title>
+    <link rel="stylesheet" href="css/dashboard-realtime.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Test Dashboard Data</h1>
+        
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <h3>Tổng nhân viên</h3>
+                <p id="totalEmployees">0</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Hoàn thành KPI</h3>
+                <p id="kpiCompletion">0%</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-user-plus"></i>
+                <h3>Ứng viên mới</h3>
+                <p id="newCandidates">0</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Dự án đang hoạt động</h3>
+                <p id="activeProjects">0</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-user-check"></i>
+                <h3>Nhân viên đang làm việc</h3>
+                <p id="activeEmployees">0</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Tỷ lệ chấm công</h3>
+                <p id="attendanceRate">0%</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-calendar-times"></i>
+                <h3>Đơn nghỉ phép chờ duyệt</h3>
+                <p id="pendingLeaves">0</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>Tổng lương tháng</h3>
+                <p id="monthlySalary">0</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-user-slash"></i>
+                <h3>Nhân viên không hoạt động</h3>
+                <p id="inactiveEmployees">0</p>
+            </div>
+        </div>
+
+        <!-- Recent Employees -->
+        <div class="recent-employees">
+            <h3>Nhân viên mới nhất</h3>
+            <table id="recentEmployeesTable">
+                <thead>
+                    <tr>
+                        <th>Mã NV</th>
+                        <th>Họ tên</th>
+                        <th>Vị trí</th>
+                        <th>Phòng ban</th>
+                        <th>Ngày vào</th>
+                        <th>Ngày sinh</th>
+                        <th>Điện thoại</th>
+                        <th>Email</th>
+                        <th>Địa chỉ</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3>Xu hướng chấm công</h3>
+                <canvas id="attendanceTrendChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Phân bố phòng ban</h3>
+                <canvas id="departmentChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Mobile Stats -->
+        <div class="mobile-stats">
+            <h3>Thống kê ứng dụng di động</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4>Tổng lượt tải</h4>
+                    <p id="mobileDownloads">0</p>
+                </div>
+                <div class="stat-item">
+                    <h4>Người dùng hoạt động</h4>
+                    <p id="activeUsers">0</p>
+                </div>
+                <div class="stat-item">
+                    <h4>Thông báo đã gửi</h4>
+                    <p id="notificationsSent">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Backup Info -->
+        <div class="backup-info">
+            <h3>Thông tin sao lưu</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>Lần sao lưu cuối</h4>
+                    <p id="lastBackup">Chưa có</p>
+                </div>
+                <div class="info-item">
+                    <h4>Kích thước sao lưu</h4>
+                    <p id="backupSize">0 MB</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Container -->
+        <div id="errorContainer" class="error-container" style="display: none;"></div>
+    </div>
+
+    <script src="js/dashboard-data.js"></script>
+</body>
+</html> 

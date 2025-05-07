@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo đào tạo</title>
+    <link rel="stylesheet" href="../../css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+                    <h1>Báo cáo đào tạo</h1>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="exportReport('excel')">
+                            <i class="fas fa-file-excel"></i> Xuất Excel
+                        </button>
+                        <button class="btn btn-danger" onclick="exportReport('pdf')">
+                            <i class="fas fa-file-pdf"></i> Xuất PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bộ lọc báo cáo -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form id="filterForm">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="startDate" class="form-label">Từ ngày</label>
+                                    <input type="date" class="form-control" id="startDate">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="endDate" class="form-label">Đến ngày</label>
+                                    <input type="date" class="form-control" id="endDate">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="department" class="form-label">Phòng ban</label>
+                                    <select class="form-select" id="department">
+                                        <option value="">Tất cả phòng ban</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="trainingType" class="form-label">Loại đào tạo</label>
+                                    <select class="form-select" id="trainingType">
+                                        <option value="">Tất cả loại</option>
+                                        <option value="technical">Kỹ thuật</option>
+                                        <option value="softskill">Kỹ năng mềm</option>
+                                        <option value="management">Quản lý</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 text-end">
+                                    <button type="button" class="btn btn-secondary" onclick="resetFilters()">
+                                        <i class="fas fa-redo"></i> Đặt lại
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i> Tìm kiếm
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Thống kê tổng quan -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Tổng số khóa đào tạo</h5>
+                                <h2 id="totalTrainings">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Số nhân viên tham gia</h5>
+                                <h2 id="totalEmployees">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-info text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Tỷ lệ hoàn thành</h5>
+                                <h2 id="completionRate">0%</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-warning text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">Điểm trung bình</h5>
+                                <h2 id="averageScore">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biểu đồ -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Phân bố theo loại đào tạo</h5>
+                                <canvas id="trainingTypeChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Kết quả đánh giá</h5>
+                                <canvas id="evaluationResultChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bảng chi tiết -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="reportTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Mã khóa</th>
+                                        <th>Tên khóa đào tạo</th>
+                                        <th>Loại</th>
+                                        <th>Số nhân viên</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <th>Ngày kết thúc</th>
+                                        <th>Tỷ lệ hoàn thành</th>
+                                        <th>Điểm trung bình</th>
+                                        <th>Chi tiết</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dữ liệu sẽ được load từ API -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let trainingTypeChart, evaluationResultChart;
+            const table = $('#reportTable').DataTable({
+                ajax: {
+                    url: '/api/trainings/reports',
+                    data: function(d) {
+                        return {
+                            start_date: $('#startDate').val(),
+                            end_date: $('#endDate').val(),
+                            department: $('#department').val(),
+                            training_type: $('#trainingType').val()
+                        };
+                    }
+                },
+                columns: [
+                    { data: 'id' },
+                    { data: 'name' },
+                    { data: 'type' },
+                    { data: 'employee_count' },
+                    { 
+                        data: 'start_date',
+                        render: function(data) {
+                            return new Date(data).toLocaleDateString('vi-VN');
+                        }
+                    },
+                    { 
+                        data: 'end_date',
+                        render: function(data) {
+                            return new Date(data).toLocaleDateString('vi-VN');
+                        }
+                    },
+                    { 
+                        data: 'completion_rate',
+                        render: function(data) {
+                            return `${data}%`;
+                        }
+                    },
+                    { data: 'average_score' },
+                    {
+                        data: null,
+                        render: function(data) {
+                            return `
+                                <button class="btn btn-sm btn-info" onclick="viewDetails(${data.id})">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            `;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json'
+                }
+            });
+
+            // Load danh sách phòng ban
+            $.ajax({
+                url: '/api/departments',
+                method: 'GET',
+                success: function(response) {
+                    const select = $('#department');
+                    response.forEach(dept => {
+                        select.append(`<option value="${dept.id}">${dept.name}</option>`);
+                    });
+                }
+            });
+
+            // Khởi tạo biểu đồ
+            function initCharts() {
+                const trainingTypeCtx = document.getElementById('trainingTypeChart').getContext('2d');
+                trainingTypeChart = new Chart(trainingTypeCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            data: [],
+                            backgroundColor: [
+                                '#FF6384',
+                                '#36A2EB',
+                                '#FFCE56'
+                            ]
+                        }]
+                    }
+                });
+
+                const evaluationResultCtx = document.getElementById('evaluationResultChart').getContext('2d');
+                evaluationResultChart = new Chart(evaluationResultCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Số lượng',
+                            data: [],
+                            backgroundColor: '#4CAF50'
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Cập nhật thống kê và biểu đồ
+            function updateStatistics(data) {
+                $('#totalTrainings').text(data.total_trainings);
+                $('#totalEmployees').text(data.total_employees);
+                $('#completionRate').text(`${data.completion_rate}%`);
+                $('#averageScore').text(data.average_score);
+
+                // Cập nhật biểu đồ loại đào tạo
+                trainingTypeChart.data.labels = data.training_types.map(t => t.type);
+                trainingTypeChart.data.datasets[0].data = data.training_types.map(t => t.count);
+                trainingTypeChart.update();
+
+                // Cập nhật biểu đồ kết quả đánh giá
+                evaluationResultChart.data.labels = data.evaluation_results.map(r => r.result);
+                evaluationResultChart.data.datasets[0].data = data.evaluation_results.map(r => r.count);
+                evaluationResultChart.update();
+            }
+
+            // Xử lý tìm kiếm
+            $('#filterForm').on('submit', function(e) {
+                e.preventDefault();
+                table.ajax.reload();
+                $.ajax({
+                    url: '/api/trainings/reports/statistics',
+                    method: 'GET',
+                    data: {
+                        start_date: $('#startDate').val(),
+                        end_date: $('#endDate').val(),
+                        department: $('#department').val(),
+                        training_type: $('#trainingType').val()
+                    },
+                    success: function(data) {
+                        updateStatistics(data);
+                    }
+                });
+            });
+
+            // Đặt lại bộ lọc
+            function resetFilters() {
+                $('#filterForm')[0].reset();
+                table.ajax.reload();
+            }
+
+            // Xuất báo cáo
+            window.exportReport = function(format) {
+                const params = new URLSearchParams({
+                    start_date: $('#startDate').val(),
+                    end_date: $('#endDate').val(),
+                    department: $('#department').val(),
+                    training_type: $('#trainingType').val(),
+                    format: format
+                });
+                window.open(`/api/trainings/reports/export?${params}`, '_blank');
+            };
+
+            // Xem chi tiết
+            window.viewDetails = function(id) {
+                window.location.href = `training-details.html?id=${id}`;
+            };
+
+            // Khởi tạo
+            initCharts();
+            table.ajax.reload();
+        });
+    </script>
+</body>
+</html> 

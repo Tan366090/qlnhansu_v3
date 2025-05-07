@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý khóa đào tạo</title>
+    <link rel="stylesheet" href="../../css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+                    <h1>Quản lý khóa đào tạo</h1>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#courseModal">
+                        <i class="fas fa-plus"></i> Thêm khóa đào tạo
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="courseTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Mã khóa</th>
+                                        <th>Tên khóa đào tạo</th>
+                                        <th>Loại</th>
+                                        <th>Thời lượng</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <th>Ngày kết thúc</th>
+                                        <th>Giảng viên</th>
+                                        <th>Địa điểm</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dữ liệu sẽ được load từ API -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thêm/sửa khóa đào tạo -->
+    <div class="modal fade" id="courseModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm khóa đào tạo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="courseForm">
+                        <input type="hidden" id="courseId">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Tên khóa đào tạo</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="type" class="form-label">Loại đào tạo</label>
+                                <select class="form-select" id="type" required>
+                                    <option value="">Chọn loại</option>
+                                    <option value="technical">Kỹ thuật</option>
+                                    <option value="softskill">Kỹ năng mềm</option>
+                                    <option value="management">Quản lý</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="duration" class="form-label">Thời lượng (giờ)</label>
+                                <input type="number" class="form-control" id="duration" min="1" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="capacity" class="form-label">Số lượng học viên tối đa</label>
+                                <input type="number" class="form-control" id="capacity" min="1" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="startDate" class="form-label">Ngày bắt đầu</label>
+                                <input type="date" class="form-control" id="startDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="endDate" class="form-label">Ngày kết thúc</label>
+                                <input type="date" class="form-control" id="endDate" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="instructor" class="form-label">Giảng viên</label>
+                                <input type="text" class="form-control" id="instructor" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="location" class="form-label">Địa điểm</label>
+                                <input type="text" class="form-control" id="location" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Mô tả</label>
+                            <textarea class="form-control" id="description" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="prerequisites" class="form-label">Điều kiện tiên quyết</label>
+                            <textarea class="form-control" id="prerequisites" rows="2"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="saveCourse">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const table = $('#courseTable').DataTable({
+                ajax: {
+                    url: '/api/trainings/courses',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'id' },
+                    { data: 'name' },
+                    { 
+                        data: 'type',
+                        render: function(data) {
+                            const typeText = {
+                                'technical': 'Kỹ thuật',
+                                'softskill': 'Kỹ năng mềm',
+                                'management': 'Quản lý'
+                            };
+                            return typeText[data] || data;
+                        }
+                    },
+                    { data: 'duration' },
+                    { 
+                        data: 'start_date',
+                        render: function(data) {
+                            return new Date(data).toLocaleDateString('vi-VN');
+                        }
+                    },
+                    { 
+                        data: 'end_date',
+                        render: function(data) {
+                            return new Date(data).toLocaleDateString('vi-VN');
+                        }
+                    },
+                    { data: 'instructor' },
+                    { data: 'location' },
+                    { 
+                        data: 'status',
+                        render: function(data) {
+                            const statusClass = {
+                                'planned': 'info',
+                                'ongoing': 'success',
+                                'completed': 'secondary',
+                                'cancelled': 'danger'
+                            };
+                            const statusText = {
+                                'planned': 'Dự kiến',
+                                'ongoing': 'Đang diễn ra',
+                                'completed': 'Đã hoàn thành',
+                                'cancelled': 'Đã hủy'
+                            };
+                            return `<span class="badge bg-${statusClass[data]}">${statusText[data]}</span>`;
+                        }
+                    },
+                    {
+                        data: null,
+                        render: function(data) {
+                            return `
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-info" onclick="viewDetails(${data.id})">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-warning" onclick="editCourse(${data.id})">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteCourse(${data.id})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            `;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json'
+                }
+            });
+
+            // Xử lý lưu khóa đào tạo
+            $('#saveCourse').click(function() {
+                const data = {
+                    name: $('#name').val(),
+                    type: $('#type').val(),
+                    duration: $('#duration').val(),
+                    capacity: $('#capacity').val(),
+                    start_date: $('#startDate').val(),
+                    end_date: $('#endDate').val(),
+                    instructor: $('#instructor').val(),
+                    location: $('#location').val(),
+                    description: $('#description').val(),
+                    prerequisites: $('#prerequisites').val()
+                };
+
+                const method = $('#courseId').val() ? 'PUT' : 'POST';
+                const url = $('#courseId').val() 
+                    ? `/api/trainings/courses/${$('#courseId').val()}`
+                    : '/api/trainings/courses';
+
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function() {
+                        table.ajax.reload();
+                        $('#courseModal').modal('hide');
+                        alert('Lưu thành công!');
+                    },
+                    error: function(xhr) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseJSON.message);
+                    }
+                });
+            });
+
+            // Xử lý sửa khóa đào tạo
+            window.editCourse = function(id) {
+                $.ajax({
+                    url: `/api/trainings/courses/${id}`,
+                    method: 'GET',
+                    success: function(data) {
+                        $('#courseId').val(data.id);
+                        $('#name').val(data.name);
+                        $('#type').val(data.type);
+                        $('#duration').val(data.duration);
+                        $('#capacity').val(data.capacity);
+                        $('#startDate').val(data.start_date);
+                        $('#endDate').val(data.end_date);
+                        $('#instructor').val(data.instructor);
+                        $('#location').val(data.location);
+                        $('#description').val(data.description);
+                        $('#prerequisites').val(data.prerequisites);
+                        $('#courseModal').modal('show');
+                    }
+                });
+            };
+
+            // Xử lý xóa khóa đào tạo
+            window.deleteCourse = function(id) {
+                if (confirm('Bạn có chắc chắn muốn xóa khóa đào tạo này?')) {
+                    $.ajax({
+                        url: `/api/trainings/courses/${id}`,
+                        method: 'DELETE',
+                        success: function() {
+                            table.ajax.reload();
+                            alert('Xóa thành công!');
+                        },
+                        error: function(xhr) {
+                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.message);
+                        }
+                    });
+                }
+            };
+
+            // Xử lý xem chi tiết
+            window.viewDetails = function(id) {
+                window.location.href = `course-details.html?id=${id}`;
+            };
+
+            // Reset form khi mở modal
+            $('#courseModal').on('show.bs.modal', function() {
+                if (!$('#courseId').val()) {
+                    $('#courseForm')[0].reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

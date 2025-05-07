@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết học viên</title>
+    <link rel="stylesheet" href="../../css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+                    <h1>Chi tiết học viên</h1>
+                    <div class="btn-group">
+                        <button class="btn btn-secondary" onclick="window.history.back()">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thông tin cơ bản -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Thông tin cơ bản</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <th style="width: 200px">Mã NV:</th>
+                                        <td id="employeeId"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Họ tên:</th>
+                                        <td id="employeeName"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phòng ban:</th>
+                                        <td id="department"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Chức vụ:</th>
+                                        <td id="position"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <th style="width: 200px">Khóa đào tạo:</th>
+                                        <td id="courseName"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ngày đăng ký:</th>
+                                        <td id="registrationDate"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Trạng thái:</th>
+                                        <td id="status"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kết quả:</th>
+                                        <td id="result"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Đánh giá -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Đánh giá</h5>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#evaluationModal">
+                            <i class="fas fa-plus"></i> Thêm đánh giá
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="evaluationTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Ngày đánh giá</th>
+                                        <th>Người đánh giá</th>
+                                        <th>Kết quả</th>
+                                        <th>Điểm</th>
+                                        <th>Nhận xét</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dữ liệu sẽ được load từ API -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Điểm danh -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Điểm danh</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="attendanceTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Buổi học</th>
+                                        <th>Ngày học</th>
+                                        <th>Thời gian</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dữ liệu sẽ được load từ API -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thêm đánh giá -->
+    <div class="modal fade" id="evaluationModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm đánh giá</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="evaluationForm">
+                        <div class="mb-3">
+                            <label for="result" class="form-label">Kết quả</label>
+                            <select class="form-select" id="result" required>
+                                <option value="">Chọn kết quả</option>
+                                <option value="excellent">Xuất sắc</option>
+                                <option value="good">Tốt</option>
+                                <option value="average">Trung bình</option>
+                                <option value="poor">Kém</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="score" class="form-label">Điểm</label>
+                            <input type="number" class="form-control" id="score" min="0" max="10" step="0.5" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Nhận xét</label>
+                            <textarea class="form-control" id="comment" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="saveEvaluation">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const courseId = new URLSearchParams(window.location.search).get('course_id');
+            const studentId = new URLSearchParams(window.location.search).get('student_id');
+            if (!courseId || !studentId) {
+                window.history.back();
+                return;
+            }
+
+            // Load thông tin học viên
+            $.ajax({
+                url: `/api/trainings/courses/${courseId}/students/${studentId}`,
+                method: 'GET',
+                success: function(data) {
+                    $('#employeeId').text(data.employee_id);
+                    $('#employeeName').text(data.employee_name);
+                    $('#department').text(data.department);
+                    $('#position').text(data.position);
+                    $('#courseName').text(data.course_name);
+                    $('#registrationDate').text(new Date(data.registration_date).toLocaleDateString('vi-VN'));
+                    
+                    const statusClass = {
+                        'registered': 'info',
+                        'attending': 'success',
+                        'completed': 'secondary',
+                        'dropped': 'danger'
+                    };
+                    const statusText = {
+                        'registered': 'Đã đăng ký',
+                        'attending': 'Đang tham gia',
+                        'completed': 'Đã hoàn thành',
+                        'dropped': 'Đã bỏ học'
+                    };
+                    $('#status').html(`<span class="badge bg-${statusClass[data.status]}">${statusText[data.status]}</span>`);
+
+                    if (data.result) {
+                        const resultClass = {
+                            'excellent': 'success',
+                            'good': 'info',
+                            'average': 'warning',
+                            'poor': 'danger'
+                        };
+                        const resultText = {
+                            'excellent': 'Xuất sắc',
+                            'good': 'Tốt',
+                            'average': 'Trung bình',
+                            'poor': 'Kém'
+                        };
+                        $('#result').html(`<span class="badge bg-${resultClass[data.result]}">${resultText[data.result]}</span>`);
+                    } else {
+                        $('#result').text('-');
+                    }
+                },
+                error: function() {
+                    window.history.back();
+                }
+            });
+
+            // Khởi tạo bảng đánh giá
+            const evaluationTable = $('#evaluationTable').DataTable({
+                ajax: {
+                    url: `/api/trainings/courses/${courseId}/students/${studentId}/evaluations`,
+                    dataSrc: ''
+                },
+                columns: [
+                    { 
+                        data: 'evaluation_date',
+                        render: function(data) {
+                            return new Date(data).toLocaleDateString('vi-VN');
+                        }
+                    },
+                    { data: 'evaluator' },
+                    { 
+                        data: 'result',
+                        render: function(data) {
+                            const resultClass = {
+                                'excellent': 'success',
+                                'good': 'info',
+                                'average': 'warning',
+                                'poor': 'danger'
+                            };
+                            const resultText = {
+                                'excellent': 'Xuất sắc',
+                                'good': 'Tốt',
+                                'average': 'Trung bình',
+                                'poor': 'Kém'
+                            };
+                            return `<span class="badge bg-${resultClass[data]}">${resultText[data]}</span>`;
+                        }
+                    },
+                    { data: 'score' },
+                    { data: 'comment' },
+                    {
+                        data: null,
+                        render: function(data) {
+                            return `
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-danger" onclick="deleteEvaluation(${data.id})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            `;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json'
+                }
+            });
+
+            // Khởi tạo bảng điểm danh
+            const attendanceTable = $('#attendanceTable').DataTable({
+                ajax: {
+                    url: `/api/trainings/courses/${courseId}/students/${studentId}/attendance`,
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'session_number' },
+                    { 
+                        data: 'date',
+                        render: function(data) {
+                            return new Date(data).toLocaleDateString('vi-VN');
+                        }
+                    },
+                    { 
+                        data: null,
+                        render: function(data) {
+                            return `${data.start_time} - ${data.end_time}`;
+                        }
+                    },
+                    { 
+                        data: 'status',
+                        render: function(data) {
+                            const statusClass = {
+                                'present': 'success',
+                                'absent': 'danger',
+                                'late': 'warning',
+                                'excused': 'info'
+                            };
+                            const statusText = {
+                                'present': 'Có mặt',
+                                'absent': 'Vắng mặt',
+                                'late': 'Đi muộn',
+                                'excused': 'Nghỉ có phép'
+                            };
+                            return `<span class="badge bg-${statusClass[data]}">${statusText[data]}</span>`;
+                        }
+                    },
+                    { data: 'note' }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json'
+                }
+            });
+
+            // Xử lý thêm đánh giá
+            $('#saveEvaluation').click(function() {
+                const data = {
+                    result: $('#result').val(),
+                    score: $('#score').val(),
+                    comment: $('#comment').val()
+                };
+
+                $.ajax({
+                    url: `/api/trainings/courses/${courseId}/students/${studentId}/evaluations`,
+                    method: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function() {
+                        evaluationTable.ajax.reload();
+                        $('#evaluationModal').modal('hide');
+                        alert('Thêm đánh giá thành công!');
+                    },
+                    error: function(xhr) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseJSON.message);
+                    }
+                });
+            });
+
+            // Xử lý xóa đánh giá
+            window.deleteEvaluation = function(id) {
+                if (confirm('Bạn có chắc chắn muốn xóa đánh giá này?')) {
+                    $.ajax({
+                        url: `/api/trainings/courses/${courseId}/students/${studentId}/evaluations/${id}`,
+                        method: 'DELETE',
+                        success: function() {
+                            evaluationTable.ajax.reload();
+                            alert('Xóa đánh giá thành công!');
+                        },
+                        error: function(xhr) {
+                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.message);
+                        }
+                    });
+                }
+            };
+
+            // Reset form khi mở modal
+            $('#evaluationModal').on('show.bs.modal', function() {
+                $('#evaluationForm')[0].reset();
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,128 @@
+[06-May-2025 01:47:57 Europe/Berlin] Request Method: GET
+[06-May-2025 01:47:57 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?page=1&per_page=10
+[06-May-2025 01:47:57 Europe/Berlin] Query String: page=1&per_page=10
+[06-May-2025 01:47:57 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:48:09 Europe/Berlin] Request Method: GET
+[06-May-2025 01:48:09 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?page=1&per_page=10
+[06-May-2025 01:48:09 Europe/Berlin] Query String: page=1&per_page=10
+[06-May-2025 01:48:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:48:10 Europe/Berlin] Request Method: GET
+[06-May-2025 01:48:10 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?page=1&per_page=10
+[06-May-2025 01:48:10 Europe/Berlin] Query String: page=1&per_page=10
+[06-May-2025 01:48:10 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:48:51 Europe/Berlin] Request Method: GET
+[06-May-2025 01:48:51 Europe/Berlin] Request Method: GET
+[06-May-2025 01:48:51 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?page=1&per_page=10
+[06-May-2025 01:48:51 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?action=statistics
+[06-May-2025 01:48:51 Europe/Berlin] Query String: page=1&per_page=10
+[06-May-2025 01:48:51 Europe/Berlin] Query String: action=statistics
+[06-May-2025 01:48:51 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:48:51 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:51:36 Europe/Berlin] Request Method: GET
+[06-May-2025 01:51:36 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php
+[06-May-2025 01:51:36 Europe/Berlin] Query String: 
+[06-May-2025 01:51:36 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:51:36 Europe/Berlin] Request Method: GET
+[06-May-2025 01:51:36 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?action=statistics
+[06-May-2025 01:51:36 Europe/Berlin] Query String: action=statistics
+[06-May-2025 01:51:36 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:51:36 Europe/Berlin] Request Method: POST
+[06-May-2025 01:51:36 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php
+[06-May-2025 01:51:36 Europe/Berlin] Query String: 
+[06-May-2025 01:51:36 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:53:06 Europe/Berlin] Request Method: GET
+[06-May-2025 01:53:06 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?action=statistics
+[06-May-2025 01:53:06 Europe/Berlin] Query String: action=statistics
+[06-May-2025 01:53:06 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:53:06 Europe/Berlin] Request Method: GET
+[06-May-2025 01:53:06 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?page=1&per_page=10
+[06-May-2025 01:53:06 Europe/Berlin] Query String: page=1&per_page=10
+[06-May-2025 01:53:06 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:53:59 Europe/Berlin] Request Method: GET
+[06-May-2025 01:53:59 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?page=1&per_page=10
+[06-May-2025 01:53:59 Europe/Berlin] Query String: page=1&per_page=10
+[06-May-2025 01:53:59 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 01:53:59 Europe/Berlin] Request Method: GET
+[06-May-2025 01:53:59 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?action=statistics
+[06-May-2025 01:53:59 Europe/Berlin] Query String: action=statistics
+[06-May-2025 01:53:59 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 05:08:01 Europe/Berlin] Request Method: GET
+[06-May-2025 05:08:01 Europe/Berlin] Request Method: GET
+[06-May-2025 05:08:01 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?page=1&per_page=10
+[06-May-2025 05:08:01 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?action=statistics
+[06-May-2025 05:08:01 Europe/Berlin] Query String: page=1&per_page=10
+[06-May-2025 05:08:01 Europe/Berlin] Query String: action=statistics
+[06-May-2025 05:08:01 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 05:08:01 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 05:26:48 Europe/Berlin] Request Method: GET
+[06-May-2025 05:26:48 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?page=1&per_page=10
+[06-May-2025 05:26:48 Europe/Berlin] Query String: page=1&per_page=10
+[06-May-2025 05:26:48 Europe/Berlin] Request Method: GET
+[06-May-2025 05:26:48 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/api/hr/leaves.php?action=statistics
+[06-May-2025 05:26:48 Europe/Berlin] Query String: action=statistics
+[06-May-2025 05:26:48 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7
+[06-May-2025 05:26:48 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "App\Models\BaseModel" not found in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php:7
+Stack trace:
+#0 C:\xampp\htdocs\qlnhansu_V3\backend\src\api\hr\leaves.php(19): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\qlnhansu_V3\backend\src\app\Models\Leave.php on line 7

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quản lý hợp đồng</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="shared/css/common.css">
+        <link rel="stylesheet" href="shared/css/style.css">
+        <!-- CSS -->
+        <link rel="stylesheet" href="/assets/css/notifications.css">
+        <link rel="stylesheet" href="/assets/css/loading.css">
+        <!-- JavaScript -->
+        <script type="module" src="/assets/js/main.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Quản lý hợp đồng</h2>
+                        <button
+                            class="btn btn-primary"
+                            onclick="showAddContractModal()"
+                        >
+                            <i class="fas fa-plus"></i> Thêm hợp đồng
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="filters">
+                            <div class="form-group">
+                                <label class="form-label">Nhân viên</label>
+                                <select
+                                    class="form-control"
+                                    id="employeeFilter"
+                                >
+                                    <option value="">Tất cả nhân viên</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Loại hợp đồng</label>
+                                <select
+                                    class="form-control"
+                                    id="contractTypeFilter"
+                                >
+                                    <option value="">Tất cả loại</option>
+                                    <option value="full_time">
+                                        Toàn thời gian
+                                    </option>
+                                    <option value="part_time">
+                                        Bán thời gian
+                                    </option>
+                                    <option value="temporary">Thời vụ</option>
+                                </select>
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                onclick="filterContracts()"
+                            >
+                                <i class="fas fa-search"></i> Lọc
+                            </button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã NV</th>
+                                        <th>Họ tên</th>
+                                        <th>Loại hợp đồng</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <th>Ngày kết thúc</th>
+                                        <th>Lương cơ bản</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contractList">
+                                    <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal thêm/sửa hợp đồng -->
+        <div id="contractModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Thêm hợp đồng</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="contractForm">
+                        <div class="form-group">
+                            <label class="form-label">Nhân viên</label>
+                            <select class="form-control" id="employee" required>
+                                <option value="">Chọn nhân viên</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Loại hợp đồng</label>
+                            <select
+                                class="form-control"
+                                id="contractType"
+                                required
+                            >
+                                <option value="">Chọn loại hợp đồng</option>
+                                <option value="full_time">
+                                    Toàn thời gian
+                                </option>
+                                <option value="part_time">Bán thời gian</option>
+                                <option value="temporary">Thời vụ</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="form-label">Ngày bắt đầu</label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="startDate"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="form-label">Ngày kết thúc</label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="endDate"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Lương cơ bản</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="baseSalary"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Ghi chú</label>
+                            <textarea
+                                class="form-control"
+                                id="notes"
+                                rows="3"
+                            ></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        onclick="closeContractModal()"
+                    >
+                        Hủy
+                    </button>
+                    <button class="btn btn-primary" onclick="saveContract()">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal xác nhận xóa -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Xác nhận xóa</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa hợp đồng này?</p>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        onclick="closeDeleteModal()"
+                    >
+                        Hủy
+                    </button>
+                    <button class="btn btn-danger" onclick="confirmDelete()">
+                        Xóa
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/common.js"></script>
+        <script>
+            let currentContractId = null;
+
+            // Hàm tải danh sách nhân viên
+            async function loadEmployees() {
+                try {
+                    const response = await fetch("/api/employees");
+                    const employees = await response.json();
+
+                    const selects = [
+                        document.getElementById("employee"),
+                        document.getElementById("employeeFilter"),
+                    ];
+
+                    selects.forEach((select) => {
+                        select.innerHTML =
+                            '<option value="">Chọn nhân viên</option>';
+                        employees.forEach((emp) => {
+                            const option = document.createElement("option");
+                            option.value = emp.id;
+                            option.textContent = `${emp.employee_id} - ${emp.full_name}`;
+                            select.appendChild(option);
+                        });
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách nhân viên:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách nhân viên",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm tải danh sách hợp đồng
+            async function loadContracts() {
+                try {
+                    const employee =
+                        document.getElementById("employeeFilter").value;
+                    const type =
+                        document.getElementById("contractTypeFilter").value;
+
+                    let url = "/api/contracts";
+                    if (employee || type) {
+                        url += "?";
+                        if (employee) url += `employee=${employee}`;
+                        if (type) url += `&type=${type}`;
+                    }
+
+                    const response = await fetch(url);
+                    const contracts = await response.json();
+
+                    const tbody = document.getElementById("contractList");
+                    tbody.innerHTML = "";
+
+                    contracts.forEach((contract) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                        <td>${contract.employee_id}</td>
+                        <td>${contract.full_name}</td>
+                        <td>${getContractTypeName(contract.type)}</td>
+                        <td>${formatDate(contract.start_date)}</td>
+                        <td>${formatDate(contract.end_date)}</td>
+                        <td>${formatCurrency(contract.base_salary)}</td>
+                        <td>
+                            <span class="status-badge ${
+                                contract.status === "active"
+                                    ? "active"
+                                    : "inactive"
+                            }">
+                                ${
+                                    contract.status === "active"
+                                        ? "Đang hiệu lực"
+                                        : "Đã hết hạn"
+                                }
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editContract(${
+                                contract.id
+                            })">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="showDeleteModal(${
+                                contract.id
+                            })">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                        tbody.appendChild(tr);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách hợp đồng:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách hợp đồng",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm lấy tên loại hợp đồng
+            function getContractTypeName(type) {
+                const types = {
+                    full_time: "Toàn thời gian",
+                    part_time: "Bán thời gian",
+                    temporary: "Thời vụ",
+                };
+                return types[type] || type;
+            }
+
+            // Hàm hiển thị modal thêm/sửa
+            function showAddContractModal() {
+                currentContractId = null;
+                document.getElementById("modalTitle").textContent =
+                    "Thêm hợp đồng";
+                document.getElementById("contractForm").reset();
+                document.getElementById("contractModal").style.display =
+                    "block";
+            }
+
+            // Hàm đóng modal
+            function closeContractModal() {
+                document.getElementById("contractModal").style.display = "none";
+            }
+
+            // Hàm lưu hợp đồng
+            async function saveContract() {
+                const form = document.getElementById("contractForm");
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                const data = {
+                    employee_id: document.getElementById("employee").value,
+                    type: document.getElementById("contractType").value,
+                    start_date: document.getElementById("startDate").value,
+                    end_date: document.getElementById("endDate").value,
+                    base_salary: document.getElementById("baseSalary").value,
+                    notes: document.getElementById("notes").value,
+                };
+
+                try {
+                    const url = currentContractId
+                        ? `/api/contracts/${currentContractId}`
+                        : "/api/contracts";
+                    const method = currentContractId ? "PUT" : "POST";
+
+                    const response = await fetch(url, {
+                        method: method,
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                        showNotification(
+                            currentContractId
+                                ? "Cập nhật hợp đồng thành công"
+                                : "Thêm hợp đồng thành công",
+                            "success"
+                        );
+                        closeContractModal();
+                        loadContracts();
+                    } else {
+                        throw new Error("Lưu hợp đồng thất bại");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi lưu hợp đồng:", error);
+                    showNotification("Có lỗi xảy ra khi lưu hợp đồng", "error");
+                }
+            }
+
+            // Hàm sửa hợp đồng
+            async function editContract(id) {
+                try {
+                    const response = await fetch(`/api/contracts/${id}`);
+                    const contract = await response.json();
+
+                    currentContractId = id;
+                    document.getElementById("modalTitle").textContent =
+                        "Sửa hợp đồng";
+                    document.getElementById("employee").value =
+                        contract.employee_id;
+                    document.getElementById("contractType").value =
+                        contract.type;
+                    document.getElementById("startDate").value =
+                        contract.start_date;
+                    document.getElementById("endDate").value =
+                        contract.end_date;
+                    document.getElementById("baseSalary").value =
+                        contract.base_salary;
+                    document.getElementById("notes").value =
+                        contract.notes || "";
+
+                    document.getElementById("contractModal").style.display =
+                        "block";
+                } catch (error) {
+                    console.error("Lỗi khi tải thông tin hợp đồng:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải thông tin hợp đồng",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm hiển thị modal xóa
+            function showDeleteModal(id) {
+                currentContractId = id;
+                document.getElementById("deleteModal").style.display = "block";
+            }
+
+            // Hàm đóng modal xóa
+            function closeDeleteModal() {
+                document.getElementById("deleteModal").style.display = "none";
+            }
+
+            // Hàm xác nhận xóa
+            async function confirmDelete() {
+                if (!currentContractId) return;
+
+                try {
+                    const response = await fetch(
+                        `/api/contracts/${currentContractId}`,
+                        {
+                            method: "DELETE",
+                        }
+                    );
+
+                    if (response.ok) {
+                        showNotification("Xóa hợp đồng thành công", "success");
+                        closeDeleteModal();
+                        loadContracts();
+                    } else {
+                        throw new Error("Xóa hợp đồng thất bại");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi xóa hợp đồng:", error);
+                    showNotification("Có lỗi xảy ra khi xóa hợp đồng", "error");
+                }
+            }
+
+            // Hàm lọc hợp đồng
+            function filterContracts() {
+                loadContracts();
+            }
+
+            // Tải dữ liệu khi trang được tải
+            document.addEventListener("DOMContentLoaded", () => {
+                loadEmployees();
+                loadContracts();
+            });
+
+            document.addEventListener("DOMContentLoaded", async () => {
+                const contracts = await fetchData("getContracts"); // Add 'getContracts' case in API
+                const tbody = document.getElementById("contractList");
+                tbody.innerHTML = ""; // Clear existing rows
+
+                contracts.forEach((contract) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                    <td>${contract.id}</td>
+                    <td>${contract.employee_name}</td>
+                    <td>${contract.start_date}</td>
+                    <td>${contract.end_date}</td>
+                    <td>${contract.status}</td>
+                `;
+                    tbody.appendChild(tr);
+                });
+            });
+        </script>
+        <script src="shared/js/common.js"></script>
+        <script src="shared/js/auth_utils.js"></script>
+        <script src="shared/js/api_service.js"></script>
+    </body>
+</html>

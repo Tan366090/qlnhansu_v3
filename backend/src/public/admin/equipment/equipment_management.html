@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý trang thiết bị</title>
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Quản lý trang thiết bị</h3>
+                        <button class="btn btn-primary" id="addEquipmentBtn">
+                            <i class="fas fa-plus"></i> Thêm thiết bị
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="equipmentTable">
+                                <thead>
+                                    <tr>
+                                        <th>Mã thiết bị</th>
+                                        <th>Tên thiết bị</th>
+                                        <th>Loại thiết bị</th>
+                                        <th>Ngày mua</th>
+                                        <th>Giá trị</th>
+                                        <th>Tình trạng</th>
+                                        <th>Người sử dụng</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="equipmentList">
+                                    <!-- Dữ liệu sẽ được thêm vào đây -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thêm/sửa thiết bị -->
+    <div class="modal fade" id="equipmentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Thêm thiết bị mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="equipmentForm">
+                        <input type="hidden" id="equipmentId">
+                        <div class="mb-3">
+                            <label class="form-label">Tên thiết bị</label>
+                            <input type="text" class="form-control" id="equipmentName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Loại thiết bị</label>
+                            <select class="form-control" id="equipmentType" required>
+                                <option value="">Chọn loại thiết bị</option>
+                                <option value="computer">Máy tính</option>
+                                <option value="printer">Máy in</option>
+                                <option value="phone">Điện thoại</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày mua</label>
+                            <input type="date" class="form-control" id="purchaseDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Giá trị</label>
+                            <input type="number" class="form-control" id="equipmentValue" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tình trạng</label>
+                            <select class="form-control" id="equipmentStatus" required>
+                                <option value="new">Mới</option>
+                                <option value="good">Tốt</option>
+                                <option value="need_repair">Cần sửa chữa</option>
+                                <option value="broken">Hỏng</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Người sử dụng</label>
+                            <select class="form-control" id="equipmentUser">
+                                <option value="">Chọn người sử dụng</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="saveEquipmentBtn">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class EquipmentManager {
+            constructor() {
+                this.equipmentModal = new bootstrap.Modal(document.getElementById('equipmentModal'));
+                this.setupEventListeners();
+                this.loadEquipmentList();
+                this.loadUsers();
+            }
+
+            setupEventListeners() {
+                document.getElementById('addEquipmentBtn').addEventListener('click', () => this.showAddModal());
+                document.getElementById('saveEquipmentBtn').addEventListener('click', () => this.saveEquipment());
+            }
+
+            async loadEquipmentList() {
+                try {
+                    const response = await fetch('/qlnhansu_V2/backend/src/public/api/equipment/list');
+                    const data = await response.json();
+                    
+                    const tbody = document.getElementById('equipmentList');
+                    tbody.innerHTML = data.map(equipment => `
+                        <tr>
+                            <td>${equipment.id}</td>
+                            <td>${equipment.name}</td>
+                            <td>${equipment.type}</td>
+                            <td>${equipment.purchase_date}</td>
+                            <td>${this.formatCurrency(equipment.value)}</td>
+                            <td>${this.getStatusLabel(equipment.status)}</td>
+                            <td>${equipment.user_name || 'Chưa có người sử dụng'}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="equipmentManager.editEquipment(${equipment.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="equipmentManager.deleteEquipment(${equipment.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } catch (error) {
+                    console.error('Error loading equipment list:', error);
+                    this.showNotification('Lỗi khi tải danh sách thiết bị', 'error');
+                }
+            }
+
+            async loadUsers() {
+                try {
+                    const response = await fetch('/qlnhansu_V2/backend/src/public/api/users/list');
+                    const data = await response.json();
+                    
+                    const select = document.getElementById('equipmentUser');
+                    select.innerHTML = '<option value="">Chọn người sử dụng</option>' +
+                        data.map(user => `
+                            <option value="${user.id}">${user.full_name}</option>
+                        `).join('');
+                } catch (error) {
+                    console.error('Error loading users:', error);
+                }
+            }
+
+            showAddModal() {
+                document.getElementById('modalTitle').textContent = 'Thêm thiết bị mới';
+                document.getElementById('equipmentForm').reset();
+                document.getElementById('equipmentId').value = '';
+                this.equipmentModal.show();
+            }
+
+            async editEquipment(id) {
+                try {
+                    const response = await fetch(`/qlnhansu_V2/backend/src/public/api/equipment/${id}`);
+                    const equipment = await response.json();
+                    
+                    document.getElementById('modalTitle').textContent = 'Sửa thông tin thiết bị';
+                    document.getElementById('equipmentId').value = equipment.id;
+                    document.getElementById('equipmentName').value = equipment.name;
+                    document.getElementById('equipmentType').value = equipment.type;
+                    document.getElementById('purchaseDate').value = equipment.purchase_date;
+                    document.getElementById('equipmentValue').value = equipment.value;
+                    document.getElementById('equipmentStatus').value = equipment.status;
+                    document.getElementById('equipmentUser').value = equipment.user_id || '';
+                    
+                    this.equipmentModal.show();
+                } catch (error) {
+                    console.error('Error loading equipment details:', error);
+                    this.showNotification('Lỗi khi tải thông tin thiết bị', 'error');
+                }
+            }
+
+            async saveEquipment() {
+                const form = document.getElementById('equipmentForm');
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                const equipment = {
+                    id: document.getElementById('equipmentId').value,
+                    name: document.getElementById('equipmentName').value,
+                    type: document.getElementById('equipmentType').value,
+                    purchase_date: document.getElementById('purchaseDate').value,
+                    value: document.getElementById('equipmentValue').value,
+                    status: document.getElementById('equipmentStatus').value,
+                    user_id: document.getElementById('equipmentUser').value || null
+                };
+
+                try {
+                    const url = equipment.id 
+                        ? `/qlnhansu_V2/backend/src/public/api/equipment/${equipment.id}`
+                        : '/qlnhansu_V2/backend/src/public/api/equipment';
+                    
+                    const response = await fetch(url, {
+                        method: equipment.id ? 'PUT' : 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(equipment)
+                    });
+
+                    if (response.ok) {
+                        this.equipmentModal.hide();
+                        this.loadEquipmentList();
+                        this.showNotification('Lưu thông tin thiết bị thành công', 'success');
+                    } else {
+                        throw new Error('Failed to save equipment');
+                    }
+                } catch (error) {
+                    console.error('Error saving equipment:', error);
+                    this.showNotification('Lỗi khi lưu thông tin thiết bị', 'error');
+                }
+            }
+
+            async deleteEquipment(id) {
+                if (!confirm('Bạn có chắc chắn muốn xóa thiết bị này?')) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/qlnhansu_V2/backend/src/public/api/equipment/${id}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (response.ok) {
+                        this.loadEquipmentList();
+                        this.showNotification('Xóa thiết bị thành công', 'success');
+                    } else {
+                        throw new Error('Failed to delete equipment');
+                    }
+                } catch (error) {
+                    console.error('Error deleting equipment:', error);
+                    this.showNotification('Lỗi khi xóa thiết bị', 'error');
+                }
+            }
+
+            formatCurrency(amount) {
+                return new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(amount);
+            }
+
+            getStatusLabel(status) {
+                const statusLabels = {
+                    'new': 'Mới',
+                    'good': 'Tốt',
+                    'need_repair': 'Cần sửa chữa',
+                    'broken': 'Hỏng'
+                };
+                return statusLabels[status] || status;
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                setTimeout(() => notification.remove(), 3000);
+            }
+        }
+
+        const equipmentManager = new EquipmentManager();
+    </script>
+</body>
+</html> 

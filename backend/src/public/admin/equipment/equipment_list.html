@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Thiết Bị - Hệ thống Quản lý Nhân sự</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Copy sidebar từ dashboard.html -->
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <!-- Copy top-nav từ dashboard.html -->
+            </header>
+
+            <!-- Equipment List Content -->
+            <div class="content">
+                <div class="page-header">
+                    <h1>Danh Sách Thiết Bị</h1>
+                    <div class="breadcrumb">
+                        <span>Home</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Quản lý thiết bị</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Danh sách thiết bị</span>
+                    </div>
+                </div>
+
+                <!-- Search and Filter -->
+                <div class="search-filter">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Tìm kiếm thiết bị...">
+                    </div>
+                    <div class="filter-options">
+                        <select id="typeFilter">
+                            <option value="">Tất cả loại thiết bị</option>
+                            <option value="laptop">Laptop</option>
+                            <option value="desktop">Desktop</option>
+                            <option value="printer">Máy in</option>
+                            <option value="phone">Điện thoại</option>
+                        </select>
+                        <select id="statusFilter">
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="available">Có sẵn</option>
+                            <option value="assigned">Đã cấp phát</option>
+                            <option value="maintenance">Bảo trì</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Equipment List -->
+                <div class="equipment-list">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Mã thiết bị</th>
+                                <th>Tên thiết bị</th>
+                                <th>Loại thiết bị</th>
+                                <th>Trạng thái</th>
+                                <th>Người sử dụng</th>
+                                <th>Ngày cấp phát</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>LAP001</td>
+                                <td>Laptop Dell XPS 13</td>
+                                <td>Laptop</td>
+                                <td><span class="status assigned">Đã cấp phát</span></td>
+                                <td>Nguyễn Văn A</td>
+                                <td>01/01/2024</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Chi tiết</button>
+                                    <button class="btn btn-sm btn-secondary">Thu hồi</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>DESK001</td>
+                                <td>Desktop HP EliteDesk</td>
+                                <td>Desktop</td>
+                                <td><span class="status available">Có sẵn</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Chi tiết</button>
+                                    <button class="btn btn-sm btn-success">Cấp phát</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PRINT001</td>
+                                <td>Máy in HP LaserJet</td>
+                                <td>Máy in</td>
+                                <td><span class="status maintenance">Bảo trì</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Chi tiết</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="btn btn-outline"><i class="fas fa-chevron-left"></i></button>
+                    <button class="btn btn-outline active">1</button>
+                    <button class="btn btn-outline">2</button>
+                    <button class="btn btn-outline">3</button>
+                    <button class="btn btn-outline"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+        <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html> 

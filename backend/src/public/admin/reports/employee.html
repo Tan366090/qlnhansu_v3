@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo nhân viên - Quản lý nhân sự</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Quản lý nhân sự</h2>
+            <ul>
+                <li><a href="../dashboard.html">Dashboard</a></li>
+                <li><a href="../employees/list.html">Nhân viên</a></li>
+                <li><a href="../departments/list.html">Phòng ban</a></li>
+                <li><a href="../positions/list.html">Chức vụ</a></li>
+                <li><a href="../attendance/list.html">Chấm công</a></li>
+                <li><a href="../salary/list.html">Lương</a></li>
+                <li><a href="../leave/list.html">Nghỉ phép</a></li>
+                <li class="active"><a href="list.html">Báo cáo</a></li>
+                <li><a href="../settings.html">Cài đặt</a></li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <div class="header">
+                <h1>Báo cáo nhân viên</h1>
+                <div class="user-info">
+                    <span id="username">Admin</span>
+                    <a href="../../logout.html" class="logout-btn">Đăng xuất</a>
+                </div>
+            </div>
+
+            <div class="report-filters">
+                <div class="filter-group">
+                    <label for="department">Phòng ban:</label>
+                    <select id="department">
+                        <option value="">Tất cả</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="position">Chức vụ:</label>
+                    <select id="position">
+                        <option value="">Tất cả</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="status">Trạng thái:</label>
+                    <select id="status">
+                        <option value="">Tất cả</option>
+                        <option value="active">Đang làm việc</option>
+                        <option value="inactive">Đã nghỉ việc</option>
+                    </select>
+                </div>
+                <button id="generate-report" class="btn">Tạo báo cáo</button>
+            </div>
+
+            <div class="report-content">
+                <div class="chart-container">
+                    <canvas id="employeeChart"></canvas>
+                </div>
+
+                <div class="report-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã NV</th>
+                                <th>Họ tên</th>
+                                <th>Phòng ban</th>
+                                <th>Chức vụ</th>
+                                <th>Ngày vào</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeList">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script src="../../js/admin.js"></script>
+    <script src="employee.js"></script>
+</body>
+</html> 

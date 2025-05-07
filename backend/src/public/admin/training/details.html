@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết đăng ký đào tạo</title>
+    <link rel="stylesheet" href="../../css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+                    <h1>Chi tiết đăng ký đào tạo</h1>
+                    <a href="list.html" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Thông tin đăng ký</h5>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th style="width: 200px">Mã đăng ký:</th>
+                                        <td id="registrationId"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mã nhân viên:</th>
+                                        <td id="employeeId"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Họ tên:</th>
+                                        <td id="employeeName"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Khóa đào tạo:</th>
+                                        <td id="trainingName"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ngày đào tạo:</th>
+                                        <td id="trainingDate"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Giảng viên:</th>
+                                        <td id="trainer"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Địa điểm:</th>
+                                        <td id="location"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Trạng thái:</th>
+                                        <td id="status"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Mô tả</h5>
+                                <div class="card">
+                                    <div class="card-body" id="description"></div>
+                                </div>
+
+                                <h5 class="mb-3 mt-4">Lịch sử cập nhật</h5>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div id="historyList"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h5 class="mb-3">Đánh giá kết quả</h5>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div id="evaluation"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+
+            if (!id) {
+                alert('Không tìm thấy mã đăng ký');
+                window.location.href = 'list.html';
+                return;
+            }
+
+            // Load chi tiết đăng ký
+            $.ajax({
+                url: `/api/trainings/registrations/${id}`,
+                method: 'GET',
+                success: function(data) {
+                    $('#registrationId').text(data.id);
+                    $('#employeeId').text(data.employee_id);
+                    $('#employeeName').text(data.employee_name);
+                    $('#trainingName').text(data.training_name);
+                    $('#trainingDate').text(new Date(data.training_date).toLocaleDateString('vi-VN'));
+                    $('#trainer').text(data.trainer);
+                    $('#location').text(data.location);
+                    
+                    // Hiển thị trạng thái
+                    const statusClass = {
+                        'pending': 'warning',
+                        'approved': 'success',
+                        'rejected': 'danger',
+                        'completed': 'info'
+                    };
+                    const statusText = {
+                        'pending': 'Chờ duyệt',
+                        'approved': 'Đã duyệt',
+                        'rejected': 'Từ chối',
+                        'completed': 'Hoàn thành'
+                    };
+                    $('#status').html(`<span class="badge bg-${statusClass[data.status]}">${statusText[data.status]}</span>`);
+
+                    // Hiển thị mô tả
+                    $('#description').text(data.description || 'Không có mô tả');
+
+                    // Hiển thị lịch sử
+                    if (data.history && data.history.length > 0) {
+                        const historyHtml = data.history.map(item => `
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <strong>${item.action}</strong>
+                                    <small class="text-muted">${new Date(item.date).toLocaleString('vi-VN')}</small>
+                                </div>
+                                <div>${item.user}</div>
+                                ${item.note ? `<div class="text-muted">${item.note}</div>` : ''}
+                            </div>
+                        `).join('');
+                        $('#historyList').html(historyHtml);
+                    } else {
+                        $('#historyList').html('<div class="text-muted">Chưa có lịch sử cập nhật</div>');
+                    }
+
+                    // Hiển thị đánh giá
+                    if (data.evaluation) {
+                        const evaluationHtml = `
+                            <div class="mb-2">
+                                <strong>Kết quả:</strong> ${data.evaluation.result}
+                            </div>
+                            <div class="mb-2">
+                                <strong>Điểm số:</strong> ${data.evaluation.score}
+                            </div>
+                            <div>
+                                <strong>Nhận xét:</strong> ${data.evaluation.comment}
+                            </div>
+                        `;
+                        $('#evaluation').html(evaluationHtml);
+                    } else {
+                        $('#evaluation').html('<div class="text-muted">Chưa có đánh giá</div>');
+                    }
+                },
+                error: function(xhr) {
+                    alert('Có lỗi xảy ra: ' + xhr.responseJSON.message);
+                    window.location.href = 'list.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

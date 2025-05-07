@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh giá kết quả đào tạo</title>
+    <link rel="stylesheet" href="../../css/admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+                    <h1>Đánh giá kết quả đào tạo</h1>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#evaluationModal">
+                        <i class="fas fa-plus"></i> Thêm đánh giá
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="evaluationTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Mã đánh giá</th>
+                                        <th>Mã đăng ký</th>
+                                        <th>Nhân viên</th>
+                                        <th>Khóa đào tạo</th>
+                                        <th>Kết quả</th>
+                                        <th>Điểm số</th>
+                                        <th>Ngày đánh giá</th>
+                                        <th>Người đánh giá</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Dữ liệu sẽ được load từ API -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thêm/sửa đánh giá -->
+    <div class="modal fade" id="evaluationModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm đánh giá</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="evaluationForm">
+                        <input type="hidden" id="evaluationId">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="registrationId" class="form-label">Mã đăng ký</label>
+                                <select class="form-select" id="registrationId" required>
+                                    <option value="">Chọn đăng ký</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="employeeName" class="form-label">Nhân viên</label>
+                                <input type="text" class="form-control" id="employeeName" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="trainingName" class="form-label">Khóa đào tạo</label>
+                                <input type="text" class="form-control" id="trainingName" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="result" class="form-label">Kết quả</label>
+                                <select class="form-select" id="result" required>
+                                    <option value="">Chọn kết quả</option>
+                                    <option value="excellent">Xuất sắc</option>
+                                    <option value="good">Tốt</option>
+                                    <option value="average">Trung bình</option>
+                                    <option value="poor">Kém</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="score" class="form-label">Điểm số</label>
+                                <input type="number" class="form-control" id="score" min="0" max="100" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="evaluator" class="form-label">Người đánh giá</label>
+                                <input type="text" class="form-control" id="evaluator" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Nhận xét</label>
+                            <textarea class="form-control" id="comment" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="saveEvaluation">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const table = $('#evaluationTable').DataTable({
+                ajax: {
+                    url: '/api/trainings/evaluations',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'id' },
+                    { data: 'registration_id' },
+                    { data: 'employee_name' },
+                    { data: 'training_name' },
+                    { 
+                        data: 'result',
+                        render: function(data) {
+                            const resultClass = {
+                                'excellent': 'success',
+                                'good': 'info',
+                                'average': 'warning',
+                                'poor': 'danger'
+                            };
+                            const resultText = {
+                                'excellent': 'Xuất sắc',
+                                'good': 'Tốt',
+                                'average': 'Trung bình',
+                                'poor': 'Kém'
+                            };
+                            return `<span class="badge bg-${resultClass[data]}">${resultText[data]}</span>`;
+                        }
+                    },
+                    { data: 'score' },
+                    { 
+                        data: 'evaluation_date',
+                        render: function(data) {
+                            return new Date(data).toLocaleDateString('vi-VN');
+                        }
+                    },
+                    { data: 'evaluator' },
+                    {
+                        data: null,
+                        render: function(data) {
+                            return `
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-info" onclick="viewDetails(${data.id})">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-warning" onclick="editEvaluation(${data.id})">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteEvaluation(${data.id})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            `;
+                        }
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json'
+                }
+            });
+
+            // Load danh sách đăng ký chưa được đánh giá
+            function loadRegistrations() {
+                $.ajax({
+                    url: '/api/trainings/registrations/pending-evaluation',
+                    method: 'GET',
+                    success: function(response) {
+                        const select = $('#registrationId');
+                        select.empty().append('<option value="">Chọn đăng ký</option>');
+                        response.forEach(reg => {
+                            select.append(`<option value="${reg.id}" data-employee="${reg.employee_name}" data-training="${reg.training_name}">${reg.id} - ${reg.employee_name}</option>`);
+                        });
+                    }
+                });
+            }
+
+            // Khi chọn đăng ký
+            $('#registrationId').on('change', function() {
+                const selected = $(this).find('option:selected');
+                $('#employeeName').val(selected.data('employee'));
+                $('#trainingName').val(selected.data('training'));
+            });
+
+            // Xử lý lưu đánh giá
+            $('#saveEvaluation').click(function() {
+                const data = {
+                    registration_id: $('#registrationId').val(),
+                    result: $('#result').val(),
+                    score: $('#score').val(),
+                    evaluator: $('#evaluator').val(),
+                    comment: $('#comment').val()
+                };
+
+                const method = $('#evaluationId').val() ? 'PUT' : 'POST';
+                const url = $('#evaluationId').val() 
+                    ? `/api/trainings/evaluations/${$('#evaluationId').val()}`
+                    : '/api/trainings/evaluations';
+
+                $.ajax({
+                    url: url,
+                    method: method,
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function() {
+                        table.ajax.reload();
+                        $('#evaluationModal').modal('hide');
+                        alert('Lưu thành công!');
+                    },
+                    error: function(xhr) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseJSON.message);
+                    }
+                });
+            });
+
+            // Xử lý sửa đánh giá
+            window.editEvaluation = function(id) {
+                $.ajax({
+                    url: `/api/trainings/evaluations/${id}`,
+                    method: 'GET',
+                    success: function(data) {
+                        $('#evaluationId').val(data.id);
+                        $('#registrationId').val(data.registration_id);
+                        $('#employeeName').val(data.employee_name);
+                        $('#trainingName').val(data.training_name);
+                        $('#result').val(data.result);
+                        $('#score').val(data.score);
+                        $('#evaluator').val(data.evaluator);
+                        $('#comment').val(data.comment);
+                        $('#evaluationModal').modal('show');
+                    }
+                });
+            };
+
+            // Xử lý xóa đánh giá
+            window.deleteEvaluation = function(id) {
+                if (confirm('Bạn có chắc chắn muốn xóa đánh giá này?')) {
+                    $.ajax({
+                        url: `/api/trainings/evaluations/${id}`,
+                        method: 'DELETE',
+                        success: function() {
+                            table.ajax.reload();
+                            alert('Xóa thành công!');
+                        },
+                        error: function(xhr) {
+                            alert('Có lỗi xảy ra: ' + xhr.responseJSON.message);
+                        }
+                    });
+                }
+            };
+
+            // Xử lý xem chi tiết
+            window.viewDetails = function(id) {
+                window.location.href = `evaluation-details.html?id=${id}`;
+            };
+
+            // Load danh sách đăng ký khi mở modal
+            $('#evaluationModal').on('show.bs.modal', function() {
+                loadRegistrations();
+                if (!$('#evaluationId').val()) {
+                    $('#evaluationForm')[0].reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

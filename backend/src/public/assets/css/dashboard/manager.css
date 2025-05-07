@@ -1,0 +1,222 @@
+@import url('styles.css');
+
+/* Manager Theme Overrides */
+.sidebar {
+    width: 270px;
+    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+}
+
+.sidebar-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h2 {
+    color: var(--color-white);
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: var(--color-manager);
+    color: var(--color-white);
+}
+
+.header-left h1 {
+    color: var(--color-gray-900);
+}
+
+.user-avatar {
+    background-color: var(--color-manager);
+}
+
+/* Manager Overview Grid */
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.overview-card {
+    transition: transform 0.3s ease;
+}
+
+.overview-card:hover {
+    transform: translateY(-5px);
+}
+
+.overview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.overview-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.overview-card:nth-child(1) .overview-icon {
+    background-color: rgba(230, 126, 34, 0.1);
+    color: var(--color-manager);
+}
+
+.overview-card:nth-child(2) .overview-icon {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: #2ecc71;
+}
+
+.overview-card:nth-child(3) .overview-icon {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+}
+
+.overview-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+}
+
+.overview-label {
+    color: var(--color-gray-600);
+    font-size: 0.875rem;
+}
+
+/* Manager Team Section */
+.team-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-header {
+    border-bottom: 2px solid var(--color-manager);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.team-member {
+    background-color: var(--color-gray-100);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateX(5px);
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-md);
+}
+
+.member-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--color-manager);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-size: 1.25rem;
+}
+
+.member-info {
+    flex: 1;
+}
+
+.member-name {
+    font-weight: 600;
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-xs);
+}
+
+.member-position {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+}
+
+/* Manager Actions */
+.action-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn-primary {
+    background-color: var(--color-manager);
+    color: var(--color-white);
+}
+
+.btn-secondary {
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-900);
+}
+
+.btn-primary:hover {
+    background-color: #d35400;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-gray-300);
+}
+
+/* Task Progress */
+.progress-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: var(--color-gray-200);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    margin: var(--spacing-sm) 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--color-manager);
+    border-radius: var(--border-radius-sm);
+    transition: width 0.3s ease;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1200px) {
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+} 

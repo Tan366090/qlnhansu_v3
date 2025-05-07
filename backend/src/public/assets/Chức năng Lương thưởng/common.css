@@ -1,0 +1,190 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    background: #f0f4f8;
+    overflow-x: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 80px;
+    background-color: #003a8c;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: width 0.3s ease;
+}
+
+.sidebar:hover {
+    width: 250px;
+}
+
+.sidebar img {
+    width: 60px;
+    transition: width 0.3s ease;
+    margin: 0 auto 20px;
+}
+
+.sidebar:hover img {
+    width: 120px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar a span {
+    display: none;
+}
+
+.sidebar:hover a span {
+    display: inline;
+}
+
+.sidebar a ion-icon {
+    font-size: 25px;
+}
+
+.sidebar a:hover {
+    background-color: #1d4e91;
+    border-radius: 5px;
+    padding-left: 25px;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    margin-top: auto;
+    padding: 15px;
+    background-color: #002b6d;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+.sidebar-footer img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: all 0.5s ease;
+}
+
+.sidebar-footer span {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    transition: all 0.5s ease;
+}
+
+.sidebar:hover .sidebar-footer {
+    flex-direction: row; /* Align avatar and name in one row */
+    justify-content: center;
+    gap: 10px; /* Add spacing between avatar and name */
+}
+
+.sidebar:hover .sidebar-footer img {
+    width: 60px; /* Enlarge avatar */
+    height: 60px;
+    margin-bottom: 0; /* Remove bottom margin */
+}
+
+.sidebar:hover .sidebar-footer span {
+    font-size: 16px; /* Increase font size */
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    margin: 40px auto 40px 100px; /* Adjust to avoid overlap with sidebar */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar:hover ~ .main-content {
+    margin-left: 270px; /* Adjust when sidebar expands */
+}
+
+/* Content Header */
+.content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: #0b7dda;
+    padding: 20px 10px;
+    border-radius: 8px;
+}
+
+.content-header h1 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+
+    .sidebar:hover {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 70px;
+    }
+
+    .sidebar:hover ~ .main-content {
+        margin-left: 210px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 50px;
+    }
+
+    .sidebar:hover {
+        width: 150px;
+    }
+
+    .main-content {
+        margin-left: 60px;
+        padding: 20px;
+    }
+
+    .sidebar:hover ~ .main-content {
+        margin-left: 160px;
+    }
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Driven Animations - Z-Stack Technique</title>
+    <style>
+        /* Base styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Scroll Driven Animation Technique */
+        @media (prefers-reduced-motion: no-preference) {
+            ul {
+                & > li {
+                    animation: var(--_animation) linear both;
+                    animation-timeline: view();
+                    animation-range: entry 0% entry 200%;
+                }
+            }
+        }
+
+        @keyframes slide-in-from-left {
+            from {
+                transform: translateX(-100%);
+            }
+        }
+
+        @keyframes scale-up {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Example styles */
+        .example-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .example-list li {
+            padding: 20px;
+            margin: 10px 0;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scroll Driven Animations - Z-Stack Technique</h1>
+    
+    <section>
+        <h2>The Technique</h2>
+        <p>Demo uses attr() but you don't have to</p>
+        
+        <h3>Implementation Steps:</h3>
+        <ol>
+            <li>Grab animation from a prop: <code>&lt;ul style="--_animation: scale-up"&gt;</code></li>
+            <li>Wire up some keyframes</li>
+            <li>Attach them to scrollport intersection view()</li>
+            <li>Run keyframes for element height on entry</li>
+        </ol>
+
+        <h3>Example:</h3>
+        <ul class="example-list" style="--_animation: scale-up">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+        </ul>
+    </section>
+
+    <p>Original source: <a href="https://nerdy.dev/notebook/scroll-driven-animations.html#the-technique: z-stack" target="_blank">https://nerdy.dev/notebook/scroll-driven-animations.html#the-technique: z-stack</a></p>
+</body>
+</html> 

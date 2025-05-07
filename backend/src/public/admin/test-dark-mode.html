@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dark Mode</title>
+    <link rel="stylesheet" href="css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="css/libs/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/libs/font-awesome.min.css">
+    <link rel="stylesheet" href="dashboard_admin.css">
+    <style>
+        .test-container {
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-card {
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-form {
+            margin: 20px 0;
+        }
+        .test-table {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Dark Mode</h1>
+        
+        <!-- Theme Toggle Button -->
+        <div class="theme-toggle-wrapper">
+            <button class="theme-toggle" id="themeToggle" role="switch" aria-checked="false" aria-label="Toggle Dark Mode">
+                <div class="sun">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                </div>
+                <div class="moon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </div>
+            </button>
+        </div>
+
+        <!-- Test Components -->
+        <div class="test-container">
+            <h2>Test Components</h2>
+            
+            <!-- Cards -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card test-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Test Card 1</h5>
+                            <p class="card-text">This is a test card to check dark mode styles.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card test-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Test Card 2</h5>
+                            <p class="card-text">Another test card for dark mode testing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="test-form">
+                <h3>Test Form</h3>
+                <form>
+                    <div class="mb-3">
+                        <label for="testInput" class="form-label">Test Input</label>
+                        <input type="text" class="form-control" id="testInput" placeholder="Enter text">
+                    </div>
+                    <div class="mb-3">
+                        <label for="testSelect" class="form-label">Test Select</label>
+                        <select class="form-select" id="testSelect">
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+            <!-- Table -->
+            <div class="test-table">
+                <h3>Test Table</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Test Item 1</td>
+                            <td>Active</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Test Item 2</td>
+                            <td>Inactive</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Debug Info -->
+        <div class="debug-info mt-4">
+            <h3>Debug Information</h3>
+            <div class="card">
+                <div class="card-body">
+                    <p>Dark Mode Status: <span id="darkModeStatus">Not Active</span></p>
+                    <p>LocalStorage Value: <span id="localStorageValue">Not Set</span></p>
+                    <button class="btn btn-secondary" id="checkStatus">Check Status</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/modules/dark-mode.js" type="module"></script>
+    <script src="js/test-dark-mode.js" type="module"></script>
+</body>
+</html> 

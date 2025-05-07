@@ -1,0 +1,139 @@
+/* 3D Icons Styles */
+.icon-3d {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.icon-3d-dashboard {
+    background-image: url('../images/3d-icons/dashboard.png');
+}
+
+.icon-3d-users {
+    background-image: url('../images/3d-icons/users.png');
+}
+
+.icon-3d-clock {
+    background-image: url('../images/3d-icons/clock.png');
+}
+
+.icon-3d-calendar {
+    background-image: url('../images/3d-icons/calendar.png');
+}
+
+.icon-3d-money {
+    background-image: url('../images/3d-icons/money.png');
+}
+
+.icon-3d-plus {
+    background-image: url('../images/3d-icons/plus.png');
+}
+
+.icon-3d-search {
+    background-image: url('../images/3d-icons/search.png');
+}
+
+.icon-3d-settings {
+    background-image: url('../images/3d-icons/settings.png');
+}
+
+.icon-3d-user {
+    background-image: url('../images/3d-icons/user.png');
+}
+
+/* Only apply 3D icons to specific elements in the sidebar */
+.sidebar .fa-home:before {
+    content: '\f015'; /* Fallback to Font Awesome home icon */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/3d-icons/dashboard.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.sidebar .fa-users:before {
+    content: '\f0c0'; /* Fallback to Font Awesome users icon */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.sidebar .fa-clock:before {
+    content: '\f017'; /* Fallback to Font Awesome clock icon */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.sidebar .fa-calendar-alt:before {
+    content: '\f073'; /* Fallback to Font Awesome calendar icon */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.sidebar .fa-money-bill-wave:before {
+    content: '\f53a'; /* Fallback to Font Awesome money icon */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.sidebar .fa-plus:before {
+    content: '\f067'; /* Fallback to Font Awesome plus icon */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.sidebar .fa-search:before {
+    content: '\f002'; /* Fallback to Font Awesome search icon */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.sidebar .fa-cog:before {
+    content: '\f013'; /* Fallback to Font Awesome cog icon */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.sidebar .fa-user-circle:before {
+    content: '\f2bd'; /* Fallback to Font Awesome user-circle icon */
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+/* Ensure Font Awesome icons are visible in main content */
+.main-content .fas:before,
+.main-content .far:before,
+.main-content .fab:before {
+    content: attr(data-fa-icon);
+    display: inline-block;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+/* Reset any icon overrides in main content */
+.main-content .fa-home:before,
+.main-content .fa-users:before,
+.main-content .fa-clock:before,
+.main-content .fa-calendar-alt:before,
+.main-content .fa-money-bill-wave:before,
+.main-content .fa-plus:before,
+.main-content .fa-search:before,
+.main-content .fa-cog:before,
+.main-content .fa-user-circle:before {
+    content: attr(data-fa-icon);
+    background-image: none;
+} 

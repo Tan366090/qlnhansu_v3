@@ -1,0 +1,448 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+}
+
+html, body {
+    height: 100%; /* Ensure body takes full height */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex; /* Use flex on body to align container */
+}
+
+/* Container Layout */
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh; /* Ensure container takes full viewport height */
+}
+
+/* Sidebar Styles - KEEP AS IS FOR DESKTOP LOOK */
+.sidebar {
+    width: 80px;
+    background-color: #003a8c;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px; /* Adjust padding */
+    /* height: 100vh; */ /* Let height be natural or use 100% */
+    height: 100%; /* Make sidebar full height of container */
+    position: fixed; /* Keep fixed positioning */
+    left: 0;
+    top: 0;
+    transition: width 0.3s ease;
+    z-index: 100; /* Ensure sidebar is above content */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+.sidebar:hover {
+    width: 250px;
+}
+
+.sidebar img[alt="VNPT Logo"] { /* More specific selector */
+    display: block; /* Center image properly */
+    width: 60px;
+    transition: width 0.3s ease;
+    margin: 0 auto 20px;
+    padding-top: 10px; /* Add some space at the top */
+}
+
+.sidebar:hover img[alt="VNPT Logo"] {
+    width: 120px; /* Adjust hover size if needed */
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 12px 15px; /* Adjust padding */
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */ /* Optional border */
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adjust gap */
+    white-space: nowrap;
+    overflow: hidden;
+    transition: background-color 0.3s ease, padding-left 0.3s ease; /* Smooth transitions */
+    flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+.sidebar a span {
+    display: none;
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.2s ease 0.1s; /* Fade in */
+}
+
+.sidebar:hover a span {
+    display: inline;
+    opacity: 1;
+}
+
+.sidebar a ion-icon {
+    font-size: 24px; /* Adjust icon size */
+    min-width: 24px; /* Ensure space for icon */
+    flex-shrink: 0;
+}
+
+.sidebar a:hover {
+    background-color: #1d4e91;
+    /* border-radius: 5px; */ /* Optional rounding */
+    padding-left: 20px; /* Indent on hover */
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    margin-top: auto; /* Push footer to the bottom */
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden; /* Prevent content spill */
+    white-space: nowrap;
+}
+
+.sidebar-footer img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0; /* Override previous margin */
+    flex-shrink: 0;
+}
+
+.sidebar-footer span {
+    display: none; /* Initially hidden */
+    opacity: 0;
+    transition: opacity 0.2s ease 0.1s;
+}
+
+.sidebar:hover .sidebar-footer span {
+    display: inline; /* Show text on hover */
+    opacity: 1;
+}
+
+
+/* Main Content Styles - KEEP BASE AS IS FOR DESKTOP */
+.main-content {
+    margin-left: 80px; /* Initial margin for collapsed sidebar */
+    flex: 1; /* Take remaining space */
+    padding: 30px; /* Adjust padding */
+    background-color: #ffffff; /* Ensure white background */
+    transition: margin-left 0.3s ease;
+    overflow-y: auto; /* Allow content scrolling */
+    height: 100vh; /* Make main content full height */
+    display: flex; /* Use flexbox for vertical centering if needed */
+    flex-direction: column; /* Stack header and form */
+}
+
+/* Adjust margin when sidebar hovers */
+.sidebar:hover ~ .main-content {
+    margin-left: 250px;
+}
+
+/* Content Header - KEEP AS IS FOR DESKTOP */
+.content-header {
+    /* display: flex; */ /* Already flex */
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    margin-bottom: 25px; /* Increase spacing */
+    background-color: #e9edf1; /* Slightly different grey */
+    padding: 15px 20px; /* Adjust padding */
+    border-radius: 8px;
+    flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.content-header h1 {
+    font-size: 1.8rem; /* Adjust size */
+    font-weight: 600; /* Adjust weight */
+    color: #333; /* Darker text */
+    line-height: 1.3;
+}
+
+/* Form Container - KEEP BASE AS IS FOR DESKTOP */
+.form-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 25px; /* Adjust padding */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); */ /* Subtle shadow */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 25px 30px; /* Row gap, Column gap */
+    width: 100%; /* Ensure it takes full width */
+    max-width: 900px; /* Optional: Max width for very large screens */
+    margin: 0 auto; /* Center if max-width is used */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Space between label and input */
+    position: relative; /* Needed for absolute positioning icons */
+}
+
+.form-group label {
+    font-size: 0.95rem; /* Adjust size */
+    font-weight: 600;
+    color: #444; /* Slightly lighter text */
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="file"] {
+    padding: 12px 15px; /* Increase padding */
+    border: 1px solid #d1d5db; /* Lighter border */
+    border-radius: 6px; /* Slightly more rounded */
+    font-size: 0.9rem;
+    background-color: #fff; /* White background */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%; /* Ensure inputs take full width of their grid cell */
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0056b3; /* VNPT blue on focus */
+    box-shadow: 0 0 0 2px rgba(0, 70, 135, 0.2); /* Subtle focus ring */
+}
+
+/* Placeholder Styling */
+.form-group input::placeholder {
+    color: #9ca3af; /* Grey placeholder */
+    font-size: 0.9rem;
+}
+
+/* File Input Specifics */
+.file-group {
+    /* Structure is label above, then div.file-upload below */
+}
+
+.file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+/* Style the default file input button if possible */
+input[type="file"]::file-selector-button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 10px;
+    transition: background-color 0.2s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Hide the default text "No file chosen" if using custom display (not strictly needed here) */
+/* input[type="file"] { color: transparent; } */
+
+
+/* Date Input Specifics */
+input[type="date"] {
+    position: relative; /* Ensure it's a positioning context */
+    padding-right: 40px; /* Make space for the icon */
+}
+
+/* Style native date picker indicator if possible (browser dependent) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    /* You might want to hide the default and use your own icon */
+    /* opacity: 0; */
+    /* cursor: pointer; */
+    /* position: absolute; */
+    /* right: 10px; top: 50%; transform: translateY(-50%); */
+}
+
+/* Style for the added ionicon */
+.date-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%; /* Center vertically relative to label+input height */
+    transform: translateY(10%); /* Fine-tune vertical alignment */
+    font-size: 20px;
+    color: #666;
+    pointer-events: none; /* Don't block clicks on the input */
+}
+
+/* Buttons - KEEP BASE AS IS FOR DESKTOP */
+.buttons {
+    grid-column: span 2; /* Span across both columns */
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    gap: 15px; /* Space between buttons */
+    margin-top: 20px; /* Space above buttons */
+    padding-top: 10px; /* Add padding above buttons */
+    border-top: 1px solid #eee; /* Optional separator line */
+}
+
+.buttons button {
+    padding: 10px 25px; /* Adjust padding */
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    font-weight: 500; /* Medium weight */
+    min-width: 110px; /* Minimum width */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.buttons button:active {
+    transform: scale(0.98); /* Click effect */
+}
+
+.buttons .cancel {
+    background-color: #6c757d; /* Bootstrap secondary grey */
+    color: white;
+}
+
+.buttons .cancel:hover {
+    background-color: #5a6268;
+}
+
+.buttons .delete {
+    background-color: #dc3545; /* Bootstrap danger red */
+    color: white;
+}
+
+.buttons .delete:hover {
+    background-color: #c82333;
+}
+
+.buttons .update {
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: white;
+}
+
+.buttons .update:hover {
+    background-color: #0056b3;
+}
+
+
+/* === Responsive Design === */
+
+/* Medium Screens (Tablets) */
+@media (max-width: 992px) {
+     .form-container {
+        grid-template-columns: 1fr 1fr; /* Keep 2 columns for wider tablets */
+        gap: 20px 25px;
+     }
+      .content-header h1 {
+        font-size: 1.6rem;
+    }
+}
+
+
+/* Smaller Screens (Tablets / Large Phones) */
+@media (max-width: 768px) {
+    /* Sidebar behavior adjustment optional for touch */
+    /* e.g., .sidebar { width: 250px; } .sidebar:hover { width: 250px; } */
+    /* .main-content { margin-left: 250px; } */
+    /* .sidebar:hover ~ .main-content { margin-left: 250px; } */
+    /* Or keep hover behavior as is */
+
+    .main-content {
+        /* Adjust margin if sidebar width changes */
+         padding: 20px; /* Reduce padding */
+    }
+
+    .form-container {
+        grid-template-columns: 1fr; /* Stack form fields into ONE column */
+        gap: 20px; /* Single gap value */
+        padding: 20px;
+    }
+
+    .buttons {
+        grid-column: span 1; /* Only one column now */
+        flex-direction: row; /* Keep buttons in a row */
+        flex-wrap: wrap; /* Allow buttons to wrap */
+        justify-content: center; /* Center the buttons */
+        gap: 10px;
+    }
+
+     .buttons button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        /* Optional: allow buttons to grow slightly */
+        /* flex-grow: 1;  */
+        /* max-width: 180px; */
+    }
+
+    .content-header h1 {
+        font-size: 1.4rem;
+    }
+}
+
+/* Small Screens (Phones) */
+@media (max-width: 576px) {
+     /* Optional: Make sidebar always narrow on small screens */
+    /* .sidebar, .sidebar:hover { width: 60px; } */
+    /* .main-content, .sidebar:hover ~ .main-content { margin-left: 60px; } */
+    /* .sidebar a span, .sidebar .sidebar-footer span { display: none !important; opacity: 0 !important; } */
+    /* .sidebar img[alt="VNPT Logo"], .sidebar:hover img[alt="VNPT Logo"] { width: 40px; } */
+
+
+    .main-content {
+        padding: 15px;
+        margin-left: 80px; /* Keep margin unless sidebar width changes */
+        /* Adjust if sidebar width changes: e.g., margin-left: 60px; */
+        height: auto; /* Allow height to grow */
+        min-height: 100vh;
+    }
+
+    .content-header {
+        padding: 10px 15px;
+        margin-bottom: 15px;
+    }
+
+    .content-header h1 {
+        font-size: 1.2rem; /* Further reduce title size */
+    }
+
+    .form-container {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"],
+    .form-group input[type="file"] {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+     input[type="file"]::file-selector-button {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+     }
+
+    .buttons {
+        flex-direction: column; /* STACK buttons vertically */
+        align-items: stretch; /* Make buttons full width */
+        gap: 10px; /* Gap between stacked buttons */
+    }
+
+    .buttons button {
+        width: 100%; /* Make buttons take full available width */
+        padding: 12px; /* Adjust padding for vertical layout */
+        font-size: 0.9rem;
+    }
+
+    .date-icon {
+        /* Adjust icon position/size if needed */
+        font-size: 18px;
+    }
+}

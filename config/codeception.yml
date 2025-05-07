@@ -1,0 +1,29 @@
+paths:
+    tests: tests/Tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/_support
+    envs: tests/_envs
+actor_suffix: Tester
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
+params:
+    - .env
+settings:
+    colors: true
+    memory_limit: 1024M
+suites:
+    acceptance:
+        actor: AcceptanceTester
+        path: .
+        modules:
+            enabled:
+                - WebDriver:
+                    url: 'http://localhost/QLNhanSu_version1'
+                    browser: 'chrome'
+                    window_size: false
+                    capabilities:
+                        chromeOptions:
+                            args: ["--headless", "--disable-gpu"]
+                - \Helper\Acceptance 

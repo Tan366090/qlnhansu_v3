@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết nhân viên - Hệ thống Quản lý Nhân sự</title>
+    <link rel="stylesheet" href="/QLNhanSu_version1/assets/css/admin/employees.css">
+    <link rel="stylesheet" href="/QLNhanSu_version1/assets/css/admin/employee-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+    <link rel="stylesheet" href="/assets/css/notifications.css">
+    <link rel="stylesheet" href="/assets/css/loading.css">
+    <script type="module" src="/assets/js/main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Quản lý nhân sự</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="/QLNhanSu_version1/public/admin/dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/QLNhanSu_version1/public/admin/employees/list.html">
+                            <i class="fas fa-users"></i>
+                            <span>Nhân viên</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/QLNhanSu_version1/public/admin/departments/list.html">
+                            <i class="fas fa-building"></i>
+                            <span>Phòng ban</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/QLNhanSu_version1/public/admin/positions/list.html">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Chức vụ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/QLNhanSu_version1/public/admin/attendance/list.html">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Chấm công</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/QLNhanSu_version1/public/admin/salary/list.html">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Lương</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/QLNhanSu_version1/public/admin/leave/list.html">
+                            <i class="fas fa-calendar-times"></i>
+                            <span>Nghỉ phép</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/QLNhanSu_version1/public/admin/training/list.html">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Đào tạo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/QLNhanSu_version1/public/admin/certificates/list.html">
+                            <i class="fas fa-certificate"></i>
+                            <span>Chứng chỉ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/QLNhanSu_version1/public/admin/documents/list.html">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Tài liệu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/QLNhanSu_version1/public/admin/equipment/list.html">
+                            <i class="fas fa-laptop"></i>
+                            <span>Thiết bị</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Chi tiết nhân viên</h1>
+                <div class="user-info">
+                    <span class="username">Admin</span>
+                    <button class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Đăng xuất
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="action-bar">
+                    <a href="/QLNhanSu_version1/public/admin/employees/list.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Quay lại
+                    </a>
+                    <div class="action-buttons">
+                        <button class="edit-btn">
+                            <i class="fas fa-edit"></i>
+                            Chỉnh sửa
+                        </button>
+                        <button class="delete-btn">
+                            <i class="fas fa-trash"></i>
+                            Xóa
+                        </button>
+                    </div>
+                </div>
+
+                <div class="employee-detail">
+                    <div class="profile-section">
+                        <div class="profile-header">
+                            <div class="avatar">
+                                <img src="/QLNhanSu_version1/assets/images/default-avatar.png" alt="Avatar">
+                            </div>
+                            <div class="profile-info">
+                                <h2 class="employee-name">Nguyễn Văn A</h2>
+                                <p class="employee-id">ID: NV001</p>
+                                <p class="employee-position">Nhân viên</p>
+                            </div>
+                        </div>
+
+                        <div class="profile-details">
+                            <div class="detail-group">
+                                <h3>Thông tin cá nhân</h3>
+                                <div class="detail-item">
+                                    <span class="label">Họ và tên:</span>
+                                    <span class="value">Nguyễn Văn A</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Giới tính:</span>
+                                    <span class="value">Nam</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Ngày sinh:</span>
+                                    <span class="value">01/01/1990</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Số CMND:</span>
+                                    <span class="value">123456789</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Địa chỉ:</span>
+                                    <span class="value">123 Đường ABC, Quận 1, TP.HCM</span>
+                                </div>
+                            </div>
+
+                            <div class="detail-group">
+                                <h3>Thông tin liên hệ</h3>
+                                <div class="detail-item">
+                                    <span class="label">Email:</span>
+                                    <span class="value">nva@example.com</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Số điện thoại:</span>
+                                    <span class="value">0123456789</span>
+                                </div>
+                            </div>
+
+                            <div class="detail-group">
+                                <h3>Thông tin công việc</h3>
+                                <div class="detail-item">
+                                    <span class="label">Phòng ban:</span>
+                                    <span class="value">Phòng Nhân sự</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Chức vụ:</span>
+                                    <span class="value">Nhân viên</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Ngày vào làm:</span>
+                                    <span class="value">01/01/2020</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="label">Trạng thái:</span>
+                                    <span class="value status active">Đang làm việc</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="attendance">Chấm công</button>
+                        <button class="tab-btn" data-tab="salary">Lương</button>
+                        <button class="tab-btn" data-tab="leave">Nghỉ phép</button>
+                        <button class="tab-btn" data-tab="training">Đào tạo</button>
+                        <button class="tab-btn" data-tab="documents">Tài liệu</button>
+                    </div>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="attendance">
+                            <!-- Attendance content will be loaded here -->
+                        </div>
+                        <div class="tab-pane" id="salary">
+                            <!-- Salary content will be loaded here -->
+                        </div>
+                        <div class="tab-pane" id="leave">
+                            <!-- Leave content will be loaded here -->
+                        </div>
+                        <div class="tab-pane" id="training">
+                            <!-- Training content will be loaded here -->
+                        </div>
+                        <div class="tab-pane" id="documents">
+                            <!-- Documents content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/QLNhanSu_version1/assets/js/admin/employee-detail.js"></script>
+    <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html> 

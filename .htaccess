@@ -1,0 +1,17 @@
+RewriteEngine On
+RewriteBase /qlnhansu_V2/
+
+# Allow direct access to API files
+RewriteRule ^backend/src/public/api/.*\.php$ - [L]
+
+# Handle API requests
+RewriteRule ^api/(.*)$ backend/src/public/api/$1 [L]
+
+# Redirect /admin to dashboard_admin_V1.php
+RewriteRule ^admin/?$ backend/src/public/admin/dashboard_admin_V1.php [L]
+
+# Allow direct access to test_api.html
+RewriteRule ^test_api\.html$ - [L]
+
+# Handle all other requests
+RewriteRule ^(.*)$ index.php [L] 

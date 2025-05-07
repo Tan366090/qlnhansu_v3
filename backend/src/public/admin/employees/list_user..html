@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Danh sách người dùng</title>
+        <link rel="stylesheet" href="/assets/css/notifications.css">
+        <link rel="stylesheet" href="/assets/css/loading.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="./css/common.css" />
+        <link rel="stylesheet" href="./css/list_user.css" />
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.js"
+        ></script>
+        <script type="module" src="/assets/js/main.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Sidebar will be injected by JavaScript -->
+            <div class="main-content">
+                <h2>Danh sách User</h2>
+                <div class="search-bar">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Tìm kiếm theo tên hoặc email..."
+                        onkeyup="filterUsers()"
+                    />
+                    <button
+                        class="add-btn"
+                        onclick="window.location.href='adduser.php'"
+                    >
+                        Thêm User
+                    </button>
+                    <button
+                        class="reset-btn"
+                        onclick="window.location.href='accountlist.php'"
+                    >
+                        🔄 Reset Mật Khẩu
+                    </button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 50px">STT</th>
+                            <th>Họ và Tên</th>
+                            <th>Ngày tháng năm sinh</th>
+                            <th>Email</th>
+                            <th>Số Điện Thoại</th>
+                            <th>Địa chỉ thường trú</th>
+                            <th>Vai Trò</th>
+                            <th>Trạng Thái</th>
+                            <th>Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        <!-- Data will be dynamically injected by JavaScript -->
+                        <tr>
+                            <td>1</td>
+                            <td>Nguyễn Văn A</td>
+                            <td>1990-01-15</td>
+                            <td>vana@gmail.com</td>
+                            <td>0981 234 567</td>
+                            <td>123 Đường ABC, Quận 1, TP. Hồ Chí Minh</td>
+                            <td>Người dùng</td>
+                            <td>Hoạt động</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">
+                                    Xem Chi Tiết
+                                </button>
+                                <button class="edit-btn">✏️ Sửa</button>
+                                <button class="delete-btn">❌ Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Trần Thị B</td>
+                            <td>1985-03-20</td>
+                            <td>tranb@example.com</td>
+                            <td>0902 345 678</td>
+                            <td>456 Đường DEF, Quận 3, TP. Hồ Chí Minh</td>
+                            <td>Người dùng</td>
+                            <td>Khóa</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">
+                                    👁️ Xem Chi Tiết
+                                </button>
+                                <button class="edit-btn">✏️ Sửa</button>
+                                <button class="delete-btn">❌ Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Lê Văn C</td>
+                            <td>1992-07-10</td>
+                            <td>levanc@example.com</td>
+                            <td>0912 456 789</td>
+                            <td>789 Đường GHI, Quận 5, TP. Hồ Chí Minh</td>
+                            <td>Người dùng</td>
+                            <td>Hoạt động</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">
+                                    👁️ Xem Chi Tiết
+                                </button>
+                                <button class="edit-btn">✏️ Sửa</button>
+                                <button class="delete-btn">❌ Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Phạm Thị D</td>
+                            <td>1988-11-25</td>
+                            <td>phamtd@example.com</td>
+                            <td>0933 567 890</td>
+                            <td>321 Đường JKL, Quận 7, TP. Hồ Chí Minh</td>
+                            <td>Admin</td>
+                            <td>Hoạt động</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">
+                                    👁️ Xem Chi Tiết
+                                </button>
+                                <button class="edit-btn">✏️ Sửa</button>
+                                <button class="delete-btn">❌ Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Hoàng Văn E</td>
+                            <td>1995-05-30</td>
+                            <td>hoange@example.com</td>
+                            <td>0944 678 901</td>
+                            <td>654 Đường MNO, Quận 9, TP. Hồ Chí Minh</td>
+                            <td>Người dùng</td>
+                            <td>Hoạt động</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">
+                                    👁️ Xem Chi Tiết
+                                </button>
+                                <button class="edit-btn">✏️ Sửa</button>
+                                <button class="delete-btn">❌ Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Ngô Thị F</td>
+                            <td>1993-09-12</td>
+                            <td>ngothif@example.com</td>
+                            <td>0955 789 012</td>
+                            <td>987 Đường PQR, Quận 2, TP. Hồ Chí Minh</td>
+                            <td>Người dùng</td>
+                            <td>Hoạt động</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">
+                                    👁️ Xem Chi Tiết
+                                </button>
+                                <button class="edit-btn">✏️ Sửa</button>
+                                <button class="delete-btn">❌ Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Đặng Văn G</td>
+                            <td>1987-04-18</td>
+                            <td>dangvg@example.com</td>
+                            <td>0966 890 123</td>
+                            <td>123 Đường STU, Quận 4, TP. Hồ Chí Minh</td>
+                            <td>Người dùng</td>
+                            <td>Khóa</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">
+                                    👁️ Xem Chi Tiết
+                                </button>
+                                <button class="edit-btn">✏️ Sửa</button>
+                                <button class="delete-btn">❌ Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Vũ Thị H</td>
+                            <td>1991-06-22</td>
+                            <td>vuth@example.com</td>
+                            <td>0977 901 234</td>
+                            <td>456 Đường VWX, Quận 6, TP. Hồ Chí Minh</td>
+                            <td>Người dùng</td>
+                            <td>Hoạt động</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">
+                                    👁️ Xem Chi Tiết
+                                </button>
+                                <button class="edit-btn">✏️ Sửa</button>
+                                <button class="delete-btn">❌ Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Nguyễn Thị I</td>
+                            <td>1994-08-05</td>
+                            <td>nguyenthii@example.com</td>
+                            <td>0988 012 345</td>
+                            <td>789 Đường YZ, Quận 8, TP. Hồ Chí Minh</td>
+                            <td>Người dùng</td>
+                            <td>Hoạt động</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">
+                                    👁️ Xem Chi Tiết
+                                </button>
+                                <button class="edit-btn">✏️ Sửa</button>
+                                <button class="delete-btn">❌ Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Phan Văn J</td>
+                            <td>1989-02-14</td>
+                            <td>phanvj@example.com</td>
+                            <td>0999 123 456</td>
+                            <td>321 Đường ABC, Quận 10, TP. Hồ Chí Minh</td>
+                            <td>Admin</td>
+                            <td>Hoạt động</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">
+                                    👁️ Xem Chi Tiết
+                                </button>
+                                <button class="edit-btn">✏️ Sửa</button>
+                                <button class="delete-btn">❌ Xóa</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="./js/common.js"></script>
+        <script src="./js/list_user.js"></script>
+        <script>
+            function filterUsers() {
+                const input = document
+                    .getElementById("searchInput")
+                    .value.toLowerCase();
+                const rows = document.querySelectorAll("#userTableBody tr");
+                rows.forEach((row) => {
+                    const name = row.cells[1]?.textContent.toLowerCase() || "";
+                    const email = row.cells[3]?.textContent.toLowerCase() || "";
+                    row.style.display =
+                        name.includes(input) || email.includes(input)
+                            ? ""
+                            : "none";
+                });
+            }
+        </script>
+        <script src="shared/js/common.js"></script>
+        <script src="shared/js/auth_utils.js"></script>
+        <script src="shared/js/api_service.js"></script>
+    </body>
+</html>

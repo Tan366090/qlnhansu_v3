@@ -1,0 +1,327 @@
+<!-- Employee List Page -->
+<div class="page-transition">
+    <header class="content-header">
+        <h1>Danh sách nhân viên</h1>
+        <div class="header-actions">
+            <button class="btn btn-primary" onclick="router.navigateToPage('employees/add')">
+                <i class="fas fa-plus"></i> Thêm nhân viên
+            </button>
+        </div>
+    </header>
+
+    <div class="content-filters">
+        <div class="search-box">
+            <input type="text" id="employeeSearch" placeholder="Tìm kiếm nhân viên...">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="filter-group">
+            <select id="departmentFilter">
+                <option value="">Tất cả phòng ban</option>
+                <option value="hr">Nhân sự</option>
+                <option value="it">CNTT</option>
+                <option value="finance">Tài chính</option>
+            </select>
+            <select id="statusFilter">
+                <option value="">Tất cả trạng thái</option>
+                <option value="active">Đang làm việc</option>
+                <option value="inactive">Đã nghỉ việc</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="content-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã NV</th>
+                    <th>Họ tên</th>
+                    <th>Phòng ban</th>
+                    <th>Chức vụ</th>
+                    <th>Ngày vào làm</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="employeeList">
+                <!-- Data will be loaded dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="content-pagination">
+        <button class="btn btn-outline-primary" onclick="prevPage()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <span id="pageInfo">Trang 1 / 5</span>
+        <button class="btn btn-outline-primary" onclick="nextPage()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<script>
+    // Employee list specific functionality
+    let currentPage = 1;
+    const itemsPerPage = 10;
+
+    async function loadEmployeeData() {
+        try {
+            showLoading('Đang tải danh sách nhân viên...');
+            
+            const searchTerm = document.getElementById('employeeSearch').value;
+            const department = document.getElementById('departmentFilter').value;
+            const status = document.getElementById('statusFilter').value;
+            
+            const response = await fetch(`/QLNhanSu_version1/public/api/employees/list.php?page=${currentPage}&limit=${itemsPerPage}&search=${searchTerm}&department=${department}&status=${status}`);
+            
+            if (!response.ok) throw new Error('Failed to load employees');
+            
+            const data = await response.json();
+            if (data.success) {
+                renderEmployeeList(data.employees);
+                updatePagination(data.totalPages);
+            } else {
+                throw new Error(data.message || 'Failed to load employees');
+            }
+        } catch (error) {
+            console.error('Error loading employees:', error);
+            showNotification('Không thể tải danh sách nhân viên', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    function renderEmployeeList(employees) {
+        const tbody = document.getElementById('employeeList');
+        tbody.innerHTML = '';
+        
+        employees.forEach(employee => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${employee.id}</td>
+                <td>${employee.name}</td>
+                <td>${employee.department}</td>
+                <td>${employee.position}</td>
+                <td>${formatDate(employee.joinDate)}</td>
+                <td>
+                    <span class="status-badge ${employee.status}">
+                        ${employee.status === 'active' ? 'Đang làm việc' : 'Đã nghỉ việc'}
+                    </span>
+                </td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="btn btn-sm btn-info" onclick="viewDetails(${employee.id}, 'employee')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary" onclick="router.navigateToPage('employees/edit?id=${employee.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="confirmDelete(${employee.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    function updatePagination(totalPages) {
+        document.getElementById('pageInfo').textContent = `Trang ${currentPage} / ${totalPages}`;
+        // Update buttons state
+        document.querySelector('.content-pagination button:first-child').disabled = currentPage === 1;
+        document.querySelector('.content-pagination button:last-child').disabled = currentPage === totalPages;
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            loadEmployeeData();
+        }
+    }
+
+    function nextPage() {
+        currentPage++;
+        loadEmployeeData();
+    }
+
+    function initEmployeeSearch() {
+        const searchInput = document.getElementById('employeeSearch');
+        const departmentFilter = document.getElementById('departmentFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        
+        // Debounce search
+        let searchTimeout;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                currentPage = 1;
+                loadEmployeeData();
+            }, 300);
+        });
+        
+        // Filter changes
+        departmentFilter.addEventListener('change', () => {
+            currentPage = 1;
+            loadEmployeeData();
+        });
+        
+        statusFilter.addEventListener('change', () => {
+            currentPage = 1;
+            loadEmployeeData();
+        });
+    }
+
+    function initEmployeeFilters() {
+        // Additional filter initialization if needed
+    }
+
+    function confirmDelete(id) {
+        if (confirm('Bạn có chắc chắn muốn xóa nhân viên này?')) {
+            deleteEmployee(id);
+        }
+    }
+
+    async function deleteEmployee(id) {
+        try {
+            showLoading('Đang xóa nhân viên...');
+            
+            const response = await fetch(`/QLNhanSu_version1/public/api/employees/delete.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id })
+            });
+            
+            if (!response.ok) throw new Error('Failed to delete employee');
+            
+            const data = await response.json();
+            if (data.success) {
+                showNotification('Xóa nhân viên thành công', 'success');
+                loadEmployeeData();
+            } else {
+                throw new Error(data.message || 'Failed to delete employee');
+            }
+        } catch (error) {
+            console.error('Error deleting employee:', error);
+            showNotification('Không thể xóa nhân viên', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    // Format date helper
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('vi-VN');
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', () => {
+        loadEmployeeData();
+        initEmployeeSearch();
+        initEmployeeFilters();
+    });
+</script>
+
+<style>
+    .content-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .content-filters {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .search-box {
+        position: relative;
+        flex: 1;
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 10px 40px 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .search-box i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+    }
+
+    .filter-group {
+        display: flex;
+        gap: 10px;
+    }
+
+    .filter-group select {
+        padding: 8px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        min-width: 150px;
+    }
+
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
+
+    .status-badge.active {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .status-badge.inactive {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+    }
+
+    .content-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    #pageInfo {
+        min-width: 100px;
+        text-align: center;
+    }
+
+    .table {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .table thead th {
+        background: #f8f9fa;
+        padding: 12px;
+    }
+
+    .table tbody td {
+        padding: 12px;
+        vertical-align: middle;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+</style> 

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quản lý báo cáo</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="shared/css/common.css">
+        <link rel="stylesheet" href="shared/css/style.css">
+        <link rel="stylesheet" href="/assets/css/notifications.css">
+        <link rel="stylesheet" href="/assets/css/loading.css">
+        <script type="module" src="/assets/js/main.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Quản lý báo cáo</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="report-grid">
+                            <div
+                                class="report-card"
+                                onclick="showReportModal('personnel')"
+                            >
+                                <div class="report-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3>Báo cáo nhân sự</h3>
+                                <p>
+                                    Báo cáo tổng hợp thông tin nhân viên, phòng
+                                    ban và vị trí
+                                </p>
+                            </div>
+
+                            <div
+                                class="report-card"
+                                onclick="showReportModal('salary')"
+                            >
+                                <div class="report-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <h3>Báo cáo lương</h3>
+                                <p>
+                                    Báo cáo chi tiết lương, phụ cấp và các khoản
+                                    khấu trừ
+                                </p>
+                            </div>
+
+                            <div
+                                class="report-card"
+                                onclick="showReportModal('attendance')"
+                            >
+                                <div class="report-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <h3>Báo cáo chấm công</h3>
+                                <p>
+                                    Báo cáo thống kê giờ làm việc và tình trạng
+                                    chấm công
+                                </p>
+                            </div>
+
+                            <div
+                                class="report-card"
+                                onclick="showReportModal('leave')"
+                            >
+                                <div class="report-icon">
+                                    <i class="fas fa-calendar-times"></i>
+                                </div>
+                                <h3>Báo cáo nghỉ phép</h3>
+                                <p>
+                                    Báo cáo tổng hợp các loại nghỉ phép và ngày
+                                    nghỉ
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal tạo báo cáo -->
+        <div class="modal" id="reportModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Tạo báo cáo</h3>
+                    <button class="close" onclick="hideReportModal()">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="reportForm">
+                        <div class="form-group">
+                            <label>Loại báo cáo</label>
+                            <select id="reportType" disabled>
+                                <option value="personnel">
+                                    Báo cáo nhân sự
+                                </option>
+                                <option value="salary">Báo cáo lương</option>
+                                <option value="attendance">
+                                    Báo cáo chấm công
+                                </option>
+                                <option value="leave">Báo cáo nghỉ phép</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phòng ban</label>
+                            <select id="department">
+                                <option value="">Tất cả phòng ban</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Thời gian</label>
+                            <div class="date-range">
+                                <input type="month" id="startDate" required />
+                                <span>đến</span>
+                                <input type="month" id="endDate" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Định dạng</label>
+                            <div class="export-options">
+                                <label class="export-option">
+                                    <input
+                                        type="radio"
+                                        name="format"
+                                        value="excel"
+                                        checked
+                                    />
+                                    <i class="fas fa-file-excel"></i> Excel
+                                </label>
+                                <label class="export-option">
+                                    <input
+                                        type="radio"
+                                        name="format"
+                                        value="pdf"
+                                    />
+                                    <i class="fas fa-file-pdf"></i> PDF
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        onclick="hideReportModal()"
+                    >
+                        Hủy
+                    </button>
+                    <button class="btn btn-primary" onclick="generateReport()">
+                        Tạo báo cáo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/common.js"></script>
+        <script>
+            let currentReportType = null;
+
+            // Hàm hiển thị modal tạo báo cáo
+            function showReportModal(type) {
+                currentReportType = type;
+                const modal = document.getElementById("reportModal");
+                const reportType = document.getElementById("reportType");
+
+                // Đặt giá trị loại báo cáo
+                reportType.value = type;
+
+                // Đặt tiêu đề modal
+                const title = modal.querySelector("h3");
+                switch (type) {
+                    case "personnel":
+                        title.textContent = "Tạo báo cáo nhân sự";
+                        break;
+                    case "salary":
+                        title.textContent = "Tạo báo cáo lương";
+                        break;
+                    case "attendance":
+                        title.textContent = "Tạo báo cáo chấm công";
+                        break;
+                    case "leave":
+                        title.textContent = "Tạo báo cáo nghỉ phép";
+                        break;
+                }
+
+                // Hiển thị modal
+                modal.style.display = "block";
+            }
+
+            // Hàm ẩn modal
+            function hideReportModal() {
+                document.getElementById("reportModal").style.display = "none";
+            }
+
+            // Hàm tải danh sách phòng ban
+            async function loadDepartments() {
+                try {
+                    const response = await fetch("/api/departments");
+                    const departments = await response.json();
+
+                    const select = document.getElementById("department");
+                    departments.forEach((dept) => {
+                        const option = document.createElement("option");
+                        option.value = dept.id;
+                        option.textContent = dept.name;
+                        select.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách phòng ban:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách phòng ban",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm tạo báo cáo
+            async function generateReport() {
+                try {
+                    const form = document.getElementById("reportForm");
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return;
+                    }
+
+                    const departmentId =
+                        document.getElementById("department").value;
+                    const startDate =
+                        document.getElementById("startDate").value;
+                    const endDate = document.getElementById("endDate").value;
+                    const format = document.querySelector(
+                        'input[name="format"]:checked'
+                    ).value;
+
+                    // Tạo URL API dựa trên loại báo cáo
+                    let apiUrl = `/api/reports/${currentReportType}?`;
+                    apiUrl += `start_date=${startDate}&end_date=${endDate}&format=${format}`;
+                    if (departmentId) {
+                        apiUrl += `&department_id=${departmentId}`;
+                    }
+
+                    // Tải báo cáo
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) {
+                        throw new Error("Lỗi khi tạo báo cáo");
+                    }
+
+                    // Tạo blob và tải xuống
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `${currentReportType}_report.${format}`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+
+                    showNotification("Tạo báo cáo thành công", "success");
+                    hideReportModal();
+                } catch (error) {
+                    console.error("Lỗi khi tạo báo cáo:", error);
+                    showNotification("Có lỗi xảy ra khi tạo báo cáo", "error");
+                }
+            }
+
+            // Đặt ngày mặc định
+            function setDefaultDates() {
+                const today = new Date();
+                const startDate = document.getElementById("startDate");
+                const endDate = document.getElementById("endDate");
+
+                startDate.value = `${today.getFullYear()}-${String(
+                    today.getMonth() + 1
+                ).padStart(2, "0")}`;
+                endDate.value = startDate.value;
+            }
+
+            // Tải dữ liệu khi trang được tải
+            document.addEventListener("DOMContentLoaded", () => {
+                loadDepartments();
+                setDefaultDates();
+            });
+        </script>
+        <script src="shared/js/common.js"></script>
+        <script src="shared/js/auth_utils.js"></script>
+        <script src="shared/js/api_service.js"></script>
+    </body>
+</html>

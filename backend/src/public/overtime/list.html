@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý tăng ca - Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+    <script src="../js/main.js" type="module"></script>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="page-title">Quản lý tăng ca</h1>
+            <button class="btn btn-primary" data-action="add-overtime">
+                <i class="fas fa-plus me-2"></i>Thêm đăng ký tăng ca
+            </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form id="overtimeFilterForm">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Nhân viên</label>
+                            <select class="form-select" name="employee_id">
+                                <option value="">Tất cả</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Phòng ban</label>
+                            <select class="form-select" name="department_id">
+                                <option value="">Tất cả</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Trạng thái</label>
+                            <select class="form-select" name="status">
+                                <option value="">Tất cả</option>
+                                <option value="pending">Chờ duyệt</option>
+                                <option value="approved">Đã duyệt</option>
+                                <option value="rejected">Từ chối</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Thời gian</label>
+                            <input type="date" class="form-control" name="date">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Overtime List -->
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="overtimeTable">
+                        <thead>
+                            <tr>
+                                <th>Mã NV</th>
+                                <th>Họ tên</th>
+                                <th>Phòng ban</th>
+                                <th>Ngày tăng ca</th>
+                                <th>Giờ bắt đầu</th>
+                                <th>Giờ kết thúc</th>
+                                <th>Số giờ</th>
+                                <th>Lý do</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Overtime records will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overtime Modal -->
+    <div class="modal fade" id="overtimeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng ký tăng ca</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="overtimeForm">
+                        <div class="mb-3">
+                            <label class="form-label">Nhân viên</label>
+                            <select class="form-select" name="employee_id" required>
+                                <option value="">Chọn nhân viên</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ngày tăng ca</label>
+                            <input type="date" class="form-control" name="date" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label">Giờ bắt đầu</label>
+                                <input type="time" class="form-control" name="start_time" required>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">Giờ kết thúc</label>
+                                <input type="time" class="form-control" name="end_time" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Lý do</label>
+                            <textarea class="form-control" name="reason" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="saveOvertime">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

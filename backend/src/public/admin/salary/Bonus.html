@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <title>VNPT Lương thưởng</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/common.css" />
+        <link rel="stylesheet" href="./css/Bonus.css" />
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.esm.js"
+        ></script>
+        <script
+            nomodul3
+            src="https://cdn.jsdelivr.net/npm/@ionic/core@latest/dist/ionic/ionic.js"
+        ></script>
+        <!-- ADD SHEETJS Library -->
+        <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <!-- Sidebar injected by common.js -->
+            <main class="content">
+                <div class="content-header">
+                    <h1>Quản lý Lương thưởng</h1>
+                </div>
+
+                <div class="form-container">
+                    <div class="bonus-management">
+                        <h3>Thêm thưởng mới</h3>
+                        <div class="add-bonus-form">
+                            <!-- Inputs remain the same -->
+                            <input
+                                type="text"
+                                id="employeeName"
+                                placeholder="Tên nhân viên"
+                                required
+                            />
+                            <input
+                                type="text"
+                                id="bonusValue"
+                                placeholder="Giá trị (VD: 1,000,000 VNĐ)"
+                                required
+                            />
+                            <input
+                                type="text"
+                                id="bonusReason"
+                                placeholder="Lý do thưởng"
+                                required
+                            />
+                            <input type="date" id="effectiveDate" required />
+                            <button class="btn btn-add" id="btnAddBonus">
+                                Thêm thưởng
+                            </button>
+                        </div>
+
+                        <!-- Modified Header Area for List -->
+                        <div class="list-header">
+                            <h3>Danh sách thưởng</h3>
+                            <!-- ADD EXPORT BUTTON -->
+                            <button class="btn btn-export" id="btnExportExcel">
+                                Xuất Excel
+                            </button>
+                        </div>
+                        <table>
+                            <!-- Table structure remains the same -->
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên nhân viên</th>
+                                    <th>Giá trị</th>
+                                    <th>Lý do</th>
+                                    <th>Ngày hiệu lực</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                <tr class="filter-row">
+                                    <th>
+                                        <!-- <select
+                                            class="filter-select"
+                                            data-column="id"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select> -->
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="employeeName"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="value"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="reason"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select
+                                            class="filter-select"
+                                            data-column="effectiveDate"
+                                        >
+                                            <option value="">
+                                                -- Tất cả --
+                                            </option>
+                                        </select>
+                                    </th>
+                                    <th><!-- No filter for actions --></th>
+                                </tr>
+                            </thead>
+                            <tbody id="bonusTableBody">
+                                <!-- Data rendered by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script src="./js/common.js"></script>
+        <script src="./js/Bonus.js"></script>
+        <!-- Bonus.js comes AFTER SheetJS -->
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const bonuses = await fetchData("getBonuses"); // Add 'getBonuses' case in API
+                const tbody = document.getElementById("bonusTableBody");
+                tbody.innerHTML = ""; // Clear existing rows
+
+                bonuses.forEach((bonus) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${bonus.employee_id}</td>
+                        <td>${bonus.full_name}</td>
+                        <td>${bonus.amount}</td>
+                        <td>${bonus.reason}</td>
+                        <td>${bonus.date}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

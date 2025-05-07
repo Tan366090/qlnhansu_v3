@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quản lý chức vụ</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+            <link rel="stylesheet" href="shared/css/common.css">
+    <link rel="stylesheet" href="shared/css/style.css">
+</head>
+    <body>
+        <div class="container">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Quản lý chức vụ</h2>
+                        <button
+                            class="btn btn-primary"
+                            onclick="showAddPositionModal()"
+                        >
+                            <i class="fas fa-plus"></i> Thêm chức vụ
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã chức vụ</th>
+                                        <th>Tên chức vụ</th>
+                                        <th>Mô tả</th>
+                                        <th>Lương cơ bản</th>
+                                        <th>Số nhân viên</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="positionList">
+                                    <!-- Dữ liệu sẽ được thêm vào đây bằng JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal thêm/sửa chức vụ -->
+        <div id="positionModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Thêm chức vụ</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="positionForm">
+                        <div class="form-group">
+                            <label class="form-label">Mã chức vụ</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="positionCode"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tên chức vụ</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="positionName"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Mô tả</label>
+                            <textarea
+                                class="form-control"
+                                id="description"
+                                rows="3"
+                            ></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Lương cơ bản</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="baseSalary"
+                                required
+                            />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        onclick="closePositionModal()"
+                    >
+                        Hủy
+                    </button>
+                    <button class="btn btn-primary" onclick="savePosition()">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal xác nhận xóa -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Xác nhận xóa</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa chức vụ này?</p>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        onclick="closeDeleteModal()"
+                    >
+                        Hủy
+                    </button>
+                    <button class="btn btn-danger" onclick="confirmDelete()">
+                        Xóa
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/common.js"></script>
+        <script>
+            let currentPositionId = null;
+
+            // Hàm tải danh sách chức vụ
+            async function loadPositions() {
+                try {
+                    const response = await fetch("/api/positions");
+                    const positions = await response.json();
+
+                    const tbody = document.getElementById("positionList");
+                    tbody.innerHTML = "";
+
+                    positions.forEach((pos) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                        <td>${pos.code}</td>
+                        <td>${pos.name}</td>
+                        <td>${pos.description || ""}</td>
+                        <td>${formatCurrency(pos.base_salary)}</td>
+                        <td>${pos.employee_count || 0}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="editPosition(${
+                                pos.id
+                            })">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="showDeleteModal(${
+                                pos.id
+                            })">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                        tbody.appendChild(tr);
+                    });
+                } catch (error) {
+                    console.error("Lỗi khi tải danh sách chức vụ:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải danh sách chức vụ",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm hiển thị modal thêm/sửa
+            function showAddPositionModal() {
+                currentPositionId = null;
+                document.getElementById("modalTitle").textContent =
+                    "Thêm chức vụ";
+                document.getElementById("positionForm").reset();
+                document.getElementById("positionModal").style.display =
+                    "block";
+            }
+
+            // Hàm đóng modal
+            function closePositionModal() {
+                document.getElementById("positionModal").style.display = "none";
+            }
+
+            // Hàm lưu chức vụ
+            async function savePosition() {
+                const form = document.getElementById("positionForm");
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                const data = {
+                    code: document.getElementById("positionCode").value,
+                    name: document.getElementById("positionName").value,
+                    description: document.getElementById("description").value,
+                    base_salary: document.getElementById("baseSalary").value,
+                };
+
+                try {
+                    const url = currentPositionId
+                        ? `/api/positions/${currentPositionId}`
+                        : "/api/positions";
+                    const method = currentPositionId ? "PUT" : "POST";
+
+                    const response = await fetch(url, {
+                        method: method,
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                        showNotification(
+                            currentPositionId
+                                ? "Cập nhật chức vụ thành công"
+                                : "Thêm chức vụ thành công",
+                            "success"
+                        );
+                        closePositionModal();
+                        loadPositions();
+                    } else {
+                        throw new Error("Lưu chức vụ thất bại");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi lưu chức vụ:", error);
+                    showNotification("Có lỗi xảy ra khi lưu chức vụ", "error");
+                }
+            }
+
+            // Hàm sửa chức vụ
+            async function editPosition(id) {
+                try {
+                    const response = await fetch(`/api/positions/${id}`);
+                    const position = await response.json();
+
+                    currentPositionId = id;
+                    document.getElementById("modalTitle").textContent =
+                        "Sửa chức vụ";
+                    document.getElementById("positionCode").value =
+                        position.code;
+                    document.getElementById("positionName").value =
+                        position.name;
+                    document.getElementById("description").value =
+                        position.description || "";
+                    document.getElementById("baseSalary").value =
+                        position.base_salary;
+
+                    document.getElementById("positionModal").style.display =
+                        "block";
+                } catch (error) {
+                    console.error("Lỗi khi tải thông tin chức vụ:", error);
+                    showNotification(
+                        "Có lỗi xảy ra khi tải thông tin chức vụ",
+                        "error"
+                    );
+                }
+            }
+
+            // Hàm hiển thị modal xóa
+            function showDeleteModal(id) {
+                currentPositionId = id;
+                document.getElementById("deleteModal").style.display = "block";
+            }
+
+            // Hàm đóng modal xóa
+            function closeDeleteModal() {
+                document.getElementById("deleteModal").style.display = "none";
+            }
+
+            // Hàm xác nhận xóa
+            async function confirmDelete() {
+                if (!currentPositionId) return;
+
+                try {
+                    const response = await fetch(
+                        `/api/positions/${currentPositionId}`,
+                        {
+                            method: "DELETE",
+                        }
+                    );
+
+                    if (response.ok) {
+                        showNotification("Xóa chức vụ thành công", "success");
+                        closeDeleteModal();
+                        loadPositions();
+                    } else {
+                        throw new Error("Xóa chức vụ thất bại");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi xóa chức vụ:", error);
+                    showNotification("Có lỗi xảy ra khi xóa chức vụ", "error");
+                }
+            }
+
+            // Tải dữ liệu khi trang được tải
+            document.addEventListener("DOMContentLoaded", loadPositions);
+        </script>
+            <script src="shared/js/common.js"></script>
+    <script src="shared/js/auth_utils.js"></script>
+    <script src="shared/js/api_service.js"></script>
+</body>
+</html>

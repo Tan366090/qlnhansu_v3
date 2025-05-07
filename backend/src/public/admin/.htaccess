@@ -1,0 +1,78 @@
+Options +Indexes +FollowSymLinks
+Require all granted
+DirectoryIndex test_dashboard.html
+
+<IfModule mod_headers.c>
+    # Security headers
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Cache control
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+    
+    # CORS headers
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+    
+    # Content Security Policy
+    Header set Content-Security-Policy "default-src 'self' https: http://localhost:*; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://code.jquery.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data: https:;"
+</IfModule>
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Set base directory
+RewriteBase /qlnhansu_V2/backend/src/public/admin/
+
+# Handle API requests
+RewriteRule ^api/(.*)$ ../../api/$1 [L]
+
+# Allow access to static files
+<FilesMatch "\.(html|js|css|php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Enable PHP execution
+AddType application/x-httpd-php .php
+
+# Set default character set
+AddDefaultCharset UTF-8
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Handle directory requests
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*[^/])$ $1/ [L]
+
+# Handle file requests
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Authentication check
+RewriteCond %{HTTP_COOKIE} !PHPSESSID= [NC]
+RewriteCond %{REQUEST_URI} !^/login\.html$
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteRule ^(.*)$ /login.html [L]
+
+# Handle AJAX requests
+RewriteCond %{HTTP:X-Requested-With} XMLHttpRequest [NC]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule . - [L]
+
+# Handle static files
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.html [L]
+
+# Rewrite API requests
+RewriteRule ^api/user/profile$ api/user_api.php [L,QSA]
+
+# Handle 404 errors
+ErrorDocument 404 /qlnhansu_V2/backend/src/public/admin/404.html 

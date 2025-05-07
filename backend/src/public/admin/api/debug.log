@@ -1,0 +1,302 @@
+[2025-04-27 18:07:27] Request received
+Array
+(
+    [method] => GET
+    [uri] => /qlnhansu_V2/backend/src/public/admin/api/test.php
+    [headers] => Array
+        (
+            [Host] => localhost
+            [Connection] => keep-alive
+            [sec-ch-ua] => "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+            [sec-ch-ua-mobile] => ?0
+            [sec-ch-ua-platform] => "Windows"
+            [Upgrade-Insecure-Requests] => 1
+            [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+            [Accept] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [Sec-Fetch-Site] => none
+            [Sec-Fetch-Mode] => navigate
+            [Sec-Fetch-User] => ?1
+            [Sec-Fetch-Dest] => document
+            [Accept-Encoding] => gzip, deflate, br, zstd
+            [Accept-Language] => vi-VN,vi;q=0.9,en-VN;q=0.8,en;q=0.7,fr-FR;q=0.6,fr;q=0.5,en-US;q=0.4
+        )
+
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+        )
+
+    [input] => 
+)
+
+--------------------------------------------------------------------------------
+[2025-04-27 18:07:27] Response data
+Array
+(
+    [success] => 1
+    [data] => Array
+        (
+            [test] => success
+            [database] => Array
+                (
+                    [test] => 1
+                )
+
+            [timestamp] => 2025-04-27 18:07:27
+            [server] => Array
+                (
+                    [php_version] => 8.2.12
+                    [server_software] => Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12
+                    [request_time] => 1745770047.3905
+                )
+
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-27 18:07:56] Request received
+Array
+(
+    [method] => GET
+    [uri] => /qlnhansu_V2/backend/src/public/admin/api/test.php
+    [headers] => Array
+        (
+            [Host] => localhost
+            [Connection] => keep-alive
+            [Cache-Control] => max-age=0
+            [sec-ch-ua] => "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+            [sec-ch-ua-mobile] => ?0
+            [sec-ch-ua-platform] => "Windows"
+            [Upgrade-Insecure-Requests] => 1
+            [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+            [Accept] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [Sec-Fetch-Site] => none
+            [Sec-Fetch-Mode] => navigate
+            [Sec-Fetch-User] => ?1
+            [Sec-Fetch-Dest] => document
+            [Accept-Encoding] => gzip, deflate, br, zstd
+            [Accept-Language] => vi-VN,vi;q=0.9,en-VN;q=0.8,en;q=0.7,fr-FR;q=0.6,fr;q=0.5,en-US;q=0.4
+        )
+
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+        )
+
+    [input] => 
+)
+
+--------------------------------------------------------------------------------
+[2025-04-27 18:07:56] Response data
+Array
+(
+    [success] => 1
+    [data] => Array
+        (
+            [test] => success
+            [database] => Array
+                (
+                    [test] => 1
+                )
+
+            [timestamp] => 2025-04-27 18:07:56
+            [server] => Array
+                (
+                    [php_version] => 8.2.12
+                    [server_software] => Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12
+                    [request_time] => 1745770076.486
+                )
+
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-27 18:07:59] Request received
+Array
+(
+    [method] => GET
+    [uri] => /qlnhansu_V2/backend/src/public/admin/api/test.php
+    [headers] => Array
+        (
+            [Host] => localhost
+            [Connection] => keep-alive
+            [Cache-Control] => max-age=0
+            [sec-ch-ua] => "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+            [sec-ch-ua-mobile] => ?0
+            [sec-ch-ua-platform] => "Windows"
+            [Upgrade-Insecure-Requests] => 1
+            [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+            [Accept] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [Sec-Fetch-Site] => none
+            [Sec-Fetch-Mode] => navigate
+            [Sec-Fetch-User] => ?1
+            [Sec-Fetch-Dest] => document
+            [Accept-Encoding] => gzip, deflate, br, zstd
+            [Accept-Language] => vi-VN,vi;q=0.9,en-VN;q=0.8,en;q=0.7,fr-FR;q=0.6,fr;q=0.5,en-US;q=0.4
+        )
+
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+        )
+
+    [input] => 
+)
+
+--------------------------------------------------------------------------------
+[2025-04-27 18:07:59] Response data
+Array
+(
+    [success] => 1
+    [data] => Array
+        (
+            [test] => success
+            [database] => Array
+                (
+                    [test] => 1
+                )
+
+            [timestamp] => 2025-04-27 18:07:59
+            [server] => Array
+                (
+                    [php_version] => 8.2.12
+                    [server_software] => Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12
+                    [request_time] => 1745770079.7185
+                )
+
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-27 18:08:47] Request received
+Array
+(
+    [method] => GET
+    [uri] => /qlnhansu_V2/backend/src/public/admin/api/test.php
+    [headers] => Array
+        (
+            [Host] => localhost
+            [Connection] => keep-alive
+            [sec-ch-ua] => "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+            [sec-ch-ua-mobile] => ?0
+            [sec-ch-ua-platform] => "Windows"
+            [Upgrade-Insecure-Requests] => 1
+            [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+            [Accept] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [Sec-Fetch-Site] => none
+            [Sec-Fetch-Mode] => navigate
+            [Sec-Fetch-User] => ?1
+            [Sec-Fetch-Dest] => document
+            [Accept-Encoding] => gzip, deflate, br, zstd
+            [Accept-Language] => vi-VN,vi;q=0.9,en-VN;q=0.8,en;q=0.7,fr-FR;q=0.6,fr;q=0.5,en-US;q=0.4
+        )
+
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+        )
+
+    [input] => 
+)
+
+--------------------------------------------------------------------------------
+[2025-04-27 18:08:47] Response data
+Array
+(
+    [success] => 1
+    [data] => Array
+        (
+            [test] => success
+            [database] => Array
+                (
+                    [test] => 1
+                )
+
+            [timestamp] => 2025-04-27 18:08:47
+            [server] => Array
+                (
+                    [php_version] => 8.2.12
+                    [server_software] => Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12
+                    [request_time] => 1745770127.8047
+                )
+
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-27 18:09:13] Request received
+Array
+(
+    [method] => GET
+    [uri] => /qlnhansu_V2/backend/src/public/admin/api/test.php
+    [headers] => Array
+        (
+            [Host] => localhost
+            [Connection] => keep-alive
+            [sec-ch-ua] => "Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+            [sec-ch-ua-mobile] => ?0
+            [sec-ch-ua-platform] => "Windows"
+            [Upgrade-Insecure-Requests] => 1
+            [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+            [Accept] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [Sec-Fetch-Site] => none
+            [Sec-Fetch-Mode] => navigate
+            [Sec-Fetch-User] => ?1
+            [Sec-Fetch-Dest] => document
+            [Accept-Encoding] => gzip, deflate, br, zstd
+            [Accept-Language] => vi-VN,vi;q=0.9,en-VN;q=0.8,en;q=0.7,fr-FR;q=0.6,fr;q=0.5,en-US;q=0.4
+        )
+
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+        )
+
+    [input] => 
+)
+
+--------------------------------------------------------------------------------
+[2025-04-27 18:09:13] Response data
+Array
+(
+    [success] => 1
+    [data] => Array
+        (
+            [test] => success
+            [database] => Array
+                (
+                    [test] => 1
+                )
+
+            [timestamp] => 2025-04-27 18:09:13
+            [server] => Array
+                (
+                    [php_version] => 8.2.12
+                    [server_software] => Apache/2.4.58 (Win64) OpenSSL/3.1.3 PHP/8.2.12
+                    [request_time] => 1745770153.1662
+                )
+
+        )
+
+)
+
+--------------------------------------------------------------------------------
