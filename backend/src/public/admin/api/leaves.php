@@ -1,215 +1,321 @@
 <?php
-// Include database connection
+// Bật hiển thị lỗi
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+session_start();
 require_once '../../config/database.php';
 
-// Handle different HTTP methods
+// Tạm thời set user_id mặc định để test
+$_SESSION['user_id'] = 1;
+
+// Lấy method và parameters
+$method = $_SERVER['REQUEST_METHOD'];
+$id = $_GET['id'] ?? null;
+$action = $_GET['action'] ?? null;
+
+// Debug request
+error_log("Request method: " . $method);
+error_log("Request parameters: " . print_r($_GET, true));
+
+// Lấy kết nối database
+$db = new Database();
+$conn = $db->getConnection();
+
+// Xử lý các methods
 switch ($method) {
     case 'GET':
+        if ($action === 'statistics') {
+            try {
+                // Lấy thống kê
+                $stmt = $conn->query("
+                    SELECT 
+                        COUNT(*) as total_leaves,
+                        SUM(CASE WHEN status = 'approved' THEN 1 ELSE 0 END) as approved_leaves,
+                        SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending_leaves
+                    FROM leaves
+                ");
+                $stats = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                echo json_encode(['success' => true, 'data' => $stats]);
+            } catch (Exception $e) {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Error getting statistics: ' . $e->getMessage()
+                ]);
+            }
+            exit();
+        }
+
         if ($id) {
-            // Get single leave request
-            $stmt = $conn->prepare("
-                SELECT l.*, 
-                       u.username as user_name,
-                       u.email as user_email,
-                       d.name as department_name,
-                       p.name as position_name
-                FROM leaves l
-                LEFT JOIN users u ON l.user_id = u.user_id
-                LEFT JOIN departments d ON u.department_id = d.id
-                LEFT JOIN positions p ON u.position_id = p.id
-                WHERE l.id = ?
-            ");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $leave = $result->fetch_assoc();
-            
-            if ($leave) {
-                sendResponse($leave);
-            } else {
-                handleError('Leave request not found', 404);
+            try {
+                // Lấy chi tiết một đơn
+                $stmt = $conn->prepare("
+                    SELECT l.*, 
+                           u.username as employee_name,
+                           u.email as employee_email
+                    FROM leaves l
+                    LEFT JOIN users u ON l.employee_id = u.user_id
+                    WHERE l.id = ?
+                ");
+                $stmt->execute([$id]);
+                $leave = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if ($leave) {
+                    echo json_encode(['success' => true, 'data' => $leave]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Leave request not found']);
+                }
+            } catch (Exception $e) {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Error getting leave details: ' . $e->getMessage()
+                ]);
             }
         } else {
-            // Get leaves list with filters
-            $user_id = $_GET['user_id'] ?? null;
-            $type = $_GET['type'] ?? null;
-            $status = $_GET['status'] ?? null;
-            $start_date = $_GET['start_date'] ?? null;
-            $end_date = $_GET['end_date'] ?? null;
-            $department_id = $_GET['department_id'] ?? null;
-            
-            $query = "
-                SELECT l.*, 
-                       u.username as user_name,
-                       u.email as user_email,
-                       d.name as department_name,
-                       p.name as position_name
-                FROM leaves l
-                LEFT JOIN users u ON l.user_id = u.user_id
-                LEFT JOIN departments d ON u.department_id = d.id
-                LEFT JOIN positions p ON u.position_id = p.id
-                WHERE 1=1
-            ";
-            
-            $params = [];
-            $types = "";
-            
-            if ($user_id) {
-                $query .= " AND l.user_id = ?";
-                $params[] = $user_id;
-                $types .= "i";
+            try {
+                // Lấy danh sách đơn với phân trang và filter
+                $page = $_GET['page'] ?? 1;
+                $per_page = $_GET['per_page'] ?? 10;
+                $offset = ($page - 1) * $per_page;
+                
+                $where = [];
+                $params = [];
+                
+                if (isset($_GET['status'])) {
+                    $where[] = "l.status = ?";
+                    $params[] = $_GET['status'];
+                }
+                
+                if (isset($_GET['leave_type'])) {
+                    $where[] = "l.leave_type = ?";
+                    $params[] = $_GET['leave_type'];
+                }
+                
+                if (isset($_GET['search'])) {
+                    $where[] = "(
+                        l.leave_code LIKE ? OR 
+                        CONCAT(e.first_name, ' ', e.last_name) LIKE ? OR 
+                        l.reason LIKE ? OR 
+                        l.status LIKE ?
+                    )";
+                    $search = "%{$_GET['search']}%";
+                    $params[] = $search;
+                    $params[] = $search;
+                    $params[] = $search;
+                    $params[] = $search;
+                }
+                
+                $whereClause = !empty($where) ? "WHERE " . implode(" AND ", $where) : "";
+                
+                // Đếm tổng số records
+                $countQuery = "SELECT COUNT(*) as total 
+                              FROM leaves l 
+                              JOIN users u ON l.employee_id = u.user_id 
+                              LEFT JOIN users a ON l.approved_by_user_id = a.user_id 
+                              $whereClause";
+                
+                $stmt = $conn->prepare($countQuery);
+                $stmt->execute($params);
+                $total = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+                
+                // Lấy danh sách
+                $query = "
+                    SELECT 
+                        l.*,
+                        u.username as employee_name,
+                        a.username as approver_name,
+                        u.email as employee_email
+                    FROM leaves l
+                    JOIN users u ON l.employee_id = u.user_id
+                    LEFT JOIN users a ON l.approved_by_user_id = a.user_id
+                    $whereClause
+                    ORDER BY l.created_at DESC
+                    LIMIT $per_page OFFSET $offset";
+                
+                $stmt = $conn->prepare($query);
+                $stmt->execute($params);
+                $leaves = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Thêm thông tin gợi ý tìm kiếm nếu có yêu cầu
+                if (isset($_GET['action']) && $_GET['action'] === 'suggestions') {
+                    $suggestions = [];
+                    foreach ($leaves as $leave) {
+                        $type = 'leave_code';
+                        if (stripos($leave['employee_name'], $_GET['search']) !== false) {
+                            $type = 'employee';
+                        } elseif (stripos($leave['reason'], $_GET['search']) !== false) {
+                            $type = 'reason';
+                        } elseif (stripos($leave['status'], $_GET['search']) !== false) {
+                            $type = 'status';
+                        }
+
+                        $suggestions[] = [
+                            'type' => $type,
+                            'title' => $leave['leave_code'],
+                            'subtitle' => $leave['employee_name'] . ' - ' . $leave['leave_type']
+                        ];
+                    }
+
+                    echo json_encode([
+                        'success' => true,
+                        'suggestions' => array_slice($suggestions, 0, 10)
+                    ]);
+                    exit;
+                }
+                
+                echo json_encode([
+                    'success' => true,
+                    'data' => $leaves,
+                    'total' => $total,
+                    'page' => $page,
+                    'per_page' => $per_page
+                ]);
+            } catch (Exception $e) {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Error getting leave list: ' . $e->getMessage()
+                ]);
             }
-            
-            if ($type) {
-                $query .= " AND l.type = ?";
-                $params[] = $type;
-                $types .= "s";
-            }
-            
-            if ($status) {
-                $query .= " AND l.status = ?";
-                $params[] = $status;
-                $types .= "s";
-            }
-            
-            if ($start_date) {
-                $query .= " AND l.start_date >= ?";
-                $params[] = $start_date;
-                $types .= "s";
-            }
-            
-            if ($end_date) {
-                $query .= " AND l.end_date <= ?";
-                $params[] = $end_date;
-                $types .= "s";
-            }
-            
-            if ($department_id) {
-                $query .= " AND u.department_id = ?";
-                $params[] = $department_id;
-                $types .= "i";
-            }
-            
-            $query .= " ORDER BY l.created_at DESC";
-            
-            $stmt = $conn->prepare($query);
-            if (!empty($params)) {
-                $stmt->bind_param($types, ...$params);
-            }
-            $stmt->execute();
-            $result = $stmt->get_result();
-            
-            $leaves = [];
-            while ($row = $result->fetch_assoc()) {
-                $leaves[] = $row;
-            }
-            sendResponse($leaves);
         }
         break;
         
     case 'POST':
-        // Create new leave request
-        $required_fields = ['user_id', 'type', 'start_date', 'end_date', 'reason', 'status'];
-        foreach ($required_fields as $field) {
-            if (!isset($input[$field])) {
-                handleError("Missing required field: $field");
+        try {
+            $input = json_decode(file_get_contents('php://input'), true);
+            
+            // Validate required fields
+            $required = ['employee_id', 'leave_type', 'start_date', 'end_date', 'reason'];
+            foreach ($required as $field) {
+                if (!isset($input[$field])) {
+                    echo json_encode(['success' => false, 'message' => "Missing required field: $field"]);
+                    exit();
+                }
             }
-        }
-        
-        $stmt = $conn->prepare("
-            INSERT INTO leaves (
-                user_id,
-                type,
-                start_date,
-                end_date,
-                reason,
-                status,
-                approved_by,
-                approved_at,
-                notes,
-                created_at,
-                updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
-        ");
-        
-        $stmt->bind_param(
-            "isssssiss",
-            $input['user_id'],
-            $input['type'],
-            $input['start_date'],
-            $input['end_date'],
-            $input['reason'],
-            $input['status'],
-            $input['approved_by'] ?? null,
-            $input['approved_at'] ?? null,
-            $input['notes'] ?? null
-        );
-        
-        if ($stmt->execute()) {
-            sendResponse(['id' => $conn->insert_id], 201);
-        } else {
-            handleError('Failed to create leave request');
+            
+            // Calculate duration
+            $start = new DateTime($input['start_date']);
+            $end = new DateTime($input['end_date']);
+            $duration = $start->diff($end)->days + 1;
+            
+            $stmt = $conn->prepare("
+                INSERT INTO leaves (
+                    employee_id, leave_type, start_date, end_date,
+                    leave_duration_days, reason, status, attachment_url,
+                    created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, 'pending', ?, NOW(), NOW())
+            ");
+            
+            $stmt->execute([
+                $input['employee_id'],
+                $input['leave_type'],
+                $input['start_date'],
+                $input['end_date'],
+                $duration,
+                $input['reason'],
+                $input['attachment_url'] ?? null
+            ]);
+            
+            $leave_id = $conn->lastInsertId();
+            
+            // Create notification
+            $notif_stmt = $conn->prepare("
+                INSERT INTO notifications (
+                    user_id, title, message, type,
+                    related_entity_type, related_entity_id
+                ) VALUES (?, 'Đơn nghỉ phép mới', ?, 'info', 'LeaveRequest', ?)
+            ");
+            $message = "Có đơn nghỉ phép mới cần duyệt";
+            $notif_stmt->execute([$_SESSION['user_id'], $message, $leave_id]);
+            
+            echo json_encode(['success' => true, 'id' => $leave_id]);
+        } catch (Exception $e) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Error creating leave request: ' . $e->getMessage()
+            ]);
         }
         break;
         
     case 'PUT':
-        // Update leave request
-        if (!$id) {
-            handleError('Leave request ID is required');
-        }
-        
-        $stmt = $conn->prepare("
-            UPDATE leaves 
-            SET user_id = ?,
-                type = ?,
-                start_date = ?,
-                end_date = ?,
-                reason = ?,
-                status = ?,
-                approved_by = ?,
-                approved_at = ?,
-                notes = ?,
-                updated_at = NOW()
-            WHERE id = ?
-        ");
-        
-        $stmt->bind_param(
-            "isssssissi",
-            $input['user_id'],
-            $input['type'],
-            $input['start_date'],
-            $input['end_date'],
-            $input['reason'],
-            $input['status'],
-            $input['approved_by'] ?? null,
-            $input['approved_at'] ?? null,
-            $input['notes'] ?? null,
-            $id
-        );
-        
-        if ($stmt->execute()) {
-            sendResponse(['message' => 'Leave request updated successfully']);
-        } else {
-            handleError('Failed to update leave request');
+        try {
+            if (!$id) {
+                echo json_encode(['success' => false, 'message' => 'Leave request ID is required']);
+                exit();
+            }
+            
+            $input = json_decode(file_get_contents('php://input'), true);
+            
+            // Calculate duration if dates are updated
+            if (isset($input['start_date']) && isset($input['end_date'])) {
+                $start = new DateTime($input['start_date']);
+                $end = new DateTime($input['end_date']);
+                $duration = $start->diff($end)->days + 1;
+            }
+            
+            $updates = [];
+            $params = [];
+            
+            $fields = [
+                'leave_type',
+                'start_date',
+                'end_date',
+                'reason',
+                'status',
+                'approved_by_user_id',
+                'approver_comments',
+                'attachment_url'
+            ];
+            
+            foreach ($fields as $field) {
+                if (isset($input[$field])) {
+                    $updates[] = "$field = ?";
+                    $params[] = $input[$field];
+                }
+            }
+            
+            if (isset($duration)) {
+                $updates[] = "leave_duration_days = ?";
+                $params[] = $duration;
+            }
+            
+            $updates[] = "updated_at = NOW()";
+            
+            $query = "UPDATE leaves SET " . implode(", ", $updates) . " WHERE id = ?";
+            $params[] = $id;
+            
+            $stmt = $conn->prepare($query);
+            $stmt->execute($params);
+            
+            echo json_encode(['success' => true, 'message' => 'Leave request updated successfully']);
+        } catch (Exception $e) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Error updating leave request: ' . $e->getMessage()
+            ]);
         }
         break;
         
     case 'DELETE':
-        // Delete leave request
-        if (!$id) {
-            handleError('Leave request ID is required');
-        }
-        
-        $stmt = $conn->prepare("DELETE FROM leaves WHERE id = ?");
-        $stmt->bind_param("i", $id);
-        
-        if ($stmt->execute()) {
-            sendResponse(['message' => 'Leave request deleted successfully']);
-        } else {
-            handleError('Failed to delete leave request');
+        try {
+            if (!$id) {
+                echo json_encode(['success' => false, 'message' => 'Leave request ID is required']);
+                exit();
+            }
+            
+            $stmt = $conn->prepare("DELETE FROM leaves WHERE id = ?");
+            $stmt->execute([$id]);
+            
+            echo json_encode(['success' => true, 'message' => 'Leave request deleted successfully']);
+        } catch (Exception $e) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Error deleting leave request: ' . $e->getMessage()
+            ]);
         }
         break;
         
     default:
-        handleError('Method not allowed', 405);
-} 
+        echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+}

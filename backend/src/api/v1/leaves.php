@@ -43,11 +43,21 @@ function getAllLeaves() {
     $user = $_SESSION['user'];
     
     try {
-        $sql = "SELECT l.*, e.name as employee_name, p.name as position_name, d.name as department_name 
+        $sql = "SELECT l.*, 
+                e.employee_code,
+                e.name as employee_name,
+                u.username as employee_username,
+                u.email as employee_email,
+                p.name as position_name, 
+                d.name as department_name,
+                a.username as approver_username,
+                a.email as approver_email
                 FROM leaves l 
-                JOIN employees e ON l.employee_id = e.id 
-                JOIN positions p ON e.position_id = p.id 
-                JOIN departments d ON p.department_id = d.id";
+                INNER JOIN employees e ON l.employee_id = e.id 
+                INNER JOIN users u ON e.user_id = u.user_id
+                LEFT JOIN positions p ON e.position_id = p.id 
+                LEFT JOIN departments d ON e.department_id = d.id
+                LEFT JOIN users a ON l.approved_by = a.user_id";
         
         // If not admin, only show leaves of the employee
         if ($user['role'] !== 'admin') {
@@ -62,10 +72,60 @@ function getAllLeaves() {
         $result = $stmt->get_result();
         $leaves = $result->fetch_all(MYSQLI_ASSOC);
         
-        echo json_encode(['success' => true, 'leaves' => $leaves]);
+        // Format the response data
+        $formattedLeaves = array_map(function($leave) {
+            return [
+                'id' => $leave['id'],
+                'employee_id' => $leave['employee_id'],
+                'employee_code' => $leave['employee_code'] ?? 'N/A',
+                'employee_name' => $leave['employee_name'] ?: $leave['employee_username'],
+                'employee_email' => $leave['employee_email'],
+                'leave_type' => $leave['leave_type'],
+                'start_date' => $leave['start_date'],
+                'end_date' => $leave['end_date'],
+                'leave_duration_days' => $leave['leave_duration_days'],
+                'reason' => $leave['reason'],
+                'status' => $leave['status'],
+                'approved_by_user_id' => $leave['approved_by'],
+                'approver_name' => $leave['approver_username'],
+                'approver_email' => $leave['approver_email'],
+                'approver_comments' => $leave['approver_comments'],
+                'attachment_url' => $leave['attachment_url'],
+                'created_at' => $leave['created_at'],
+                'updated_at' => $leave['updated_at'],
+                'leave_code' => $leave['leave_code'],
+                'position_name' => $leave['position_name'],
+                'department_name' => $leave['department_name']
+            ];
+        }, $leaves);
+        
+        // Get total count for pagination
+        $countSql = "SELECT COUNT(*) as total FROM leaves l 
+                    INNER JOIN employees e ON l.employee_id = e.id";
+        if ($user['role'] !== 'admin') {
+            $countSql .= " WHERE l.employee_id = ?";
+            $countStmt = $conn->prepare($countSql);
+            $countStmt->bind_param("i", $user['id']);
+        } else {
+            $countStmt = $conn->prepare($countSql);
+        }
+        $countStmt->execute();
+        $total = $countStmt->get_result()->fetch_assoc()['total'];
+        
+        // Get pagination parameters
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $per_page = isset($_GET['per_page']) ? (int)$_GET['per_page'] : 10;
+        
+        echo json_encode([
+            'success' => true, 
+            'data' => $formattedLeaves,
+            'total' => $total,
+            'page' => $page,
+            'per_page' => $per_page
+        ]);
     } catch (Exception $e) {
         http_response_code(500);
-        echo json_encode(['success' => false, 'message' => 'Database error']);
+        echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
     }
 }
 
@@ -82,11 +142,21 @@ function getLeaveById() {
     }
     
     try {
-        $sql = "SELECT l.*, e.name as employee_name, p.name as position_name, d.name as department_name 
+        $sql = "SELECT l.*, 
+                e.employee_code,
+                e.name as employee_name,
+                u.username as employee_username,
+                u.email as employee_email,
+                p.name as position_name, 
+                d.name as department_name,
+                a.username as approver_username,
+                a.email as approver_email
                 FROM leaves l 
-                JOIN employees e ON l.employee_id = e.id 
-                JOIN positions p ON e.position_id = p.id 
-                JOIN departments d ON p.department_id = d.id 
+                INNER JOIN employees e ON l.employee_id = e.id 
+                INNER JOIN users u ON e.user_id = u.user_id
+                LEFT JOIN positions p ON e.position_id = p.id 
+                LEFT JOIN departments d ON e.department_id = d.id
+                LEFT JOIN users a ON l.approved_by = a.user_id
                 WHERE l.id = ?";
         
         $stmt = $conn->prepare($sql);
@@ -108,10 +178,35 @@ function getLeaveById() {
             return;
         }
         
-        echo json_encode(['success' => true, 'leave' => $leave]);
+        // Format the response data
+        $formattedLeave = [
+            'id' => $leave['id'],
+            'employee_id' => $leave['employee_id'],
+            'employee_code' => $leave['employee_code'] ?? 'N/A',
+            'employee_name' => $leave['employee_name'] ?: $leave['employee_username'],
+            'employee_email' => $leave['employee_email'],
+            'leave_type' => $leave['leave_type'],
+            'start_date' => $leave['start_date'],
+            'end_date' => $leave['end_date'],
+            'leave_duration_days' => $leave['leave_duration_days'],
+            'reason' => $leave['reason'],
+            'status' => $leave['status'],
+            'approved_by_user_id' => $leave['approved_by'],
+            'approver_name' => $leave['approver_username'],
+            'approver_email' => $leave['approver_email'],
+            'approver_comments' => $leave['approver_comments'],
+            'attachment_url' => $leave['attachment_url'],
+            'created_at' => $leave['created_at'],
+            'updated_at' => $leave['updated_at'],
+            'leave_code' => $leave['leave_code'],
+            'position_name' => $leave['position_name'],
+            'department_name' => $leave['department_name']
+        ];
+        
+        echo json_encode(['success' => true, 'leave' => $formattedLeave]);
     } catch (Exception $e) {
         http_response_code(500);
-        echo json_encode(['success' => false, 'message' => 'Database error']);
+        echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
     }
 }
 

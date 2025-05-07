@@ -594,3 +594,9 @@
 {"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-04 13:23:19"}
 {"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-06 01:04:23"}
 {"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-06 01:04:23"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-07 11:46:11"}
+{"error":{"address":"::1","code":"ECONNREFUSED","errno":-4078,"fatal":true,"port":3306,"syscall":"connect"},"level":"error","message":"Lỗi kết nối MySQL:","timestamp":"2025-05-07 11:46:11"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-07 11:48:11"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-07 11:48:11"}
+{"level":"info","message":"Server đang chạy tại port 3000","timestamp":"2025-05-07 12:25:34"}
+{"level":"info","message":"Đã kết nối thành công đến MySQL","timestamp":"2025-05-07 12:25:34"}

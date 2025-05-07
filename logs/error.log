@@ -94,3 +94,4 @@
 {"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng user_profiles:","timestamp":"2025-04-25 08:48:09"}
 {"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng users:","timestamp":"2025-04-25 08:48:09"}
 {"error":{"fatal":true},"level":"error","message":"Lỗi khi lấy dữ liệu từ bảng work_schedules:","timestamp":"2025-04-25 08:48:09"}
+{"error":{"address":"::1","code":"ECONNREFUSED","errno":-4078,"fatal":true,"port":3306,"syscall":"connect"},"level":"error","message":"Lỗi kết nối MySQL:","timestamp":"2025-05-07 11:46:11"}

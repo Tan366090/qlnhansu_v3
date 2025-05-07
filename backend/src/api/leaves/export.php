@@ -51,8 +51,8 @@ try {
         JOIN employees e ON l.employee_id = e.id
         JOIN user_profiles up ON e.user_id = up.user_id
         JOIN departments d ON e.department_id = d.id
-        LEFT JOIN users u ON l.approved_by_user_id = u.id
-        LEFT JOIN user_profiles up2 ON u.id = up2.user_id
+        LEFT JOIN users u ON l.approved_by_user_id = u.user_id
+        LEFT JOIN user_profiles up2 ON u.user_id = up2.user_id
         WHERE 1=1
     ";
 

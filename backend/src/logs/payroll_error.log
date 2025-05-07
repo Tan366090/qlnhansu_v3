@@ -1732,3 +1732,21 @@
 [06-May-2025 05:19:07 Europe/Berlin] Current directory: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api
 [06-May-2025 05:19:07 Europe/Berlin] Looking for database file at: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api/../../../config/database.php
 [06-May-2025 05:19:07 Europe/Berlin] Looking for functions file at: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api/../../../config/functions.php
+[07-May-2025 06:48:55 Europe/Berlin] === Starting Payroll API Request ===
+[07-May-2025 06:48:55 Europe/Berlin] Request Method: GET
+[07-May-2025 06:48:55 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/public/admin/api/payroll.php?page=1&limit=10&search=&department=&month=&year=
+[07-May-2025 06:48:55 Europe/Berlin] Current directory: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api
+[07-May-2025 06:48:55 Europe/Berlin] Looking for database file at: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api/../../../config/database.php
+[07-May-2025 06:48:55 Europe/Berlin] Looking for functions file at: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api/../../../config/functions.php
+[07-May-2025 08:09:56 Europe/Berlin] === Starting Payroll API Request ===
+[07-May-2025 08:09:56 Europe/Berlin] Request Method: GET
+[07-May-2025 08:09:56 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/public/admin/api/payroll.php?page=1&limit=10&search=&department=&month=&year=
+[07-May-2025 08:09:56 Europe/Berlin] Current directory: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api
+[07-May-2025 08:09:56 Europe/Berlin] Looking for database file at: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api/../../../config/database.php
+[07-May-2025 08:09:56 Europe/Berlin] Looking for functions file at: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api/../../../config/functions.php
+[07-May-2025 08:25:26 Europe/Berlin] === Starting Payroll API Request ===
+[07-May-2025 08:25:26 Europe/Berlin] Request Method: GET
+[07-May-2025 08:25:26 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/public/admin/api/payroll.php?page=1&limit=10&search=&department=&month=&year=
+[07-May-2025 08:25:26 Europe/Berlin] Current directory: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api
+[07-May-2025 08:25:26 Europe/Berlin] Looking for database file at: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api/../../../config/database.php
+[07-May-2025 08:25:26 Europe/Berlin] Looking for functions file at: C:\xampp\htdocs\qlnhansu_V3\backend\src\public\admin\api/../../../config/functions.php

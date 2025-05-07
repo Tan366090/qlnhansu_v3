@@ -65,6 +65,12 @@ switch ($action) {
     case 'report':
         getEmployeeReport();
         break;
+    case 'getAll':
+        getAllEmployees();
+        break;
+    case 'getById':
+        getEmployeeById();
+        break;
     default:
         sendResponse(false, 'Invalid action', [], ['action' => 'Invalid action specified'], 400);
 }
@@ -505,5 +511,119 @@ function getEmployeeReport() {
         sendResponse(true, 'Employee report retrieved successfully', ['report' => $report]);
     } catch (Exception $e) {
         sendResponse(false, 'Failed to get employee report', [], ['server' => $e->getMessage()], 500);
+    }
+}
+
+// Get all employees
+function getAllEmployees() {
+    global $conn;
+    $user = $_SESSION['user'];
+    
+    try {
+        $sql = "SELECT e.*, 
+                u.username,
+                u.email,
+                p.name as position_name,
+                d.name as department_name
+                FROM employees e
+                INNER JOIN users u ON e.user_id = u.user_id
+                LEFT JOIN positions p ON e.position_id = p.id
+                LEFT JOIN departments d ON e.department_id = d.id
+                WHERE e.status = 'active'";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $employees = $result->fetch_all(MYSQLI_ASSOC);
+        
+        // Format the response data
+        $formattedEmployees = array_map(function($employee) {
+            return [
+                'id' => $employee['id'],
+                'user_id' => $employee['user_id'],
+                'employee_code' => $employee['employee_code'],
+                'name' => $employee['name'] ?: $employee['username'],
+                'email' => $employee['email'],
+                'phone' => $employee['phone'],
+                'department_id' => $employee['department_id'],
+                'position_id' => $employee['position_id'],
+                'department_name' => $employee['department_name'],
+                'position_name' => $employee['position_name'],
+                'hire_date' => $employee['hire_date'],
+                'contract_type' => $employee['contract_type'],
+                'contract_start_date' => $employee['contract_start_date'],
+                'contract_end_date' => $employee['contract_end_date'],
+                'base_salary' => $employee['base_salary'],
+                'status' => $employee['status']
+            ];
+        }, $employees);
+        
+        echo json_encode(['success' => true, 'data' => $formattedEmployees]);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
+    }
+}
+
+// Get employee by ID
+function getEmployeeById() {
+    global $conn;
+    $user = $_SESSION['user'];
+    $id = $_GET['id'] ?? 0;
+    
+    if (!$id) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Employee ID is required']);
+        return;
+    }
+    
+    try {
+        $sql = "SELECT e.*, 
+                u.username,
+                u.email,
+                p.name as position_name,
+                d.name as department_name
+                FROM employees e
+                INNER JOIN users u ON e.user_id = u.user_id
+                LEFT JOIN positions p ON e.position_id = p.id
+                LEFT JOIN departments d ON e.department_id = d.id
+                WHERE e.id = ?";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $employee = $result->fetch_assoc();
+        
+        if (!$employee) {
+            http_response_code(404);
+            echo json_encode(['success' => false, 'message' => 'Employee not found']);
+            return;
+        }
+        
+        // Format the response data
+        $formattedEmployee = [
+            'id' => $employee['id'],
+            'user_id' => $employee['user_id'],
+            'employee_code' => $employee['employee_code'],
+            'name' => $employee['name'] ?: $employee['username'],
+            'email' => $employee['email'],
+            'phone' => $employee['phone'],
+            'department_id' => $employee['department_id'],
+            'position_id' => $employee['position_id'],
+            'department_name' => $employee['department_name'],
+            'position_name' => $employee['position_name'],
+            'hire_date' => $employee['hire_date'],
+            'contract_type' => $employee['contract_type'],
+            'contract_start_date' => $employee['contract_start_date'],
+            'contract_end_date' => $employee['contract_end_date'],
+            'base_salary' => $employee['base_salary'],
+            'status' => $employee['status']
+        ];
+        
+        echo json_encode(['success' => true, 'data' => $formattedEmployee]);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
     }
 } 

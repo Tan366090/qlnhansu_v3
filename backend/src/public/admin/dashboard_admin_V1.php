@@ -2317,13 +2317,13 @@
                     </li>
                     
                     <li class="nav-item" data-menu-id="leave">
-                        <a href="leave/leave_list.html" class="nav-link">
+                        <a href="leave/leave_list.php" class="nav-link">
                             <i class="fas fa-calendar-alt"></i>
                             <span>Nghỉ phép</span>
                         </a>
                     </li>
                     
-                    <li class="nav-item" data-menu-id="training">
+                    <!-- <li class="nav-item" data-menu-id="training">
                         <a href="pages/training.php" class="nav-link">
                             <i class="fas fa-graduation-cap"></i>
                             <span>Đào tạo</span>
@@ -2340,7 +2340,7 @@
                             <i class="fas fa-file-alt"></i>
                             <span>Tài liệu</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item" data-menu-id="logout">
                         <a href="logout.php" class="nav-link">
                             <i class="fas fa-sign-out-alt"></i>
