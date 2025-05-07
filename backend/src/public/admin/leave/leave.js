@@ -20,7 +20,388 @@ const leaveModal = new bootstrap.Modal(document.getElementById('leaveModal'));
 const leaveForm = document.getElementById('leaveForm');
 const leaveInfoModal = new bootstrap.Modal(document.getElementById('leaveInfoModal'));
 
+// Add loader styles
+const loaderStyles = `
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(3px);
+}
 
+.loader {
+    animation: rotate 1s infinite;
+    height: 50px;
+    width: 50px;
+}
+
+.loader:before,
+.loader:after {
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 20px;
+    width: 20px;
+}
+
+.loader:before {
+    animation: ball1 1s infinite;
+    background-color: #fff;
+    box-shadow: 30px 0 0 #ff3d00;
+    margin-bottom: 10px;
+}
+
+.loader:after {
+    animation: ball2 1s infinite;
+    background-color: #ff3d00;
+    box-shadow: 30px 0 0 #fff;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg) scale(0.8) }
+    50% { transform: rotate(360deg) scale(1.2) }
+    100% { transform: rotate(720deg) scale(0.8) }
+}
+
+@keyframes ball1 {
+    0% {
+        box-shadow: 30px 0 0 #ff3d00;
+    }
+    50% {
+        box-shadow: 0 0 0 #ff3d00;
+        margin-bottom: 0;
+        transform: translate(15px, 15px);
+    }
+    100% {
+        box-shadow: 30px 0 0 #ff3d00;
+        margin-bottom: 10px;
+    }
+}
+
+@keyframes ball2 {
+    0% {
+        box-shadow: 30px 0 0 #fff;
+    }
+    50% {
+        box-shadow: 0 0 0 #fff;
+        margin-top: -20px;
+        transform: translate(15px, 15px);
+    }
+    100% {
+        box-shadow: 30px 0 0 #fff;
+        margin-top: 0;
+    }
+}
+`;
+
+// Add responsive styles
+const responsiveStyles = `
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .container-fluid {
+        padding: 15px;
+    }
+    
+    .card {
+        margin-bottom: 20px;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+    }
+    
+    .action-btns {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .icon-btn {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 992px) {
+    .statistics-row {
+        flex-direction: column;
+    }
+    
+    .stat-card {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .filters-row {
+        flex-direction: column;
+    }
+    
+    .filter-group {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .search-group {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .table th, .table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .modal-dialog {
+        margin: 10px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .btn-group {
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        margin-bottom: 5px;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .page-item {
+        margin: 2px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .card-title {
+        margin-bottom: 10px;
+    }
+    
+    .btn-toolbar {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .table-responsive {
+        margin: 0 -15px;
+    }
+    
+    .modal-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .modal-footer .btn {
+        width: 100%;
+    }
+    
+    .toast-container {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .toast {
+        width: 100%;
+    }
+}
+
+/* Common responsive styles */
+.table-responsive {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.btn {
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-control {
+    border-radius: 6px;
+}
+
+.modal-content {
+    border-radius: 12px;
+}
+
+/* Loading animation */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Toast notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    margin-bottom: 10px;
+    min-width: 300px;
+    max-width: 100%;
+}
+
+/* Table styles */
+.table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Status badges */
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Action buttons */
+.action-btns {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: all 0.2s;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: inherit;
+    padding: 0;
+}
+.icon-btn:hover, .icon-btn:focus {
+    background: rgba(0,0,0,0.05);
+    color: #007bff;
+}
+.icon-btn.info-btn { color: #17a2b8; }
+.icon-btn.edit-btn { color: #ffc107; }
+.icon-btn.delete-btn { color: #dc3545; }
+
+/* Form styles */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+/* Modal styles */
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Pagination styles */
+.pagination {
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.page-item .page-link {
+    border-radius: 4px;
+    margin: 0 2px;
+}
+
+.page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+`;
 // Add styles to document
 const styleSheet = document.createElement('style');
 styleSheet.textContent = responsiveStyles;
@@ -583,7 +964,7 @@ async function approveLeave(leaveId) {
     }
 }
 
-// Update rejectLeave function
+// Update rejectLeave function to return true/false
 async function rejectLeave(leaveId, reason) {
     showLoader();
     try {
@@ -603,16 +984,18 @@ async function rejectLeave(leaveId, reason) {
         
         if (data.success) {
             showToast('success', 'Thành công', 'Đơn nghỉ phép đã bị từ chối');
-            // Hide details section
             hideLeaveDetails();
-            // Refresh data
             loadLeaves();
             loadStatistics();
+            return true;
         } else {
-            showToast('error', 'Lỗi', data.message);
+            showToast('error', 'Lỗi', data.message || 'Không thể từ chối đơn nghỉ phép');
+            return false;
         }
     } catch (error) {
-        showToast('error', 'Lỗi', 'Không thể từ chối đơn nghỉ phép');
+        console.error('Error rejecting leave:', error);
+        // showToast('error', 'Lỗi', 'Không thể kết nối đến server');
+        return false;
     } finally {
         hideLoader();
     }
@@ -912,20 +1295,25 @@ function showRejectModal(leaveId) {
     modal.show();
 }
 
-// Add event listener for reject confirmation
-document.getElementById('confirmReject').addEventListener('click', function() {
-    const leaveId = document.getElementById('rejectModal').dataset.leaveId;
-    const reason = document.getElementById('rejectReason').value;
-    
-    if (!reason.trim()) {
-        showNotification('error', 'Lỗi', 'Vui lòng nhập lý do từ chối');
-        return;
-    }
-    
-    rejectLeave(leaveId, reason);
-    bootstrap.Modal.getInstance(document.getElementById('rejectModal')).hide();
-    document.getElementById('rejectReason').value = '';
-});
+// Update event listener for reject confirmation to use async/await and only close modal on success
+const confirmRejectBtn = document.getElementById('confirmReject');
+if (confirmRejectBtn) {
+    confirmRejectBtn.addEventListener('click', async function() {
+        const leaveId = document.getElementById('rejectModal').dataset.leaveId;
+        const reason = document.getElementById('rejectReason').value;
+        
+        if (!reason.trim()) {
+            showNotification('error', 'Lỗi', 'Vui lòng nhập lý do từ chối');
+            return;
+        }
+        // Await rejectLeave and only close modal if success
+        const result = await rejectLeave(leaveId, reason);
+        if (result === true) {
+            bootstrap.Modal.getInstance(document.getElementById('rejectModal')).hide();
+            document.getElementById('rejectReason').value = '';
+        }
+    });
+}
 
 // Update pagination function
 function updatePagination(total, currentPage, perPage) {
