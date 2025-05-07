@@ -49,6 +49,32 @@ switch ($method) {
             exit();
         }
 
+        if ($action === 'top_employees') {
+            $stmt = $conn->query("
+                SELECT u.username as employee_name, COUNT(*) as total_leaves
+                FROM leaves l
+                JOIN users u ON l.employee_id = u.user_id
+                GROUP BY l.employee_id
+                ORDER BY total_leaves DESC
+                LIMIT 5
+            ");
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode(['success' => true, 'data' => $data]);
+            exit();
+        }
+
+        if ($action === 'leaves_trend') {
+            $stmt = $conn->query("
+                SELECT DATE(created_at) as date, COUNT(*) as total
+                FROM leaves
+                GROUP BY DATE(created_at)
+                ORDER BY date ASC
+            ");
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode(['success' => true, 'data' => $data]);
+            exit();
+        }
+
         if ($id) {
             try {
                 // Lấy chi tiết một đơn
@@ -201,16 +227,24 @@ switch ($method) {
             $start = new DateTime($input['start_date']);
             $end = new DateTime($input['end_date']);
             $duration = $start->diff($end)->days + 1;
-            
+
+            // Sinh mã đơn tự động
+            $today = date('Ymd');
+            $countStmt = $conn->prepare("SELECT COUNT(*) as count FROM leaves WHERE DATE(created_at) = CURDATE()");
+            $countStmt->execute();
+            $countToday = $countStmt->fetch(PDO::FETCH_ASSOC)['count'] + 1;
+            $leave_code = 'LV' . $today . '-' . str_pad($countToday, 3, '0', STR_PAD_LEFT);
+
             $stmt = $conn->prepare("
                 INSERT INTO leaves (
-                    employee_id, leave_type, start_date, end_date,
+                    leave_code, employee_id, leave_type, start_date, end_date,
                     leave_duration_days, reason, status, attachment_url,
                     created_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, 'pending', ?, NOW(), NOW())
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending', ?, NOW(), NOW())
             ");
             
             $stmt->execute([
+                $leave_code,
                 $input['employee_id'],
                 $input['leave_type'],
                 $input['start_date'],

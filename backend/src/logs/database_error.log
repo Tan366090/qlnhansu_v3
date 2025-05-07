@@ -15744,3 +15744,198 @@ Stack trace:
 [07-May-2025 12:36:58 Europe/Berlin] Attempting to connect to database: qlnhansu
 [07-May-2025 12:36:58 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
 [07-May-2025 12:36:58 Europe/Berlin] Database connection successful
+[07-May-2025 12:37:28 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:37:28 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:37:28 Europe/Berlin] Database connection successful
+[07-May-2025 12:37:40 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:37:40 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:37:40 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:37:40 Europe/Berlin] Database connection successful
+[07-May-2025 12:37:40 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:37:40 Europe/Berlin] Database connection successful
+[07-May-2025 12:37:43 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:37:43 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:37:43 Europe/Berlin] Database connection successful
+[07-May-2025 12:38:11 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:38:11 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:38:11 Europe/Berlin] Database connection successful
+[07-May-2025 12:38:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:38:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:38:41 Europe/Berlin] Database connection successful
+[07-May-2025 12:39:10 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:39:10 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:39:10 Europe/Berlin] Database connection successful
+[07-May-2025 12:39:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:39:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:39:41 Europe/Berlin] Database connection successful
+[07-May-2025 12:40:11 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:40:11 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:40:11 Europe/Berlin] Database connection successful
+[07-May-2025 12:41:10 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:41:10 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:41:10 Europe/Berlin] Database connection successful
+[07-May-2025 12:42:10 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:42:10 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:42:10 Europe/Berlin] Database connection successful
+[07-May-2025 12:43:10 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:43:10 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:43:10 Europe/Berlin] Database connection successful
+[07-May-2025 12:43:24 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:43:24 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:43:24 Europe/Berlin] Database connection successful
+[07-May-2025 12:43:24 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:43:24 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:43:24 Europe/Berlin] Database connection successful
+[07-May-2025 12:43:54 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:43:54 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:43:54 Europe/Berlin] Database connection successful
+[07-May-2025 12:44:24 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:44:24 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:44:24 Europe/Berlin] Database connection successful
+[07-May-2025 12:44:54 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:44:54 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:44:54 Europe/Berlin] Database connection successful
+[07-May-2025 12:45:18 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:45:18 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:45:18 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:45:18 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:45:18 Europe/Berlin] Database connection successful
+[07-May-2025 12:45:18 Europe/Berlin] Database connection successful
+[07-May-2025 12:45:49 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:45:49 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:45:49 Europe/Berlin] Database connection successful
+[07-May-2025 12:46:19 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:46:19 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:46:19 Europe/Berlin] Database connection successful
+[07-May-2025 12:46:34 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:46:34 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:46:34 Europe/Berlin] Database connection successful
+[07-May-2025 12:46:34 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:46:34 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:46:34 Europe/Berlin] Database connection successful
+[07-May-2025 12:47:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:47:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:47:05 Europe/Berlin] Database connection successful
+[07-May-2025 12:47:35 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:47:35 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:47:35 Europe/Berlin] Database connection successful
+[07-May-2025 12:47:38 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:47:38 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:47:38 Europe/Berlin] Database connection successful
+[07-May-2025 12:47:38 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:47:38 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:47:38 Europe/Berlin] Database connection successful
+[07-May-2025 12:48:09 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:48:09 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:48:09 Europe/Berlin] Database connection successful
+[07-May-2025 12:48:18 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:48:18 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:48:18 Europe/Berlin] Database connection successful
+[07-May-2025 12:48:18 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:48:18 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:48:18 Europe/Berlin] Database connection successful
+[07-May-2025 12:48:49 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:48:49 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:48:49 Europe/Berlin] Database connection successful
+[07-May-2025 12:49:11 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:49:11 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:49:11 Europe/Berlin] Database connection successful
+[07-May-2025 12:49:11 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:49:11 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:49:11 Europe/Berlin] Database connection successful
+[07-May-2025 12:49:42 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:49:42 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:49:42 Europe/Berlin] Database connection successful
+[07-May-2025 12:50:12 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:50:12 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:50:12 Europe/Berlin] Database connection successful
+[07-May-2025 12:50:37 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:50:37 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:50:37 Europe/Berlin] Database connection successful
+[07-May-2025 12:50:37 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:50:37 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:50:37 Europe/Berlin] Database connection successful
+[07-May-2025 12:51:08 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:51:08 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:51:08 Europe/Berlin] Database connection successful
+[07-May-2025 12:51:38 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:51:38 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:51:38 Europe/Berlin] Database connection successful
+[07-May-2025 12:52:08 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:52:08 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:52:08 Europe/Berlin] Database connection successful
+[07-May-2025 12:52:38 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:52:38 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:52:38 Europe/Berlin] Database connection successful
+[07-May-2025 12:52:58 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:52:58 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:52:58 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:52:58 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:52:58 Europe/Berlin] Database connection successful
+[07-May-2025 12:52:58 Europe/Berlin] Database connection successful
+[07-May-2025 12:53:13 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:53:13 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:53:13 Europe/Berlin] Database connection successful
+[07-May-2025 12:53:13 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:53:13 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:53:13 Europe/Berlin] Database connection successful
+[07-May-2025 12:53:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:53:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:53:44 Europe/Berlin] Database connection successful
+[07-May-2025 12:54:14 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:54:14 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:54:14 Europe/Berlin] Database connection successful
+[07-May-2025 12:54:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:54:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:54:44 Europe/Berlin] Database connection successful
+[07-May-2025 12:55:14 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:55:14 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:55:14 Europe/Berlin] Database connection successful
+[07-May-2025 12:55:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:55:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:55:44 Europe/Berlin] Database connection successful
+[07-May-2025 12:55:53 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:55:53 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:55:53 Europe/Berlin] Database connection successful
+[07-May-2025 12:55:53 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:55:53 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:55:53 Europe/Berlin] Database connection successful
+[07-May-2025 12:56:23 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:56:23 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:56:23 Europe/Berlin] Database connection successful
+[07-May-2025 12:56:54 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:56:54 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:56:54 Europe/Berlin] Database connection successful
+[07-May-2025 12:57:24 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:57:24 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:57:24 Europe/Berlin] Database connection successful
+[07-May-2025 12:57:53 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:57:53 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:57:53 Europe/Berlin] Database connection successful
+[07-May-2025 12:57:54 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:57:54 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:57:54 Europe/Berlin] Database connection successful
+[07-May-2025 12:57:54 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:57:54 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:57:54 Europe/Berlin] Database connection successful
+[07-May-2025 12:58:24 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:58:24 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:58:24 Europe/Berlin] Database connection successful
+[07-May-2025 12:58:54 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:58:54 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:58:54 Europe/Berlin] Database connection successful
+[07-May-2025 12:59:11 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:59:11 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:59:11 Europe/Berlin] Database connection successful
+[07-May-2025 12:59:11 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:59:11 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:59:11 Europe/Berlin] Database connection successful
+[07-May-2025 12:59:35 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:59:35 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:59:35 Europe/Berlin] Database connection successful
+[07-May-2025 12:59:35 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 12:59:35 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 12:59:35 Europe/Berlin] Database connection successful
+[07-May-2025 13:00:06 Europe/Berlin] Attempting to connect to database: qlnhansu
+[07-May-2025 13:00:06 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[07-May-2025 13:00:06 Europe/Berlin] Database connection successful

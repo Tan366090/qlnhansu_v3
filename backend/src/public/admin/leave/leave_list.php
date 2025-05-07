@@ -785,6 +785,25 @@ session_start();
     90% { transform: rotate(-1deg) scale(1);}
     100% { transform: rotate(0deg) scale(1);}
 }
+
+.chart-container {
+    max-width: 520px;
+    min-width: 500px;
+    height: 340px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-left: 12px; */
+    /* margin-right: 12px; */
+}
+.chart-container h6 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+.chart-row {
+    margin-bottom: 3rem;
+}
 </style>
 <body>
     <!-- Toast Container -->
@@ -985,6 +1004,22 @@ session_start();
                                 <span id="pendingAvgTime">0 giờ chờ trung bình</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thêm sau phần dashboard-cards hoặc vị trí phù hợp -->
+            <div class="row mt-4 chart-row gx-5">
+                <div class="col-12 col-md-6">
+                    <div class="chart-container">
+                        <h6>Top 5 nhân viên xin nghỉ nhiều nhất</h6>
+                        <canvas id="topEmployeesChart" width="500" height="300"></canvas>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="chart-container">
+                        <h6>Xu hướng số lượng đơn nghỉ phép theo ngày</h6>
+                        <canvas id="leavesTrendChart" width="500" height="300"></canvas>
                     </div>
                 </div>
             </div>
@@ -1866,6 +1901,81 @@ session_start();
     // Update end date min when start date changes
     document.getElementById('startDate').addEventListener('change', function() {
         document.getElementById('endDate').min = this.value;
+    });
+    </script>
+
+    <script>
+    async function renderTopEmployeesChart() {
+        const res = await fetch('../api/leaves.php?action=top_employees');
+        const result = await res.json();
+        if (result.success) {
+            const labels = result.data.map(item => item.employee_name);
+            const data = result.data.map(item => item.total_leaves);
+            new Chart(document.getElementById('topEmployeesChart'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Số đơn nghỉ',
+                        data: data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                        barThickness: 24,
+                        borderRadius: 12
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: false }
+                    },
+                    layout: { padding: 8 },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { font: { size: 10 } } },
+                        x: { ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+    }
+
+    async function renderLeavesTrendChart() {
+        const res = await fetch('../api/leaves.php?action=leaves_trend');
+        const result = await res.json();
+        if (result.success) {
+            const labels = result.data.map(item => item.date);
+            const data = result.data.map(item => item.total);
+            new Chart(document.getElementById('leavesTrendChart'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Số đơn nghỉ phép',
+                        data: data,
+                        fill: false,
+                        borderColor: 'rgba(255, 99, 132, 0.8)',
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: false }
+                    },
+                    layout: { padding: 8 },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { font: { size: 10 } } },
+                        x: { ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        renderTopEmployeesChart();
+        renderLeavesTrendChart();
     });
     </script>
 </body>
