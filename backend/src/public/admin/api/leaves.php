@@ -33,7 +33,8 @@ switch ($method) {
                     SELECT 
                         COUNT(*) as total_leaves,
                         SUM(CASE WHEN status = 'approved' THEN 1 ELSE 0 END) as approved_leaves,
-                        SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending_leaves
+                        SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending_leaves,
+                        SUM(CASE WHEN status = 'rejected' THEN 1 ELSE 0 END) as rejected_leaves
                     FROM leaves
                 ");
                 $stats = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -95,12 +96,14 @@ switch ($method) {
                 
                 if (isset($_GET['search'])) {
                     $where[] = "(
-                        l.leave_code LIKE ? OR 
-                        CONCAT(e.first_name, ' ', e.last_name) LIKE ? OR 
+                        l.leave_code = ? OR 
                         l.reason LIKE ? OR 
-                        l.status LIKE ?
+                        l.status LIKE ? OR
+                        l.leave_type LIKE ? OR
+                        l.approver_comments LIKE ?
                     )";
                     $search = "%{$_GET['search']}%";
+                    $params[] = $_GET['search']; // Exact match for leave_code
                     $params[] = $search;
                     $params[] = $search;
                     $params[] = $search;

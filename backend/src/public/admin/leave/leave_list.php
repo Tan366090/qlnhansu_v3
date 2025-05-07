@@ -44,24 +44,83 @@ session_start();
 
 /* Dashboard Cards Styles */
 .dashboard-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
+    margin: 2rem 0 2.5rem 0;
+    overflow-x: auto;
+    padding-bottom: 8px;
 }
 
 .dashboard-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 1rem;
-    transition: transform 0.3s ease;
+    min-width: 300px;
+    flex: 0 0 auto;
+    background: linear-gradient(135deg, #fff 60%, #f7fafd 100%);
+    border-radius: 22px;
+    box-shadow: 0 4px 24px rgba(52, 152, 219, 0.08), 0 1.5px 6px rgba(0,0,0,0.04);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    transition: transform 0.25s cubic-bezier(.4,2,.3,1), box-shadow 0.25s;
     position: relative;
     cursor: pointer;
+    border: 1.5px solid #f0f4fa;
 }
 
 .dashboard-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(52, 152, 219, 0.18), 0 2px 8px rgba(0,0,0,0.08);
+    border-color: #e0e8f8;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: linear-gradient(135deg, #f7b42c 0%, #fc575e 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(252, 87, 94, 0.12);
+    transition: background 0.3s;
+    animation: shake 2.5s infinite cubic-bezier(.36,.07,.19,.97) both;
+}
+
+#totalLeavesCard .card-icon {
+    background: linear-gradient(135deg, #3498db 0%, #6dd5fa 100%);
+}
+#rejectedLeavesCard .card-icon {
+    background: linear-gradient(135deg, #e74c3c 0%, #ffb199 100%);
+}
+#approvedLeavesCard .card-icon {
+    background: linear-gradient(135deg, #2ecc71 0%, #a8ff78 100%);
+}
+#pendingLeavesCard .card-icon {
+    background: linear-gradient(135deg, #f1c40f 0%, #f9d423 100%);
+}
+
+.card-title {
+    font-size: 1.1rem;
+    color: #222;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.2px;
+}
+
+.card-value {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #222;
+    margin: 0.1rem 0 0.2rem 0;
+    letter-spacing: 1px;
+    line-height: 1.1;
 }
 
 /* Reset CSS cho tooltip */
@@ -712,6 +771,20 @@ session_start();
     visibility: visible;
     bottom: calc(100% + 5px);
 }
+
+@keyframes shake {
+    0% { transform: rotate(0deg) scale(1);}
+    10% { transform: rotate(-10deg) scale(1.08);}
+    20% { transform: rotate(10deg) scale(1.12);}
+    30% { transform: rotate(-8deg) scale(1.1);}
+    40% { transform: rotate(8deg) scale(1.08);}
+    50% { transform: rotate(-4deg) scale(1.06);}
+    60% { transform: rotate(4deg) scale(1.04);}
+    70% { transform: rotate(-2deg) scale(1.02);}
+    80% { transform: rotate(2deg) scale(1.01);}
+    90% { transform: rotate(-1deg) scale(1);}
+    100% { transform: rotate(0deg) scale(1);}
+}
 </style>
 <body>
     <!-- Toast Container -->
@@ -830,6 +903,34 @@ session_start();
                         </div>
                     </div>
                 </div>
+                <div class="dashboard-card" id="rejectedLeavesCard">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                            <i class="fas fa-calendar-times"></i>
+                        </div>
+                        <div>
+                            <h6 class="card-title">Tổng số đơn từ chối</h6>
+                            <h3 class="card-value" id="rejectedLeaves">0</h3>
+                        </div>
+                    </div>
+                    <div class="leave-tooltip">
+                        <div class="leave-tooltip-title">Chi tiết đơn từ chối</div>
+                        <div class="leave-tooltip-content">
+                            <div class="leave-tooltip-item">
+                                <i class="fas fa-calendar-times"></i>
+                                <span id="rejectedToday">0 đơn hôm nay</span>
+                            </div>
+                            <div class="leave-tooltip-item">
+                                <i class="fas fa-calendar-times"></i>
+                                <span id="rejectedThisWeek">0 đơn tuần này</span>
+                            </div>
+                            <div class="leave-tooltip-item">
+                                <i class="fas fa-calendar-times"></i>
+                                <span id="rejectedThisMonth">0 đơn tháng này</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="dashboard-card" id="approvedLeavesCard">
                     <div class="card-header">
                         <div class="card-icon" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
@@ -896,7 +997,7 @@ session_start();
                             <span class="input-group-text">
                                 <i class="fas fa-search"></i>
                             </span>
-                            <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm theo mã đơn, tên nhân viên, lý do...">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Tìm kiếm theo mã đơn, lý do, trạng thái...">
                             <!-- <button class="btn btn-outline-secondary" type="button" id="clearSearch">
                                 <i class="fas fa-times"></i>
                             </button> -->
@@ -1307,6 +1408,11 @@ session_start();
                     document.getElementById('pendingEmployeeCount').textContent = `${data.pending_employee_count || 0} nhân viên`;
                     document.getElementById('pendingTodayCount').textContent = `${data.pending_today || 0} đơn hôm nay`;
                     document.getElementById('pendingAvgTime').textContent = `${data.pending_avg_time || 0} giờ chờ trung bình`;
+
+                    document.getElementById('rejectedLeaves').textContent = data.rejected_leaves || 0;
+                    document.getElementById('rejectedToday').textContent = `${data.rejected_today || 0} đơn hôm nay`;
+                    document.getElementById('rejectedThisWeek').textContent = `${data.rejected_this_week || 0} đơn tuần này`;
+                    document.getElementById('rejectedThisMonth').textContent = `${data.rejected_this_month || 0} đơn tháng này`;
                 }
             } catch (error) {
                 console.error('Lỗi khi lấy dữ liệu thống kê:', error);
