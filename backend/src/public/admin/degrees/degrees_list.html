@@ -9,9 +9,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="degrees.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:700,400&display=swap" rel="stylesheet">
     
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="lib/xlsx.full.min.js"></script>
+    <script>
+        // Verify XLSX is loaded
+        window.addEventListener('load', function() {
+            if (typeof XLSX === 'undefined') {
+                console.error('XLSX library not loaded!');
+            } else {
+                console.log('XLSX library loaded successfully');
+            }
+        });
+    </script>
+    <script src="degrees.js" defer></script>
+  
+    <style>
+    .header-text h2, .header-text p {
+    font-family: 'Poppins', sans-serif;
+}
+    </style>
 </head>
 <body>
     <!-- Toast Container -->
@@ -26,11 +47,11 @@
         <!-- Main Content -->
         <main class="main-content">
             <!-- Page Header -->
-            <header class="page-header">
+            <header class="page-header" style="background: linear-gradient(135deg, #11998E, #38EF7D);">
                 <div class="header-content">
                     <div class="header-text">
                         <h2>Quản lý bằng cấp</h2>
-                        <p>Quản lý thông tin bằng cấp và chứng chỉ của nhân viên</p>
+                        <p >Quản lý thông tin bằng cấp và chứng chỉ của nhân viên</p>
                     </div>
                     <div class="header-decoration">
                         <div class="circle-decoration"></div>
@@ -38,73 +59,321 @@
                 </div>
             </header>
 
-            <!-- Dashboard Cards -->
-            <div class="dashboard-cards">
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #3498db, #2980b9);">
-                            <i class="fas fa-graduation-cap"></i>
+            <!-- Main Dashboard Layout -->
+            <div class="dashboard-layout">
+                <!-- Left Side - Charts Section -->
+                <div class="charts-section">
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h5 class="text-center mb-3">Phân bố bằng cấp theo loại</h5>
+                            <div class="chart-container">
+                                <canvas id="degreeTypeChart" width="500" height="260"></canvas>
+                            </div>
+                            <div class="d-flex justify-content-end mt-2">
+                                <button class="btn btn-sm btn-outline-primary" id="toggleChartView">
+                                    <i class="fas fa-chart-bar"></i> Đổi dạng biểu đồ
+                                </button>
+                            </div>
                         </div>
-                        <div>
-                            <h6 class="card-title">Tổng số bằng cấp</h6>
-                            <h3 class="card-value" id="totalDegrees">0</h3>
+                        <div class="chart-card">
+                            <h5 class="text-center mb-3">Phân bố chứng chỉ theo tổ chức cấp</h5>
+                            <div class="chart-container">
+                                <canvas id="certificateOrgChart" width="500" height="260"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                        <div>
-                            <h6 class="card-title">Tổng số chứng chỉ</h6>
-                            <h3 class="card-value" id="totalCertificates">0</h3>
+
+                <!-- Right Side - Dashboard Cards -->
+                <div class="dashboard-cards">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h6 class="card-title">Tổng số bằng cấp</h6>
+                                <h3 class="card-value" id="totalDegrees">0</h3>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="dashboard-card">
-                    <div class="card-header">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #f1c40f, #f39c12);">
-                            <i class="fas fa-clock"></i>
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div>
+                                <h6 class="card-title">Tổng số chứng chỉ</h6>
+                                <h3 class="card-value" id="totalCertificates">0</h3>
+                            </div>
                         </div>
-                        <div>
-                            <h6 class="card-title">Chứng chỉ sắp hết hạn</h6>
-                            <h3 class="card-value" id="expiringCertificates">0</h3>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #f1c40f, #f39c12);">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h6 class="card-title">Chứng chỉ sắp hết hạn</h6>
+                                <h3 class="card-value" id="expiringCertificates">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div>
+                                <h6 class="card-title">Chứng chỉ đã hết hạn</h6>
+                                <h3 class="card-value" id="expiredCertificates">0</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Charts Section -->
-            <div class="charts-section">
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h5>Phân bố bằng cấp theo loại</h5>
-                        <div class="chart-actions">
-                            <button class="btn btn-sm btn-outline-primary" id="toggleChartView">
-                                <i class="fas fa-chart-bar"></i> Đổi dạng biểu đồ
-                            </button>
-                        </div>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="degreeTypeChart"></canvas>
-                    </div>
-                </div>
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h5>Phân bố chứng chỉ theo tổ chức cấp</h5>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="certificateOrgChart"></canvas>
-                    </div>
-                </div>
-            </div>
+            <style>
+                .dashboard-layout {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 2rem;
+                    margin-bottom: 2rem;
+                    padding: 0 0.5rem;
+                    max-width: 1400px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .charts-section {
+                    flex: 1.8;
+                    max-width: 900px;
+                }
+
+                .charts-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1.2rem;
+                }
+
+                .dashboard-cards {
+                    flex: 1;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1rem;
+                    max-width: 500px;
+                    align-self: center;
+                }
+
+                .dashboard-card {
+                    background: #fff;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+                    transition: all 0.3s ease;
+                    padding: 1rem;
+                    border: 1px solid rgba(0,0,0,0.05);
+                }
+
+                .dashboard-card:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+                }
+
+                .dashboard-card .card-header {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.8rem;
+                    text-align: center;
+                }
+
+                .dashboard-card .card-icon {
+                    width: 42px;
+                    height: 42px;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-size: 1.2rem;
+                    transition: transform 0.3s ease;
+                }
+
+                .dashboard-card:hover .card-icon {
+                    transform: scale(1.1);
+                }
+
+                .dashboard-card .card-title {
+                    font-size: 0.85rem;
+                    margin-bottom: 0.3rem;
+                    text-align: center;
+                    color: #6c757d;
+                }
+
+                .dashboard-card .card-value {
+                    font-size: 1.5rem;
+                    text-align: center;
+                    color: #2c3e50;
+                    font-weight: 700;
+                }
+
+                .chart-card {
+                    background: #fff;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+                    padding: 1.2rem;
+                    transition: all 0.3s ease;
+                    border: 1px solid rgba(0,0,0,0.05);
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .chart-card h5 {
+                    font-size: 1rem;
+                    margin-bottom: 0.8rem;
+                    text-align: center;
+                    width: 100%;
+                }
+
+                .chart-container {
+                    height: 220px;
+                    position: relative;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                }
+
+                @media (max-width: 1399.98px) {
+                    .dashboard-layout {
+                        max-width: 1200px;
+                        gap: 1.5rem;
+                    }
+                    
+                    .charts-section {
+                        max-width: 800px;
+                    }
+
+                    .dashboard-cards {
+                        max-width: 450px;
+                    }
+                    
+                    .chart-container {
+                        height: 200px;
+                    }
+                }
+
+                @media (max-width: 1199.98px) {
+                    .dashboard-layout {
+                        max-width: 992px;
+                        gap: 1.2rem;
+                    }
+
+                    .charts-section {
+                        max-width: 700px;
+                    }
+
+                    .dashboard-cards {
+                        max-width: 400px;
+                        gap: 0.8rem;
+                    }
+
+                    .dashboard-card {
+                        padding: 0.9rem;
+                    }
+
+                    .dashboard-card .card-icon {
+                        width: 38px;
+                        height: 38px;
+                        font-size: 1.1rem;
+                    }
+
+                    .dashboard-card .card-value {
+                        font-size: 1.3rem;
+                    }
+                }
+
+                @media (max-width: 991.98px) {
+                    .dashboard-layout {
+                        flex-direction: column;
+                        align-items: center;
+                        max-width: 768px;
+                        gap: 1.5rem;
+                    }
+                    
+                    .charts-section {
+                        max-width: 100%;
+                    }
+
+                    .charts-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .dashboard-cards {
+                        grid-template-columns: repeat(2, 1fr);
+                        max-width: 100%;
+                        gap: 1rem;
+                    }
+                    
+                    .dashboard-card {
+                        min-width: 200px;
+                    }
+
+                    .chart-container {
+                        height: 250px;
+                    }
+                }
+
+                @media (max-width: 575.98px) {
+                    .dashboard-layout {
+                        gap: 1rem;
+                        padding: 0;
+                        max-width: 100%;
+                    }
+
+                    .dashboard-cards {
+                        grid-template-columns: 1fr;
+                        gap: 0.8rem;
+                    }
+                    
+                    .dashboard-card {
+                        min-width: 100%;
+                    }
+
+                    .chart-container {
+                        height: 200px;
+                    }
+
+                    .chart-card {
+                        padding: 1rem;
+                    }
+
+                    .chart-card h5 {
+                        font-size: 0.9rem;
+                        margin-bottom: 0.6rem;
+                    }
+                }
+
+                .dashboard-card.gradient-green {
+                    background: linear-gradient(45deg, #11998E, #38EF7D);
+                    color: #2C3E50;
+                    box-shadow: 0 4px 20px rgba(56,239,125,0.10);
+                    border: none;
+                }
+                .dashboard-card.gradient-green .card-title,
+                .dashboard-card.gradient-green .card-value {
+                    color: #2C3E50;
+                }
+            </style>
 
             <!-- Search and Filter -->
             <div class="search-filter">
-                <div class="filter-group">
+                <div class="filter-group d-flex align-items-center gap-3">
                     <!-- Smart Search Box -->
-                    <div class="search-box">
+                    <div class="search-box flex-grow-1">
                         <div class="input-group">
                             <span class="input-group-text">
                                 <i class="fas fa-search"></i>
@@ -121,7 +390,7 @@
                     </div>
 
                     <!-- Quick Filters -->
-                    <div class="quick-filters">
+                    <div class="quick-filters d-flex gap-2">
                         <select class="form-select filter-select" id="typeFilter">
                             <option value="">Tất cả loại</option>
                             <option value="degree">Bằng cấp</option>
@@ -141,51 +410,51 @@
                             <option value="year">Năm nay</option>
                         </select>
                     </div>
+                </div>
 
-                    <!-- Advanced Search Panel -->
-                    <div id="advancedSearchPanel" class="advanced-search-panel" style="display: none;">
-                        <div class="advanced-search-grid">
-                            <div class="form-group">
-                                <label>Tổ chức cấp</label>
-                                <input type="text" class="form-control" id="orgFilter" placeholder="Nhập tên tổ chức...">
-                            </div>
-                            <div class="form-group">
-                                <label>Khoảng thời gian</label>
-                                <div class="date-range">
-                                    <input type="date" class="form-control" id="dateFrom" placeholder="Từ ngày">
-                                    <input type="date" class="form-control" id="dateTo" placeholder="Đến ngày">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Phòng ban</label>
-                                <select class="form-select" id="departmentFilter">
-                                    <option value="">Tất cả phòng ban</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Nhân viên</label>
-                                <select class="form-select" id="employeeFilter">
-                                    <option value="">Tất cả nhân viên</option>
-                                </select>
+                <!-- Advanced Search Panel -->
+                <div id="advancedSearchPanel" class="advanced-search-panel mt-3" style="display: none;">
+                    <div class="advanced-search-grid">
+                        <div class="form-group">
+                            <label>Tổ chức cấp</label>
+                            <input type="text" class="form-control" id="orgFilter" placeholder="Nhập tên tổ chức...">
+                        </div>
+                        <div class="form-group">
+                            <label>Khoảng thời gian</label>
+                            <div class="date-range">
+                                <input type="date" class="form-control" id="dateFrom" placeholder="Từ ngày">
+                                <input type="date" class="form-control" id="dateTo" placeholder="Đến ngày">
                             </div>
                         </div>
-                        <div class="advanced-search-actions">
-                            <button class="btn btn-primary" id="applyFilters">
-                                <i class="fas fa-check"></i> Áp dụng
-                            </button>
-                            <button class="btn btn-secondary" id="resetFilters">
-                                <i class="fas fa-undo"></i> Đặt lại
-                            </button>
-                            <button class="btn btn-outline-secondary" id="saveFilterPreset">
-                                <i class="fas fa-save"></i> Lưu bộ lọc
-                            </button>
+                        <div class="form-group">
+                            <label>Phòng ban</label>
+                            <select class="form-select" id="departmentFilter">
+                                <option value="">Tất cả phòng ban</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nhân viên</label>
+                            <select class="form-select" id="employeeFilter">
+                                <option value="">Tất cả nhân viên</option>
+                            </select>
                         </div>
                     </div>
-
-                    <!-- Active Filters -->
-                    <div id="activeFilters" class="active-filters">
-                        <!-- Active filters will be displayed here -->
+                    <div class="advanced-search-actions">
+                        <button class="btn btn-outline-secondary" id="applyFilters">
+                            <i class="fas fa-check"></i> Áp dụng
+                        </button>
+                        <button class="btn btn-outline-secondary" id="resetFilters">
+                            <i class="fas fa-undo"></i> Đặt lại
+                        </button>
+                        <button class="btn btn-outline-secondary" id="saveFilterPreset">
+                            <i class="fas fa-save"></i> Lưu bộ lọc
+                        </button>
                     </div>
+                </div>
+
+                <!-- Active Filters -->
+                <div id="activeFilters" class="active-filters mt-3">
+                    <!-- Active filters will be displayed here -->
                 </div>
             </div>
 
@@ -196,6 +465,23 @@
                     border-radius: 8px;
                     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
                     margin-bottom: 1.5rem;
+                }
+
+                .filter-group {
+                    display: flex;
+                    align-items: center;
+                }
+
+                .search-box {
+                    min-width: 300px;
+                }
+
+                .quick-filters {
+                    min-width: 400px;
+                }
+
+                .filter-select {
+                    min-width: 120px;
                 }
 
                 .search-suggestions {
@@ -219,12 +505,6 @@
 
                 .suggestion-item:hover {
                     background: #f8f9fa;
-                }
-
-                .quick-filters {
-                    display: flex;
-                    gap: 1rem;
-                    margin-top: 1rem;
                 }
 
                 .advanced-search-panel {
@@ -257,7 +537,6 @@
                     display: flex;
                     flex-wrap: wrap;
                     gap: 0.5rem;
-                    margin-top: 1rem;
                 }
 
                 .filter-tag {
@@ -277,24 +556,41 @@
                 .filter-tag .remove:hover {
                     color: #dc3545;
                 }
+
+                @media (max-width: 1200px) {
+                    .filter-group {
+                        flex-direction: column;
+                        align-items: stretch;
+                    }
+                    
+                    .quick-filters {
+                        min-width: 100%;
+                    }
+                    
+                    .search-box {
+                        min-width: 100%;
+                    }
+                }
             </style>
 
             <!-- Degrees/Certificates Table -->
             <div class="degrees-table">
                 <div class="table-header">
-                    <h5 class="table-title">Danh sách bằng cấp và chứng chỉ</h5>
-                    <div class="table-actions">
-                        <button class="btn btn-success me-2" id="exportBtn">
-                            <i class="fas fa-file-export"></i> Xuất Excel
-                        </button>
-                        <button class="btn btn-primary" id="addDegreeBtn">
-                            <i class="fas fa-plus"></i> Thêm mới
-                        </button>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="table-title mb-0 text-dark">Danh sách bằng cấp và chứng chỉ</h5>
+                        <div class="table-actions">
+                            <button class="btn btn-outline-secondary me-2" id="exportBtn">
+                                <i class="fas fa-file-export"></i> Xuất Excel
+                            </button>
+                            <button class="btn btn-outline-secondary" id="addDegreeBtn">
+                                <i class="fas fa-plus"></i> Thêm mới
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover">
-                        <thead>
+                        <thead class="table-light">
                             <tr>
                                 <th>STT</th>
                                 <th>Loại</th>
@@ -400,7 +696,7 @@
     </div>
 
     <!-- Add/Edit Degree Modal -->
-    <div id="degreeModal" class="modal">
+    <div id="degreeModal" class="modal custom-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modalTitle">Thêm bằng cấp/chứng chỉ mới</h3>
@@ -432,6 +728,14 @@
                                 <label for="organization" class="required-field">Tổ chức cấp</label>
                                 <input type="text" id="organization" class="form-control" required>
                             </div>
+                            <div class="form-group degree-fields" style="display: none;">
+                                <label for="major">Chuyên ngành</label>
+                                <input type="text" id="major" class="form-control">
+                            </div>
+                            <div class="form-group degree-fields" style="display: none;">
+                                <label for="gpa">GPA</label>
+                                <input type="number" id="gpa" class="form-control" step="0.01" min="0" max="4">
+                            </div>
                         </div>
                     </div>
 
@@ -442,11 +746,11 @@
                                 <label for="issueDate" class="required-field">Ngày cấp</label>
                                 <input type="date" id="issueDate" class="form-control" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group certificate-fields" style="display: none;">
                                 <label for="expiryDate">Ngày hết hạn</label>
                                 <input type="date" id="expiryDate" class="form-control">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group certificate-fields" style="display: none;">
                                 <label for="credentialId">Mã chứng chỉ</label>
                                 <input type="text" id="credentialId" class="form-control">
                             </div>
@@ -457,7 +761,8 @@
                         <h4><i class="fas fa-file"></i> Tài liệu đính kèm</h4>
                         <div class="form-group">
                             <label for="attachment">File đính kèm</label>
-                            <input type="file" id="attachment" class="form-control">
+                            <input type="file" id="attachment" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
+                            <small class="form-text text-muted">Chấp nhận file PDF, JPG, JPEG, PNG (tối đa 5MB)</small>
                         </div>
                     </div>
 
@@ -474,9 +779,180 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="degrees.js"></script>
+    <style>
+        .btn-outline-secondary {
+            color: #6c757d;
+            border-color: #dee2e6;
+            background-color: #f8f9fa;
+        }
+        
+        .btn-outline-secondary:hover {
+            color: #495057;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+
+        .table-light {
+            background-color: #f8f9fa;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .table-title {
+            color: #212529;
+            font-weight: 600;
+        }
+
+        /* Custom styles for status badges */
+        .badge.bg-success {
+            background-color: #d1e7dd !important;
+            color: #0f5132;
+        }
+
+        .badge.bg-danger {
+            background-color: #f8d7da !important;
+            color: #842029;
+        }
+
+        .badge.bg-warning {
+            background-color: #fff3cd !important;
+            color: #664d03;
+        }
+
+        .badge.bg-secondary {
+            background-color: #e2e3e5 !important;
+            color: #41464b;
+        }
+
+        .modal-header {
+            background: #f8f9fa !important;
+            color: #212529 !important;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            font-weight: 600;
+        }
+        .modal-header h3, .modal-header h5, .modal-header .modal-title {
+            color: #212529 !important;
+        }
+        .modal-content {
+            background: #fff !important;
+        }
+
+        /* Chỉ áp dụng nền tối khi modal custom đang mở */
+        .custom-modal {
+            background: none !important;
+        }
+        .custom-modal[style*="display: block"] {
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        /* ======= Đẹp giao diện modal xem chi tiết ======= */
+        #degreeInfoModal .modal-content {
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+            border: none;
+            background: #f8fafc;
+        }
+        #degreeInfoModal .modal-header {
+            background: linear-gradient(90deg, #e0e7ef 0%, #f8fafc 100%);
+            color: #212529;
+            border-radius: 18px 18px 0 0;
+            border-bottom: 1px solid #e9ecef;
+            padding: 1.2rem 2rem 1.2rem 2rem;
+        }
+        #degreeInfoModal .modal-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+        #degreeInfoModal .modal-body {
+            padding: 2rem 2.5rem 2rem 2.5rem;
+            background: #f8fafc;
+        }
+        .degree-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem 2.5rem;
+        }
+        @media (max-width: 900px) {
+            .degree-info-grid {
+                grid-template-columns: 1fr;
+            }
+            #degreeInfoModal .modal-body {
+                padding: 1.2rem;
+            }
+        }
+        .info-section {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.06);
+            padding: 1.2rem 1.5rem 1.2rem 1.5rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid #e5e7eb;
+        }
+        .info-section h6 {
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .info-section h6 i {
+            color: #2563eb;
+            font-size: 1.1rem;
+        }
+        .info-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .info-item {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #374151;
+            min-width: 110px;
+        }
+        .info-value {
+            color: #212529;
+            font-weight: 400;
+        }
+        #degreeInfoModal .badge {
+            font-size: 0.95rem;
+            padding: 0.35em 0.9em;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+        }
+        #degreeInfoModal .attachment-preview .btn {
+            font-size: 0.95rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+        }
+        #degreeInfoModal .attachment-preview .btn-outline-primary {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+        #degreeInfoModal .attachment-preview .btn-outline-primary:hover {
+            background: #2563eb;
+            color: #fff;
+        }
+        #degreeInfoModal .attachment-preview .btn-outline-secondary {
+            border-color: #64748b;
+            color: #64748b;
+        }
+        #degreeInfoModal .attachment-preview .btn-outline-secondary:hover {
+            background: #64748b;
+            color: #fff;
+        }
+    </style>
 </body>
 </html>

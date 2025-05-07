@@ -1,8 +1,11 @@
 RewriteEngine On
-RewriteBase /qlnhansu_V2/
+RewriteBase /qlnhansu_V3/
 
 # Allow direct access to API files
 RewriteRule ^backend/src/public/api/.*\.php$ - [L]
+
+# Handle admin API requests
+RewriteRule ^backend/src/public/admin/api/.*\.php$ - [L]
 
 # Handle API requests
 RewriteRule ^api/(.*)$ backend/src/public/api/$1 [L]

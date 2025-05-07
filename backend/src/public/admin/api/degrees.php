@@ -2,6 +2,32 @@
 header('Content-Type: application/json; charset=utf-8');
 require_once '../../config/database.php';
 
+// Start session for basic state management
+session_start();
+
+// Set default session data if not exists (for development)
+if (!isset($_SESSION['initialized'])) {
+    $_SESSION['initialized'] = true;
+    $_SESSION['last_access'] = time();
+    $_SESSION['user_id'] = 1; // Set default user ID for development
+    $_SESSION['role'] = 'admin'; // Set default role as admin for development
+}
+
+// Comment out authentication checks for development
+/*
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['error' => 'Unauthorized access'], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// Check if user has admin role
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    echo json_encode(['error' => 'Access denied'], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+*/
+
 class TrainingAPI {
     private $conn;
     
@@ -22,46 +48,81 @@ class TrainingAPI {
                 'total_courses' => $this->getTotalCourses(),
                 'active_registrations' => $this->getActiveRegistrations()
             ];
+            
+            // Log the stats for debugging
+            error_log("Dashboard stats: " . print_r($stats, true));
+            
             return $stats;
         } catch (Exception $e) {
+            error_log("Error in getDashboardStats: " . $e->getMessage());
             throw new Exception("Error getting dashboard stats: " . $e->getMessage());
         }
     }
 
     private function getTotalDegrees() {
-        $query = "SELECT COUNT(*) as count FROM degrees";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+        try {
+            $query = "SELECT COUNT(*) as count FROM degrees";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int)$result['count'];
+        } catch (Exception $e) {
+            error_log("Error in getTotalDegrees: " . $e->getMessage());
+            return 0;
+        }
     }
 
     private function getTotalCertificates() {
-        $query = "SELECT COUNT(*) as count FROM certificates";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+        try {
+            $query = "SELECT COUNT(*) as count FROM certificates";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int)$result['count'];
+        } catch (Exception $e) {
+            error_log("Error in getTotalCertificates: " . $e->getMessage());
+            return 0;
+        }
     }
 
     private function getTotalCourses() {
-        $query = "SELECT COUNT(*) as count FROM training_courses WHERE status = 'active'";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+        try {
+            $query = "SELECT COUNT(*) as count FROM training_courses WHERE status = 'active'";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int)$result['count'];
+        } catch (Exception $e) {
+            error_log("Error in getTotalCourses: " . $e->getMessage());
+            return 0;
+        }
     }
 
     private function getActiveRegistrations() {
-        $query = "SELECT COUNT(*) as count FROM training_registrations WHERE status IN ('registered', 'attended')";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+        try {
+            $query = "SELECT COUNT(*) as count FROM training_registrations WHERE status IN ('registered', 'attended')";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int)$result['count'];
+        } catch (Exception $e) {
+            error_log("Error in getActiveRegistrations: " . $e->getMessage());
+            return 0;
+        }
     }
 
     private function getExpiringCertificates() {
-        $query = "SELECT COUNT(*) as count FROM certificates 
-                 WHERE expiry_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+        try {
+            $query = "SELECT COUNT(*) as count FROM certificates 
+                     WHERE expiry_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int)$result['count'];
+        } catch (Exception $e) {
+            error_log("Error in getExpiringCertificates: " . $e->getMessage());
+            return 0;
+        }
     }
 
     // Get degree type distribution for chart
@@ -92,16 +153,20 @@ class TrainingAPI {
         }
     }
 
-    // Get all degrees and certificates with pagination and filters
+    // Get all qualifications with pagination and filters
     public function getQualifications($page = 1, $limit = 10, $search = '', $type = '', $status = '') {
         try {
+            error_log("=== getQualifications called ===");
+            error_log("Parameters: page=$page, limit=$limit, search=$search, type=$type, status=$status");
+            
             $offset = ($page - 1) * $limit;
             $where = [];
             $params = [];
 
             if ($search) {
-                $where[] = "(d.degree_name LIKE ? OR c.name LIKE ? OR e.name LIKE ?)";
-                $params = array_merge($params, ["%$search%", "%$search%", "%$search%"]);
+                $where[] = "(d.degree_name LIKE ? OR c.name LIKE ? OR e.name LIKE ? OR d.institution LIKE ? OR c.issuing_organization LIKE ?)";
+                $searchParam = "%$search%";
+                $params = array_merge($params, [$searchParam, $searchParam, $searchParam, $searchParam, $searchParam]);
             }
 
             if ($type === 'degree') {
@@ -125,6 +190,8 @@ class TrainingAPI {
             }
 
             $whereClause = $where ? 'WHERE ' . implode(' AND ', $where) : '';
+            error_log("Where clause: " . $whereClause);
+            error_log("Parameters: " . print_r($params, true));
 
             // First get degrees
             $degreesQuery = "SELECT 
@@ -176,27 +243,37 @@ class TrainingAPI {
                 ($degreesQuery) UNION ALL ($certificatesQuery)
             ) as combined 
             ORDER BY issue_date DESC, id DESC 
-            LIMIT $limit OFFSET $offset";
+            LIMIT " . (int)$limit . " OFFSET " . (int)$offset;
 
+            error_log("Final query: " . $query);
+            
             $stmt = $this->conn->prepare($query);
             $stmt->execute($params);
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            error_log("Query results: " . print_r($data, true));
 
             // Get total count
             $countQuery = "SELECT COUNT(*) as count FROM (
                 ($degreesQuery) UNION ALL ($certificatesQuery)
             ) as combined";
             $stmt = $this->conn->prepare($countQuery);
-            $stmt->execute(array_slice($params, 0, -2)); // Remove limit and offset
+            $stmt->execute($params);
             $total = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+            error_log("Total count: " . $total);
 
-            return [
+            $result = [
                 'data' => $data,
                 'total' => $total,
                 'page' => (int)$page,
-                'limit' => (int)$limit
+                'limit' => (int)$limit,
+                'message' => $total > 0 ? 'Tìm thấy ' . $total . ' kết quả' : 'Không tìm thấy kết quả nào phù hợp'
             ];
+            
+            error_log("=== getQualifications completed ===");
+            return $result;
         } catch (Exception $e) {
+            error_log("Error in getQualifications: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
             throw new Exception("Error getting qualifications: " . $e->getMessage());
         }
     }
@@ -273,6 +350,139 @@ class TrainingAPI {
             throw new Exception("Error getting course evaluations: " . $e->getMessage());
         }
     }
+
+    // Create new degree or certificate
+    public function createQualification($data) {
+        try {
+            $this->conn->beginTransaction();
+
+            if ($data['type'] === 'degree') {
+                $query = "INSERT INTO degrees (employee_id, degree_name, major, institution, graduation_date, gpa, attachment_url) 
+                         VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $this->conn->prepare($query);
+                $stmt->execute([
+                    $data['employee_id'],
+                    $data['name'],
+                    $data['major'] ?? null,
+                    $data['organization'],
+                    $data['issue_date'],
+                    $data['gpa'] ?? null,
+                    $data['attachment_url'] ?? null
+                ]);
+            } else {
+                $query = "INSERT INTO certificates (employee_id, name, issuing_organization, issue_date, expiry_date, credential_id, file_url) 
+                         VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $this->conn->prepare($query);
+                $stmt->execute([
+                    $data['employee_id'],
+                    $data['name'],
+                    $data['organization'],
+                    $data['issue_date'],
+                    $data['expiry_date'] ?? null,
+                    $data['credential_id'] ?? null,
+                    $data['attachment_url'] ?? null
+                ]);
+            }
+
+            $this->conn->commit();
+            return ['success' => true, 'message' => 'Thêm thành công'];
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            throw new Exception("Error creating qualification: " . $e->getMessage());
+        }
+    }
+
+    // Update existing degree or certificate
+    public function updateQualification($data) {
+        try {
+            $this->conn->beginTransaction();
+
+            if ($data['type'] === 'degree') {
+                $query = "UPDATE degrees 
+                         SET employee_id = ?, degree_name = ?, major = ?, institution = ?, 
+                             graduation_date = ?, gpa = ?, attachment_url = ?, updated_at = NOW()
+                         WHERE degree_id = ?";
+                $stmt = $this->conn->prepare($query);
+                $stmt->execute([
+                    $data['employee_id'],
+                    $data['name'],
+                    $data['major'] ?? null,
+                    $data['organization'],
+                    $data['issue_date'],
+                    $data['gpa'] ?? null,
+                    $data['attachment_url'] ?? null,
+                    $data['id']
+                ]);
+            } else {
+                $query = "UPDATE certificates 
+                         SET employee_id = ?, name = ?, issuing_organization = ?, issue_date = ?, 
+                             expiry_date = ?, credential_id = ?, file_url = ?, updated_at = NOW()
+                         WHERE id = ?";
+                $stmt = $this->conn->prepare($query);
+                $stmt->execute([
+                    $data['employee_id'],
+                    $data['name'],
+                    $data['organization'],
+                    $data['issue_date'],
+                    $data['expiry_date'] ?? null,
+                    $data['credential_id'] ?? null,
+                    $data['attachment_url'] ?? null,
+                    $data['id']
+                ]);
+            }
+
+            $this->conn->commit();
+            return ['success' => true, 'message' => 'Cập nhật thành công'];
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            throw new Exception("Error updating qualification: " . $e->getMessage());
+        }
+    }
+
+    // Delete degree or certificate
+    public function deleteQualification($id, $type) {
+        try {
+            $this->conn->beginTransaction();
+
+            if ($type === 'degree') {
+                $query = "DELETE FROM degrees WHERE degree_id = ?";
+            } else {
+                $query = "DELETE FROM certificates WHERE id = ?";
+            }
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute([$id]);
+
+            $this->conn->commit();
+            return ['success' => true, 'message' => 'Xóa thành công'];
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            throw new Exception("Error deleting qualification: " . $e->getMessage());
+        }
+    }
+
+    // Get single qualification by ID
+    public function getQualification($id, $type) {
+        try {
+            if ($type === 'degree') {
+                $query = "SELECT d.*, e.name as employee_name 
+                         FROM degrees d 
+                         LEFT JOIN employees e ON e.id = d.employee_id 
+                         WHERE d.degree_id = ?";
+            } else {
+                $query = "SELECT c.*, e.name as employee_name 
+                         FROM certificates c 
+                         LEFT JOIN employees e ON e.id = c.employee_id 
+                         WHERE c.id = ?";
+            }
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute([$id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            throw new Exception("Error getting qualification: " . $e->getMessage());
+        }
+    }
 }
 
 // Initialize database connection
@@ -291,22 +501,115 @@ try {
     $employeeId = $_GET['employee_id'] ?? null;
     $courseId = $_GET['course_id'] ?? null;
 
+    // Handle POST requests for create/update operations
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $data = json_decode(file_get_contents('php://input'), true);
+        
+        switch($action) {
+            case 'create':
+                echo json_encode($api->createQualification($data), JSON_UNESCAPED_UNICODE);
+                break;
+            case 'update':
+                echo json_encode($api->updateQualification($data), JSON_UNESCAPED_UNICODE);
+                break;
+            case 'delete':
+                if (isset($data['id']) && isset($data['type'])) {
+                    echo json_encode($api->deleteQualification($data['id'], $data['type']), JSON_UNESCAPED_UNICODE);
+                } else {
+                    echo json_encode(['error' => 'Missing required parameters'], JSON_UNESCAPED_UNICODE);
+                }
+                break;
+            default:
+                echo json_encode(['error' => 'Invalid action'], JSON_UNESCAPED_UNICODE);
+        }
+        exit;
+    }
+
+    // Handle GET requests
     switch($action) {
         case 'dashboard_stats':
-            echo json_encode($api->getDashboardStats(), JSON_UNESCAPED_UNICODE);
+            try {
+                error_log("Fetching dashboard stats...");
+                $stats = $api->getDashboardStats();
+                error_log("Dashboard stats result: " . print_r($stats, true));
+                
+                $response = ['success' => true, 'data' => $stats];
+                error_log("Sending response: " . print_r($response, true));
+                
+                echo json_encode($response, JSON_UNESCAPED_UNICODE);
+            } catch (Exception $e) {
+                error_log("Error in dashboard_stats: " . $e->getMessage());
+                echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
+            }
+            break;
+        case 'export':
+            try {
+                error_log("=== Starting export process ===");
+                error_log("Request parameters: " . print_r($_GET, true));
+                
+                // Get all data without pagination for export
+                $result = $api->getQualifications(1, 1000, $search, $type, $status);
+                error_log("Raw result from getQualifications: " . print_r($result, true));
+                
+                if (!isset($result['data'])) {
+                    error_log("No 'data' key in result");
+                    throw new Exception('Cấu trúc dữ liệu không hợp lệ');
+                }
+                
+                if (empty($result['data'])) {
+                    error_log("Data array is empty");
+                    throw new Exception('Không có dữ liệu để xuất');
+                }
+                
+                $response = [
+                    'success' => true,
+                    'data' => $result['data']
+                ];
+                
+                error_log("Final response: " . print_r($response, true));
+                echo json_encode($response, JSON_UNESCAPED_UNICODE);
+                error_log("=== Export process completed ===");
+            } catch (Exception $e) {
+                error_log("Export error: " . $e->getMessage());
+                error_log("Stack trace: " . $e->getTraceAsString());
+                echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
+            }
             break;
         case 'degree_distribution':
-            echo json_encode($api->getDegreeTypeDistribution(), JSON_UNESCAPED_UNICODE);
+            try {
+                $data = $api->getDegreeTypeDistribution();
+                echo json_encode(['success' => true, 'data' => $data], JSON_UNESCAPED_UNICODE);
+            } catch (Exception $e) {
+                echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
+            }
             break;
         case 'certificate_distribution':
-            echo json_encode($api->getCertificateOrgDistribution(), JSON_UNESCAPED_UNICODE);
+            try {
+                $data = $api->getCertificateOrgDistribution();
+                echo json_encode(['success' => true, 'data' => $data], JSON_UNESCAPED_UNICODE);
+            } catch (Exception $e) {
+                echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
+            }
             break;
         case 'list':
-            $result = $api->getQualifications($page, $limit, $search, $type, $status);
-            if (!isset($result['data'])) {
-                throw new Exception('Invalid data format received from server');
+            try {
+                $result = $api->getQualifications($page, $limit, $search, $type, $status);
+                echo json_encode(['success' => true, 'data' => $result], JSON_UNESCAPED_UNICODE);
+            } catch (Exception $e) {
+                echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
             }
-            echo json_encode($result, JSON_UNESCAPED_UNICODE);
+            break;
+        case 'get':
+            if (isset($_GET['id']) && isset($_GET['type'])) {
+                try {
+                    $data = $api->getQualification($_GET['id'], $_GET['type']);
+                    echo json_encode(['success' => true, 'data' => $data], JSON_UNESCAPED_UNICODE);
+                } catch (Exception $e) {
+                    echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);
+                }
+            } else {
+                echo json_encode(['error' => 'Missing required parameters'], JSON_UNESCAPED_UNICODE);
+            }
             break;
         case 'courses':
             echo json_encode($api->getCourses($page, $limit, $search), JSON_UNESCAPED_UNICODE);

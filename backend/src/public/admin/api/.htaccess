@@ -1,6 +1,6 @@
 Options +FollowSymLinks
 RewriteEngine On
-RewriteBase /qlnhansu_V2/backend/src/public/admin/api/
+RewriteBase /qlnhansu_V3/backend/src/public/admin/api/
 
 # Allow direct access to PHP files
 <FilesMatch "\.php$">

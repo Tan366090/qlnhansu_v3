@@ -28,9 +28,18 @@ class DegreesManager {
             document.body.appendChild(toastContainer);
         }
         
+        // Update loading state management
+        this.isLoading = false;
+        this.loadingOverlay = null;
+        this.loadingQueue = [];
+        
         this.initializeEventListeners();
         this.initializeModalEvents();
         this.loadData();
+        
+        // Initialize additional features
+        this.initializeSessionCheck();
+        this.initializeResponsiveHandlers();
     }
 
     initializeEventListeners() {
@@ -144,11 +153,16 @@ class DegreesManager {
     }
 
     async loadData() {
-        const loadingToast = this.showLoading();
         try {
+            // Show loading with initial message
+            this.showLoading('Đang tải dữ liệu...');
+
             // Load dashboard stats
             const stats = await this.fetchData('dashboard_stats');
             this.updateDashboardStats(stats);
+
+            // Update loading message
+            this.showLoading('Đang tải biểu đồ...');
 
             // Load degree distribution
             const degreeDist = await this.fetchData('degree_distribution');
@@ -157,6 +171,9 @@ class DegreesManager {
             // Load certificate distribution
             const certDist = await this.fetchData('certificate_distribution');
             this.updateCertificateChart(certDist);
+
+            // Update loading message
+            this.showLoading('Đang tải danh sách...');
 
             // Load main list with all filters
             const listData = await this.fetchData('list', {
@@ -182,46 +199,123 @@ class DegreesManager {
         } catch (error) {
             this.showToast('Lỗi khi tải dữ liệu: ' + error.message, 'error');
         } finally {
-            this.hideLoading(loadingToast);
+            // Hide loading if no more requests in queue
+            if (this.loadingQueue.length === 0) {
+                this.hideLoading();
+            }
         }
     }
 
     async fetchData(action, params = {}) {
-        const queryString = new URLSearchParams(params).toString();
-        const url = `../api/degrees.php?action=${action}${queryString ? '&' + queryString : ''}`;
-        
         try {
-            const response = await fetch(url, {
-                method: params instanceof FormData ? 'POST' : 'GET',
-                body: params instanceof FormData ? params : undefined,
-                headers: params instanceof FormData ? {} : {
-                    'Content-Type': 'application/json'
-                }
+            const queryParams = new URLSearchParams({
+                action: action,
+                ...params
             });
 
+            console.log('Fetching data for action:', action);
+            console.log('With params:', params);
+
+            const response = await fetch(`/qlnhansu_V3/backend/src/public/admin/api/degrees.php?${queryParams}`);
+            
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-
-            const data = await response.json();
             
-            // Add CSRF token to all subsequent requests if provided
-            if (data.csrf_token) {
-                this.csrfToken = data.csrf_token;
+            const data = await response.json();
+            console.log('Received data:', data);
+            
+            // Check if response has error property
+            if (data.error) {
+                throw new Error(data.error);
             }
 
-            return data;
+            // For dashboard_stats and other direct data responses
+            if (action === 'dashboard_stats' || action === 'degree_distribution' || action === 'certificate_distribution') {
+                console.log('Returning direct data for action:', action);
+                return data.data || data;
+            }
+
+            // For list and other responses that should have success property
+            if (!data.success && data.message) {
+                throw new Error(data.message);
+            }
+
+            console.log('Returning processed data:', data.data || data);
+            return data.data || data;
         } catch (error) {
-            console.error('API Error:', error);
-            this.showToast('Lỗi kết nối API: ' + error.message, 'error');
+            console.error('Error in fetchData:', error);
+            this.showToast(error.message || 'Có lỗi xảy ra khi tải dữ liệu', 'error');
             throw error;
         }
     }
 
     updateDashboardStats(stats) {
-        $('#totalDegrees').text(stats.total_degrees);
-        $('#totalCertificates').text(stats.total_certificates);
-        $('#expiringCertificates').text(stats.expiring_certificates);
+        try {
+            console.log('Updating dashboard stats with data:', stats);
+            
+            // Log all available elements
+            console.log('Available elements:', {
+                totalDegrees: document.getElementById('totalDegrees'),
+                totalCertificates: document.getElementById('totalCertificates'),
+                expiringCertificates: document.getElementById('expiringCertificates'),
+                totalCourses: document.getElementById('totalCourses'),
+                activeRegistrations: document.getElementById('activeRegistrations')
+            });
+            
+            // Update total degrees
+            const totalDegreesElement = document.getElementById('totalDegrees');
+            if (totalDegreesElement) {
+                const value = stats.total_degrees || '0';
+                console.log('Setting totalDegrees to:', value);
+                totalDegreesElement.textContent = value;
+            } else {
+                console.warn('Element totalDegrees not found');
+            }
+
+            // Update total certificates
+            const totalCertificatesElement = document.getElementById('totalCertificates');
+            if (totalCertificatesElement) {
+                const value = stats.total_certificates || '0';
+                console.log('Setting totalCertificates to:', value);
+                totalCertificatesElement.textContent = value;
+            } else {
+                console.warn('Element totalCertificates not found');
+            }
+
+            // Update expiring certificates
+            const expiringCertificatesElement = document.getElementById('expiringCertificates');
+            if (expiringCertificatesElement) {
+                const value = stats.expiring_certificates || '0';
+                console.log('Setting expiringCertificates to:', value);
+                expiringCertificatesElement.textContent = value;
+            } else {
+                console.warn('Element expiringCertificates not found');
+            }
+
+            // Update total courses if element exists
+            const totalCoursesElement = document.getElementById('totalCourses');
+            if (totalCoursesElement) {
+                const value = stats.total_courses || '0';
+                console.log('Setting totalCourses to:', value);
+                totalCoursesElement.textContent = value;
+            } else {
+                console.warn('Element totalCourses not found');
+            }
+
+            // Update active registrations if element exists
+            const activeRegistrationsElement = document.getElementById('activeRegistrations');
+            if (activeRegistrationsElement) {
+                const value = stats.active_registrations || '0';
+                console.log('Setting activeRegistrations to:', value);
+                activeRegistrationsElement.textContent = value;
+            } else {
+                console.warn('Element activeRegistrations not found');
+            }
+        } catch (error) {
+            console.error('Error updating dashboard stats:', error);
+            this.showToast('Lỗi khi cập nhật thống kê: ' + error.message, 'error');
+        }
     }
 
     updateDegreeChart(data) {
@@ -231,6 +325,9 @@ class DegreesManager {
             this.degreeTypeChart.destroy();
         }
 
+        // Use a single gray color for all bars
+        const grayColor = '#90A4AE';
+
         this.degreeTypeChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -238,8 +335,8 @@ class DegreesManager {
                 datasets: [{
                     label: 'Số lượng',
                     data: data.map(item => item.count),
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: grayColor,
+                    borderColor: grayColor,
                     borderWidth: 1
                 }]
             },
@@ -265,27 +362,34 @@ class DegreesManager {
             this.certificateOrgChart.destroy();
         }
 
+        // Vibrant color palette
+        const pieColors = [
+            '#FFA726', // Orange
+            '#FFD600', // Yellow
+            '#90A4AE', // Gray
+            '#66BB6A', // Green
+            '#42A5F5', // Blue
+            '#EF5350', // Red
+            '#AB47BC', // Purple
+            '#26C6DA', // Teal
+            '#FF7043', // Deep Orange
+            '#8D6E63', // Brown
+            '#FBC02D', // Bright Yellow
+            '#29B6F6', // Light Blue
+            '#7E57C2', // Deep Purple
+            '#EC407A', // Pink
+            '#BDBDBD'  // Light Gray
+        ];
+
         this.certificateOrgChart = new Chart(ctx, {
             type: 'pie',
             data: {
                 labels: data.map(item => item.issuing_organization),
                 datasets: [{
                     data: data.map(item => item.count),
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)',
-                        'rgba(153, 102, 255, 0.5)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)'
-                    ],
-                    borderWidth: 1
+                    backgroundColor: data.map((_, i) => pieColors[i % pieColors.length]),
+                    borderColor: '#fff',
+                    borderWidth: 2
                 }]
             },
             options: {
@@ -436,25 +540,30 @@ class DegreesManager {
     }
 
     showLoading(message = 'Đang tải dữ liệu...') {
-        const toast = document.createElement('div');
-        toast.className = 'toast info';
-        toast.innerHTML = `
-            <i class="fas fa-spinner fa-spin"></i>
-            <div class="toast-content">
-                <div class="toast-title">Đang xử lý</div>
-                <div class="toast-message">${message}</div>
-            </div>
-        `;
+        // If already showing loading, just update message
+        if (this.loadingOverlay) {
+            const loadingText = this.loadingOverlay.querySelector('.loading-text');
+            if (loadingText) {
+                loadingText.textContent = message;
+            }
+            return this.loadingOverlay;
+        }
 
-        const container = document.querySelector('.toast-container');
-        container.appendChild(toast);
-        return toast;
+        // Create new loading overlay
+        this.loadingOverlay = document.createElement('div');
+        this.loadingOverlay.className = 'loading-overlay';
+        this.loadingOverlay.innerHTML = `
+            <div class="loader"></div>
+            <div class="loading-text">${message}</div>
+        `;
+        document.body.appendChild(this.loadingOverlay);
+        return this.loadingOverlay;
     }
 
-    hideLoading(loadingToast) {
-        if (loadingToast && loadingToast.parentElement) {
-            loadingToast.classList.add('hide');
-            setTimeout(() => loadingToast.remove(), 300);
+    hideLoading() {
+        if (this.loadingOverlay && this.loadingOverlay.parentElement) {
+            this.loadingOverlay.remove();
+            this.loadingOverlay = null;
         }
     }
 
@@ -537,32 +646,91 @@ class DegreesManager {
     }
 
     async handleFormSubmit() {
-        const formData = new FormData(this.form);
-        formData.append('type', document.getElementById('degreeType').value);
-        
-        if (this.currentEditId) {
-            formData.append('id', this.currentEditId);
-            formData.append('edit_type', this.currentEditType);
+        // Validate required fields
+        const requiredFields = {
+            'degreeType': 'Loại',
+            'employeeId': 'Nhân viên',
+            'degreeName': 'Tên bằng cấp/chứng chỉ',
+            'organization': 'Tổ chức cấp',
+            'issueDate': 'Ngày cấp'
+        };
+
+        for (const [field, label] of Object.entries(requiredFields)) {
+            const element = document.getElementById(field);
+            if (!element.value.trim()) {
+                this.showToast(`Vui lòng nhập ${label}`, 'error');
+                element.focus();
+                return;
+            }
         }
 
+        // Validate file if exists
+        const fileInput = document.getElementById('attachment');
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            if (!this.validateFile(file)) {
+                return;
+            }
+        }
+
+        const loadingOverlay = this.showLoading('Đang lưu thông tin...');
         try {
-            const loadingToast = this.showLoading('Đang lưu thông tin...');
+            const formData = new FormData(this.form);
+            const data = {
+                type: document.getElementById('degreeType').value,
+                employee_id: formData.get('employeeId'),
+                name: formData.get('degreeName'),
+                organization: formData.get('organization'),
+                issue_date: formData.get('issueDate'),
+                major: formData.get('major'),
+                gpa: formData.get('gpa'),
+                attachment_url: formData.get('attachment')
+            };
+
+            if (data.type === 'certificate') {
+                data.expiry_date = formData.get('expiryDate');
+                data.credential_id = formData.get('credentialId');
+            }
+
+            if (this.currentEditId) {
+                data.id = this.currentEditId;
+                data.edit_type = this.currentEditType;
+            }
+
             const response = await this.fetchData(
                 this.currentEditId ? 'update' : 'create',
-                formData
+                JSON.stringify(data)
             );
             
-            this.hideLoading(loadingToast);
             if (response.success) {
                 this.showToast('Lưu thông tin thành công', 'success');
                 this.hideModal();
-                this.loadData();
+                this.refreshData();
             } else {
                 throw new Error(response.message || 'Lỗi không xác định');
             }
         } catch (error) {
             this.showToast('Lỗi khi lưu thông tin: ' + error.message, 'error');
+        } finally {
+            this.hideLoading();
         }
+    }
+
+    validateFile(file) {
+        // Validate file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            this.showToast('File không được vượt quá 5MB', 'error');
+            return false;
+        }
+
+        // Validate file type
+        const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+        if (!allowedTypes.includes(file.type)) {
+            this.showToast('Chỉ chấp nhận file PDF, JPEG hoặc PNG', 'error');
+            return false;
+        }
+
+        return true;
     }
 
     handleFileUpload(event) {
@@ -640,11 +808,9 @@ class DegreesManager {
             return;
         }
 
+        const loadingOverlay = this.showLoading('Đang xóa...');
         try {
-            const loadingToast = this.showLoading('Đang xóa...');
             const response = await this.fetchData('delete', { id, type });
-            
-            this.hideLoading(loadingToast);
             if (response.success) {
                 this.showToast('Xóa thành công', 'success');
                 this.loadData();
@@ -653,6 +819,8 @@ class DegreesManager {
             }
         } catch (error) {
             this.showToast('Lỗi khi xóa: ' + error.message, 'error');
+        } finally {
+            this.hideLoading();
         }
     }
 
@@ -667,54 +835,80 @@ class DegreesManager {
     }
 
     async exportToExcel() {
+        const loadingOverlay = this.showLoading('Đang xuất dữ liệu...');
         try {
-            const loadingToast = this.showLoading('Đang xuất dữ liệu...');
+            console.log('Starting export process...');
             
             // Get all data without pagination
-            const data = await this.fetchData('list', {
-                search: this.search,
-                type: this.type,
-                status: this.status,
-                export: true
-            });
+            const response = await fetch(`/qlnhansu_V3/backend/src/public/admin/api/degrees.php?action=export`);
+            const data = await response.json();
+            
+            console.log('Export response:', data);
 
-            if (!data || !data.data) {
+            if (!data.success) {
+                throw new Error(data.error || 'Không thể xuất dữ liệu');
+            }
+
+            if (!data.data || !Array.isArray(data.data) || data.data.length === 0) {
                 throw new Error('Không có dữ liệu để xuất');
             }
 
-            // Create worksheet
+            console.log('Processing data for Excel:', data.data);
+
+            // Create worksheet with Vietnamese headers
             const ws = XLSX.utils.json_to_sheet(data.data.map(item => ({
                 'STT': item.id,
                 'Loại': item.type === 'degree' ? 'Bằng cấp' : 'Chứng chỉ',
-                'Tên': item.name,
-                'Nhân viên': item.employee_name,
-                'Tổ chức cấp': item.organization,
+                'Tên': item.name || '',
+                'Nhân viên': item.employee_name || '',
+                'Tổ chức cấp': item.organization || '',
                 'Ngày cấp': this.formatDate(item.issue_date),
                 'Ngày hết hạn': item.expiry_date ? this.formatDate(item.expiry_date) : 'N/A',
                 'Trạng thái': this.getStatusText(item.status),
                 'Mã chứng chỉ': item.credential_id || 'N/A'
             })));
 
+            // Set column widths
+            const wscols = [
+                {wch: 5},  // STT
+                {wch: 10}, // Loại
+                {wch: 30}, // Tên
+                {wch: 20}, // Nhân viên
+                {wch: 25}, // Tổ chức cấp
+                {wch: 12}, // Ngày cấp
+                {wch: 12}, // Ngày hết hạn
+                {wch: 15}, // Trạng thái
+                {wch: 15}  // Mã chứng chỉ
+            ];
+            ws['!cols'] = wscols;
+
             // Create workbook
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Bằng cấp và chứng chỉ');
 
-            // Generate Excel file
+            // Generate Excel file with current date
             const fileName = `bang_cap_chung_chi_${new Date().toISOString().split('T')[0]}.xlsx`;
+            
+            // Use XLSX.writeFile to save the file
             XLSX.writeFile(wb, fileName);
 
-            this.hideLoading(loadingToast);
             this.showToast('Xuất Excel thành công', 'success');
         } catch (error) {
+            console.error('Export error:', error);
             this.showToast('Lỗi khi xuất Excel: ' + error.message, 'error');
+        } finally {
+            this.hideLoading();
         }
     }
 
     updateActiveFilters() {
-        const activeFilters = $('#activeFilters');
-        activeFilters.empty();
+        const activeFilters = document.getElementById('activeFilters');
+        activeFilters.innerHTML = '';
 
         const filters = {
+            type: this.type,
+            status: this.status,
+            date: this.date,
             organization: this.organization,
             dateFrom: this.dateFrom,
             dateTo: this.dateTo,
@@ -724,28 +918,39 @@ class DegreesManager {
 
         Object.entries(filters).forEach(([key, value]) => {
             if (value) {
-                const filterTag = $(`
-                    <div class="filter-tag">
-                        <span>${this.getFilterLabel(key)}: ${value}</span>
-                        <span class="remove" data-filter="${key}">&times;</span>
-                    </div>
-                `);
-                activeFilters.append(filterTag);
+                const filterTag = document.createElement('div');
+                filterTag.className = 'filter-tag';
+                filterTag.innerHTML = `
+                    <span>${this.getFilterLabel(key)}: ${value}</span>
+                    <span class="remove" data-filter="${key}">&times;</span>
+                `;
+                activeFilters.appendChild(filterTag);
             }
         });
 
-        // Add remove filter functionality
-        $('.filter-tag .remove').on('click', (e) => {
-            const filterKey = $(e.target).data('filter');
-            this[filterKey] = '';
-            $(`#${filterKey}Filter`).val('');
-            $(e.target).closest('.filter-tag').remove();
-            this.loadData();
+        // Add event listeners to remove buttons
+        activeFilters.querySelectorAll('.remove').forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+                this[filter] = '';
+                if (filter === 'dateFrom' || filter === 'dateTo') {
+                    document.getElementById(filter).value = '';
+                } else if (filter === 'type' || filter === 'status' || filter === 'date') {
+                    document.getElementById(`${filter}Filter`).value = '';
+                } else {
+                    document.getElementById(filter === 'organization' ? 'orgFilter' : `${filter}Filter`).value = '';
+                }
+                this.currentPage = 1;
+                this.loadData();
+            });
         });
     }
 
     getFilterLabel(key) {
         const labels = {
+            type: 'Loại',
+            status: 'Trạng thái',
+            date: 'Thời gian',
             organization: 'Tổ chức',
             dateFrom: 'Từ ngày',
             dateTo: 'Đến ngày',
@@ -760,6 +965,45 @@ class DegreesManager {
         presets.push(filters);
         localStorage.setItem('degreeFilterPresets', JSON.stringify(presets));
         this.showToast('Đã lưu bộ lọc thành công!', 'success');
+    }
+
+    // Add new methods for improved functionality
+    initializeSessionCheck() {
+        // Check session every 5 minutes
+        this.sessionCheckInterval = setInterval(() => this.checkSession(), 5 * 60 * 1000);
+    }
+
+    initializeResponsiveHandlers() {
+        // Handle responsive layout changes
+        window.addEventListener('resize', debounce(() => {
+            this.updateResponsiveLayout();
+        }, 250));
+    }
+
+    updateResponsiveLayout() {
+        const isMobile = window.innerWidth <= 768;
+        document.querySelector('.search-filter').classList.toggle('mobile-view', isMobile);
+        document.querySelector('.quick-filters').classList.toggle('mobile-view', isMobile);
+    }
+
+    async checkSession() {
+        try {
+            const response = await fetch('../api/check_session.php');
+            const data = await response.json();
+            if (data.error === 'session_expired') {
+                this.showToast('Phiên làm việc đã hết hạn. Vui lòng đăng nhập lại.', 'warning');
+                setTimeout(() => {
+                    window.location.href = '../login.php';
+                }, 2000);
+            }
+        } catch (error) {
+            console.error('Session check error:', error);
+        }
+    }
+
+    refreshData() {
+        this.currentPage = 1;
+        this.loadData();
     }
 }
 
@@ -964,7 +1208,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add smart search query
         if (smartSearchInput.value) {
-            searchParams.append('q', smartSearchInput.value);
+            searchParams.append('search', smartSearchInput.value);
         }
 
         // Add quick filters
@@ -996,8 +1240,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch degrees with search parameters
     async function fetchDegrees(searchParams) {
         try {
-            const response = await fetch(`/api/degrees/search?${searchParams}`);
+            const response = await fetch(`/backend/src/public/admin/api/degrees.php?action=list&${searchParams}`);
             const data = await response.json();
+            if (data.error) {
+                showToast(data.error, 'error');
+                return;
+            }
             updateDegreesTable(data);
         } catch (error) {
             console.error('Error fetching degrees:', error);
