@@ -420,6 +420,24 @@ class TrainingAPI {
         try {
             $this->conn->beginTransaction();
 
+            // Validate required fields
+            if (!isset($data['id']) || !isset($data['type']) || !isset($data['employee_id'])) {
+                throw new Exception('Thiếu thông tin bắt buộc (ID, loại hoặc ID nhân viên)');
+            }
+
+            // Validate employee_id is numeric
+            if (!is_numeric($data['employee_id'])) {
+                throw new Exception('ID nhân viên không hợp lệ');
+            }
+
+            // Check if employee exists
+            $check_employee = "SELECT id FROM employees WHERE id = ?";
+            $stmt = $this->conn->prepare($check_employee);
+            $stmt->execute([$data['employee_id']]);
+            if ($stmt->rowCount() === 0) {
+                throw new Exception('Không tìm thấy nhân viên');
+            }
+
             // Handle file upload if exists
             $attachment_url = null;
             if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] === UPLOAD_ERR_OK) {
@@ -468,7 +486,7 @@ class TrainingAPI {
                          SET employee_id = ?, degree_name = ?, major = ?, institution = ?, 
                              graduation_date = ?, gpa = ?, updated_at = NOW()";
                 $params = [
-                    $data['employee_id'],
+                    (int)$data['employee_id'],  // Convert to integer
                     $data['name'],
                     $data['major'] ?? null,
                     $data['organization'],
@@ -482,7 +500,7 @@ class TrainingAPI {
                 }
 
                 $query .= " WHERE degree_id = ?";
-                $params[] = $data['id'];
+                $params[] = (int)$data['id'];  // Convert to integer
 
                 $stmt = $this->conn->prepare($query);
                 $stmt->execute($params);
@@ -491,7 +509,7 @@ class TrainingAPI {
                          SET employee_id = ?, name = ?, issuing_organization = ?, issue_date = ?, 
                              expiry_date = ?, credential_id = ?, updated_at = NOW()";
                 $params = [
-                    $data['employee_id'],
+                    (int)$data['employee_id'],  // Convert to integer
                     $data['name'],
                     $data['organization'],
                     $data['issue_date'],
@@ -505,7 +523,7 @@ class TrainingAPI {
                 }
 
                 $query .= " WHERE id = ?";
-                $params[] = $data['id'];
+                $params[] = (int)$data['id'];  // Convert to integer
 
                 $stmt = $this->conn->prepare($query);
                 $stmt->execute($params);

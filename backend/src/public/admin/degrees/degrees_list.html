@@ -1032,76 +1032,76 @@
                 </ul>
             </nav>
 
-            <!-- Degree/Certificate Info Modal -->
-            <div class="modal fade" id="degreeInfoModal" tabindex="-1">
+            <!-- Degree Info Modal -->
+            <div class="modal fade" id="degreeInfoModal" tabindex="-1" aria-labelledby="degreeInfoModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Thông tin chi tiết</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            <h5 class="modal-title" id="degreeInfoModalLabel">Thông tin chi tiết</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="degree-info-grid">
+                                <!-- Thông tin cơ bản -->
                                 <div class="info-section">
                                     <h6><i class="fas fa-info-circle"></i> Thông tin cơ bản</h6>
                                     <div class="info-content">
                                         <div class="info-item">
-                                            <span class="info-label">Loại:</span>
+                                            <span class="info-label">Loại</span>
                                             <span class="info-value" id="infoType"></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="info-label">Tên:</span>
+                                            <span class="info-label">Tên bằng cấp/chứng chỉ</span>
                                             <span class="info-value" id="infoName"></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="info-label">Nhân viên:</span>
+                                            <span class="info-label">Nhân viên</span>
                                             <span class="info-value" id="infoEmployee"></span>
                                         </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="info-section">
-                                    <h6><i class="fas fa-building"></i> Thông tin tổ chức</h6>
-                                    <div class="info-content">
                                         <div class="info-item">
-                                            <span class="info-label">Tổ chức cấp:</span>
+                                            <span class="info-label">Tổ chức cấp</span>
                                             <span class="info-value" id="infoOrganization"></span>
-                                        </div>
-                                        <div class="info-item">
-                                            <span class="info-label">Mã chứng chỉ:</span>
-                                            <span class="info-value" id="infoCredentialId"></span>
                                         </div>
                                     </div>
                                 </div>
 
+                                <!-- Thông tin chi tiết -->
                                 <div class="info-section">
-                                    <h6><i class="fas fa-calendar"></i> Thông tin thời gian</h6>
+                                    <h6><i class="fas fa-file-alt"></i> Thông tin chi tiết</h6>
                                     <div class="info-content">
                                         <div class="info-item">
-                                            <span class="info-label">Ngày cấp:</span>
+                                            <span class="info-label">Mã chứng chỉ</span>
+                                            <span class="info-value" id="infoCredentialId"></span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Ngày cấp</span>
                                             <span class="info-value" id="infoIssueDate"></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="info-label">Ngày hết hạn:</span>
+                                            <span class="info-label">Ngày hết hạn</span>
                                             <span class="info-value" id="infoExpiryDate"></span>
                                         </div>
                                         <div class="info-item">
-                                            <span class="info-label">Trạng thái:</span>
+                                            <span class="info-label">Trạng thái</span>
                                             <span class="info-value" id="infoStatus"></span>
                                         </div>
                                     </div>
                                 </div>
 
+                                <!-- File đính kèm -->
                                 <div class="info-section">
-                                    <h6><i class="fas fa-file"></i> Tài liệu đính kèm</h6>
+                                    <h6><i class="fas fa-paperclip"></i> File đính kèm</h6>
                                     <div class="info-content">
                                         <div class="info-item">
-                                            <span class="info-label">File đính kèm:</span>
-                                            <span class="info-value" id="infoAttachment"></span>
+                                            <span class="info-label">Tài liệu</span>
+                                            <div id="infoAttachment"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                         </div>
                     </div>
                 </div>
@@ -1420,6 +1420,143 @@
         word-break: break-word !important;
         max-width: 220px;
     }
+    </style>
+
+    <style>
+        /* Degree Info Modal Styles */
+        #degreeInfoModal .modal-content {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            pointer-events: auto !important;
+        }
+
+        #degreeInfoModal .modal-header {
+            background: linear-gradient(135deg, #11998E, #38EF7D);
+            color: white;
+            border-radius: 12px 12px 0 0;
+            padding: 1.5rem;
+            border: none;
+        }
+
+        #degreeInfoModal .modal-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        #degreeInfoModal .modal-body {
+            padding: 2rem;
+            max-height: 70vh;
+            overflow-y: auto;
+            pointer-events: auto !important;
+        }
+
+        #degreeInfoModal .degree-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        #degreeInfoModal .info-section {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        #degreeInfoModal .info-section h6 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #degreeInfoModal .info-section h6 i {
+            color: #11998E;
+        }
+
+        #degreeInfoModal .info-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #degreeInfoModal .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        #degreeInfoModal .info-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        #degreeInfoModal .info-value {
+            color: #2c3e50;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+
+        #degreeInfoModal .badge {
+            font-size: 0.85rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        #degreeInfoModal .attachment-preview {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        #degreeInfoModal .attachment-preview .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #degreeInfoModal .attachment-preview .btn i {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            #degreeInfoModal .modal-body {
+                padding: 1.5rem;
+            }
+
+            #degreeInfoModal .degree-info-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            #degreeInfoModal .info-section {
+                padding: 1.2rem;
+            }
+
+            #degreeInfoModal .attachment-preview {
+                flex-direction: column;
+            }
+
+            #degreeInfoModal .attachment-preview .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </body>
 </html>

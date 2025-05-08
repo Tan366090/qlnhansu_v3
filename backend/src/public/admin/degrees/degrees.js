@@ -76,7 +76,10 @@ class DegreesManager {
         this.form = document.getElementById('degreeForm');
         this.currentEditId = null;
         this.currentEditType = null;
-        this.infoModal = new bootstrap.Modal(document.getElementById('degreeInfoModal'));
+        this.infoModal = new bootstrap.Modal(document.getElementById('degreeInfoModal'), {
+            backdrop: 'static',
+            keyboard: false
+        });
         this.sortColumn = null;
         this.sortDirection = 'asc';
         
@@ -99,6 +102,15 @@ class DegreesManager {
         // Initialize additional features
         this.initializeSessionCheck();
         this.initializeResponsiveHandlers();
+        
+        // Add event listeners for modal
+        document.getElementById('degreeInfoModal').addEventListener('shown.bs.modal', () => {
+            console.log('Info modal shown');
+        });
+        
+        document.getElementById('degreeInfoModal').addEventListener('hidden.bs.modal', () => {
+            console.log('Info modal hidden');
+        });
     }
 
     initializeEventListeners() {
@@ -483,14 +495,34 @@ class DegreesManager {
         }
 
         data.data.forEach((item, index) => {
+            // Log item data for debugging
+            console.log('Processing item:', item);
+            
+            // Map the correct employee_id based on type
+            let employeeId;
+            if (item.type === 'degree') {
+                // For degrees table, use id as employee_id if not provided
+                employeeId = item.employee_id || item.id;
+            } else {
+                // For certificates table, use id as employee_id if not provided
+                employeeId = item.employee_id || item.id;
+            }
+
+            // Ensure employee_id is a valid number
+            employeeId = employeeId ? parseInt(employeeId) : null;
+            if (!employeeId) {
+                console.error('Invalid employee_id for item:', item);
+                return; // Skip this item if employee_id is invalid
+            }
+            
             const row = `
-                <tr>
+                <tr data-id="${item.id}" data-employee-id="${employeeId}" data-type="${item.type}">
                     <td>${(this.currentPage - 1) * this.limit + index + 1}</td>
                     <td>${item.type === 'degree' ? 'Bằng cấp' : 'Chứng chỉ'}</td>
-                    <td>${item.name || ''}</td>
+                    <td>${item.name || item.degree_name || ''}</td>
                     <td>${item.employee_name || ''}</td>
-                    <td>${item.organization || ''}</td>
-                    <td>${this.formatDate(item.issue_date)}</td>
+                    <td>${item.organization || item.issuing_organization || item.institution || ''}</td>
+                    <td>${this.formatDate(item.issue_date || item.graduation_date)}</td>
                     <td>${item.expiry_date ? this.formatDate(item.expiry_date) : 'N/A'}</td>
                     <td>
                         <span class="badge ${this.getStatusBadgeClass(item.status)}">
@@ -498,8 +530,8 @@ class DegreesManager {
                         </span>
                     </td>
                     <td>
-                        ${item.attachment_url ? 
-                            `<a href="${item.attachment_url}" target="_blank" class="btn btn-sm btn-outline-primary">
+                        ${(item.attachment_url || item.file_url) ? 
+                            `<a href="${item.attachment_url || item.file_url}" target="_blank" class="btn btn-sm btn-outline-primary">
                                 <i class="fas fa-file"></i> Xem
                             </a>` : 
                             'Không có'
@@ -510,9 +542,7 @@ class DegreesManager {
                             <button class="btn btn-view" onclick="degreesManager.viewDetails(${item.id}, '${item.type}')">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button class="btn btn-edit" onclick="degreesManager.editItem(${item.id}, '${item.type}')">
-                                <i class="fas fa-edit"></i>
-                            </button>
+                            <button class="btn btn-edit">Sửa</button>
                             <button class="btn btn-delete" onclick="degreesManager.deleteItem(${item.id}, '${item.type}')">
                                 <i class="fas fa-trash"></i>
                             </button>
@@ -666,61 +696,59 @@ class DegreesManager {
         }
     }
 
-    async showAddModal() {
-        this.currentEditId = null;
-        this.currentEditType = null;
-        document.getElementById('modalTitle').textContent = 'Thêm bằng cấp/chứng chỉ mới';
-        this.form.reset();
-        await this.loadEmployeeList();
-        this.modal.show();
-    }
+    // async showAddModal() {
+    //     this.currentEditId = null;
+    //     this.currentEditType = null;
+    //     document.getElementById('modalTitle').textContent = 'Thêm bằng cấp/chứng chỉ mới';
+    //     this.form.reset();
+    //     await this.loadEmployeeList();
+    //     this.modal.show();
+    // }
 
-    async editItem(id, type) {
-        this.currentEditId = id;
-        this.currentEditType = type;
-        document.getElementById('modalTitle').textContent = 'Chỉnh sửa bằng cấp/chứng chỉ';
-        
-        try {
-            const data = await this.fetchData('get', { id, type });
-            if (data) {
-                this.populateForm(data);
-                await this.loadEmployeeList();
-                this.modal.show();
-            }
-        } catch (error) {
-            this.showToast('Lỗi khi tải thông tin: ' + error.message, 'error');
-        }
-    }
+    // async editItem(id, type) {
+    //     this.currentEditId = id;
+    //     this.currentEditType = type;
+    //     document.getElementById('modalTitle').textContent = 'Chỉnh sửa bằng cấp/chứng chỉ';
+    //     try {
+    //         const data = await this.fetchData('get', { id, type });
+    //         if (data) {
+    //             this.populateForm(data);
+    //             await this.loadEmployeeList();
+    //             this.modal.show();
+    //         }
+    //     } catch (error) {
+    //         this.showToast('Lỗi khi tải thông tin: ' + error.message, 'error');
+    //     }
+    // }
 
-    async loadEmployeeList() {
-        try {
-            const response = await fetch('/qlnhansu_V3/backend/src/api/employees.php?action=quick_search&search=');
-            const data = await response.json();
-            if (data.success) {
-                const select = document.getElementById('employeeId');
-                select.innerHTML = '<option value="">Chọn nhân viên</option>';
-                
-                data.data.forEach(employee => {
-                    const option = document.createElement('option');
-                    option.value = employee.id;
-                    option.textContent = employee.name;
-                    select.appendChild(option);
-                });
-            }
-        } catch (error) {
-            this.showToast('Lỗi khi tải danh sách nhân viên: ' + error.message, 'error');
-        }
-    }
+    // async loadEmployeeList() {
+    //     try {
+    //         const response = await fetch('/qlnhansu_V3/backend/src/api/employees.php?action=quick_search&search=');
+    //         const data = await response.json();
+    //         if (data.success) {
+    //             const select = document.getElementById('employeeId');
+    //             select.innerHTML = '<option value="">Chọn nhân viên</option>';
+    //             data.data.forEach(employee => {
+    //                 const option = document.createElement('option');
+    //                 option.value = employee.id;
+    //                 option.textContent = employee.name;
+    //                 select.appendChild(option);
+    //             });
+    //         }
+    //     } catch (error) {
+    //         this.showToast('Lỗi khi tải danh sách nhân viên: ' + error.message, 'error');
+    //     }
+    // }
 
-    populateForm(data) {
-        document.getElementById('degreeType').value = data.type;
-        document.getElementById('employeeId').value = data.employee_id;
-        document.getElementById('degreeName').value = data.name;
-        document.getElementById('organization').value = data.organization;
-        document.getElementById('issueDate').value = data.issue_date;
-        document.getElementById('expiryDate').value = data.expiry_date || '';
-        document.getElementById('credentialId').value = data.credential_id || '';
-    }
+    // populateForm(data) {
+    //     document.getElementById('degreeType').value = data.type;
+    //     document.getElementById('employeeId').value = data.employee_id;
+    //     document.getElementById('degreeName').value = data.name;
+    //     document.getElementById('organization').value = data.organization;
+    //     document.getElementById('issueDate').value = data.issue_date;
+    //     document.getElementById('expiryDate').value = data.expiry_date || '';
+    //     document.getElementById('credentialId').value = data.credential_id || '';
+    // }
 
     async handleFormSubmit() {
         console.log('Form submission started');
@@ -1214,6 +1242,147 @@ function debounce(func, wait) {
 let degreesManager;
 $(document).ready(() => {
     degreesManager = new DegreesManager();
+
+    // --- Inline edit events: Đặt ở đây để luôn hoạt động ---
+    $(document).on('click', '.btn-edit', function(event) {
+        event.preventDefault();
+        console.log('Edit clicked', event);
+        const $row = $(this).closest('tr');
+        if ($row.hasClass('editing')) return;
+        $row.addClass('editing');
+
+        // Lấy dữ liệu hiện tại
+        const cells = $row.children('td');
+        const type = cells.eq(1).text().trim() === 'Bằng cấp' ? 'degree' : 'certificate';
+        const name = cells.eq(2).text().trim();
+        const employeeName = cells.eq(3).text().trim();
+        const organization = cells.eq(4).text().trim();
+        const issueDate = cells.eq(5).text().trim().split('/').reverse().join('-');
+        const expiryDate = cells.eq(6).text().trim() !== 'N/A' ? cells.eq(6).text().trim().split('/').reverse().join('-') : '';
+        const status = cells.eq(7).find('.badge').text().trim();
+        const credentialId = cells.eq(8).text().trim();
+
+        // Loại select
+        const typeSelect = `<select class='form-select form-select-sm inline-type'><option value='degree' ${type==='degree'?'selected':''}>Bằng cấp</option><option value='certificate' ${type==='certificate'?'selected':''}>Chứng chỉ</option></select>`;
+        // Tên
+        const nameInput = `<input type='text' class='form-control form-control-sm inline-name' value="${name}">`;
+        // Nhân viên (autocomplete input, tạm thời là text)
+        const employeeInput = `<input type='text' class='form-control form-control-sm inline-employee' value="${employeeName}" readonly>`;
+        // Tổ chức cấp
+        const orgInput = `<input type='text' class='form-control form-control-sm inline-org' value="${organization}">`;
+        // Ngày cấp
+        const issueInput = `<input type='date' class='form-control form-control-sm inline-issue' value="${issueDate}">`;
+        // Ngày hết hạn
+        const expiryInput = `<input type='date' class='form-control form-control-sm inline-expiry' value="${expiryDate}">`;
+        // Mã chứng chỉ
+        const credInput = `<input type='text' class='form-control form-control-sm inline-cred' value="${credentialId}">`;
+        // Trạng thái (không chỉnh sửa trực tiếp, chỉ hiển thị)
+        const statusHtml = cells.eq(7).html();
+        // File đính kèm giữ nguyên
+        const fileHtml = cells.eq(8).html();
+
+        // Thay thế các ô bằng input/select
+        cells.eq(1).html(typeSelect);
+        cells.eq(2).html(nameInput);
+        cells.eq(3).html(employeeInput);
+        cells.eq(4).html(orgInput);
+        cells.eq(5).html(issueInput);
+        cells.eq(6).html(expiryInput);
+        cells.eq(7).html(statusHtml);
+        cells.eq(8).html(fileHtml);
+
+        // Thay nút hành động
+        const saveBtn = `<button class='btn btn-success btn-save' title='Lưu'><i class='fas fa-save'></i></button>`;
+        const cancelBtn = `<button class='btn btn-secondary btn-cancel' title='Hủy'><i class='fas fa-times'></i></button>`;
+        cells.eq(9).html(saveBtn + ' ' + cancelBtn);
+    });
+
+    $(document).on('click', '.btn-save', async function(event) {
+        event.preventDefault();
+        console.log('Save clicked', event);
+        
+        const $row = $(this).closest('tr');
+        const id = $row.data('id');
+        const employee_id = $row.data('employee-id');
+        const type = $row.find('.inline-type').val();
+        
+        // Log all data attributes for debugging
+        console.log('Row data attributes:', {
+            id: id,
+            employee_id: employee_id,
+            type: type,
+            allData: $row.data()
+        });
+        
+        // Validate required fields
+        if (!id || !employee_id || !type) {
+            degreesManager.showToast('Lỗi: Thiếu thông tin cần thiết (ID, ID nhân viên hoặc loại)', 'error');
+            return;
+        }
+
+        // Validate employee_id is a valid number
+        const employeeIdNum = parseInt(employee_id);
+        if (isNaN(employeeIdNum)) {
+            degreesManager.showToast('Lỗi: ID nhân viên không hợp lệ', 'error');
+            return;
+        }
+
+        const name = $row.find('.inline-name').val();
+        const organization = $row.find('.inline-org').val();
+        const issueDate = $row.find('.inline-issue').val();
+        const expiryDate = $row.find('.inline-expiry').val();
+        const credentialId = $row.find('.inline-cred').val();
+
+        // Validate other required fields
+        if (!name || !organization || !issueDate) {
+            degreesManager.showToast('Vui lòng điền đầy đủ thông tin bắt buộc', 'error');
+            return;
+        }
+
+        // Prepare request data
+        const requestData = {
+            id: parseInt(id),
+            type: type,
+            name: name,
+            employee_id: employeeIdNum,
+            organization: organization,
+            issue_date: issueDate,
+            expiry_date: expiryDate || null,
+            credential_id: credentialId || null
+        };
+
+        console.log('Sending request data:', requestData);
+
+        try {
+            const response = await fetch(`/qlnhansu_V3/backend/src/public/admin/api/degrees.php?action=update`, {
+                method: 'POST',
+                body: JSON.stringify(requestData),
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            });
+            
+            const result = await response.json();
+            console.log('API result:', result);
+            
+            if (result.success) {
+                degreesManager.showToast('Cập nhật thành công', 'success');
+                degreesManager.loadData();
+            } else {
+                throw new Error(result.error || result.message || 'Lỗi không xác định');
+            }
+        } catch (e) {
+            console.error('Error saving:', e);
+            degreesManager.showToast('Lỗi khi lưu: ' + e.message, 'error');
+        }
+    });
+
+    $(document).on('click', '.btn-cancel', function(event) {
+        event.preventDefault();
+        console.log('Cancel clicked', event);
+        degreesManager.loadData();
+    });
 });
 
 // Add global formatDate function if not already defined
