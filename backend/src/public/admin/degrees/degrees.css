@@ -1509,3 +1509,221 @@ body {
         font-size: 1rem;
     }
 }
+
+/* --- Custom styles for Add/Edit Degree Modal (migrated from degrees_list.html) --- */
+.header-text h2, .header-text p {
+    font-family: 'Poppins', sans-serif;
+}
+#degreeModal .modal-title {
+    font-size: 1.4rem !important;
+}
+#degreeModal label,
+#degreeModal .form-control,
+#degreeModal .form-select,
+#degreeModal .btn,
+#degreeModal .modal-header,
+#degreeModal .modal-footer,
+#degreeModal .form-group,
+#degreeModal .form-text {
+    font-size: 0.98rem !important;
+}
+#degreeModal .form-control,
+#degreeModal .form-select {
+    padding: 0.5rem 0.75rem;
+}
+#degreeModal .modal-dialog {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+#degreeModal .modal-content {
+    width: 100vw !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+}
+#degreeModal .modal-header,
+#degreeModal .modal-footer {
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
+}
+#degreeModal .modal-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+#degreeModal .modal-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 2.5rem !important;
+}
+#degreeModal .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+#degreeModal .form-group {
+    margin-bottom: 1.5rem;
+}
+#degreeModal .form-control,
+#degreeModal .form-select {
+    font-size: 1.2rem;
+    padding: 0.75rem 1rem;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+#degreeModal .employee-search-container .form-control {
+    font-size: 1.1rem;
+}
+@media (max-width: 900px) {
+    #degreeModal .modal-header,
+    #degreeModal .modal-footer,
+    #degreeModal .modal-body {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    #degreeModal .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+#degreeModal .qualifications-info .table-courses th.name-col,
+#degreeModal .qualifications-info .table-courses td.name-col {
+    min-width: 180px;
+    max-width: 350px;
+    width: 40%;
+    white-space: normal;
+    word-break: break-word;
+}
+#degreeModal .qualifications-info .table-courses th.date-col,
+#degreeModal .qualifications-info .table-courses td.date-col {
+    width: 110px;
+    min-width: 90px;
+    max-width: 120px;
+    text-align: center;
+}
+#degreeModal .qualifications-info .table-courses th.score-col,
+#degreeModal .qualifications-info .table-courses td.score-col {
+    width: 70px;
+    min-width: 50px;
+    max-width: 80px;
+    text-align: center;
+}
+#degreeModal .qualifications-info .table-courses th.evaluation-col,
+#degreeModal .qualifications-info .table-courses td.evaluation-col {
+    width: 90px;
+    min-width: 70px;
+    max-width: 110px;
+    text-align: center;
+}
+#degreeModal .qualifications-info .table-courses .btn-eval-sm {
+    font-size: 11px !important;
+    padding: 1px 6px !important;
+    min-width: unset !important;
+    height: 20px !important;
+    line-height: 1.1 !important;
+    border-radius: 4px !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+}
+#degreeModal .qualifications-info .table-courses {
+    font-size: 0.97rem;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+}
+#degreeModal .qualifications-info .table-courses th,
+#degreeModal .qualifications-info .table-courses td {
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+    border-right: none;
+    border-left: none;
+    padding: 0.5rem 0.6rem;
+    vertical-align: middle;
+}
+#degreeModal .qualifications-info .table-courses th {
+    background: #f8f9fa;
+    font-weight: 600;
+    text-align: center;
+}
+#degreeModal .qualifications-info .table-courses td.name-col {
+    text-align: left;
+    font-weight: 500;
+    color: #222;
+    max-width: 320px;
+    white-space: normal;
+    word-break: break-word;
+}
+#degreeModal .qualifications-info .table-courses td,
+#degreeModal .qualifications-info .table-courses th {
+    text-align: center;
+}
+#degreeModal .qualifications-info .table-courses td.name-col {
+    text-align: left;
+}
+#degreeModal .qualifications-info .table-courses .badge {
+    font-size: 11px !important;
+    padding: 1px 6px !important;
+    border-radius: 4px !important;
+    min-width: unset !important;
+    height: 20px !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+    font-weight: 500;
+    opacity: 0.85;
+    border: none;
+}
+#degreeModal .qualifications-info .table-courses .bg-success {
+    background-color: #d4f5e9 !important;
+    color: #2e7d5b !important;
+}
+#degreeModal .qualifications-info .table-courses .bg-primary {
+    background-color: #e3eafd !important;
+    color: #2a4d8f !important;
+}
+#degreeModal .qualifications-info .table-courses .bg-secondary {
+    background-color: #f0f1f3 !important;
+    color: #6c757d !important;
+}
+#degreeModal .qualifications-info .table-courses .bg-danger {
+    background-color: #fdeaea !important;
+    color: #b94a48 !important;
+}
+#degreeModal .qualifications-info .table-courses .btn-eval-sm {
+    font-size: 0.92rem;
+    padding: 0.22rem 0.7rem;
+    border-radius: 6px;
+    min-width: 90px;
+}
+@media (max-width: 700px) {
+    #degreeModal .qualifications-info .table-courses th,
+    #degreeModal .qualifications-info .table-courses td {
+        font-size: 0.92rem;
+        padding: 0.35rem 0.3rem;
+    }
+    #degreeModal .qualifications-info .table-courses td.name-col {
+        max-width: 120px;
+    }
+}
+#degreeModal .qualifications-info .table th,
+#degreeModal .qualifications-info .table td {
+    white-space: normal !important;
+    word-break: break-word !important;
+    max-width: 220px;
+}
+/* --- End custom styles for Add/Edit Degree Modal --- */
+
+#degreeModal .popover .popover-body div,
+#degreeModal .popover .popover-body {
+    font-size: 13px !important;
+}

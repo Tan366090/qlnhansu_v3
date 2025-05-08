@@ -25,6 +25,415 @@
                 console.log('XLSX library loaded successfully');
             }
         });
+
+        // Hàm debounce để tránh gọi API quá nhiều lần
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        async function searchEmployeeByCode(code) {
+        const nameInput = document.getElementById('employeeName');
+        const idInput = document.getElementById('employeeId');
+        const degreesDiv = document.getElementById('employeeDegreesList');
+        if (!code || code.length < 3) {
+            nameInput.value = '';
+            idInput.value = '';
+            degreesDiv.innerHTML = '';
+            return;
+        }
+        try {
+            // Sử dụng đường dẫn tương đối từ thư mục hiện tại
+            const response = await fetch(`../../api/employees.php?action=quick_search&search=${encodeURIComponent(code)}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            console.log('Employee search response:', data); // Debug log
+
+            if (data.success && data.data && data.data.length > 0) {
+                const employee = data.data[0];
+                nameInput.value = employee.name;
+                idInput.value = employee.id;
+
+                // Lấy thông tin chi tiết về bằng cấp và chứng chỉ
+                const degreesResponse = await fetch(`../../api/degrees.php?action=list&employee=${employee.employee_code}`);
+                if (!degreesResponse.ok) {
+                    throw new Error(`HTTP error! status: ${degreesResponse.status}`);
+                }
+                const degreesData = await degreesResponse.json();
+                console.log('Degrees response:', degreesData);
+
+                if (degreesData.success && degreesData.data) {
+                    let html = '<div class="qualifications-info">';
+                    
+                    // Hiển thị bằng cấp
+                    if (degreesData.data.degrees && degreesData.data.degrees.length > 0) {
+                        html += `
+                            <div class="section">
+                                <h5>Bằng cấp:</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Tên bằng</th>
+                                                <th>Chuyên ngành</th>
+                                                <th>Trường</th>
+                                                <th>Ngày tốt nghiệp</th>
+                                                <th>GPA</th>
+                                                <th>File đính kèm</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>`;
+                        degreesData.data.degrees.forEach(degree => {
+                            html += `
+                                <tr>
+                                    <td>${degree.name}</td>
+                                    <td>${degree.major || '-'}</td>
+                                    <td>${degree.institution}</td>
+                                    <td>${new Date(degree.graduation_date).toLocaleDateString('vi-VN')}</td>
+                                    <td>${degree.gpa || '-'}</td>
+                                    <td>${degree.attachment_url ? `<a href="${degree.attachment_url}" target="_blank" class="btn btn-sm btn-outline-primary">Xem</a>` : '-'}</td>
+                                </tr>`;
+                        });
+                        html += `
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>`;
+                    }
+
+                    // Hiển thị chứng chỉ
+                    if (degreesData.data.certificates && degreesData.data.certificates.length > 0) {
+                        html += `
+                            <div class="section">
+                                <h5>Chứng chỉ:</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Tên chứng chỉ</th>
+                                                <th>Tổ chức cấp</th>
+                                                <th>Ngày cấp</th>
+                                                <th>Ngày hết hạn</th>
+                                                <th>Mã chứng chỉ</th>
+                                                <th>File đính kèm</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>`;
+                        degreesData.data.certificates.forEach(cert => {
+                            html += `
+                                <tr>
+                                    <td>${cert.name}</td>
+                                    <td>${cert.issuing_organization}</td>
+                                    <td>${new Date(cert.issue_date).toLocaleDateString('vi-VN')}</td>
+                                    <td>${cert.expiry_date ? new Date(cert.expiry_date).toLocaleDateString('vi-VN') : '-'}</td>
+                                    <td>${cert.credential_id || '-'}</td>
+                                    <td>${cert.file_url ? `<a href="${cert.file_url}" target="_blank" class="btn btn-sm btn-outline-primary">Xem</a>` : '-'}</td>
+                                </tr>`;
+                        });
+                        html += `
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>`;
+                    }
+
+                    // Hiển thị khóa học đã tham gia
+                    if (degreesData.data.courses && degreesData.data.courses.length > 0) {
+                        html += renderCoursesTable(degreesData.data.courses);
+                    }
+
+                    if (!degreesData.data.degrees?.length && !degreesData.data.certificates?.length && !degreesData.data.courses?.length) {
+                        html += '<p><i>Không có thông tin bằng cấp, chứng chỉ hoặc khóa học nào.</i></p>';
+                    }
+
+                    html += '</div>';
+                    degreesDiv.innerHTML = html;
+
+                    // Khởi tạo lại popover cho các nút đánh giá
+                    const popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
+                    popovers.forEach(popover => {
+                        new bootstrap.Popover(popover, {
+                            trigger: 'click',
+                            placement: 'left',
+                            html: true
+                        });
+                    });
+                } else {
+                    degreesDiv.innerHTML = '<p><i>Không có thông tin bằng cấp, chứng chỉ hoặc khóa học nào.</i></p>';
+                }
+            } else {
+                nameInput.value = '';
+                idInput.value = '';
+                degreesDiv.innerHTML = '<p class="text-danger">Không tìm thấy nhân viên</p>';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            degreesDiv.innerHTML = `<p class="text-danger">Lỗi: ${error.message}</p>`;
+        }
+    }
+
+    // Hàm chuyển đổi trạng thái khóa học sang text
+    function getCourseStatusText(status) {
+        const statusMap = {
+            'registered': 'Đã đăng ký',
+            'attended': 'Đang tham gia',
+            'completed': 'Đã hoàn thành',
+            'cancelled': 'Đã hủy'
+        };
+        return statusMap[status] || status;
+    }
+
+    // Tạo phiên bản debounce của hàm tìm kiếm
+    const debouncedSearch = debounce((code) => {
+        searchEmployeeByCode(code);
+    }, 300);
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const employeeCodeInput = document.getElementById('employeeCode');
+        if (employeeCodeInput) {
+            employeeCodeInput.addEventListener('input', (e) => {
+                const code = e.target.value.trim();
+                debouncedSearch(code);
+            });
+        }
+    });
+
+    // Hàm tìm kiếm nhân viên cho modal
+    async function searchEmployeeByCodeForModal(code) {
+        const nameInput = document.getElementById('employeeNameModal');
+        const idInput = document.getElementById('employeeIdModal');
+        const degreesDiv = document.getElementById('modalEmployeeDegreesList');
+        
+        if (!code || code.length < 3) {
+            if (nameInput) nameInput.value = '';
+            if (idInput) idInput.value = '';
+            if (degreesDiv) {
+                degreesDiv.innerHTML = '<div class="alert alert-info"><i class="fas fa-info-circle"></i> Vui lòng nhập mã nhân viên để xem thông tin</div>';
+            }
+            return;
+        }
+
+        try {
+            // Sử dụng đường dẫn tương đối
+            const response = await fetch('/qlnhansu_V3/backend/src/api/employees.php?action=quick_search&search=' + encodeURIComponent(code));
+            const data = await response.json();
+            
+            if (data.success && data.data && data.data.length > 0) {
+                const employee = data.data[0];
+                if (nameInput) nameInput.value = employee.name;
+                if (idInput) {
+                    idInput.value = employee.id;
+                    console.log('Set employee ID:', employee.id); // Debug log
+                }
+                
+                // Lấy bằng cấp/chứng chỉ với đường dẫn tương đối
+                const degreesResponse = await fetch('/qlnhansu_V3/backend/src/api/degrees.php?action=list&employee=' + employee.employee_code);
+                const degreesData = await degreesResponse.json();
+                
+                if (degreesDiv) {
+                    if (degreesData.success && degreesData.data) {
+                        let html = '<div class="qualifications-info">';
+                        
+                        // Hiển thị bằng cấp
+                        if (degreesData.data.degrees && degreesData.data.degrees.length > 0) {
+                            html += `
+                                <div class="section">
+                                    <h5>Bằng cấp:</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Tên bằng</th>
+                                                    <th>Chuyên ngành</th>
+                                                    <th>Trường</th>
+                                                    <th>Ngày tốt nghiệp</th>
+                                                    <th>GPA</th>
+                                                    <th>File đính kèm</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>`;
+                            degreesData.data.degrees.forEach(degree => {
+                                html += `
+                                    <tr>
+                                        <td>${degree.name}</td>
+                                        <td>${degree.major || '-'}</td>
+                                        <td>${degree.institution}</td>
+                                        <td>${new Date(degree.graduation_date).toLocaleDateString('vi-VN')}</td>
+                                        <td>${degree.gpa || '-'}</td>
+                                        <td>${degree.attachment_url ? `<a href="${degree.attachment_url}" target="_blank" class="btn btn-sm btn-outline-primary">Xem</a>` : '-'}</td>
+                                    </tr>`;
+                            });
+                            html += `
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>`;
+                        }
+
+                        // Hiển thị chứng chỉ
+                        if (degreesData.data.certificates && degreesData.data.certificates.length > 0) {
+                            html += `
+                                <div class="section">
+                                    <h5>Chứng chỉ:</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Tên chứng chỉ</th>
+                                                    <th>Tổ chức cấp</th>
+                                                    <th>Ngày cấp</th>
+                                                    <th>Ngày hết hạn</th>
+                                                    <th>Mã chứng chỉ</th>
+                                                    <th>File đính kèm</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>`;
+                            degreesData.data.certificates.forEach(cert => {
+                                html += `
+                                    <tr>
+                                        <td>${cert.name}</td>
+                                        <td>${cert.issuing_organization}</td>
+                                        <td>${new Date(cert.issue_date).toLocaleDateString('vi-VN')}</td>
+                                        <td>${cert.expiry_date ? new Date(cert.expiry_date).toLocaleDateString('vi-VN') : '-'}</td>
+                                        <td>${cert.credential_id || '-'}</td>
+                                        <td>${cert.file_url ? `<a href="${cert.file_url}" target="_blank" class="btn btn-sm btn-outline-primary">Xem</a>` : '-'}</td>
+                                    </tr>`;
+                            });
+                            html += `
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>`;
+                        }
+
+                        // Hiển thị khóa học đã tham gia
+                        if (degreesData.data.courses && degreesData.data.courses.length > 0) {
+                            html += renderCoursesTable(degreesData.data.courses);
+                        }
+
+                        if (!degreesData.data.degrees?.length && !degreesData.data.certificates?.length && !degreesData.data.courses?.length) {
+                            html += '<p><i>Không có thông tin bằng cấp, chứng chỉ hoặc khóa học nào.</i></p>';
+                        }
+
+                        html += '</div>';
+                        degreesDiv.innerHTML = html;
+                    } else {
+                        degreesDiv.innerHTML = '<div class="alert alert-info"><i class="fas fa-info-circle"></i> Không có bằng cấp/chứng chỉ nào.</div>';
+                    }
+                }
+            } else {
+                if (nameInput) nameInput.value = '';
+                if (idInput) idInput.value = '';
+                if (degreesDiv) {
+                    degreesDiv.innerHTML = '<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> Không tìm thấy nhân viên với mã này.</div>';
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            if (nameInput) nameInput.value = '';
+            if (idInput) idInput.value = '';
+            if (degreesDiv) {
+                degreesDiv.innerHTML = `<div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> Lỗi khi tìm kiếm nhân viên: ${error.message}</div>`;
+            }
+        }
+    }
+
+    // Gắn sự kiện cho input trong modal
+    document.addEventListener('DOMContentLoaded', function() {
+        const employeeCodeInputModal = document.getElementById('employeeCodeModal');
+        if (employeeCodeInputModal) {
+            employeeCodeInputModal.addEventListener('input', (e) => {
+                const code = e.target.value.trim();
+                searchEmployeeByCodeForModal(code);
+            });
+        }
+    });
+
+    // Hàm lấy class cho badge trạng thái
+    function getStatusBadgeClass(status) {
+        const statusMap = {
+            'registered': 'bg-secondary',
+            'attended': 'bg-primary',
+            'completed': 'bg-success',
+            'cancelled': 'bg-danger'
+        };
+        return statusMap[status] || 'bg-secondary';
+    }
+
+    // Sửa lại render bảng Khóa học đã tham gia để thêm class cho từng cột và button nhỏ lại
+    function renderCoursesTable(courses) {
+        let html = `<div class="section">
+            <h5>Khóa học đã tham gia:</h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-courses">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="name-col">Tên khóa học</th>
+                            <th>Trạng thái</th>
+                            <th class="date-col">Ngày hoàn thành</th>
+                            <th class="score-col">Điểm số</th>
+                            <th class="evaluation-col">Đánh giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+        courses.forEach(course => {
+            // Chuẩn bị nội dung popover đánh giá
+            let evalContent = '';
+            if (course.evaluation) {
+                let hasAny = false;
+                evalContent += `<div style='font-weight:600;margin-bottom:4px;'>Chi tiết đánh giá</div>`;
+                if (course.evaluation.content_rating) {
+                    evalContent += `<div>Nội dung: <b>${course.evaluation.content_rating}/5</b></div>`;
+                    hasAny = true;
+                }
+                if (course.evaluation.instructor_rating) {
+                    evalContent += `<div>Giảng viên: <b>${course.evaluation.instructor_rating}/5</b></div>`;
+                    hasAny = true;
+                }
+                if (course.evaluation.materials_rating) {
+                    evalContent += `<div>Tài liệu: <b>${course.evaluation.materials_rating}/5</b></div>`;
+                    hasAny = true;
+                }
+                if (course.evaluation.comments) {
+                    evalContent += `<div>Nhận xét: <i>${course.evaluation.comments}</i></div>`;
+                    hasAny = true;
+                }
+                if (!hasAny) {
+                    evalContent += `<div>Chưa có đánh giá chi tiết.</div>`;
+                }
+            } else {
+                evalContent = `<div>Chưa có đánh giá.</div>`;
+            }
+            // Escape ký tự " cho an toàn
+            const safeEvalContent = evalContent.replace(/"/g, '&quot;');
+            html += `<tr>
+                <td class="name-col">${course.name}</td>
+                <td><span class="badge ${getStatusBadgeClass(course.status)}">${getCourseStatusText(course.status)}</span></td>
+                <td class="date-col">${course.completion_date ? new Date(course.completion_date).toLocaleDateString('vi-VN') : '-'}</td>
+                <td class="score-col">${course.score || '-'}</td>
+                <td class="evaluation-col">${
+                    course.evaluation ? `
+                    <button type="button" class="btn btn-sm btn-outline-info btn-eval-sm" data-bs-toggle="popover" 
+                        data-bs-html="true"
+                        data-bs-content="${safeEvalContent}">
+                        Xem đánh giá
+                    </button>
+                    ` : '-'
+                }</td>
+            </tr>`;
+        });
+        html += `</tbody></table></div></div>`;
+        return html;
+    }
     </script>
     <script src="degrees.js" defer></script>
   
@@ -433,12 +842,17 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Nhân viên</label>
-                            <select class="form-select" id="employeeFilter">
-                                <option value="">Tất cả nhân viên</option>
-                            </select>
+                            <label for="employeeId" class="required-field">Nhân viên</label>
+                            <div class="employee-search-container">
+                                <div class="input-group mb-2">
+                                    <input type="text" id="employeeCode" class="form-control" placeholder="Nhập mã nhân viên...">
+                                </div>
+                                <input type="text" id="employeeName" class="form-control mb-2" placeholder="Tên nhân viên" readonly>
+                                <input type="hidden" id="employeeId">
+                            </div>
                         </div>
                     </div>
+                    <div id="employeeDegreesList" class="mt-2"></div>
                     <div class="advanced-search-actions">
                         <button class="btn btn-outline-secondary" id="applyFilters">
                             <i class="fas fa-check"></i> Áp dụng
@@ -696,263 +1110,316 @@
     </div>
 
     <!-- Add/Edit Degree Modal -->
-    <div id="degreeModal" class="modal custom-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Thêm bằng cấp/chứng chỉ mới</h3>
-                <span class="close">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form id="degreeForm">
-                    <div class="form-section">
-                        <h4><i class="fas fa-info-circle"></i> Thông tin cơ bản</h4>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="degreeType" class="required-field">Loại</label>
-                                <select id="degreeType" class="form-select" required>
-                                    <option value="degree">Bằng cấp</option>
-                                    <option value="certificate">Chứng chỉ</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeId" class="required-field">Nhân viên</label>
-                                <select id="employeeId" class="form-select" required>
-                                    <option value="">Chọn nhân viên</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="degreeName" class="required-field">Tên bằng cấp/chứng chỉ</label>
-                                <input type="text" id="degreeName" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="organization" class="required-field">Tổ chức cấp</label>
-                                <input type="text" id="organization" class="form-control" required>
-                            </div>
-                            <div class="form-group degree-fields" style="display: none;">
-                                <label for="major">Chuyên ngành</label>
-                                <input type="text" id="major" class="form-control">
-                            </div>
-                            <div class="form-group degree-fields" style="display: none;">
-                                <label for="gpa">GPA</label>
-                                <input type="number" id="gpa" class="form-control" step="0.01" min="0" max="4">
+    <div class="modal fade" id="degreeModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <h3 id="modalTitle" class="modal-title">Thêm bằng cấp/chứng chỉ mới</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="degreeForm">
+                        <div class="form-section">
+                            <h4><i class="fas fa-info-circle"></i> Thông tin cơ bản</h4>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="degreeType" class="required-field">Loại</label>
+                                    <select id="degreeType" class="form-select form-select-lg" required>
+                                        <option value="degree">Bằng cấp</option>
+                                        <option value="certificate">Chứng chỉ</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="employeeId" class="required-field">Nhân viên</label>
+                                    <div class="employee-search-container">
+                                        <div class="input-group mb-2">
+                                            <input type="text" id="employeeCodeModal" class="form-control form-control-lg" placeholder="Nhập mã nhân viên...">
+                                        </div>
+                                        <input type="text" id="employeeNameModal" class="form-control form-control-lg mb-2" placeholder="Tên nhân viên" readonly>
+                                        <input type="hidden" id="employeeIdModal" name="employee_id">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="degreeName" class="required-field">Tên bằng cấp/chứng chỉ</label>
+                                    <input type="text" id="degreeName" class="form-control form-control-lg" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="organization" class="required-field">Tổ chức cấp</label>
+                                    <input type="text" id="organization" class="form-control form-control-lg" required>
+                                </div>
+                                <div class="form-group degree-fields" style="display: none;">
+                                    <label for="major">Chuyên ngành</label>
+                                    <input type="text" id="major" class="form-control form-control-lg">
+                                </div>
+                                <div class="form-group degree-fields" style="display: none;">
+                                    <label for="gpa">GPA</label>
+                                    <input type="number" id="gpa" class="form-control form-control-lg" step="0.01" min="0" max="4">
+                                </div>
+                                <div class="form-group">
+                                    <label for="issueDate" class="required-field">Ngày cấp</label>
+                                    <input type="date" id="issueDate" class="form-control form-control-lg" required>
+                                </div>
+                                <div class="form-group certificate-fields" style="display: none;">
+                                    <label for="expiryDate">Ngày hết hạn</label>
+                                    <input type="date" id="expiryDate" class="form-control form-control-lg">
+                                </div>
+                                <div class="form-group certificate-fields" style="display: none;">
+                                    <label for="credentialId">Mã chứng chỉ</label>
+                                    <input type="text" id="credentialId" class="form-control form-control-lg">
+                                </div>
+                                <div class="form-group">
+                                    <label for="attachment">File đính kèm</label>
+                                    <input type="file" id="attachment" class="form-control form-control-lg" accept=".pdf,.jpg,.jpeg,.png">
+                                    <small class="form-text text-muted">Chấp nhận file PDF, JPG, JPEG, PNG (tối đa 5MB)</small>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-section">
-                        <h4><i class="fas fa-calendar"></i> Thông tin thời gian</h4>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="issueDate" class="required-field">Ngày cấp</label>
-                                <input type="date" id="issueDate" class="form-control" required>
-                            </div>
-                            <div class="form-group certificate-fields" style="display: none;">
-                                <label for="expiryDate">Ngày hết hạn</label>
-                                <input type="date" id="expiryDate" class="form-control">
-                            </div>
-                            <div class="form-group certificate-fields" style="display: none;">
-                                <label for="credentialId">Mã chứng chỉ</label>
-                                <input type="text" id="credentialId" class="form-control">
+                        <!-- Thông tin bằng cấp và chứng chỉ hiện có -->
+                        <div class="form-section mt-4">
+                            <h4><i class="fas fa-graduation-cap"></i> Thông tin bằng cấp và chứng chỉ hiện có</h4>
+                            <div id="modalEmployeeDegreesList" class="qualifications-info">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> Vui lòng nhập mã nhân viên để xem thông tin
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-section">
-                        <h4><i class="fas fa-file"></i> Tài liệu đính kèm</h4>
-                        <div class="form-group">
-                            <label for="attachment">File đính kèm</label>
-                            <input type="file" id="attachment" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
-                            <small class="form-text text-muted">Chấp nhận file PDF, JPG, JPEG, PNG (tối đa 5MB)</small>
-                        </div>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Lưu
-                        </button>
-                        <button type="button" class="btn btn-secondary" id="cancelBtn">
-                            <i class="fas fa-times"></i> Hủy
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" form="degreeForm" class="btn btn-primary btn-lg">
+                        <i class="fas fa-save me-2"></i>Lưu
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
     <style>
-        .btn-outline-secondary {
-            color: #6c757d;
-            border-color: #dee2e6;
-            background-color: #f8f9fa;
+        /* Giảm kích thước chữ cho modal Add/Edit Degree */
+        #degreeModal .modal-title {
+            font-size: 1.4rem !important;
         }
-        
-        .btn-outline-secondary:hover {
-            color: #495057;
-            background-color: #e9ecef;
-            border-color: #dee2e6;
+        #degreeModal label,
+        #degreeModal .form-control,
+        #degreeModal .form-select,
+        #degreeModal .btn,
+        #degreeModal .modal-header,
+        #degreeModal .modal-footer,
+        #degreeModal .form-group,
+        #degreeModal .form-text {
+            font-size: 0.98rem !important;
         }
-
-        .table-light {
-            background-color: #f8f9fa;
+        #degreeModal .form-control,
+        #degreeModal .form-select {
+            padding: 0.5rem 0.75rem;
         }
-
-        .table-hover tbody tr:hover {
-            background-color: #f8f9fa;
-        }
-
-        .table-title {
-            color: #212529;
-            font-weight: 600;
-        }
-
-        /* Custom styles for status badges */
-        .badge.bg-success {
-            background-color: #d1e7dd !important;
-            color: #0f5132;
-        }
-
-        .badge.bg-danger {
-            background-color: #f8d7da !important;
-            color: #842029;
-        }
-
-        .badge.bg-warning {
-            background-color: #fff3cd !important;
-            color: #664d03;
-        }
-
-        .badge.bg-secondary {
-            background-color: #e2e3e5 !important;
-            color: #41464b;
-        }
-
-        .modal-header {
-            background: #f8f9fa !important;
-            color: #212529 !important;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            font-weight: 600;
-        }
-        .modal-header h3, .modal-header h5, .modal-header .modal-title {
-            color: #212529 !important;
-        }
-        .modal-content {
-            background: #fff !important;
-        }
-
-        /* Chỉ áp dụng nền tối khi modal custom đang mở */
-        .custom-modal {
-            background: none !important;
-        }
-        .custom-modal[style*="display: block"] {
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-
-        /* ======= Đẹp giao diện modal xem chi tiết ======= */
-        #degreeInfoModal .modal-content {
-            border-radius: 18px;
-            box-shadow: 0 8px 32px rgba(44,62,80,0.18);
-            border: none;
-            background: #f8fafc;
-        }
-        #degreeInfoModal .modal-header {
-            background: linear-gradient(90deg, #e0e7ef 0%, #f8fafc 100%);
-            color: #212529;
-            border-radius: 18px 18px 0 0;
-            border-bottom: 1px solid #e9ecef;
-            padding: 1.2rem 2rem 1.2rem 2rem;
-        }
-        #degreeInfoModal .modal-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-        }
-        #degreeInfoModal .modal-body {
-            padding: 2rem 2.5rem 2rem 2.5rem;
-            background: #f8fafc;
-        }
-        .degree-info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem 2.5rem;
-        }
-        @media (max-width: 900px) {
-            .degree-info-grid {
-                grid-template-columns: 1fr;
-            }
-            #degreeInfoModal .modal-body {
-                padding: 1.2rem;
-            }
-        }
-        .info-section {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(44,62,80,0.06);
-            padding: 1.2rem 1.5rem 1.2rem 1.5rem;
-            margin-bottom: 1.2rem;
-            border-left: 4px solid #e5e7eb;
-        }
-        .info-section h6 {
-            font-size: 1.08rem;
-            font-weight: 600;
-            color: #2563eb;
-            margin-bottom: 1rem;
+        /* Modal full màn hình, căn giữa, không bị lệch */
+        #degreeModal .modal-dialog {
+            max-width: 100vw !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            margin: 0 !important;
+            padding: 0 !important;
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            align-items: stretch;
+            justify-content: center;
         }
-        .info-section h6 i {
-            color: #2563eb;
-            font-size: 1.1rem;
-        }
-        .info-content {
+
+        #degreeModal .modal-content {
+            width: 100vw !important;
+            height: 100vh !important;
+            min-height: 100vh !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-shadow: none !important;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
         }
-        .info-item {
-            display: flex;
-            gap: 0.5rem;
+
+        #degreeModal .modal-header,
+        #degreeModal .modal-footer {
+            padding-left: 2.5rem !important;
+            padding-right: 2.5rem !important;
+        }
+
+        #degreeModal .modal-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        #degreeModal .modal-body {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            padding: 2.5rem !important;
+        }
+
+        #degreeModal .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        #degreeModal .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        #degreeModal .form-control,
+        #degreeModal .form-select {
+            font-size: 1.2rem;
+            padding: 0.75rem 1rem;
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+
+        #degreeModal .employee-search-container .form-control {
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 900px) {
+            #degreeModal .modal-header,
+            #degreeModal .modal-footer,
+            #degreeModal .modal-body {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            #degreeModal .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        #degreeModal .qualifications-info .table-courses th.name-col,
+        #degreeModal .qualifications-info .table-courses td.name-col {
+            min-width: 180px;
+            max-width: 350px;
+            width: 40%;
+            white-space: normal;
+            word-break: break-word;
+        }
+        #degreeModal .qualifications-info .table-courses th.date-col,
+        #degreeModal .qualifications-info .table-courses td.date-col {
+            width: 110px;
+            min-width: 90px;
+            max-width: 120px;
+            text-align: center;
+        }
+        #degreeModal .qualifications-info .table-courses th.score-col,
+        #degreeModal .qualifications-info .table-courses td.score-col {
+            width: 70px;
+            min-width: 50px;
+            max-width: 80px;
+            text-align: center;
+        }
+        #degreeModal .qualifications-info .table-courses th.evaluation-col,
+        #degreeModal .qualifications-info .table-courses td.evaluation-col {
+            width: 90px;
+            min-width: 70px;
+            max-width: 110px;
+            text-align: center;
+        }
+        #degreeModal .qualifications-info .table-courses .btn-eval-sm {
+            font-size: 0.82rem;
+            padding: 0.13rem 0.5rem;
+            border-radius: 5px;
+            min-width: 70px;
+            height: 28px;
+            line-height: 1.1;
+            display: inline-flex;
             align-items: center;
+            justify-content: center;
         }
-        .info-label {
-            font-weight: 600;
-            color: #374151;
-            min-width: 110px;
+    </style>
+
+    <style>
+    #degreeModal .qualifications-info .table-courses {
+        font-size: 0.97rem;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #fff;
+    }
+    #degreeModal .qualifications-info .table-courses th,
+    #degreeModal .qualifications-info .table-courses td {
+        border-top: 1px solid #e9ecef;
+        border-bottom: 1px solid #e9ecef;
+        border-right: none;
+        border-left: none;
+        padding: 0.5rem 0.6rem;
+        vertical-align: middle;
+    }
+    #degreeModal .qualifications-info .table-courses th {
+        background: #f8f9fa;
+        font-weight: 600;
+        text-align: center;
+    }
+    #degreeModal .qualifications-info .table-courses td.name-col {
+        text-align: left;
+        font-weight: 500;
+        color: #222;
+        max-width: 320px;
+        white-space: normal;
+        word-break: break-word;
+    }
+    #degreeModal .qualifications-info .table-courses td,
+    #degreeModal .qualifications-info .table-courses th {
+        text-align: center;
+    }
+    #degreeModal .qualifications-info .table-courses td.name-col {
+        text-align: left;
+    }
+    #degreeModal .qualifications-info .table-courses .badge {
+        border-radius: 8px;
+        font-size: 0.85rem;
+        padding: 0.18em 0.7em;
+        background-color: #e3e8ef !important;
+        color: #5a5a5a !important;
+        font-weight: 500;
+        opacity: 0.85;
+        border: none;
+    }
+    #degreeModal .qualifications-info .table-courses .bg-success {
+        background-color: #d4f5e9 !important;
+        color: #2e7d5b !important;
+    }
+    #degreeModal .qualifications-info .table-courses .bg-primary {
+        background-color: #e3eafd !important;
+        color: #2a4d8f !important;
+    }
+    #degreeModal .qualifications-info .table-courses .bg-secondary {
+        background-color: #f0f1f3 !important;
+        color: #6c757d !important;
+    }
+    #degreeModal .qualifications-info .table-courses .bg-danger {
+        background-color: #fdeaea !important;
+        color: #b94a48 !important;
+    }
+    #degreeModal .qualifications-info .table-courses .btn-eval-sm {
+        font-size: 0.92rem;
+        padding: 0.22rem 0.7rem;
+        border-radius: 6px;
+        min-width: 90px;
+    }
+    @media (max-width: 700px) {
+        #degreeModal .qualifications-info .table-courses th,
+        #degreeModal .qualifications-info .table-courses td {
+            font-size: 0.92rem;
+            padding: 0.35rem 0.3rem;
         }
-        .info-value {
-            color: #212529;
-            font-weight: 400;
+        #degreeModal .qualifications-info .table-courses td.name-col {
+            max-width: 120px;
         }
-        #degreeInfoModal .badge {
-            font-size: 0.95rem;
-            padding: 0.35em 0.9em;
-            border-radius: 8px;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(44,62,80,0.08);
-        }
-        #degreeInfoModal .attachment-preview .btn {
-            font-size: 0.95rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: 6px;
-        }
-        #degreeInfoModal .attachment-preview .btn-outline-primary {
-            border-color: #2563eb;
-            color: #2563eb;
-        }
-        #degreeInfoModal .attachment-preview .btn-outline-primary:hover {
-            background: #2563eb;
-            color: #fff;
-        }
-        #degreeInfoModal .attachment-preview .btn-outline-secondary {
-            border-color: #64748b;
-            color: #64748b;
-        }
-        #degreeInfoModal .attachment-preview .btn-outline-secondary:hover {
-            background: #64748b;
-            color: #fff;
-        }
+    }
+    </style>
+
+    <style>
+    #degreeModal .qualifications-info .table th,
+    #degreeModal .qualifications-info .table td {
+        white-space: normal !important;
+        word-break: break-word !important;
+        max-width: 220px;
+    }
     </style>
 </body>
 </html>

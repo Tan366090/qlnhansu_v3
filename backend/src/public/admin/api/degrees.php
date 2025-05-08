@@ -154,20 +154,14 @@ class TrainingAPI {
     }
 
     // Get all qualifications with pagination and filters
-    public function getQualifications($page = 1, $limit = 10, $search = '', $type = '', $status = '') {
+    public function getQualifications($page = 1, $limit = 10, $type = '', $status = '') {
         try {
             error_log("=== getQualifications called ===");
-            error_log("Parameters: page=$page, limit=$limit, search=$search, type=$type, status=$status");
+            error_log("Parameters: page=$page, limit=$limit, type=$type, status=$status");
             
             $offset = ($page - 1) * $limit;
             $where = [];
             $params = [];
-
-            if ($search) {
-                $where[] = "(d.degree_name LIKE ? OR c.name LIKE ? OR e.name LIKE ? OR d.institution LIKE ? OR c.issuing_organization LIKE ?)";
-                $searchParam = "%$search%";
-                $params = array_merge($params, [$searchParam, $searchParam, $searchParam, $searchParam, $searchParam]);
-            }
 
             if ($type === 'degree') {
                 $where[] = "d.degree_id IS NOT NULL";
@@ -356,6 +350,35 @@ class TrainingAPI {
         try {
             $this->conn->beginTransaction();
 
+            // Handle file upload if exists
+            $attachment_url = null;
+            if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] === UPLOAD_ERR_OK) {
+                $upload_dir = '../../uploads/qualifications/';
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+
+                $file_extension = strtolower(pathinfo($_FILES['attachment']['name'], PATHINFO_EXTENSION));
+                $allowed_extensions = ['pdf', 'jpg', 'jpeg', 'png'];
+                
+                if (!in_array($file_extension, $allowed_extensions)) {
+                    throw new Exception('Chỉ chấp nhận file PDF, JPEG hoặc PNG');
+                }
+
+                if ($_FILES['attachment']['size'] > 5 * 1024 * 1024) {
+                    throw new Exception('File không được vượt quá 5MB');
+                }
+
+                $filename = uniqid() . '.' . $file_extension;
+                $filepath = $upload_dir . $filename;
+                
+                if (move_uploaded_file($_FILES['attachment']['tmp_name'], $filepath)) {
+                    $attachment_url = 'uploads/qualifications/' . $filename;
+                } else {
+                    throw new Exception('Lỗi khi upload file');
+                }
+            }
+
             if ($data['type'] === 'degree') {
                 $query = "INSERT INTO degrees (employee_id, degree_name, major, institution, graduation_date, gpa, attachment_url) 
                          VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -367,7 +390,7 @@ class TrainingAPI {
                     $data['organization'],
                     $data['issue_date'],
                     $data['gpa'] ?? null,
-                    $data['attachment_url'] ?? null
+                    $attachment_url
                 ]);
             } else {
                 $query = "INSERT INTO certificates (employee_id, name, issuing_organization, issue_date, expiry_date, credential_id, file_url) 
@@ -380,7 +403,7 @@ class TrainingAPI {
                     $data['issue_date'],
                     $data['expiry_date'] ?? null,
                     $data['credential_id'] ?? null,
-                    $data['attachment_url'] ?? null
+                    $attachment_url
                 ]);
             }
 
@@ -397,38 +420,95 @@ class TrainingAPI {
         try {
             $this->conn->beginTransaction();
 
+            // Handle file upload if exists
+            $attachment_url = null;
+            if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] === UPLOAD_ERR_OK) {
+                $upload_dir = '../../uploads/qualifications/';
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+
+                $file_extension = strtolower(pathinfo($_FILES['attachment']['name'], PATHINFO_EXTENSION));
+                $allowed_extensions = ['pdf', 'jpg', 'jpeg', 'png'];
+                
+                if (!in_array($file_extension, $allowed_extensions)) {
+                    throw new Exception('Chỉ chấp nhận file PDF, JPEG hoặc PNG');
+                }
+
+                if ($_FILES['attachment']['size'] > 5 * 1024 * 1024) {
+                    throw new Exception('File không được vượt quá 5MB');
+                }
+
+                $filename = uniqid() . '.' . $file_extension;
+                $filepath = $upload_dir . $filename;
+                
+                if (move_uploaded_file($_FILES['attachment']['tmp_name'], $filepath)) {
+                    $attachment_url = 'uploads/qualifications/' . $filename;
+
+                    // Delete old file if exists
+                    if ($data['type'] === 'degree') {
+                        $query = "SELECT attachment_url FROM degrees WHERE degree_id = ?";
+                    } else {
+                        $query = "SELECT file_url FROM certificates WHERE id = ?";
+                    }
+                    $stmt = $this->conn->prepare($query);
+                    $stmt->execute([$data['id']]);
+                    $old_file = $stmt->fetchColumn();
+
+                    if ($old_file && file_exists('../../' . $old_file)) {
+                        unlink('../../' . $old_file);
+                    }
+                } else {
+                    throw new Exception('Lỗi khi upload file');
+                }
+            }
+
             if ($data['type'] === 'degree') {
                 $query = "UPDATE degrees 
                          SET employee_id = ?, degree_name = ?, major = ?, institution = ?, 
-                             graduation_date = ?, gpa = ?, attachment_url = ?, updated_at = NOW()
-                         WHERE degree_id = ?";
-                $stmt = $this->conn->prepare($query);
-                $stmt->execute([
+                             graduation_date = ?, gpa = ?, updated_at = NOW()";
+                $params = [
                     $data['employee_id'],
                     $data['name'],
                     $data['major'] ?? null,
                     $data['organization'],
                     $data['issue_date'],
-                    $data['gpa'] ?? null,
-                    $data['attachment_url'] ?? null,
-                    $data['id']
-                ]);
+                    $data['gpa'] ?? null
+                ];
+
+                if ($attachment_url) {
+                    $query .= ", attachment_url = ?";
+                    $params[] = $attachment_url;
+                }
+
+                $query .= " WHERE degree_id = ?";
+                $params[] = $data['id'];
+
+                $stmt = $this->conn->prepare($query);
+                $stmt->execute($params);
             } else {
                 $query = "UPDATE certificates 
                          SET employee_id = ?, name = ?, issuing_organization = ?, issue_date = ?, 
-                             expiry_date = ?, credential_id = ?, file_url = ?, updated_at = NOW()
-                         WHERE id = ?";
-                $stmt = $this->conn->prepare($query);
-                $stmt->execute([
+                             expiry_date = ?, credential_id = ?, updated_at = NOW()";
+                $params = [
                     $data['employee_id'],
                     $data['name'],
                     $data['organization'],
                     $data['issue_date'],
                     $data['expiry_date'] ?? null,
-                    $data['credential_id'] ?? null,
-                    $data['attachment_url'] ?? null,
-                    $data['id']
-                ]);
+                    $data['credential_id'] ?? null
+                ];
+
+                if ($attachment_url) {
+                    $query .= ", file_url = ?";
+                    $params[] = $attachment_url;
+                }
+
+                $query .= " WHERE id = ?";
+                $params[] = $data['id'];
+
+                $stmt = $this->conn->prepare($query);
+                $stmt->execute($params);
             }
 
             $this->conn->commit();
@@ -495,7 +575,6 @@ try {
     $action = $_GET['action'] ?? '';
     $page = $_GET['page'] ?? 1;
     $limit = $_GET['limit'] ?? 10;
-    $search = $_GET['search'] ?? '';
     $type = $_GET['type'] ?? '';
     $status = $_GET['status'] ?? '';
     $employeeId = $_GET['employee_id'] ?? null;
@@ -548,7 +627,7 @@ try {
                 error_log("Request parameters: " . print_r($_GET, true));
                 
                 // Get all data without pagination for export
-                $result = $api->getQualifications(1, 1000, $search, $type, $status);
+                $result = $api->getQualifications(1, 1000, $type, $status);
                 error_log("Raw result from getQualifications: " . print_r($result, true));
                 
                 if (!isset($result['data'])) {
@@ -593,7 +672,7 @@ try {
             break;
         case 'list':
             try {
-                $result = $api->getQualifications($page, $limit, $search, $type, $status);
+                $result = $api->getQualifications($page, $limit, $type, $status);
                 echo json_encode(['success' => true, 'data' => $result], JSON_UNESCAPED_UNICODE);
             } catch (Exception $e) {
                 echo json_encode(['error' => $e->getMessage()], JSON_UNESCAPED_UNICODE);

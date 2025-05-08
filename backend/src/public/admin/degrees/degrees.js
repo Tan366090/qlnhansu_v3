@@ -1,3 +1,62 @@
+// Add required libraries
+document.head.innerHTML += `
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            transition: opacity 0.3s ease;
+        }
+
+        #degreeModal {
+            z-index: 1050;
+        }
+
+        #degreeModal .modal-dialog {
+            margin: 1.75rem auto;
+            max-width: 800px;
+        }
+
+        #degreeModal .modal-content {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: none;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        #degreeModal .modal-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            border-radius: 8px 8px 0 0;
+            padding: 1rem;
+        }
+
+        #degreeModal .modal-body {
+            padding: 1.5rem;
+        }
+
+        #degreeModal .modal-footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            border-radius: 0 0 8px 8px;
+            padding: 1rem;
+        }
+
+        .modal-backdrop {
+            z-index: 1039;
+        }
+
+        .modal-backdrop.show {
+            opacity: 0;
+        }
+    </style>
+`;
+
 class DegreesManager {
     constructor() {
         this.currentPage = 1;
@@ -43,13 +102,6 @@ class DegreesManager {
     }
 
     initializeEventListeners() {
-        // Smart Search
-        $('#smartSearchInput').on('input', debounce(() => {
-            this.search = $('#smartSearchInput').val();
-            this.currentPage = 1;
-            this.loadData();
-        }, 500));
-
         // Quick Filters
         $('#typeFilter').on('change', () => {
             this.type = $('#typeFilter').val();
@@ -95,21 +147,6 @@ class DegreesManager {
             this.loadData();
         });
 
-        $('#saveFilterPreset').on('click', () => {
-            const presetName = prompt('Nhập tên cho bộ lọc này:');
-            if (presetName) {
-                const filters = {
-                    name: presetName,
-                    organization: this.organization,
-                    dateFrom: this.dateFrom,
-                    dateTo: this.dateTo,
-                    department: this.department,
-                    employee: this.employee
-                };
-                this.saveFilterPreset(filters);
-            }
-        });
-
         // Add new degree/certificate
         $('#addDegreeBtn').on('click', () => this.showAddModal());
 
@@ -129,27 +166,37 @@ class DegreesManager {
     }
 
     initializeModalEvents() {
-        // Close modal when clicking close button or outside
-        const closeBtn = this.modal.querySelector('.close');
-        const cancelBtn = document.getElementById('cancelBtn');
+        // Initialize Bootstrap modal
+        this.modal = new bootstrap.Modal(document.getElementById('degreeModal'));
         
-        closeBtn.onclick = () => this.hideModal();
-        cancelBtn.onclick = () => this.hideModal();
-        window.onclick = (event) => {
-            if (event.target === this.modal) {
-                this.hideModal();
-            }
-        };
-
         // Form submit handler
-        this.form.onsubmit = (e) => {
-            e.preventDefault();
-            this.handleFormSubmit();
-        };
+        const form = document.getElementById('degreeForm');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleFormSubmit();
+            });
+        }
 
         // File upload handler
         const attachmentInput = document.getElementById('attachment');
-        attachmentInput.onchange = (e) => this.handleFileUpload(e);
+        if (attachmentInput) {
+            attachmentInput.onchange = (e) => this.handleFileUpload(e);
+        }
+
+        // Handle degree type change
+        const degreeTypeSelect = document.getElementById('degreeType');
+        if (degreeTypeSelect) {
+            degreeTypeSelect.addEventListener('change', () => {
+                const isCertificate = degreeTypeSelect.value === 'certificate';
+                document.querySelectorAll('.certificate-fields').forEach(el => {
+                    el.style.display = isCertificate ? 'block' : 'none';
+                });
+                document.querySelectorAll('.degree-fields').forEach(el => {
+                    el.style.display = isCertificate ? 'none' : 'block';
+                });
+            });
+        }
     }
 
     async loadData() {
@@ -175,22 +222,29 @@ class DegreesManager {
             // Update loading message
             this.showLoading('Đang tải danh sách...');
 
-            // Load main list with all filters
-            const listData = await this.fetchData('list', {
+            // Prepare list parameters
+            const listParams = {
                 page: this.currentPage,
-                limit: this.limit,
-                search: this.search,
-                type: this.type,
-                status: this.status,
-                date: this.date,
-                organization: this.organization,
-                dateFrom: this.dateFrom,
-                dateTo: this.dateTo,
-                department: this.department,
-                employee: this.employee,
-                sortColumn: this.sortColumn,
-                sortDirection: this.sortDirection
-            });
+                limit: this.limit
+            };
+
+            // Only add non-empty parameters
+            if (this.search) listParams.search = this.search;
+            if (this.type) listParams.type = this.type;
+            if (this.status) listParams.status = this.status;
+            if (this.date) listParams.date = this.date;
+            if (this.organization) listParams.organization = this.organization;
+            if (this.dateFrom) listParams.dateFrom = this.dateFrom;
+            if (this.dateTo) listParams.dateTo = this.dateTo;
+            if (this.department) listParams.department = this.department;
+            if (this.employee) listParams.employee = this.employee;
+            if (this.sortColumn) {
+                listParams.sortColumn = this.sortColumn;
+                listParams.sortDirection = this.sortDirection;
+            }
+
+            // Load main list with all filters
+            const listData = await this.fetchData('list', listParams);
             this.updateTable(listData);
             this.updatePagination(listData.total);
             this.updateActiveFilters();
@@ -208,13 +262,33 @@ class DegreesManager {
 
     async fetchData(action, params = {}) {
         try {
-            const queryParams = new URLSearchParams({
-                action: action,
-                ...params
-            });
+            const queryParams = new URLSearchParams();
+            queryParams.append('action', action);
+
+            // Handle different types of params
+            if (typeof params === 'string') {
+                // If params is a JSON string, parse it
+                try {
+                    const parsedParams = JSON.parse(params);
+                    Object.entries(parsedParams).forEach(([key, value]) => {
+                        if (value !== null && value !== undefined) {
+                            queryParams.append(key, value);
+                        }
+                    });
+                } catch (e) {
+                    console.error('Error parsing params string:', e);
+                }
+            } else if (typeof params === 'object') {
+                // If params is an object, append each key-value pair
+                Object.entries(params).forEach(([key, value]) => {
+                    if (value !== null && value !== undefined) {
+                        queryParams.append(key, value);
+                    }
+                });
+            }
 
             console.log('Fetching data for action:', action);
-            console.log('With params:', params);
+            console.log('With params:', Object.fromEntries(queryParams));
 
             const response = await fetch(`/qlnhansu_V3/backend/src/public/admin/api/degrees.php?${queryParams}`);
             
@@ -598,7 +672,7 @@ class DegreesManager {
         document.getElementById('modalTitle').textContent = 'Thêm bằng cấp/chứng chỉ mới';
         this.form.reset();
         await this.loadEmployeeList();
-        this.modal.style.display = 'block';
+        this.modal.show();
     }
 
     async editItem(id, type) {
@@ -611,7 +685,7 @@ class DegreesManager {
             if (data) {
                 this.populateForm(data);
                 await this.loadEmployeeList();
-                this.modal.style.display = 'block';
+                this.modal.show();
             }
         } catch (error) {
             this.showToast('Lỗi khi tải thông tin: ' + error.message, 'error');
@@ -620,16 +694,19 @@ class DegreesManager {
 
     async loadEmployeeList() {
         try {
-            const employees = await this.fetchData('employees');
-            const select = document.getElementById('employeeId');
-            select.innerHTML = '<option value="">Chọn nhân viên</option>';
-            
-            employees.forEach(employee => {
-                const option = document.createElement('option');
-                option.value = employee.id;
-                option.textContent = employee.name;
-                select.appendChild(option);
-            });
+            const response = await fetch('/qlnhansu_V3/backend/src/api/employees.php?action=quick_search&search=');
+            const data = await response.json();
+            if (data.success) {
+                const select = document.getElementById('employeeId');
+                select.innerHTML = '<option value="">Chọn nhân viên</option>';
+                
+                data.data.forEach(employee => {
+                    const option = document.createElement('option');
+                    option.value = employee.id;
+                    option.textContent = employee.name;
+                    select.appendChild(option);
+                });
+            }
         } catch (error) {
             this.showToast('Lỗi khi tải danh sách nhân viên: ' + error.message, 'error');
         }
@@ -646,71 +723,173 @@ class DegreesManager {
     }
 
     async handleFormSubmit() {
-        // Validate required fields
-        const requiredFields = {
-            'degreeType': 'Loại',
-            'employeeId': 'Nhân viên',
-            'degreeName': 'Tên bằng cấp/chứng chỉ',
-            'organization': 'Tổ chức cấp',
-            'issueDate': 'Ngày cấp'
-        };
-
-        for (const [field, label] of Object.entries(requiredFields)) {
-            const element = document.getElementById(field);
-            if (!element.value.trim()) {
-                this.showToast(`Vui lòng nhập ${label}`, 'error');
-                element.focus();
-                return;
-            }
-        }
-
-        // Validate file if exists
-        const fileInput = document.getElementById('attachment');
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            if (!this.validateFile(file)) {
-                return;
-            }
-        }
-
-        const loadingOverlay = this.showLoading('Đang lưu thông tin...');
+        console.log('Form submission started');
+        
         try {
-            const formData = new FormData(this.form);
-            const data = {
-                type: document.getElementById('degreeType').value,
-                employee_id: formData.get('employeeId'),
-                name: formData.get('degreeName'),
-                organization: formData.get('organization'),
-                issue_date: formData.get('issueDate'),
-                major: formData.get('major'),
-                gpa: formData.get('gpa'),
-                attachment_url: formData.get('attachment')
+            // Log all form elements for debugging
+            console.log('Form elements:', {
+                employeeIdModal: document.getElementById('employeeIdModal'),
+                employeeNameModal: document.getElementById('employeeNameModal'),
+                employeeCodeModal: document.getElementById('employeeCodeModal')
+            });
+
+            // Validate required fields
+            const requiredFields = {
+                'degreeType': 'Loại',
+                'degreeName': 'Tên bằng cấp/chứng chỉ',
+                'organization': 'Tổ chức cấp',
+                'issueDate': 'Ngày cấp'
             };
 
-            if (data.type === 'certificate') {
-                data.expiry_date = formData.get('expiryDate');
-                data.credential_id = formData.get('credentialId');
+            for (const [field, label] of Object.entries(requiredFields)) {
+                const element = document.getElementById(field);
+                if (!element || !element.value.trim()) {
+                    this.showToast(`Vui lòng nhập ${label}`, 'error');
+                    if (element) element.focus();
+                    return;
+                }
+            }
+
+            // Validate employee selection
+            const employeeIdInput = document.getElementById('employeeIdModal');
+            const employeeNameInput = document.getElementById('employeeNameModal');
+            const employeeCodeInput = document.getElementById('employeeCodeModal');
+
+            console.log('Employee inputs:', {
+                idInput: employeeIdInput,
+                idValue: employeeIdInput?.value,
+                nameInput: employeeNameInput,
+                nameValue: employeeNameInput?.value,
+                codeInput: employeeCodeInput,
+                codeValue: employeeCodeInput?.value
+            });
+
+            if (!employeeIdInput) {
+                console.error('employeeIdModal element not found');
+                this.showToast('Lỗi: Không tìm thấy trường ID nhân viên', 'error');
+                return;
+            }
+
+            if (!employeeIdInput.value) {
+                console.error('employeeIdModal value is empty');
+                this.showToast('Vui lòng chọn nhân viên', 'error');
+                if (employeeCodeInput) employeeCodeInput.focus();
+                return;
+            }
+
+            if (!employeeNameInput || !employeeNameInput.value) {
+                console.error('employeeNameModal value is empty');
+                this.showToast('Vui lòng chọn nhân viên', 'error');
+                if (employeeCodeInput) employeeCodeInput.focus();
+                return;
+            }
+
+            const employeeId = employeeIdInput.value.trim();
+            console.log('Selected employee:', {
+                id: employeeId,
+                name: employeeNameInput.value,
+                code: employeeCodeInput.value
+            });
+
+            // Validate file if exists
+            const fileInput = document.getElementById('attachment');
+            if (fileInput && fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                if (!this.validateFile(file)) {
+                    return;
+                }
+            }
+
+            const loadingOverlay = this.showLoading('Đang lưu thông tin...');
+            
+            console.log('Preparing form data');
+            const formData = new FormData();
+            
+            // Log all form values for debugging
+            const formValues = {
+                type: document.getElementById('degreeType').value,
+                employee_id: employeeId,
+                name: document.getElementById('degreeName').value,
+                organization: document.getElementById('organization').value,
+                issue_date: document.getElementById('issueDate').value,
+                major: document.getElementById('major')?.value,
+                gpa: document.getElementById('gpa')?.value,
+                expiry_date: document.getElementById('expiryDate')?.value,
+                credential_id: document.getElementById('credentialId')?.value,
+                has_file: fileInput?.files.length > 0
+            };
+            console.log('Form values:', formValues);
+
+            // Add required fields
+            formData.append('type', formValues.type);
+            formData.append('employee_id', formValues.employee_id);
+            formData.append('name', formValues.name);
+            formData.append('organization', formValues.organization);
+            formData.append('issue_date', formValues.issue_date);
+            
+            // Add optional fields only if they have values
+            if (formValues.major) {
+                formData.append('major', formValues.major.trim());
+            }
+            
+            if (formValues.gpa) {
+                formData.append('gpa', formValues.gpa.trim());
+            }
+
+            if (formValues.type === 'certificate') {
+                if (formValues.expiry_date) {
+                    formData.append('expiry_date', formValues.expiry_date.trim());
+                }
+                
+                if (formValues.credential_id) {
+                    formData.append('credential_id', formValues.credential_id.trim());
+                }
             }
 
             if (this.currentEditId) {
-                data.id = this.currentEditId;
-                data.edit_type = this.currentEditType;
+                formData.append('id', this.currentEditId);
+                formData.append('edit_type', this.currentEditType);
             }
 
-            const response = await this.fetchData(
-                this.currentEditId ? 'update' : 'create',
-                JSON.stringify(data)
-            );
+            // Add file if exists
+            if (fileInput && fileInput.files.length > 0) {
+                formData.append('attachment', fileInput.files[0]);
+            }
+
+            // Log FormData contents
+            console.log('FormData contents:');
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+
+            console.log('Sending request to server');
+            const response = await fetch(`/qlnhansu_V3/backend/src/public/admin/api/degrees.php?action=${this.currentEditId ? 'update' : 'create'}`, {
+                method: 'POST',
+                body: formData
+            });
+
+            console.log('Received response from server');
+            const result = await response.json();
+            console.log('Server response:', result);
             
-            if (response.success) {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            if (result.success) {
                 this.showToast('Lưu thông tin thành công', 'success');
                 this.hideModal();
                 this.refreshData();
             } else {
-                throw new Error(response.message || 'Lỗi không xác định');
+                throw new Error(result.message || result.error || 'Lỗi không xác định');
             }
         } catch (error) {
-            this.showToast('Lỗi khi lưu thông tin: ' + error.message, 'error');
+            console.error('Error in form submission:', error);
+            console.error('Error details:', {
+                message: error.message,
+                stack: error.stack
+            });
+            this.showToast('Lỗi khi lưu thông tin: ' + (error.message || 'Lỗi không xác định'), 'error');
         } finally {
             this.hideLoading();
         }
@@ -754,7 +933,7 @@ class DegreesManager {
     }
 
     hideModal() {
-        this.modal.style.display = 'none';
+        this.modal.hide();
         this.form.reset();
         this.currentEditId = null;
         this.currentEditType = null;
@@ -1005,6 +1184,17 @@ class DegreesManager {
         this.currentPage = 1;
         this.loadData();
     }
+
+    getCourseStatusText(status) {
+        const statusMap = {
+            'registered': 'Đã đăng ký',
+            'attended': 'Đã tham gia',
+            'completed': 'Đã hoàn thành',
+            'failed': 'Không đạt',
+            'cancelled': 'Đã hủy'
+        };
+        return statusMap[status] || status;
+    }
 }
 
 // Debounce function
@@ -1033,249 +1223,4 @@ if (typeof window.formatDate !== 'function') {
         const date = new Date(dateString);
         return date.toLocaleDateString('vi-VN');
     };
-}
-
-// Add required libraries
-document.head.innerHTML += `
-    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
-`;
-
-// Smart Search Implementation
-document.addEventListener('DOMContentLoaded', function() {
-    const smartSearchInput = document.getElementById('smartSearchInput');
-    const searchSuggestions = document.getElementById('searchSuggestions');
-    const advancedSearchToggle = document.getElementById('advancedSearchToggle');
-    const advancedSearchPanel = document.getElementById('advancedSearchPanel');
-    const activeFilters = document.getElementById('activeFilters');
-    let searchTimeout;
-
-    // Debounce function for search
-    function debounce(func, wait) {
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(searchTimeout);
-                func(...args);
-            };
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(later, wait);
-        };
-    }
-
-    // Smart search with suggestions
-    smartSearchInput.addEventListener('input', debounce(async function(e) {
-        const query = e.target.value.trim();
-        if (query.length < 2) {
-            searchSuggestions.style.display = 'none';
-            return;
-        }
-
-        try {
-            const response = await fetch(`/api/degrees/search-suggestions?q=${encodeURIComponent(query)}`);
-            const suggestions = await response.json();
-            
-            if (suggestions.length > 0) {
-                searchSuggestions.innerHTML = suggestions.map(suggestion => `
-                    <div class="suggestion-item" data-type="${suggestion.type}" data-id="${suggestion.id}">
-                        <i class="fas ${getSuggestionIcon(suggestion.type)}"></i>
-                        ${suggestion.text}
-                    </div>
-                `).join('');
-                searchSuggestions.style.display = 'block';
-            } else {
-                searchSuggestions.style.display = 'none';
-            }
-        } catch (error) {
-            console.error('Error fetching suggestions:', error);
-        }
-    }, 300));
-
-    // Handle suggestion click
-    searchSuggestions.addEventListener('click', function(e) {
-        const suggestionItem = e.target.closest('.suggestion-item');
-        if (suggestionItem) {
-            const type = suggestionItem.dataset.type;
-            const id = suggestionItem.dataset.id;
-            smartSearchInput.value = suggestionItem.textContent.trim();
-            searchSuggestions.style.display = 'none';
-            applySearch();
-        }
-    });
-
-    // Toggle advanced search panel
-    advancedSearchToggle.addEventListener('click', function() {
-        advancedSearchPanel.style.display = 
-            advancedSearchPanel.style.display === 'none' ? 'block' : 'none';
-    });
-
-    // Apply filters
-    document.getElementById('applyFilters').addEventListener('click', function() {
-        const filters = {
-            organization: document.getElementById('orgFilter').value,
-            dateFrom: document.getElementById('dateFrom').value,
-            dateTo: document.getElementById('dateTo').value,
-            department: document.getElementById('departmentFilter').value,
-            employee: document.getElementById('employeeFilter').value
-        };
-        
-        updateActiveFilters(filters);
-        applySearch();
-    });
-
-    // Reset filters
-    document.getElementById('resetFilters').addEventListener('click', function() {
-        document.querySelectorAll('#advancedSearchPanel input, #advancedSearchPanel select')
-            .forEach(input => input.value = '');
-        activeFilters.innerHTML = '';
-        applySearch();
-    });
-
-    // Save filter preset
-    document.getElementById('saveFilterPreset').addEventListener('click', function() {
-        const presetName = prompt('Nhập tên cho bộ lọc này:');
-        if (presetName) {
-            const filters = {
-                name: presetName,
-                organization: document.getElementById('orgFilter').value,
-                dateFrom: document.getElementById('dateFrom').value,
-                dateTo: document.getElementById('dateTo').value,
-                department: document.getElementById('departmentFilter').value,
-                employee: document.getElementById('employeeFilter').value
-            };
-            saveFilterPreset(filters);
-        }
-    });
-
-    // Update active filters display
-    function updateActiveFilters(filters) {
-        activeFilters.innerHTML = '';
-        Object.entries(filters).forEach(([key, value]) => {
-            if (value) {
-                const filterTag = document.createElement('div');
-                filterTag.className = 'filter-tag';
-                filterTag.innerHTML = `
-                    <span>${getFilterLabel(key)}: ${value}</span>
-                    <span class="remove" data-filter="${key}">&times;</span>
-                `;
-                activeFilters.appendChild(filterTag);
-            }
-        });
-
-        // Add remove filter functionality
-        document.querySelectorAll('.filter-tag .remove').forEach(removeBtn => {
-            removeBtn.addEventListener('click', function() {
-                const filterKey = this.dataset.filter;
-                document.getElementById(`${filterKey}Filter`).value = '';
-                this.parentElement.remove();
-                applySearch();
-            });
-        });
-    }
-
-    // Helper function to get filter labels
-    function getFilterLabel(key) {
-        const labels = {
-            organization: 'Tổ chức',
-            dateFrom: 'Từ ngày',
-            dateTo: 'Đến ngày',
-            department: 'Phòng ban',
-            employee: 'Nhân viên'
-        };
-        return labels[key] || key;
-    }
-
-    // Helper function to get suggestion icons
-    function getSuggestionIcon(type) {
-        const icons = {
-            degree: 'fa-graduation-cap',
-            certificate: 'fa-certificate',
-            employee: 'fa-user',
-            organization: 'fa-building'
-        };
-        return icons[type] || 'fa-search';
-    }
-
-    // Save filter preset to localStorage
-    function saveFilterPreset(filters) {
-        const presets = JSON.parse(localStorage.getItem('degreeFilterPresets') || '[]');
-        presets.push(filters);
-        localStorage.setItem('degreeFilterPresets', JSON.stringify(presets));
-        showToast('Đã lưu bộ lọc thành công!', 'success');
-    }
-
-    // Apply search with all active filters
-    function applySearch() {
-        const searchParams = new URLSearchParams();
-        
-        // Add smart search query
-        if (smartSearchInput.value) {
-            searchParams.append('search', smartSearchInput.value);
-        }
-
-        // Add quick filters
-        const typeFilter = document.getElementById('typeFilter').value;
-        const statusFilter = document.getElementById('statusFilter').value;
-        const dateFilter = document.getElementById('dateFilter').value;
-
-        if (typeFilter) searchParams.append('type', typeFilter);
-        if (statusFilter) searchParams.append('status', statusFilter);
-        if (dateFilter) searchParams.append('date', dateFilter);
-
-        // Add advanced filters
-        const advancedFilters = {
-            organization: document.getElementById('orgFilter').value,
-            dateFrom: document.getElementById('dateFrom').value,
-            dateTo: document.getElementById('dateTo').value,
-            department: document.getElementById('departmentFilter').value,
-            employee: document.getElementById('employeeFilter').value
-        };
-
-        Object.entries(advancedFilters).forEach(([key, value]) => {
-            if (value) searchParams.append(key, value);
-        });
-
-        // Fetch and update results
-        fetchDegrees(searchParams.toString());
-    }
-
-    // Fetch degrees with search parameters
-    async function fetchDegrees(searchParams) {
-        try {
-            const response = await fetch(`/backend/src/public/admin/api/degrees.php?action=list&${searchParams}`);
-            const data = await response.json();
-            if (data.error) {
-                showToast(data.error, 'error');
-                return;
-            }
-            updateDegreesTable(data);
-        } catch (error) {
-            console.error('Error fetching degrees:', error);
-            showToast('Có lỗi xảy ra khi tìm kiếm', 'error');
-        }
-    }
-
-    // Show toast notification
-    function showToast(message, type = 'info') {
-        const toast = document.createElement('div');
-        toast.className = `toast align-items-center text-white bg-${type} border-0`;
-        toast.setAttribute('role', 'alert');
-        toast.setAttribute('aria-live', 'assertive');
-        toast.setAttribute('aria-atomic', 'true');
-        
-        toast.innerHTML = `
-            <div class="d-flex">
-                <div class="toast-body">
-                    ${message}
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-            </div>
-        `;
-        
-        document.querySelector('.toast-container').appendChild(toast);
-        const bsToast = new bootstrap.Toast(toast);
-        bsToast.show();
-        
-        toast.addEventListener('hidden.bs.toast', () => {
-            toast.remove();
-        });
-    }
-}); 
+} 

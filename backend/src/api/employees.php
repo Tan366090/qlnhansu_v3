@@ -321,6 +321,75 @@ class EmployeeAPI {
 $api = new EmployeeAPI();
 $method = $_SERVER['REQUEST_METHOD'];
 
+if (isset($_GET['action']) && $_GET['action'] === 'quick_search' && !empty($_GET['search'])) {
+    $search = $_GET['search'];
+    $query = "SELECT e.id, e.employee_code, e.name
+              FROM employees e
+              WHERE e.employee_code LIKE ? OR e.name LIKE ?";
+    $stmt = $conn->prepare($query);
+    $like = "%$search%";
+    $stmt->execute([$like, $like]);
+    $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode([
+        'success' => true,
+        'data' => $employees
+    ]);
+    exit();
+}
+
+if (isset($_GET['action']) && $_GET['action'] === 'employee_qualifications' && !empty($_GET['employee_id'])) {
+    $employee_id = $_GET['employee_id'];
+    
+    // Query to get all qualifications
+    $query = "SELECT 
+        e.employee_code,
+        e.name as employee_name,
+        -- Degrees
+        d.degree_name,
+        d.major,
+        d.institution as degree_institution,
+        d.graduation_date,
+        d.gpa,
+        d.attachment_url as degree_attachment,
+        -- Certificates
+        c.name as certificate_name,
+        c.issuing_organization,
+        c.issue_date as certificate_issue_date,
+        c.expiry_date as certificate_expiry_date,
+        c.credential_id,
+        c.file_url as certificate_file,
+        -- Training courses
+        tc.name as course_name,
+        tr.status as course_status,
+        tr.completion_date,
+        tr.score as course_score,
+        te.rating_content,
+        te.rating_instructor,
+        te.rating_materials,
+        te.comments as evaluation_comments
+    FROM employees e
+    LEFT JOIN degrees d ON e.id = d.employee_id
+    LEFT JOIN certificates c ON e.id = c.employee_id
+    LEFT JOIN training_registrations tr ON e.id = tr.employee_id
+    LEFT JOIN training_courses tc ON tr.course_id = tc.id
+    LEFT JOIN training_evaluations te ON tr.id = te.registration_id
+    WHERE e.id = ?
+    ORDER BY 
+        d.graduation_date DESC,
+        c.issue_date DESC,
+        tr.completion_date DESC";
+        
+    $stmt = $conn->prepare($query);
+    $stmt->execute([$employee_id]);
+    $qualifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    echo json_encode([
+        'success' => true,
+        'data' => $qualifications
+    ]);
+    exit();
+}
+
 switch ($method) {
     case 'GET':
         $api->getEmployees();
