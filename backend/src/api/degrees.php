@@ -78,27 +78,175 @@ function convertEncoding($data) {
 
 switch ($_GET['action']) {
     case 'list':
-        if (!isset($_GET['employee'])) {
-            handleApiError('Thiếu tham số employee', 400);
+        // Xử lý các tham số tìm kiếm và lọc
+        $filters = [];
+        $params = [];
+        
+        // Validate và sanitize input
+        function validateDate($date) {
+            $d = DateTime::createFromFormat('Y-m-d', $date);
+            return $d && $d->format('Y-m-d') === $date;
+        }
+
+        function validateNumeric($value, $min = null, $max = null) {
+            if (!is_numeric($value)) return false;
+            if ($min !== null && $value < $min) return false;
+            if ($max !== null && $value > $max) return false;
+            return true;
+        }
+
+        // Log các tham số đầu vào
+        writeLog("Received search parameters: " . print_r($_GET, true));
+        
+        // Lọc theo nhân viên
+        if (isset($_GET['employee'])) {
+            if (empty($_GET['employee'])) {
+                handleApiError('Mã nhân viên không được để trống', 400);
+            }
+            $filters[] = "e.employee_code = ?";
+            $params[] = $_GET['employee'];
         }
         
-        $employee_code = $_GET['employee'];
-        writeLog("Fetching qualifications for employee code: $employee_code");
+        // Lọc theo trạng thái nhân viên
+        if (isset($_GET['employee_status'])) {
+            $valid_statuses = ['active', 'inactive', 'terminated', 'on_leave'];
+            if (!in_array($_GET['employee_status'], $valid_statuses)) {
+                handleApiError('Trạng thái nhân viên không hợp lệ', 400);
+            }
+            $filters[] = "e.status = ?";
+            $params[] = $_GET['employee_status'];
+        }
+        
+        // Tìm kiếm bằng cấp
+        if (isset($_GET['degree_name'])) {
+            $filters[] = "d.degree_name LIKE ?";
+            $params[] = "%" . htmlspecialchars($_GET['degree_name']) . "%";
+        }
+        if (isset($_GET['major'])) {
+            $filters[] = "d.major LIKE ?";
+            $params[] = "%" . htmlspecialchars($_GET['major']) . "%";
+        }
+        if (isset($_GET['institution'])) {
+            $filters[] = "d.institution LIKE ?";
+            $params[] = "%" . htmlspecialchars($_GET['institution']) . "%";
+        }
+        if (isset($_GET['degree_from_date']) && isset($_GET['degree_to_date'])) {
+            if (!validateDate($_GET['degree_from_date']) || !validateDate($_GET['degree_to_date'])) {
+                handleApiError('Định dạng ngày không hợp lệ', 400);
+            }
+            if ($_GET['degree_from_date'] > $_GET['degree_to_date']) {
+                handleApiError('Ngày bắt đầu phải nhỏ hơn ngày kết thúc', 400);
+            }
+            $filters[] = "d.graduation_date BETWEEN ? AND ?";
+            $params[] = $_GET['degree_from_date'];
+            $params[] = $_GET['degree_to_date'];
+        }
+        if (isset($_GET['min_gpa'])) {
+            if (!validateNumeric($_GET['min_gpa'], 0, 4)) {
+                handleApiError('GPA phải từ 0 đến 4', 400);
+            }
+            $filters[] = "d.gpa >= ?";
+            $params[] = $_GET['min_gpa'];
+        }
+        
+        // Tìm kiếm chứng chỉ
+        if (isset($_GET['certificate_name'])) {
+            $filters[] = "c.name LIKE ?";
+            $params[] = "%" . htmlspecialchars($_GET['certificate_name']) . "%";
+        }
+        if (isset($_GET['issuing_org'])) {
+            $filters[] = "c.issuing_organization LIKE ?";
+            $params[] = "%" . htmlspecialchars($_GET['issuing_org']) . "%";
+        }
+        if (isset($_GET['certificate_status'])) {
+            if (!in_array($_GET['certificate_status'], ['valid', 'expired'])) {
+                handleApiError('Trạng thái chứng chỉ không hợp lệ', 400);
+            }
+            if ($_GET['certificate_status'] === 'valid') {
+                $filters[] = "(c.expiry_date IS NULL OR c.expiry_date > CURDATE())";
+            } else {
+                $filters[] = "c.expiry_date <= CURDATE()";
+            }
+        }
+        if (isset($_GET['certificate_from_date']) && isset($_GET['certificate_to_date'])) {
+            if (!validateDate($_GET['certificate_from_date']) || !validateDate($_GET['certificate_to_date'])) {
+                handleApiError('Định dạng ngày không hợp lệ', 400);
+            }
+            if ($_GET['certificate_from_date'] > $_GET['certificate_to_date']) {
+                handleApiError('Ngày bắt đầu phải nhỏ hơn ngày kết thúc', 400);
+            }
+            $filters[] = "c.issue_date BETWEEN ? AND ?";
+            $params[] = $_GET['certificate_from_date'];
+            $params[] = $_GET['certificate_to_date'];
+        }
+        
+        // Tìm kiếm khóa học
+        if (isset($_GET['course_name'])) {
+            $filters[] = "tc.name LIKE ?";
+            $params[] = "%" . htmlspecialchars($_GET['course_name']) . "%";
+        }
+        if (isset($_GET['course_status'])) {
+            $valid_statuses = ['registered', 'attended', 'completed', 'failed', 'cancelled'];
+            if (!in_array($_GET['course_status'], $valid_statuses)) {
+                handleApiError('Trạng thái khóa học không hợp lệ', 400);
+            }
+            $filters[] = "tr.status = ?";
+            $params[] = $_GET['course_status'];
+        }
+        if (isset($_GET['course_active_status'])) {
+            $valid_statuses = ['active', 'inactive', 'draft'];
+            if (!in_array($_GET['course_active_status'], $valid_statuses)) {
+                handleApiError('Trạng thái hoạt động của khóa học không hợp lệ', 400);
+            }
+            $filters[] = "tc.status = ?";
+            $params[] = $_GET['course_active_status'];
+        }
+        if (isset($_GET['min_score'])) {
+            if (!validateNumeric($_GET['min_score'], 0, 100)) {
+                handleApiError('Điểm số phải từ 0 đến 100', 400);
+            }
+            $filters[] = "tr.score >= ?";
+            $params[] = $_GET['min_score'];
+        }
+        if (isset($_GET['min_rating'])) {
+            if (!validateNumeric($_GET['min_rating'], 1, 5)) {
+                handleApiError('Đánh giá phải từ 1 đến 5', 400);
+            }
+            $filters[] = "(te.rating_content >= ? OR te.rating_instructor >= ? OR te.rating_materials >= ?)";
+            $params[] = $_GET['min_rating'];
+            $params[] = $_GET['min_rating'];
+            $params[] = $_GET['min_rating'];
+        }
+        if (isset($_GET['evaluation_from_date']) && isset($_GET['evaluation_to_date'])) {
+            if (!validateDate($_GET['evaluation_from_date']) || !validateDate($_GET['evaluation_to_date'])) {
+                handleApiError('Định dạng ngày không hợp lệ', 400);
+            }
+            if ($_GET['evaluation_from_date'] > $_GET['evaluation_to_date']) {
+                handleApiError('Ngày bắt đầu phải nhỏ hơn ngày kết thúc', 400);
+            }
+            $filters[] = "te.evaluation_date BETWEEN ? AND ?";
+            $params[] = $_GET['evaluation_from_date'];
+            $params[] = $_GET['evaluation_to_date'];
+        }
+        
+        // Thêm điều kiện WHERE nếu có bộ lọc
+        $where_clause = !empty($filters) ? "WHERE " . implode(" AND ", $filters) : "";
         
         try {
-            // Kiểm tra xem nhân viên có tồn tại không
-            $check_query = "SELECT id FROM employees WHERE employee_code = ?";
-            $check_stmt = $conn->prepare($check_query);
-            $check_stmt->execute([$employee_code]);
-            
-            if ($check_stmt->rowCount() === 0) {
-                handleApiError('Không tìm thấy nhân viên với mã: ' . $employee_code, 404);
-            }
+            // Log câu query và tham số
+            writeLog("Executing query with filters: " . $where_clause);
+            writeLog("Query parameters: " . print_r($params, true));
             
             // Query để lấy thông tin đầy đủ về bằng cấp, chứng chỉ và khóa học
             $query = "SELECT DISTINCT
                 e.employee_code,
                 e.name as employee_name,
+                e.status as employee_status,
+                -- Thông tin phòng ban
+                dpt.id as department_id,
+                dpt.name as department_name,
+                dpt.description as department_description,
+                manager.name as department_manager_name,
                 -- Thông tin bằng cấp
                 d.degree_id,
                 d.degree_name,
@@ -118,36 +266,79 @@ switch ($_GET['action']) {
                 -- Thông tin khóa học đã tham gia
                 tc.id as course_id,
                 tc.name as course_name,
-                tr.status as course_status,
+                tc.status as course_active_status,
+                tc.duration,
+                tc.cost,
+                tr.status as registration_status,
+                tr.registration_date,
                 tr.completion_date,
                 tr.score as course_score,
+                tr.feedback as course_feedback,
+                -- Thông tin đánh giá
+                te.evaluation_date,
                 te.rating_content,
                 te.rating_instructor,
                 te.rating_materials,
-                te.comments as evaluation_comments
+                te.comments as evaluation_comments,
+                evaluator.name as evaluator_name
             FROM employees e
+            LEFT JOIN departments dpt ON e.department_id = dpt.id
+            LEFT JOIN employees manager ON dpt.manager_id = manager.id
             LEFT JOIN degrees d ON e.id = d.employee_id
             LEFT JOIN certificates c ON e.id = c.employee_id
             LEFT JOIN training_registrations tr ON e.id = tr.employee_id
             LEFT JOIN training_courses tc ON tr.course_id = tc.id
             LEFT JOIN training_evaluations te ON tr.id = te.registration_id
-            WHERE e.employee_code = ?
+            LEFT JOIN employees evaluator ON te.evaluator_employee_id = evaluator.id
+            $where_clause
             ORDER BY 
                 d.graduation_date DESC,
                 c.issue_date DESC,
                 tr.completion_date DESC";
             
             $stmt = $conn->prepare($query);
-            $stmt->execute([$employee_code]);
+            $stmt->execute($params);
             $qualifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             writeLog("Found " . count($qualifications) . " qualification records");
+            
+            // Kiểm tra kết quả trống
+            if (empty($qualifications)) {
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Không tìm thấy kết quả phù hợp',
+                    'data' => [
+                        'employee' => [
+                            'code' => $_GET['employee'] ?? '',
+                            'name' => '',
+                            'status' => '',
+                            'department' => [
+                                'id' => null,
+                                'name' => '',
+                                'description' => '',
+                                'manager' => ''
+                            ]
+                        ],
+                        'degrees' => [],
+                        'certificates' => [],
+                        'courses' => []
+                    ]
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                exit();
+            }
             
             // Tổ chức dữ liệu thành các nhóm
             $result = [
                 'employee' => [
                     'code' => $qualifications[0]['employee_code'] ?? '',
-                    'name' => $qualifications[0]['employee_name'] ?? ''
+                    'name' => $qualifications[0]['employee_name'] ?? '',
+                    'status' => $qualifications[0]['employee_status'] ?? '',
+                    'department' => [
+                        'id' => $qualifications[0]['department_id'] ?? null,
+                        'name' => $qualifications[0]['department_name'] ?? '',
+                        'description' => $qualifications[0]['department_description'] ?? '',
+                        'manager' => $qualifications[0]['department_manager_name'] ?? ''
+                    ]
                 ],
                 'degrees' => [],
                 'certificates' => [],
@@ -190,14 +381,19 @@ switch ($_GET['action']) {
                 if (!empty($row['course_name']) && !in_array($row['course_id'], $processed_courses)) {
                     $result['courses'][] = [
                         'name' => $row['course_name'],
-                        'status' => $row['course_status'],
+                        'status' => $row['registration_status'],
                         'completion_date' => $row['completion_date'],
                         'score' => $row['course_score'],
+                        'feedback' => $row['course_feedback'],
                         'evaluation' => [
+                            'date' => $row['evaluation_date'],
                             'content_rating' => $row['rating_content'],
                             'instructor_rating' => $row['rating_instructor'],
                             'materials_rating' => $row['rating_materials'],
                             'comments' => $row['evaluation_comments']
+                        ],
+                        'evaluator' => [
+                            'name' => $row['evaluator_name']
                         ]
                     ];
                     $processed_courses[] = $row['course_id'];
@@ -229,6 +425,41 @@ switch ($_GET['action']) {
             handleApiError('Lỗi không xác định: ' . $e->getMessage());
         }
         break;
+        
+    case 'departments':
+        try {
+            $query = "SELECT id, name FROM departments ORDER BY name";
+            $stmt = $conn->query($query);
+            $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode([
+                'success' => true,
+                'data' => $departments
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        } catch (Exception $e) {
+            handleApiError('Lỗi khi truy vấn phòng ban: ' . $e->getMessage());
+        }
+        exit();
+        
+    case 'employees':
+        try {
+            $params = [];
+            $where = '';
+            if (isset($_GET['department_id']) && is_numeric($_GET['department_id'])) {
+                $where = 'WHERE department_id = ?';
+                $params[] = $_GET['department_id'];
+            }
+            $query = "SELECT id, employee_code, name FROM employees $where ORDER BY employee_code";
+            $stmt = $conn->prepare($query);
+            $stmt->execute($params);
+            $employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode([
+                'success' => true,
+                'data' => $employees
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        } catch (Exception $e) {
+            handleApiError('Lỗi khi truy vấn nhân viên: ' . $e->getMessage());
+        }
+        exit();
         
     default:
         handleApiError('Action không hợp lệ', 400);

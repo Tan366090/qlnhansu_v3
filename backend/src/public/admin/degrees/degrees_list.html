@@ -40,206 +40,37 @@
         }
 
         async function searchEmployeeByCode(code) {
-        const nameInput = document.getElementById('employeeName');
-        const idInput = document.getElementById('employeeId');
-        const degreesDiv = document.getElementById('employeeDegreesList');
-        if (!code || code.length < 3) {
-            nameInput.value = '';
-            idInput.value = '';
-            degreesDiv.innerHTML = '';
-            return;
-        }
-        try {
-            // Sử dụng đường dẫn tương đối từ thư mục hiện tại
-            const response = await fetch(`../../api/employees.php?action=quick_search&search=${encodeURIComponent(code)}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            console.log('Employee search response:', data); // Debug log
-
-            if (data.success && data.data && data.data.length > 0) {
-                const employee = data.data[0];
-                nameInput.value = employee.name;
-                idInput.value = employee.id;
-
-                // Lấy thông tin chi tiết về bằng cấp và chứng chỉ
-                const degreesResponse = await fetch(`../../api/degrees.php?action=list&employee=${employee.employee_code}`);
-                if (!degreesResponse.ok) {
-                    throw new Error(`HTTP error! status: ${degreesResponse.status}`);
-                }
-                const degreesData = await degreesResponse.json();
-                console.log('Degrees response:', degreesData);
-
-                if (degreesData.success && degreesData.data) {
-                    let html = '<div class="qualifications-info">';
-                    
-                    // Hiển thị bằng cấp
-                    if (degreesData.data.degrees && degreesData.data.degrees.length > 0) {
-                        html += `
-                            <div class="section">
-                                <h5>Bằng cấp:</h5>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Tên bằng</th>
-                                                <th>Chuyên ngành</th>
-                                                <th>Trường</th>
-                                                <th>Ngày tốt nghiệp</th>
-                                                <th>GPA</th>
-                                                <th>File đính kèm</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>`;
-                        degreesData.data.degrees.forEach(degree => {
-                            html += `
-                                <tr>
-                                    <td>${degree.name}</td>
-                                    <td>${degree.major || '-'}</td>
-                                    <td>${degree.institution}</td>
-                                    <td>${new Date(degree.graduation_date).toLocaleDateString('vi-VN')}</td>
-                                    <td>${degree.gpa || '-'}</td>
-                                    <td>${degree.attachment_url ? `<a href="${degree.attachment_url}" target="_blank" class="btn btn-sm btn-outline-primary">Xem</a>` : '-'}</td>
-                                </tr>`;
-                        });
-                        html += `
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>`;
-                    }
-
-                    // Hiển thị chứng chỉ
-                    if (degreesData.data.certificates && degreesData.data.certificates.length > 0) {
-                        html += `
-                            <div class="section">
-                                <h5>Chứng chỉ:</h5>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Tên chứng chỉ</th>
-                                                <th>Tổ chức cấp</th>
-                                                <th>Ngày cấp</th>
-                                                <th>Ngày hết hạn</th>
-                                                <th>Mã chứng chỉ</th>
-                                                <th>File đính kèm</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>`;
-                        degreesData.data.certificates.forEach(cert => {
-                            html += `
-                                <tr>
-                                    <td>${cert.name}</td>
-                                    <td>${cert.issuing_organization}</td>
-                                    <td>${new Date(cert.issue_date).toLocaleDateString('vi-VN')}</td>
-                                    <td>${cert.expiry_date ? new Date(cert.expiry_date).toLocaleDateString('vi-VN') : '-'}</td>
-                                    <td>${cert.credential_id || '-'}</td>
-                                    <td>${cert.file_url ? `<a href="${cert.file_url}" target="_blank" class="btn btn-sm btn-outline-primary">Xem</a>` : '-'}</td>
-                                </tr>`;
-                        });
-                        html += `
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>`;
-                    }
-
-                    // Hiển thị khóa học đã tham gia
-                    if (degreesData.data.courses && degreesData.data.courses.length > 0) {
-                        html += renderCoursesTable(degreesData.data.courses);
-                    }
-
-                    if (!degreesData.data.degrees?.length && !degreesData.data.certificates?.length && !degreesData.data.courses?.length) {
-                        html += '<p><i>Không có thông tin bằng cấp, chứng chỉ hoặc khóa học nào.</i></p>';
-                    }
-
-                    html += '</div>';
-                    degreesDiv.innerHTML = html;
-
-                    // Khởi tạo lại popover cho các nút đánh giá
-                    const popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
-                    popovers.forEach(popover => {
-                        new bootstrap.Popover(popover, {
-                            trigger: 'click',
-                            placement: 'left',
-                            html: true
-                        });
-                    });
-                } else {
-                    degreesDiv.innerHTML = '<p><i>Không có thông tin bằng cấp, chứng chỉ hoặc khóa học nào.</i></p>';
-                }
-            } else {
+            const nameInput = document.getElementById('employeeName');
+            const idInput = document.getElementById('employeeId');
+            const degreesDiv = document.getElementById('employeeDegreesList');
+            if (!code || code.length < 3) {
                 nameInput.value = '';
                 idInput.value = '';
-                degreesDiv.innerHTML = '<p class="text-danger">Không tìm thấy nhân viên</p>';
+                degreesDiv.innerHTML = '';
+                return;
             }
-        } catch (error) {
-            console.error('Error:', error);
-            degreesDiv.innerHTML = `<p class="text-danger">Lỗi: ${error.message}</p>`;
-        }
-    }
-
-    // Hàm chuyển đổi trạng thái khóa học sang text
-    function getCourseStatusText(status) {
-        const statusMap = {
-            'registered': 'Đã đăng ký',
-            'attended': 'Đang tham gia',
-            'completed': 'Đã hoàn thành',
-            'cancelled': 'Đã hủy'
-        };
-        return statusMap[status] || status;
-    }
-
-    // Tạo phiên bản debounce của hàm tìm kiếm
-    const debouncedSearch = debounce((code) => {
-        searchEmployeeByCode(code);
-    }, 300);
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const employeeCodeInput = document.getElementById('employeeCode');
-        if (employeeCodeInput) {
-            employeeCodeInput.addEventListener('input', (e) => {
-                const code = e.target.value.trim();
-                debouncedSearch(code);
-            });
-        }
-    });
-
-    // Hàm tìm kiếm nhân viên cho modal
-    async function searchEmployeeByCodeForModal(code) {
-        const nameInput = document.getElementById('employeeNameModal');
-        const idInput = document.getElementById('employeeIdModal');
-        const degreesDiv = document.getElementById('modalEmployeeDegreesList');
-        
-        if (!code || code.length < 3) {
-            if (nameInput) nameInput.value = '';
-            if (idInput) idInput.value = '';
-            if (degreesDiv) {
-                degreesDiv.innerHTML = '<div class="alert alert-info"><i class="fas fa-info-circle"></i> Vui lòng nhập mã nhân viên để xem thông tin</div>';
-            }
-            return;
-        }
-
-        try {
-            // Sử dụng đường dẫn tương đối
-            const response = await fetch('/qlnhansu_V3/backend/src/api/employees.php?action=quick_search&search=' + encodeURIComponent(code));
-            const data = await response.json();
-            
-            if (data.success && data.data && data.data.length > 0) {
-                const employee = data.data[0];
-                if (nameInput) nameInput.value = employee.name;
-                if (idInput) {
-                    idInput.value = employee.id;
-                    console.log('Set employee ID:', employee.id); // Debug log
+            try {
+                // Sửa đường dẫn API
+                const response = await fetch(`/qlnhansu_V3/backend/src/api/employees.php?action=quick_search&search=${encodeURIComponent(code)}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                
-                // Lấy bằng cấp/chứng chỉ với đường dẫn tương đối
-                const degreesResponse = await fetch('/qlnhansu_V3/backend/src/api/degrees.php?action=list&employee=' + employee.employee_code);
-                const degreesData = await degreesResponse.json();
-                
-                if (degreesDiv) {
+                const data = await response.json();
+                console.log('Employee search response:', data); // Debug log
+
+                if (data.success && data.data && data.data.length > 0) {
+                    const employee = data.data[0];
+                    nameInput.value = employee.name;
+                    idInput.value = employee.id;
+
+                    // Lấy thông tin chi tiết về bằng cấp và chứng chỉ
+                    const degreesResponse = await fetch(`/qlnhansu_V3/backend/src/api/degrees.php?action=list&employee=${employee.employee_code}`);
+                    if (!degreesResponse.ok) {
+                        throw new Error(`HTTP error! status: ${degreesResponse.status}`);
+                    }
+                    const degreesData = await degreesResponse.json();
+                    console.log('Degrees response:', degreesData);
+
                     if (degreesData.success && degreesData.data) {
                         let html = '<div class="qualifications-info">';
                         
@@ -315,125 +146,582 @@
                             </div>`;
                         }
 
-                        // Hiển thị khóa học đã tham gia
-                        if (degreesData.data.courses && degreesData.data.courses.length > 0) {
-                            html += renderCoursesTable(degreesData.data.courses);
-                        }
-
-                        if (!degreesData.data.degrees?.length && !degreesData.data.certificates?.length && !degreesData.data.courses?.length) {
-                            html += '<p><i>Không có thông tin bằng cấp, chứng chỉ hoặc khóa học nào.</i></p>';
+                        if (!degreesData.data.degrees?.length && !degreesData.data.certificates?.length) {
+                            html += '<p><i>Không có thông tin bằng cấp hoặc chứng chỉ nào.</i></p>';
                         }
 
                         html += '</div>';
                         degreesDiv.innerHTML = html;
                     } else {
-                        degreesDiv.innerHTML = '<div class="alert alert-info"><i class="fas fa-info-circle"></i> Không có bằng cấp/chứng chỉ nào.</div>';
+                        degreesDiv.innerHTML = '<p><i>Không có thông tin bằng cấp hoặc chứng chỉ nào.</i></p>';
                     }
+                } else {
+                    nameInput.value = '';
+                    idInput.value = '';
+                    degreesDiv.innerHTML = '<p class="text-danger">Không tìm thấy nhân viên</p>';
                 }
-            } else {
+            } catch (error) {
+                console.error('Error:', error);
+                degreesDiv.innerHTML = `<p class="text-danger">Lỗi: ${error.message}</p>`;
+            }
+        }
+
+        // Hàm chuyển đổi trạng thái khóa học sang text
+        function getCourseStatusText(status) {
+            const statusMap = {
+                'registered': 'Đã đăng ký',
+                'attended': 'Đang tham gia',
+                'completed': 'Đã hoàn thành',
+                'cancelled': 'Đã hủy'
+            };
+            return statusMap[status] || status;
+        }
+
+        // Tạo phiên bản debounce của hàm tìm kiếm
+        const debouncedSearch = debounce((code) => {
+            searchEmployeeByCode(code);
+        }, 300);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load danh sách phòng ban
+            function loadDepartments() {
+                fetch('/qlnhansu_V3/backend/src/api/degrees.php?action=departments')
+                    .then(res => res.json())
+                    .then(data => {
+                        const select = document.getElementById('departmentFilter');
+                        if (!select) return;
+                        select.innerHTML = '<option value="">Tất cả phòng ban</option>';
+                        if (data.success && data.data) {
+                            data.data.forEach(dep => {
+                                select.innerHTML += `<option value="${dep.id}">${dep.name}</option>`;
+                            });
+                        }
+                    });
+            }
+
+            // Load danh sách nhân viên (có thể lọc theo phòng ban)
+            function loadEmployees(departmentId = '') {
+                let url = '/qlnhansu_V3/backend/src/api/degrees.php?action=employees';
+                if (departmentId) url += `&department_id=${departmentId}`;
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => {
+                        window.employeeList = data.success && data.data ? data.data : [];
+                    });
+            }
+
+            // Gợi ý mã nhân viên khi nhập
+            const employeeCodeInput = document.getElementById('employeeCode');
+            if (employeeCodeInput) {
+                employeeCodeInput.addEventListener('input', function(e) {
+                    const val = e.target.value.trim().toLowerCase();
+                    const nameInput = document.getElementById('employeeName');
+                    if (!window.employeeList) return;
+                    const found = window.employeeList.find(emp => emp.employee_code.toLowerCase() === val);
+                    if (found) {
+                        nameInput.value = found.name;
+                    } else {
+                        nameInput.value = '';
+                    }
+                });
+            }
+
+            // Khi chọn phòng ban thì load lại danh sách nhân viên
+            const departmentSelect = document.getElementById('departmentFilter');
+            if (departmentSelect) {
+                departmentSelect.addEventListener('change', function(e) {
+                    loadEmployees(e.target.value);
+                });
+            }
+
+            // Khởi tạo dữ liệu ban đầu
+            loadDepartments();
+            loadEmployees();
+
+            // Giữ lại các logic cũ khác nếu có
+            // ...
+        });
+
+        // Hàm tìm kiếm nhân viên cho modal
+        async function searchEmployeeByCodeForModal(code) {
+            const nameInput = document.getElementById('employeeNameModal');
+            const idInput = document.getElementById('employeeIdModal');
+            const degreesDiv = document.getElementById('modalEmployeeDegreesList');
+            
+            if (!code || code.length < 3) {
                 if (nameInput) nameInput.value = '';
                 if (idInput) idInput.value = '';
                 if (degreesDiv) {
-                    degreesDiv.innerHTML = '<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> Không tìm thấy nhân viên với mã này.</div>';
+                    degreesDiv.innerHTML = '<div class="alert alert-info"><i class="fas fa-info-circle"></i> Vui lòng nhập mã nhân viên để xem thông tin</div>';
                 }
+                return;
             }
-        } catch (error) {
-            console.error('Error:', error);
-            if (nameInput) nameInput.value = '';
-            if (idInput) idInput.value = '';
-            if (degreesDiv) {
-                degreesDiv.innerHTML = `<div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> Lỗi khi tìm kiếm nhân viên: ${error.message}</div>`;
+
+            try {
+                // Sử dụng đường dẫn tương đối
+                const response = await fetch('/qlnhansu_V3/backend/src/api/employees.php?action=quick_search&search=' + encodeURIComponent(code));
+                const data = await response.json();
+                
+                if (data.success && data.data && data.data.length > 0) {
+                    const employee = data.data[0];
+                    if (nameInput) nameInput.value = employee.name;
+                    if (idInput) {
+                        idInput.value = employee.id;
+                        console.log('Set employee ID:', employee.id); // Debug log
+                    }
+                    
+                    // Lấy bằng cấp/chứng chỉ với đường dẫn tương đối
+                    const degreesResponse = await fetch('/qlnhansu_V3/backend/src/api/degrees.php?action=list&employee=' + employee.employee_code);
+                    const degreesData = await degreesResponse.json();
+                    
+                    if (degreesDiv) {
+                        if (degreesData.success && degreesData.data) {
+                            let html = '<div class="qualifications-info">';
+                            
+                            // Hiển thị bằng cấp
+                            if (degreesData.data.degrees && degreesData.data.degrees.length > 0) {
+                                html += `
+                                    <div class="section">
+                                        <h5>Bằng cấp:</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Tên bằng</th>
+                                                        <th>Chuyên ngành</th>
+                                                        <th>Trường</th>
+                                                        <th>Ngày tốt nghiệp</th>
+                                                        <th>GPA</th>
+                                                        <th>File đính kèm</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>`;
+                                degreesData.data.degrees.forEach(degree => {
+                                    html += `
+                                        <tr>
+                                            <td>${degree.name}</td>
+                                            <td>${degree.major || '-'}</td>
+                                            <td>${degree.institution}</td>
+                                            <td>${new Date(degree.graduation_date).toLocaleDateString('vi-VN')}</td>
+                                            <td>${degree.gpa || '-'}</td>
+                                            <td>${degree.attachment_url ? `<a href="${degree.attachment_url}" target="_blank" class="btn btn-sm btn-outline-primary">Xem</a>` : '-'}</td>
+                                        </tr>`;
+                                });
+                                html += `
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>`;
+                            }
+
+                            // Hiển thị chứng chỉ
+                            if (degreesData.data.certificates && degreesData.data.certificates.length > 0) {
+                                html += `
+                                    <div class="section">
+                                        <h5>Chứng chỉ:</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Tên chứng chỉ</th>
+                                                        <th>Tổ chức cấp</th>
+                                                        <th>Ngày cấp</th>
+                                                        <th>Ngày hết hạn</th>
+                                                        <th>Mã chứng chỉ</th>
+                                                        <th>File đính kèm</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>`;
+                                degreesData.data.certificates.forEach(cert => {
+                                    html += `
+                                        <tr>
+                                            <td>${cert.name}</td>
+                                            <td>${cert.issuing_organization}</td>
+                                            <td>${new Date(cert.issue_date).toLocaleDateString('vi-VN')}</td>
+                                            <td>${cert.expiry_date ? new Date(cert.expiry_date).toLocaleDateString('vi-VN') : '-'}</td>
+                                            <td>${cert.credential_id || '-'}</td>
+                                            <td>${cert.file_url ? `<a href="${cert.file_url}" target="_blank" class="btn btn-sm btn-outline-primary">Xem</a>` : '-'}</td>
+                                        </tr>`;
+                                });
+                                html += `
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>`;
+                            }
+
+                            // Hiển thị khóa học đã tham gia
+                            if (degreesData.data.courses && degreesData.data.courses.length > 0) {
+                                html += renderCoursesTable(degreesData.data.courses);
+                            }
+
+                            if (!degreesData.data.degrees?.length && !degreesData.data.certificates?.length && !degreesData.data.courses?.length) {
+                                html += '<p><i>Không có thông tin bằng cấp, chứng chỉ hoặc khóa học nào.</i></p>';
+                            }
+
+                            html += '</div>';
+                            degreesDiv.innerHTML = html;
+                        } else {
+                            degreesDiv.innerHTML = '<div class="alert alert-info"><i class="fas fa-info-circle"></i> Không có bằng cấp/chứng chỉ nào.</div>';
+                        }
+                    }
+                } else {
+                    if (nameInput) nameInput.value = '';
+                    if (idInput) idInput.value = '';
+                    if (degreesDiv) {
+                        degreesDiv.innerHTML = '<div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> Không tìm thấy nhân viên với mã này.</div>';
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                if (nameInput) nameInput.value = '';
+                if (idInput) idInput.value = '';
+                if (degreesDiv) {
+                    degreesDiv.innerHTML = `<div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> Lỗi khi tìm kiếm nhân viên: ${error.message}</div>`;
+                }
             }
         }
-    }
 
-    // Gắn sự kiện cho input trong modal
-    document.addEventListener('DOMContentLoaded', function() {
-        const employeeCodeInputModal = document.getElementById('employeeCodeModal');
-        if (employeeCodeInputModal) {
-            employeeCodeInputModal.addEventListener('input', (e) => {
-                const code = e.target.value.trim();
-                searchEmployeeByCodeForModal(code);
-            });
-        }
-    });
-
-    // Hàm lấy class cho badge trạng thái
-    function getStatusBadgeClass(status) {
-        const statusMap = {
-            'registered': 'bg-secondary',
-            'attended': 'bg-primary',
-            'completed': 'bg-success',
-            'cancelled': 'bg-danger'
-        };
-        return statusMap[status] || 'bg-secondary';
-    }
-
-    // Sửa lại render bảng Khóa học đã tham gia để thêm class cho từng cột và button nhỏ lại
-    function renderCoursesTable(courses) {
-        let html = `<div class="section">
-            <h5>Khóa học đã tham gia:</h5>
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-courses">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="name-col">Tên khóa học</th>
-                            <th>Trạng thái</th>
-                            <th class="date-col">Ngày hoàn thành</th>
-                            <th class="score-col">Điểm số</th>
-                            <th class="evaluation-col">Đánh giá</th>
-                        </tr>
-                    </thead>
-                    <tbody>`;
-        courses.forEach(course => {
-            // Chuẩn bị nội dung popover đánh giá
-            let evalContent = '';
-            if (course.evaluation) {
-                let hasAny = false;
-                evalContent += `<div style='font-weight:600;margin-bottom:4px;'>Chi tiết đánh giá</div>`;
-                if (course.evaluation.content_rating) {
-                    evalContent += `<div>Nội dung: <b>${course.evaluation.content_rating}/5</b></div>`;
-                    hasAny = true;
-                }
-                if (course.evaluation.instructor_rating) {
-                    evalContent += `<div>Giảng viên: <b>${course.evaluation.instructor_rating}/5</b></div>`;
-                    hasAny = true;
-                }
-                if (course.evaluation.materials_rating) {
-                    evalContent += `<div>Tài liệu: <b>${course.evaluation.materials_rating}/5</b></div>`;
-                    hasAny = true;
-                }
-                if (course.evaluation.comments) {
-                    evalContent += `<div>Nhận xét: <i>${course.evaluation.comments}</i></div>`;
-                    hasAny = true;
-                }
-                if (!hasAny) {
-                    evalContent += `<div>Chưa có đánh giá chi tiết.</div>`;
-                }
-            } else {
-                evalContent = `<div>Chưa có đánh giá.</div>`;
+        // Gắn sự kiện cho input trong modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const employeeCodeInputModal = document.getElementById('employeeCodeModal');
+            if (employeeCodeInputModal) {
+                employeeCodeInputModal.addEventListener('input', (e) => {
+                    const code = e.target.value.trim();
+                    searchEmployeeByCodeForModal(code);
+                });
             }
-            // Escape ký tự " cho an toàn
-            const safeEvalContent = evalContent.replace(/"/g, '&quot;');
-            html += `<tr>
-                <td class="name-col">${course.name}</td>
-                <td><span class="badge ${getStatusBadgeClass(course.status)}">${getCourseStatusText(course.status)}</span></td>
-                <td class="date-col">${course.completion_date ? new Date(course.completion_date).toLocaleDateString('vi-VN') : '-'}</td>
-                <td class="score-col">${course.score || '-'}</td>
-                <td class="evaluation-col">${
-                    course.evaluation ? `
-                    <button type="button" class="btn btn-sm btn-outline-info btn-eval-sm" data-bs-toggle="popover" 
-                        data-bs-html="true"
-                        data-bs-content="${safeEvalContent}">
-                        Xem đánh giá
-                    </button>
-                    ` : '-'
-                }</td>
-            </tr>`;
         });
-        html += `</tbody></table></div></div>`;
-        return html;
-    }
+
+        // Hàm lấy class cho badge trạng thái
+        function getStatusBadgeClass(status) {
+            const statusMap = {
+                'registered': 'bg-secondary',
+                'attended': 'bg-primary',
+                'completed': 'bg-success',
+                'cancelled': 'bg-danger'
+            };
+            return statusMap[status] || 'bg-secondary';
+        }
+
+        // Sửa lại render bảng Khóa học đã tham gia để thêm class cho từng cột và button nhỏ lại
+        function renderCoursesTable(courses) {
+            let html = `<div class="section">
+                <h5>Khóa học đã tham gia:</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-courses">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="name-col">Tên khóa học</th>
+                                <th>Trạng thái</th>
+                                <th class="date-col">Ngày hoàn thành</th>
+                                <th class="score-col">Điểm số</th>
+                                <th class="evaluation-col">Đánh giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+            courses.forEach(course => {
+                // Chuẩn bị nội dung popover đánh giá
+                let evalContent = '';
+                if (course.evaluation) {
+                    let hasAny = false;
+                    evalContent += `<div style='font-weight:600;margin-bottom:4px;'>Chi tiết đánh giá</div>`;
+                    if (course.evaluation.content_rating) {
+                        evalContent += `<div>Nội dung: <b>${course.evaluation.content_rating}/5</b></div>`;
+                        hasAny = true;
+                    }
+                    if (course.evaluation.instructor_rating) {
+                        evalContent += `<div>Giảng viên: <b>${course.evaluation.instructor_rating}/5</b></div>`;
+                        hasAny = true;
+                    }
+                    if (course.evaluation.materials_rating) {
+                        evalContent += `<div>Tài liệu: <b>${course.evaluation.materials_rating}/5</b></div>`;
+                        hasAny = true;
+                    }
+                    if (course.evaluation.comments) {
+                        evalContent += `<div>Nhận xét: <i>${course.evaluation.comments}</i></div>`;
+                        hasAny = true;
+                    }
+                    if (!hasAny) {
+                        evalContent += `<div>Chưa có đánh giá chi tiết.</div>`;
+                    }
+                } else {
+                    evalContent = `<div>Chưa có đánh giá.</div>`;
+                }
+                // Escape ký tự " cho an toàn
+                const safeEvalContent = evalContent.replace(/"/g, '&quot;');
+                html += `<tr>
+                    <td class="name-col">${course.name}</td>
+                    <td><span class="badge ${getStatusBadgeClass(course.status)}">${getCourseStatusText(course.status)}</span></td>
+                    <td class="date-col">${course.completion_date ? new Date(course.completion_date).toLocaleDateString('vi-VN') : '-'}</td>
+                    <td class="score-col">${course.score || '-'}</td>
+                    <td class="evaluation-col">${
+                        course.evaluation ? `
+                        <button type="button" class="btn btn-sm btn-outline-info btn-eval-sm" data-bs-toggle="popover" 
+                            data-bs-html="true"
+                            data-bs-content="${safeEvalContent}">
+                            Xem đánh giá
+                        </button>
+                        ` : '-'
+                    }</td>
+                </tr>`;
+            });
+            html += `</tbody></table></div></div>`;
+            return html;
+        }
+    </script>
+    <script>
+        // Global variables for pagination and sorting
+        let currentPage = 1;
+        let itemsPerPage = 10;
+        let totalPages = 1;
+        let currentSort = {
+            column: 'issue_date',
+            direction: 'desc'
+        };
+
+        // Function to update table with filtered data
+        async function updateTable(data, page = 1) {
+            const tbody = document.getElementById('degreesTableBody');
+            if (!tbody) return;
+
+            // Show loading state
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="10" class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+            try {
+                // Calculate pagination
+                const start = (page - 1) * itemsPerPage;
+                const end = start + itemsPerPage;
+                const paginatedData = data.slice(start, end);
+                totalPages = Math.ceil(data.length / itemsPerPage);
+
+                // Sort data if needed
+                if (currentSort.column) {
+                    paginatedData.sort((a, b) => {
+                        let valueA = a[currentSort.column];
+                        let valueB = b[currentSort.column];
+
+                        // Handle date sorting
+                        if (currentSort.column.includes('date')) {
+                            valueA = new Date(valueA || 0);
+                            valueB = new Date(valueB || 0);
+                        }
+
+                        // Handle string sorting
+                        if (typeof valueA === 'string') {
+                            valueA = valueA.toLowerCase();
+                            valueB = valueB.toLowerCase();
+                        }
+
+                        if (valueA < valueB) return currentSort.direction === 'asc' ? -1 : 1;
+                        if (valueA > valueB) return currentSort.direction === 'asc' ? 1 : -1;
+                        return 0;
+                    });
+                }
+
+                // Update table content
+                let html = '';
+                paginatedData.forEach((item, index) => {
+                    const rowIndex = start + index + 1;
+                    html += `
+                        <tr>
+                            <td>${rowIndex}</td>
+                            <td>${item.type === 'degree' ? 'Bằng cấp' : 'Chứng chỉ'}</td>
+                            <td>${item.name}</td>
+                            <td>${item.employee_name}</td>
+                            <td>${item.organization}</td>
+                            <td>${new Date(item.issue_date).toLocaleDateString('vi-VN')}</td>
+                            <td>${item.expiry_date ? new Date(item.expiry_date).toLocaleDateString('vi-VN') : '-'}</td>
+                            <td>${getStatusBadge(item.status)}</td>
+                            <td>${item.attachment_url ? 
+                                `<a href="${item.attachment_url}" target="_blank" class="btn btn-sm btn-outline-primary">Xem</a>` : 
+                                '-'}</td>
+                            <td>
+                                <button class="btn btn-sm btn-info me-1" onclick="viewDegree(${item.id})">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-warning me-1" onclick="editDegree(${item.id})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="confirmDelete(${item.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                tbody.innerHTML = html;
+                updatePagination();
+            } catch (error) {
+                console.error('Error updating table:', error);
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="10" class="text-center text-danger py-4">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            Lỗi khi tải dữ liệu
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Function to update pagination
+        function updatePagination() {
+            const pagination = document.getElementById('pagination');
+            if (!pagination) return;
+
+            let html = '';
+            
+            // Previous button
+            html += `
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage - 1})" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            `;
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (
+                    i === 1 || // First page
+                    i === totalPages || // Last page
+                    (i >= currentPage - 2 && i <= currentPage + 2) // Pages around current
+                ) {
+                    html += `
+                        <li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                        </li>
+                    `;
+                } else if (
+                    i === currentPage - 3 || // Before current range
+                    i === currentPage + 3 // After current range
+                ) {
+                    html += `
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    `;
+                }
+            }
+
+            // Next button
+            html += `
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage + 1})" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            `;
+
+            pagination.innerHTML = html;
+        }
+
+        // Function to change page
+        function changePage(page) {
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            applyFilters();
+        }
+
+        // Function to handle sorting
+        function handleSort(column) {
+            if (currentSort.column === column) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = column;
+                currentSort.direction = 'asc';
+            }
+            applyFilters();
+        }
+
+        // Function to export to Excel
+        async function exportToExcel() {
+            try {
+                const filters = {
+                    type: document.getElementById('typeFilter')?.value,
+                    status: document.getElementById('statusFilter')?.value,
+                    date: document.getElementById('dateFilter')?.value,
+                    organization: document.getElementById('orgFilter')?.value,
+                    dateFrom: document.getElementById('dateFrom')?.value,
+                    dateTo: document.getElementById('dateTo')?.value,
+                    department: document.getElementById('departmentFilter')?.value,
+                    employee: document.getElementById('employeeId')?.value
+                };
+
+                const queryString = new URLSearchParams(filters).toString();
+                const response = await fetch(`../../api/degrees.php?action=export&${queryString}`);
+                const blob = await response.blob();
+                
+                // Create download link
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `degrees_export_${new Date().toISOString().split('T')[0]}.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+
+                showToast('Đã xuất file Excel thành công', 'success');
+            } catch (error) {
+                console.error('Export error:', error);
+                showToast('Lỗi khi xuất file Excel', 'error');
+            }
+        }
+
+        // Function to confirm delete
+        function confirmDelete(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa bằng cấp/chứng chỉ này?')) {
+                deleteDegree(id);
+            }
+        }
+
+        // Function to delete degree
+        async function deleteDegree(id) {
+            try {
+                const response = await fetch(`../../api/degrees.php?action=delete&id=${id}`, {
+                    method: 'DELETE'
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showToast('Đã xóa thành công', 'success');
+                    applyFilters();
+                } else {
+                    throw new Error(data.message || 'Lỗi khi xóa');
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+                showToast(error.message || 'Lỗi khi xóa', 'error');
+            }
+        }
+
+        // Add event listeners for sorting
+        document.addEventListener('DOMContentLoaded', function() {
+            const tableHeaders = document.querySelectorAll('th[data-sort]');
+            tableHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const column = header.dataset.sort;
+                    handleSort(column);
+                });
+            });
+
+            // Add export button handler
+            const exportBtn = document.getElementById('exportBtn');
+            if (exportBtn) {
+                exportBtn.addEventListener('click', exportToExcel);
+            }
+        });
     </script>
     <script src="degrees.js" defer></script>
   
