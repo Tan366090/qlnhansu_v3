@@ -502,7 +502,9 @@ class DegreesManager {
                             <button class="btn btn-view" onclick="degreesManager.viewDetails(${item.id}, '${item.type}')">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button class="btn btn-edit">Sửa</button>
+                            <button class="btn btn-edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
                             <button class="btn btn-delete" onclick="degreesManager.deleteItem(${item.id}, '${item.type}')">
                                 <i class="fas fa-trash"></i>
                             </button>
@@ -994,17 +996,49 @@ class DegreesManager {
             return;
         }
 
+        // Show loading immediately
         const loadingOverlay = this.showLoading('Đang xóa...');
+        
         try {
-            const response = await this.fetchData('delete', { id, type });
-            if (response.success) {
+            // Add timeout to the fetch request
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+            const response = await fetch(`/qlnhansu_V3/backend/src/public/admin/api/degrees.php?action=delete`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ id, type }),
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            if (data.success) {
                 this.showToast('Xóa thành công', 'success');
-                this.loadData();
+                // Use requestAnimationFrame to defer the data reload
+                requestAnimationFrame(() => {
+                    this.loadData();
+                });
             } else {
-                throw new Error(response.message || 'Lỗi không xác định');
+                throw new Error(data.message || 'Lỗi không xác định');
             }
         } catch (error) {
-            this.showToast('Lỗi khi xóa: ' + error.message, 'error');
+            if (error.name === 'AbortError') {
+                this.showToast('Yêu cầu xóa bị timeout. Vui lòng thử lại.', 'error');
+            } else {
+                this.showToast('Lỗi khi xóa: ' + error.message, 'error');
+            }
+            console.error('Delete error:', error);
         } finally {
             this.hideLoading();
         }
