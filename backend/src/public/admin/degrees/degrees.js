@@ -677,228 +677,183 @@ class DegreesManager {
         }
     }
 
-    // async showAddModal() {
-    //     this.currentEditId = null;
-    //     this.currentEditType = null;
-    //     document.getElementById('modalTitle').textContent = 'Thêm bằng cấp/chứng chỉ mới';
-    //     this.form.reset();
-    //     await this.loadEmployeeList();
-    //     this.modal.show();
-    // }
+    showAddModal() {
+        // Reset form
+        const form = document.getElementById('degreeForm');
+        if (form) form.reset();
+        
+        // Reset modal title and fields
+        document.getElementById('modalTitle').textContent = 'Thêm bằng cấp/chứng chỉ mới';
+        document.getElementById('employeeIdModal').value = '';
+        document.getElementById('employeeNameModal').value = '';
+        document.getElementById('modalEmployeeDegreesList').innerHTML = `
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> Vui lòng nhập mã nhân viên để xem thông tin
+            </div>
+        `;
 
-    // async editItem(id, type) {
-    //     this.currentEditId = id;
-    //     this.currentEditType = type;
-    //     document.getElementById('modalTitle').textContent = 'Chỉnh sửa bằng cấp/chứng chỉ';
-    //     try {
-    //         const data = await this.fetchData('get', { id, type });
-    //         if (data) {
-    //             this.populateForm(data);
-    //             await this.loadEmployeeList();
-    //             this.modal.show();
-    //         }
-    //     } catch (error) {
-    //         this.showToast('Lỗi khi tải thông tin: ' + error.message, 'error');
-    //     }
-    // }
+        // Show/hide fields based on type
+        const degreeType = document.getElementById('degreeType');
+        const degreeFields = document.querySelectorAll('.degree-fields');
+        const certificateFields = document.querySelectorAll('.certificate-fields');
 
-    // async loadEmployeeList() {
-    //     try {
-    //         const response = await fetch('/qlnhansu_V3/backend/src/api/employees.php?action=quick_search&search=');
-    //         const data = await response.json();
-    //         if (data.success) {
-    //             const select = document.getElementById('employeeId');
-    //             select.innerHTML = '<option value="">Chọn nhân viên</option>';
-    //             data.data.forEach(employee => {
-    //                 const option = document.createElement('option');
-    //                 option.value = employee.id;
-    //                 option.textContent = employee.name;
-    //                 select.appendChild(option);
-    //             });
-    //         }
-    //     } catch (error) {
-    //         this.showToast('Lỗi khi tải danh sách nhân viên: ' + error.message, 'error');
-    //     }
-    // }
+        function toggleFields() {
+            if (degreeType.value === 'degree') {
+                degreeFields.forEach(field => field.style.display = 'block');
+                certificateFields.forEach(field => field.style.display = 'none');
+            } else {
+                degreeFields.forEach(field => field.style.display = 'none');
+                certificateFields.forEach(field => field.style.display = 'block');
+            }
+        }
 
-    // populateForm(data) {
-    //     document.getElementById('degreeType').value = data.type;
-    //     document.getElementById('employeeId').value = data.employee_id;
-    //     document.getElementById('degreeName').value = data.name;
-    //     document.getElementById('organization').value = data.organization;
-    //     document.getElementById('issueDate').value = data.issue_date;
-    //     document.getElementById('expiryDate').value = data.expiry_date || '';
-    //     document.getElementById('credentialId').value = data.credential_id || '';
-    // }
+        degreeType.addEventListener('change', toggleFields);
+        toggleFields(); // Initial toggle
+
+        // Show modal
+        const degreeModal = new bootstrap.Modal(document.getElementById('degreeModal'));
+        degreeModal.show();
+    }
 
     async handleFormSubmit() {
-        console.log('Form submission started');
-        
         try {
-            // Log all form elements for debugging
-            console.log('Form elements:', {
-                employeeIdModal: document.getElementById('employeeIdModal'),
-                employeeNameModal: document.getElementById('employeeNameModal'),
-                employeeCodeModal: document.getElementById('employeeCodeModal')
-            });
-
-            // Validate required fields
-            const requiredFields = {
-                'degreeType': 'Loại',
-                'degreeName': 'Tên bằng cấp/chứng chỉ',
-                'organization': 'Tổ chức cấp',
-                'issueDate': 'Ngày cấp'
-            };
-
-            for (const [field, label] of Object.entries(requiredFields)) {
-                const element = document.getElementById(field);
-                if (!element || !element.value.trim()) {
-                    this.showToast(`Vui lòng nhập ${label}`, 'error');
-                    if (element) element.focus();
-                    return;
-                }
+            const form = document.getElementById('degreeForm');
+            if (!form) {
+                throw new Error('Form not found');
             }
 
-            // Validate employee selection
-            const employeeIdInput = document.getElementById('employeeIdModal');
-            const employeeNameInput = document.getElementById('employeeNameModal');
-            const employeeCodeInput = document.getElementById('employeeCodeModal');
-
-            console.log('Employee inputs:', {
-                idInput: employeeIdInput,
-                idValue: employeeIdInput?.value,
-                nameInput: employeeNameInput,
-                nameValue: employeeNameInput?.value,
-                codeInput: employeeCodeInput,
-                codeValue: employeeCodeInput?.value
-            });
-
-            if (!employeeIdInput) {
-                console.error('employeeIdModal element not found');
-                this.showToast('Lỗi: Không tìm thấy trường ID nhân viên', 'error');
-                return;
-            }
-
-            if (!employeeIdInput.value) {
-                console.error('employeeIdModal value is empty');
-                this.showToast('Vui lòng chọn nhân viên', 'error');
-                if (employeeCodeInput) employeeCodeInput.focus();
-                return;
-            }
-
-            if (!employeeNameInput || !employeeNameInput.value) {
-                console.error('employeeNameModal value is empty');
-                this.showToast('Vui lòng chọn nhân viên', 'error');
-                if (employeeCodeInput) employeeCodeInput.focus();
-                return;
-            }
-
-            const employeeId = employeeIdInput.value.trim();
-            console.log('Selected employee:', {
-                id: employeeId,
-                name: employeeNameInput.value,
-                code: employeeCodeInput.value
-            });
-
-            // Validate file if exists
-            const fileInput = document.getElementById('attachment');
-            if (fileInput && fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                if (!this.validateFile(file)) {
-                    return;
-                }
-            }
-
-            const loadingOverlay = this.showLoading('Đang lưu thông tin...');
-            
-            console.log('Preparing form data');
+            // Get form data
             const formData = new FormData();
-            
-            // Log all form values for debugging
-            const formValues = {
-                type: document.getElementById('degreeType').value,
-                employee_id: employeeId,
-                name: document.getElementById('degreeName').value,
-                organization: document.getElementById('organization').value,
-                issue_date: document.getElementById('issueDate').value,
-                major: document.getElementById('major')?.value,
-                gpa: document.getElementById('gpa')?.value,
-                expiry_date: document.getElementById('expiryDate')?.value,
-                credential_id: document.getElementById('credentialId')?.value,
-                has_file: fileInput?.files.length > 0
-            };
-            console.log('Form values:', formValues);
 
-            // Add required fields
-            formData.append('type', formValues.type);
-            formData.append('employee_id', formValues.employee_id);
-            formData.append('name', formValues.name);
-            formData.append('organization', formValues.organization);
-            formData.append('issue_date', formValues.issue_date);
-            
-            // Add optional fields only if they have values
-            if (formValues.major) {
-                formData.append('major', formValues.major.trim());
+            // Get and validate employee ID
+            const employeeId = document.getElementById('employeeIdModal').value;
+            if (!employeeId) {
+                throw new Error('Vui lòng chọn nhân viên');
             }
-            
-            if (formValues.gpa) {
-                formData.append('gpa', formValues.gpa.trim());
-            }
+            formData.append('employee_id', employeeId);
 
-            if (formValues.type === 'certificate') {
-                if (formValues.expiry_date) {
-                    formData.append('expiry_date', formValues.expiry_date.trim());
+            // Get other form fields
+            const type = document.getElementById('degreeType').value;
+            if (!type) {
+                throw new Error('Vui lòng chọn loại bằng cấp/chứng chỉ');
+            }
+            formData.append('type', type);
+
+            const name = document.getElementById('degreeName').value;
+            if (!name) {
+                throw new Error('Vui lòng nhập tên bằng cấp/chứng chỉ');
+            }
+            formData.append('name', name);
+
+            const organization = document.getElementById('organization').value;
+            if (!organization) {
+                throw new Error('Vui lòng nhập tổ chức cấp');
+            }
+            formData.append('organization', organization);
+
+            const issueDate = document.getElementById('issueDate').value;
+            if (!issueDate) {
+                throw new Error('Vui lòng nhập ngày cấp');
+            }
+            formData.append('issue_date', issueDate);
+
+            // Add type-specific fields
+            if (type === 'degree') {
+                const major = document.getElementById('major').value;
+                if (!major) {
+                    throw new Error('Vui lòng nhập chuyên ngành');
                 }
-                
-                if (formValues.credential_id) {
-                    formData.append('credential_id', formValues.credential_id.trim());
+                formData.append('major', major);
+
+                const gpa = document.getElementById('gpa').value;
+                if (!gpa) {
+                    throw new Error('Vui lòng nhập điểm GPA');
                 }
+                formData.append('gpa', gpa);
+            } else {
+                const expiryDate = document.getElementById('expiryDate').value;
+                if (!expiryDate) {
+                    throw new Error('Vui lòng nhập ngày hết hạn');
+                }
+                formData.append('expiry_date', expiryDate);
+
+                const credentialId = document.getElementById('credentialId').value;
+                if (!credentialId) {
+                    throw new Error('Vui lòng nhập mã chứng chỉ');
+                }
+                formData.append('credential_id', credentialId);
             }
 
-            if (this.currentEditId) {
-                formData.append('id', this.currentEditId);
-                formData.append('edit_type', this.currentEditType);
+            // Handle file attachment
+            const attachment = document.getElementById('attachment').files[0];
+            if (attachment) {
+                if (!this.validateFile(attachment)) {
+                    throw new Error('File không hợp lệ. Chỉ chấp nhận file PDF, JPG, JPEG, PNG và kích thước tối đa 5MB');
+                }
+                formData.append('attachment', attachment);
             }
 
-            // Add file if exists
-            if (fileInput && fileInput.files.length > 0) {
-                formData.append('attachment', fileInput.files[0]);
-            }
+            // Add action parameter
+            formData.append('action', 'create');
 
-            // Log FormData contents
-            console.log('FormData contents:');
+            // Show loading state
+            this.showLoading('Đang lưu thông tin...');
+
+            // Log form data for debugging
+            console.log('Form data being sent:');
             for (let pair of formData.entries()) {
                 console.log(pair[0] + ': ' + pair[1]);
             }
 
-            console.log('Sending request to server');
-            const response = await fetch(`/qlnhansu_V3/backend/src/public/admin/api/degrees.php?action=${this.currentEditId ? 'update' : 'create'}`, {
-                method: 'POST',
-                body: formData
-            });
+            // Send request
+            const apiUrl = '/qlnhansu_V3/backend/src/api/degrees.php?action=create';
+            console.log('Sending request to:', apiUrl);
 
-            console.log('Received response from server');
-            const result = await response.json();
-            console.log('Server response:', result);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                // Log response status and headers
+                console.log('Response status:', response.status);
+                console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+
+                // Get response text first for debugging
+                const responseText = await response.text();
+                console.log('Raw response:', responseText);
+
+                let data;
+                try {
+                    data = JSON.parse(responseText);
+                } catch (e) {
+                    console.error('Error parsing JSON response:', e);
+                    throw new Error('Invalid JSON response from server');
+                }
+
+                console.log('Parsed response data:', data);
+
+                if (!response.ok) {
+                    throw new Error(data.message || `Server error: ${response.status}`);
+                }
+                
+                if (data.success) {
+                    this.showToast('Lưu thông tin thành công', 'success');
+                    this.hideModal();
+                    await this.loadData(); // Refresh the table
+                } else {
+                    throw new Error(data.message || 'Lỗi khi lưu thông tin');
+                }
+
+            } catch (fetchError) {
+                console.error('Fetch error:', fetchError);
+                throw new Error(`Network error: ${fetchError.message}`);
             }
-            
-            if (result.success) {
-                this.showToast('Lưu thông tin thành công', 'success');
-                this.hideModal();
-                this.refreshData();
-            } else {
-                throw new Error(result.message || result.error || 'Lỗi không xác định');
-            }
+
         } catch (error) {
             console.error('Error in form submission:', error);
-            console.error('Error details:', {
-                message: error.message,
-                stack: error.stack
-            });
-            this.showToast('Lỗi khi lưu thông tin: ' + (error.message || 'Lỗi không xác định'), 'error');
+            console.error('Error stack:', error.stack);
+            this.showToast(error.message || 'Lỗi khi lưu thông tin', 'error');
         } finally {
             this.hideLoading();
         }
@@ -1076,8 +1031,8 @@ class DegreesManager {
             console.log('Processing data for Excel:', data.data);
 
             // Create worksheet with Vietnamese headers
-            const ws = XLSX.utils.json_to_sheet(data.data.map(item => ({
-                'STT': item.id,
+            const ws = XLSX.utils.json_to_sheet(data.data.map((item, idx) => ({
+                'STT': idx + 1,
                 'Loại': item.type === 'degree' ? 'Bằng cấp' : 'Chứng chỉ',
                 'Tên': item.name || '',
                 'Nhân viên': item.employee_name || '',
@@ -1136,15 +1091,36 @@ class DegreesManager {
             employee: this.employee
         };
 
+        // Mapping giá trị sang tiếng Việt, icon và mô tả thân thiện
+        const typeMap = { degree: 'Bằng cấp', certificate: 'Chứng chỉ' };
+        const statusMap = { valid: 'Còn hiệu lực', expired: 'Hết hạn', expiring: 'Sắp hết hạn', completed: 'Đã hoàn thành', registered: 'Đã đăng ký', attended: 'Đã tham gia', failed: 'Không đạt', cancelled: 'Đã hủy' };
+        const dateMap = { today: 'Hôm nay', week: 'Tuần này', month: 'Tháng này', year: 'Năm nay' };
+        const icons = {
+            type: '<i class="fas fa-graduation-cap"></i>',
+            status: '<i class="fas fa-check-circle"></i>',
+            date: '<i class="fas fa-calendar-alt"></i>',
+            organization: '<i class="fas fa-building"></i>',
+            dateFrom: '<i class="fas fa-calendar-day"></i>',
+            dateTo: '<i class="fas fa-calendar-day"></i>',
+            department: '<i class="fas fa-sitemap"></i>',
+            employee: '<i class="fas fa-user"></i>'
+        };
+
         Object.entries(filters).forEach(([key, value]) => {
             if (value) {
+                let displayValue = value;
+                if (key === 'type') displayValue = typeMap[value] || value;
+                if (key === 'status') displayValue = statusMap[value] || value;
+                if (key === 'date') displayValue = dateMap[value] || value;
+                if (key === 'dateFrom' || key === 'dateTo') displayValue = this.formatDate(value);
+                // organization, department, employee giữ nguyên
+
                 const filterTag = document.createElement('div');
-                filterTag.className = 'filter-tag';
+                filterTag.className = 'filter-tag ' + key;
                 filterTag.innerHTML = `
-                    <span>${this.getFilterLabel(key)}: ${value}</span>QT6H7JKL;'
-                    
-                    <span class="remove" data-filter="${key}">&times;</span  nbvcvbnnbvcQT6H7JKL;'
-                                    `;
+                    ${icons[key] || ''} <span>${this.getFilterLabel(key)}: <b>${displayValue}</b></span>
+                    <span class="remove" data-filter="${key}" title="Bỏ lọc">&times;</span>
+                `;
                 activeFilters.appendChild(filterTag);
             }
         });

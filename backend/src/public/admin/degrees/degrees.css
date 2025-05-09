@@ -459,10 +459,10 @@ body {
     text-align: left;
 }
 
-.table th:nth-child(8), /* Mô tả */
+.table th:nth-child(8), /* File đính kèm */
 .table td:nth-child(8) {
-    width: 150px;
-    text-align: left;
+    width: 120px;
+    text-align: center;
 }
 
 .table th:nth-child(9), /* Ngày tạo */

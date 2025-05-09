@@ -213,17 +213,34 @@
             // Gợi ý mã nhân viên khi nhập
             const employeeCodeInput = document.getElementById('employeeCode');
             if (employeeCodeInput) {
-                employeeCodeInput.addEventListener('input', function(e) {
-                    const val = e.target.value.trim().toLowerCase();
-                    const nameInput = document.getElementById('employeeName');
-                    if (!window.employeeList) return;
-                    const found = window.employeeList.find(emp => emp.employee_code.toLowerCase() === val);
-                    if (found) {
-                        nameInput.value = found.name;
-                    } else {
-                        nameInput.value = '';
-                    }
-                });
+                employeeCodeInput.addEventListener('input', debounce(async function(e) {
+                    const code = e.target.value.trim();
+                    if (!code) return;
+
+                    // Lấy thông tin nhân viên (giữ nguyên logic cũ)
+                    await searchEmployeeByCode(code);
+
+                    // Lấy gợi ý tổ chức cấp
+                    try {
+                        const orgRes = await fetch(`/qlnhansu_V3/backend/src/api/degrees.php?action=org_suggestions&employee=${encodeURIComponent(code)}`);
+                        const orgData = await orgRes.json();
+                        updateOrgSuggestions(orgData.data || []);
+                    } catch (err) { updateOrgSuggestions([]); }
+
+                    // Lấy gợi ý phòng ban
+                    try {
+                        const depRes = await fetch(`/qlnhansu_V3/backend/src/api/degrees.php?action=department_suggestions&employee=${encodeURIComponent(code)}`);
+                        const depData = await depRes.json();
+                        updateDepartmentSuggestions(depData.data || []);
+                    } catch (err) { updateDepartmentSuggestions([]); }
+
+                    // Lấy gợi ý khoảng thời gian
+                    try {
+                        const timeRes = await fetch(`/qlnhansu_V3/backend/src/api/degrees.php?action=time_suggestions&employee=${encodeURIComponent(code)}`);
+                        const timeData = await timeRes.json();
+                        updateTimeSuggestions(timeData.data || []);
+                    } catch (err) { updateTimeSuggestions([]); }
+                }, 300));
             }
 
             // Khi chọn phòng ban thì load lại danh sách nhân viên
@@ -240,7 +257,202 @@
 
             // Giữ lại các logic cũ khác nếu có
             // ...
+
+            // Add reset button handler
+            const resetBtn = document.getElementById('resetFilters');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function() {
+                    // Reset smart search
+                    const smartSearchInput = document.getElementById('smartSearchInput');
+                    if (smartSearchInput) smartSearchInput.value = '';
+
+                    // Reset quick filters
+                    const typeFilter = document.getElementById('typeFilter');
+                    const statusFilter = document.getElementById('statusFilter');
+                    const dateFilter = document.getElementById('dateFilter');
+                    if (typeFilter) typeFilter.value = '';
+                    if (statusFilter) statusFilter.value = '';
+                    if (dateFilter) dateFilter.value = '';
+
+                    // Reset advanced search fields
+                    const employeeCode = document.getElementById('employeeCode');
+                    const employeeName = document.getElementById('employeeName');
+                    const employeeId = document.getElementById('employeeId');
+                    if (employeeCode) employeeCode.value = '';
+                    if (employeeName) employeeName.value = '';
+                    if (employeeId) employeeId.value = '';
+
+                    // Clear employee degrees list
+                    const employeeDegreesList = document.getElementById('employeeDegreesList');
+                    if (employeeDegreesList) {
+                        employeeDegreesList.innerHTML = '<div class="alert alert-info"><i class="fas fa-info-circle"></i> Vui lòng nhập mã nhân viên để xem thông tin</div>';
+                    }
+
+                    // Clear active filters
+                    const activeFilters = document.getElementById('activeFilters');
+                    if (activeFilters) activeFilters.innerHTML = '';
+
+                    // Reset table to show all data
+                    applyFilters();
+                });
+            }
+
+            // Add save filter preset handler
+            const saveFilterPresetBtn = document.getElementById('saveFilterPreset');
+            if (saveFilterPresetBtn) {
+                saveFilterPresetBtn.addEventListener('click', function() {
+                    // Get current filter values
+                    const filters = {
+                        type: document.getElementById('typeFilter')?.value || '',
+                        status: document.getElementById('statusFilter')?.value || '',
+                        date: document.getElementById('dateFilter')?.value || '',
+                        employeeCode: document.getElementById('employeeCode')?.value || '',
+                        employeeName: document.getElementById('employeeName')?.value || '',
+                        employeeId: document.getElementById('employeeId')?.value || '',
+                        smartSearch: document.getElementById('smartSearchInput')?.value || ''
+                    };
+
+                    // Prompt for preset name
+                    const presetName = prompt('Nhập tên cho bộ lọc này:', 'Bộ lọc mới');
+                    if (!presetName) return; // User cancelled
+
+                    // Get existing presets from localStorage
+                    let presets = JSON.parse(localStorage.getItem('degreeFilterPresets') || '[]');
+                    
+                    // Add new preset
+                    presets.push({
+                        name: presetName,
+                        filters: filters,
+                        createdAt: new Date().toISOString()
+                    });
+
+                    // Save back to localStorage
+                    localStorage.setItem('degreeFilterPresets', JSON.stringify(presets));
+
+                    // Show success message
+                    showToast(`Đã lưu bộ lọc "${presetName}" thành công`, 'success');
+
+                    // Update preset dropdown if it exists
+                    updatePresetDropdown();
+                });
+            }
+
+            // Function to update preset dropdown
+            function updatePresetDropdown() {
+                const presets = JSON.parse(localStorage.getItem('degreeFilterPresets') || '[]');
+                const dropdown = document.getElementById('filterPresets');
+                
+                if (!dropdown) {
+                    // Create dropdown if it doesn't exist
+                    const dropdownHtml = `
+                        <select class="form-select" id="filterPresets" style="max-width: 200px;">
+                            <option value="">Chọn bộ lọc đã lưu</option>
+                        </select>
+                    `;
+                    const container = document.querySelector('.advanced-search-actions');
+                    if (container) {
+                        container.insertAdjacentHTML('afterbegin', dropdownHtml);
+                    }
+                }
+
+                // Update options
+                if (dropdown) {
+                    dropdown.innerHTML = '<option value="">Chọn bộ lọc đã lưu</option>';
+                    presets.forEach((preset, index) => {
+                        dropdown.innerHTML += `
+                            <option value="${index}">
+                                ${preset.name} (${new Date(preset.createdAt).toLocaleDateString('vi-VN')})
+                            </option>
+                        `;
+                    });
+
+                    // Add change event listener
+                    dropdown.addEventListener('change', function(e) {
+                        const selectedIndex = e.target.value;
+                        if (selectedIndex === '') return;
+
+                        const preset = presets[selectedIndex];
+                        if (preset) {
+                            // Apply the saved filters
+                            if (preset.filters.type) document.getElementById('typeFilter').value = preset.filters.type;
+                            if (preset.filters.status) document.getElementById('statusFilter').value = preset.filters.status;
+                            if (preset.filters.date) document.getElementById('dateFilter').value = preset.filters.date;
+                            if (preset.filters.employeeCode) document.getElementById('employeeCode').value = preset.filters.employeeCode;
+                            if (preset.filters.employeeName) document.getElementById('employeeName').value = preset.filters.employeeName;
+                            if (preset.filters.employeeId) document.getElementById('employeeId').value = preset.filters.employeeId;
+                            if (preset.filters.smartSearch) document.getElementById('smartSearchInput').value = preset.filters.smartSearch;
+
+                            // Trigger search if needed
+                            if (preset.filters.employeeCode) {
+                                searchEmployeeByCode(preset.filters.employeeCode);
+                            }
+                            if (preset.filters.smartSearch) {
+                                const event = new Event('input');
+                                document.getElementById('smartSearchInput').dispatchEvent(event);
+                            }
+
+                            // Apply filters
+                            applyFilters();
+                        }
+                    });
+                }
+            }
+
+            // Initialize preset dropdown
+            updatePresetDropdown();
         });
+
+        // Cập nhật datalist cho tổ chức cấp
+        function updateOrgSuggestions(list) {
+            const orgInput = document.getElementById('orgFilter');
+            if (!orgInput) return;
+            orgInput.setAttribute('list', 'orgSuggestions');
+            let datalist = document.getElementById('orgSuggestions');
+            if (!datalist) {
+                datalist = document.createElement('datalist');
+                datalist.id = 'orgSuggestions';
+                orgInput.parentNode.appendChild(datalist);
+            }
+            datalist.innerHTML = list.map(org => `<option value="${org}">`).join('');
+        }
+
+        // Cập nhật select cho phòng ban
+        function updateDepartmentSuggestions(list) {
+            const depSelect = document.getElementById('departmentFilter');
+            if (!depSelect) return;
+            depSelect.innerHTML = '<option value="">Tất cả phòng ban</option>' +
+                list.map(dep => `<option value="${dep.id}">${dep.name}</option>`).join('');
+        }
+
+        // Cập nhật gợi ý cho khoảng thời gian (ở đây sẽ cập nhật min/max cho input date)
+        function updateTimeSuggestions(list) {
+            // list dạng [{from: '2022-01-01', to: '2023-12-31'}] hoặc mảng các năm
+            const dateFrom = document.getElementById('dateFrom');
+            const dateTo = document.getElementById('dateTo');
+            if (!dateFrom || !dateTo) return;
+            if (Array.isArray(list) && list.length > 0) {
+                // Nếu là mảng các object from/to
+                if (typeof list[0] === 'object' && list[0].from && list[0].to) {
+                    dateFrom.min = list[0].from;
+                    dateFrom.max = list[0].to;
+                    dateTo.min = list[0].from;
+                    dateTo.max = list[0].to;
+                } else if (typeof list[0] === 'string' && list[0].length === 4) {
+                    // Nếu là mảng các năm
+                    const minYear = Math.min(...list.map(y => parseInt(y)));
+                    const maxYear = Math.max(...list.map(y => parseInt(y)));
+                    dateFrom.min = `${minYear}-01-01`;
+                    dateFrom.max = `${maxYear}-12-31`;
+                    dateTo.min = `${minYear}-01-01`;
+                    dateTo.max = `${maxYear}-12-31`;
+                }
+            } else {
+                dateFrom.min = '';
+                dateFrom.max = '';
+                dateTo.min = '';
+                dateTo.max = '';
+            }
+        }
 
         // Hàm tìm kiếm nhân viên cho modal
         async function searchEmployeeByCodeForModal(code) {
@@ -706,22 +918,7 @@
             }
         }
 
-        // Add event listeners for sorting
-        document.addEventListener('DOMContentLoaded', function() {
-            const tableHeaders = document.querySelectorAll('th[data-sort]');
-            tableHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const column = header.dataset.sort;
-                    handleSort(column);
-                });
-            });
-
-            // Add export button handler
-            const exportBtn = document.getElementById('exportBtn');
-            if (exportBtn) {
-                exportBtn.addEventListener('click', exportToExcel);
-            }
-        });
+   
     </script>
     <script src="degrees.js" defer></script>
   
@@ -1112,7 +1309,7 @@
                 <!-- Advanced Search Panel -->
                 <div id="advancedSearchPanel" class="advanced-search-panel mt-3" style="display: none;">
                     <div class="advanced-search-grid">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label>Tổ chức cấp</label>
                             <input type="text" class="form-control" id="orgFilter" placeholder="Nhập tên tổ chức...">
                         </div>
@@ -1128,28 +1325,28 @@
                             <select class="form-select" id="departmentFilter">
                                 <option value="">Tất cả phòng ban</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="employeeId" class="required-field">Nhân viên</label>
                             <div class="employee-search-container">
-                                <div class="input-group mb-2">
-                                    <input type="text" id="employeeCode" class="form-control" placeholder="Nhập mã nhân viên...">
+                                <div class="input-group">
+                                    <input type="text" id="employeeCode" class="form-control me-2" placeholder="Nhập mã nhân viên...">
+                                    <input type="text" id="employeeName" class="form-control" placeholder="Tên nhân viên" readonly>
+                                    <input type="hidden" id="employeeId">
                                 </div>
-                                <input type="text" id="employeeName" class="form-control mb-2" placeholder="Tên nhân viên" readonly>
-                                <input type="hidden" id="employeeId">
                             </div>
                         </div>
                     </div>
                     <div id="employeeDegreesList" class="mt-2"></div>
                     <div class="advanced-search-actions">
-                        <button class="btn btn-outline-secondary" id="applyFilters">
-                            <i class="fas fa-check"></i> Áp dụng
-                        </button>
+                        <!-- <button class="btn btn-outline-secondary" id="applyFilters">
+                            <i class="fas fa-check" style="color: #43a047;"></i> Áp dụng
+                        </button> -->
                         <button class="btn btn-outline-secondary" id="resetFilters">
-                            <i class="fas fa-undo"></i> Đặt lại
+                            <i class="fas fa-undo" style="color: #fbc02d;"></i> Đặt lại
                         </button>
                         <button class="btn btn-outline-secondary" id="saveFilterPreset">
-                            <i class="fas fa-save"></i> Lưu bộ lọc
+                            <i class="fas fa-save" style="color: #1976d2;"></i> Lưu bộ lọc
                         </button>
                     </div>
                 </div>
@@ -1242,21 +1439,49 @@
                 }
 
                 .filter-tag {
-                    background: #e9ecef;
-                    padding: 4px 8px;
-                    border-radius: 4px;
+                    background: #e3f2fd;
+                    color: #1976d2;
+                    border-radius: 20px;
+                    padding: 6px 14px;
+                    font-weight: 500;
                     display: flex;
                     align-items: center;
-                    gap: 4px;
+                    gap: 8px;
+                    font-size: 1rem;
+                    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+                    transition: box-shadow 0.2s, background 0.2s;
                 }
-
+                .filter-tag:hover {
+                    background: #bbdefb;
+                    box-shadow: 0 4px 16px rgba(25, 118, 210, 0.13);
+                }
+                .filter-tag i {
+                    font-size: 1.15em;
+                    margin-right: 4px;
+                    /* Hiệu ứng động */
+                    transition: transform 0.3s, color 0.3s;
+                    filter: drop-shadow(0 1px 2px rgba(25,118,210,0.15));
+                }
+                .filter-tag.type i { color: #43a047; animation: pop 0.7s; }
+                .filter-tag.status i { color: #1976d2; animation: pop 0.7s; }
+                .filter-tag.date i, .filter-tag.dateFrom i, .filter-tag.dateTo i { color: #fbc02d; animation: pop 0.7s; }
+                .filter-tag.organization i { color: #8e24aa; animation: pop 0.7s; }
+                .filter-tag.department i { color: #ff7043; animation: pop 0.7s; }
+                .filter-tag.employee i { color: #00bcd4; animation: pop 0.7s; }
+                @keyframes pop {
+                    0% { transform: scale(0.7) rotate(-10deg); }
+                    60% { transform: scale(1.2) rotate(8deg); }
+                    100% { transform: scale(1) rotate(0); }
+                }
                 .filter-tag .remove {
+                    margin-left: 6px;
                     cursor: pointer;
-                    color: #666;
+                    color: #888;
+                    font-size: 1.1em;
+                    transition: color 0.2s;
                 }
-
                 .filter-tag .remove:hover {
-                    color: #dc3545;
+                    color: #d32f2f;
                 }
 
                 @media (max-width: 1200px) {
@@ -1281,6 +1506,9 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="table-title mb-0 text-dark">Danh sách bằng cấp và chứng chỉ</h5>
                         <div class="table-actions">
+                            <button class="btn btn-outline-secondary me-2" id="refreshBtn">
+                                <i class="fas fa-sync-alt"></i> Làm mới
+                            </button>
                             <button class="btn btn-outline-secondary me-2" id="exportBtn">
                                 <i class="fas fa-file-export"></i> Xuất Excel
                             </button>
@@ -1846,5 +2074,337 @@
             }
         }
     </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const smartSearchInput = document.getElementById('smartSearchInput');
+        if (smartSearchInput) {
+            smartSearchInput.addEventListener('input', debounce(async function(e) {
+                const keyword = e.target.value.trim();
+                try {
+                    const response = await fetch(`/qlnhansu_V3/backend/src/api/degrees.php?action=list&search=${encodeURIComponent(keyword)}`);
+                    const data = await response.json();
+                    if (data.success && data.data) {
+                        // Gộp degrees và certificates nếu có
+                        let result = [];
+                        if (Array.isArray(data.data.degrees)) result = result.concat(data.data.degrees);
+                        if (Array.isArray(data.data.certificates)) result = result.concat(data.data.certificates);
+                        updateTable(result);
+                    } else {
+                        updateTable([]);
+                    }
+                } catch (err) {
+                    updateTable([]);
+                }
+            }, 300));
+        }
+    });
+    </script>
+
+    <script>
+    function getStatusBadge(status) {
+        let badgeClass = 'bg-secondary';
+        let text = 'Không xác định';
+        switch (status) {
+            case 'valid':
+            case 'completed':
+                badgeClass = 'bg-success';
+                text = 'Còn hiệu lực';
+                break;
+            case 'expired':
+            case 'failed':
+                badgeClass = 'bg-danger';
+                text = 'Hết hạn';
+                break;
+            case 'expiring':
+                badgeClass = 'bg-warning text-dark';
+                text = 'Sắp hết hạn';
+                break;
+            case 'registered':
+                badgeClass = 'bg-primary';
+                text = 'Đã đăng ký';
+                break;
+            case 'attended':
+                badgeClass = 'bg-info text-dark';
+                text = 'Đang tham gia';
+                break;
+            default:
+                text = status || 'Không xác định';
+        }
+        return `<span class="badge ${badgeClass}">${text}</span>`;
+    }
+    </script>
+
+    <!-- Add this before closing body tag -->
+    <!-- Filter Presets Modal -->
+    <div class="modal fade" id="filterPresetsModal" tabindex="-1" aria-labelledby="filterPresetsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterPresetsModalLabel">
+                        <i class="fas fa-filter me-2"></i>Quản lý bộ lọc đã lưu
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Tên bộ lọc</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Chi tiết bộ lọc</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="filterPresetsTableBody">
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+    /* Filter Presets Modal Styles */
+    #filterPresetsModal .modal-content {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    #filterPresetsModal .modal-header {
+        background: linear-gradient(135deg, #11998E, #38EF7D);
+        color: white;
+        border-radius: 12px 12px 0 0;
+        padding: 1.2rem;
+    }
+
+    #filterPresetsModal .modal-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    #filterPresetsModal .modal-body {
+        padding: 1.5rem;
+    }
+
+    #filterPresetsModal .table th {
+        font-weight: 600;
+        background: #f8f9fa;
+    }
+
+    #filterPresetsModal .filter-details {
+        max-width: 300px;
+        font-size: 0.9rem;
+    }
+
+    #filterPresetsModal .filter-details span {
+        display: block;
+        margin-bottom: 0.3rem;
+    }
+
+    #filterPresetsModal .filter-details .label {
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    #filterPresetsModal .btn-action {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    #filterPresetsModal .btn-action i {
+        font-size: 0.9rem;
+    }
+    </style>
+
+    <script>
+    // Add this to your existing JavaScript
+    function showFilterPresets() {
+        const presets = JSON.parse(localStorage.getItem('degreeFilterPresets') || '[]');
+        const tbody = document.getElementById('filterPresetsTableBody');
+        
+        if (!tbody) return;
+        
+        tbody.innerHTML = '';
+        
+        if (presets.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="text-center py-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Chưa có bộ lọc nào được lưu
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        presets.forEach((preset, index) => {
+            const filterDetails = [];
+            if (preset.filters.type) filterDetails.push(`Loại: ${preset.filters.type}`);
+            if (preset.filters.status) filterDetails.push(`Trạng thái: ${preset.filters.status}`);
+            if (preset.filters.date) filterDetails.push(`Thời gian: ${preset.filters.date}`);
+            if (preset.filters.employeeCode) filterDetails.push(`Mã NV: ${preset.filters.employeeCode}`);
+            if (preset.filters.smartSearch) filterDetails.push(`Tìm kiếm: ${preset.filters.smartSearch}`);
+
+            tbody.innerHTML += `
+                <tr>
+                    <td>${preset.name}</td>
+                    <td>${new Date(preset.createdAt).toLocaleDateString('vi-VN')}</td>
+                    <td>
+                        <div class="filter-details">
+                            ${filterDetails.map(detail => `<span>${detail}</span>`).join('')}
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-primary btn-action me-1" onclick="applyPreset(${index})">
+                            <i class="fas fa-check"></i> Áp dụng
+                        </button>
+                        <button class="btn btn-sm btn-danger btn-action" onclick="deletePreset(${index})">
+                            <i class="fas fa-trash"></i> Xóa
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function applyPreset(index) {
+        const presets = JSON.parse(localStorage.getItem('degreeFilterPresets') || '[]');
+        const preset = presets[index];
+        
+        if (preset) {
+            // Apply the saved filters
+            if (preset.filters.type) document.getElementById('typeFilter').value = preset.filters.type;
+            if (preset.filters.status) document.getElementById('statusFilter').value = preset.filters.status;
+            if (preset.filters.date) document.getElementById('dateFilter').value = preset.filters.date;
+            if (preset.filters.employeeCode) document.getElementById('employeeCode').value = preset.filters.employeeCode;
+            if (preset.filters.employeeName) document.getElementById('employeeName').value = preset.filters.employeeName;
+            if (preset.filters.employeeId) document.getElementById('employeeId').value = preset.filters.employeeId;
+            if (preset.filters.smartSearch) document.getElementById('smartSearchInput').value = preset.filters.smartSearch;
+
+            // Trigger search if needed
+            if (preset.filters.employeeCode) {
+                searchEmployeeByCode(preset.filters.employeeCode);
+            }
+            if (preset.filters.smartSearch) {
+                const event = new Event('input');
+                document.getElementById('smartSearchInput').dispatchEvent(event);
+            }
+
+            // Apply filters
+            applyFilters();
+
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('filterPresetsModal'));
+            if (modal) modal.hide();
+
+            showToast(`Đã áp dụng bộ lọc "${preset.name}"`, 'success');
+        }
+    }
+
+    function deletePreset(index) {
+        if (confirm('Bạn có chắc chắn muốn xóa bộ lọc này?')) {
+            const presets = JSON.parse(localStorage.getItem('degreeFilterPresets') || '[]');
+            const deletedPreset = presets[index];
+            
+            presets.splice(index, 1);
+            localStorage.setItem('degreeFilterPresets', JSON.stringify(presets));
+            
+            showToast(`Đã xóa bộ lọc "${deletedPreset.name}"`, 'success');
+            showFilterPresets();
+            updatePresetDropdown();
+        }
+    }
+
+    // Update the saveFilterPreset click handler to show the modal
+    let filterPresetsModalInstance = null;
+    document.addEventListener('DOMContentLoaded', function() {
+        const saveFilterPresetBtn = document.getElementById('saveFilterPreset');
+        if (saveFilterPresetBtn) {
+            saveFilterPresetBtn.addEventListener('click', function() {
+                if (!filterPresetsModalInstance) {
+                    filterPresetsModalInstance = new bootstrap.Modal(document.getElementById('filterPresetsModal'), { backdrop: false });
+                }
+                filterPresetsModalInstance.show();
+                showFilterPresets();
+            });
+        }
+    });
+    </script>
+
+    <script>
+    // Add this before other JavaScript code
+    function showToast(message, type = 'info') {
+        const toastContainer = document.querySelector('.toast-container');
+        if (!toastContainer) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast align-items-center text-white bg-${type} border-0`;
+        toast.setAttribute('role', 'alert');
+        toast.setAttribute('aria-live', 'assertive');
+        toast.setAttribute('aria-atomic', 'true');
+
+        toast.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        `;
+
+        toastContainer.appendChild(toast);
+        const bsToast = new bootstrap.Toast(toast, {
+            animation: true,
+            autohide: true,
+            delay: 3000
+        });
+        bsToast.show();
+
+        // Remove toast after it's hidden
+        toast.addEventListener('hidden.bs.toast', () => {
+            toast.remove();
+        });
+    }
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const refreshBtn = document.getElementById('refreshBtn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', function() {
+                window.location.reload();
+            });
+        }
+
+        // Initialize Bootstrap modal
+        let degreeModal = null;
+        const degreeModalElement = document.getElementById('degreeModal');
+        if (degreeModalElement) {
+            degreeModal = new bootstrap.Modal(degreeModalElement);
+        }
+
+        // Add event listener for addDegreeBtn
+        const addDegreeBtn = document.getElementById('addDegreeBtn');
+        if (addDegreeBtn) {
+            addDegreeBtn.addEventListener('click', function() {
+                if (window.degreesManager) {
+                    window.degreesManager.showAddModal();
+                } else {
+                    console.error('DegreesManager not initialized');
+                    showToast('Lỗi: Hệ thống chưa sẵn sàng', 'error');
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>

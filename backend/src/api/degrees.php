@@ -460,6 +460,79 @@ switch ($_GET['action']) {
             handleApiError('Lỗi khi truy vấn nhân viên: ' . $e->getMessage());
         }
         exit();
+
+    case 'org_suggestions':
+        try {
+            if (!isset($_GET['employee'])) {
+                handleApiError('Thiếu mã nhân viên', 400);
+            }
+            
+            $query = "SELECT DISTINCT c.issuing_organization 
+                     FROM certificates c 
+                     JOIN employees e ON c.employee_id = e.id 
+                     WHERE e.employee_code = ? 
+                     ORDER BY c.issuing_organization";
+            $stmt = $conn->prepare($query);
+            $stmt->execute([$_GET['employee']]);
+            $suggestions = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            
+            echo json_encode([
+                'success' => true,
+                'data' => $suggestions
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        } catch (Exception $e) {
+            handleApiError('Lỗi khi truy vấn gợi ý tổ chức: ' . $e->getMessage());
+        }
+        exit();
+
+    case 'department_suggestions':
+        try {
+            if (!isset($_GET['employee'])) {
+                handleApiError('Thiếu mã nhân viên', 400);
+            }
+            
+            $query = "SELECT DISTINCT dpt.name 
+                     FROM departments dpt 
+                     JOIN employees e ON e.department_id = dpt.id 
+                     WHERE e.employee_code = ? 
+                     ORDER BY dpt.name";
+            $stmt = $conn->prepare($query);
+            $stmt->execute([$_GET['employee']]);
+            $suggestions = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            
+            echo json_encode([
+                'success' => true,
+                'data' => $suggestions
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        } catch (Exception $e) {
+            handleApiError('Lỗi khi truy vấn gợi ý phòng ban: ' . $e->getMessage());
+        }
+        exit();
+
+    case 'time_suggestions':
+        try {
+            if (!isset($_GET['employee'])) {
+                handleApiError('Thiếu mã nhân viên', 400);
+            }
+            
+            $query = "SELECT DISTINCT 
+                        DATE_FORMAT(c.issue_date, '%Y-%m') as month_year
+                     FROM certificates c 
+                     JOIN employees e ON c.employee_id = e.id 
+                     WHERE e.employee_code = ? 
+                     ORDER BY month_year DESC";
+            $stmt = $conn->prepare($query);
+            $stmt->execute([$_GET['employee']]);
+            $suggestions = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            
+            echo json_encode([
+                'success' => true,
+                'data' => $suggestions
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        } catch (Exception $e) {
+            handleApiError('Lỗi khi truy vấn gợi ý thời gian: ' . $e->getMessage());
+        }
+        exit();
         
     default:
         handleApiError('Action không hợp lệ', 400);
