@@ -163,38 +163,43 @@ class TrainingAPI {
             $where = [];
             $params = [];
 
+            // Prepare separate where clauses for degrees and certificates
+            $degreesWhere = [];
+            $certificatesWhere = [];
+
             if ($type === 'degree') {
-                $where[] = "d.degree_id IS NOT NULL";
-            } elseif ($type === 'certificate') {
-                $where[] = "c.id IS NOT NULL";
+                $degreesWhere[] = "d.degree_id IS NOT NULL";
+            }
+            if ($type === 'certificate') {
+                $certificatesWhere[] = "c.id IS NOT NULL";
             }
 
             if ($status) {
                 switch ($status) {
                     case 'valid':
-                        $where[] = "(c.expiry_date IS NULL OR c.expiry_date > CURDATE())";
+                        $certificatesWhere[] = "(c.expiry_date IS NULL OR c.expiry_date > CURDATE())";
                         break;
                     case 'expired':
-                        $where[] = "c.expiry_date < CURDATE()";
+                        $certificatesWhere[] = "c.expiry_date < CURDATE()";
                         break;
                     case 'expiring':
-                        $where[] = "c.expiry_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)";
+                        $certificatesWhere[] = "c.expiry_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)";
                         break;
                 }
             }
 
-            $whereClause = $where ? 'WHERE ' . implode(' AND ', $where) : '';
-            error_log("Where clause: " . $whereClause);
-            error_log("Parameters: " . print_r($params, true));
+            $degreesWhereClause = $degreesWhere ? 'WHERE ' . implode(' AND ', $degreesWhere) : '';
+            $certificatesWhereClause = $certificatesWhere ? 'WHERE ' . implode(' AND ', $certificatesWhere) : '';
 
             // First get degrees
             $degreesQuery = "SELECT 
                 d.degree_id as id,
+                d.employee_id as employee_id,
                 'degree' as type,
                 d.degree_name as name,
                 COALESCE(e.name, 'Chưa có thông tin') as employee_name,
                 d.institution as organization,
-                d.graduation_date as issue_date,
+                DATE_FORMAT(d.graduation_date, '%Y-%m-%d') as issue_date,
                 NULL as expiry_date,
                 'valid' as status,
                 COALESCE(d.attachment_url, '') as attachment_url,
@@ -205,19 +210,19 @@ class TrainingAPI {
                 d.updated_at
             FROM degrees d
             LEFT JOIN employees e ON e.id = d.employee_id
-            $whereClause";
+            $degreesWhereClause";
 
             // Then get certificates
             $certificatesQuery = "SELECT 
                 c.id,
+                c.employee_id as employee_id,
                 'certificate' as type,
                 c.name,
                 COALESCE(e.name, 'Chưa có thông tin') as employee_name,
                 c.issuing_organization as organization,
-                c.issue_date,
-                c.expiry_date,
+                DATE_FORMAT(c.issue_date, '%Y-%m-%d') as issue_date,
+                DATE_FORMAT(c.expiry_date, '%Y-%m-%d') as expiry_date,
                 CASE 
-                    WHEN c.expiry_date IS NULL THEN 'valid'
                     WHEN c.expiry_date < CURDATE() THEN 'expired'
                     WHEN c.expiry_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY) THEN 'expiring'
                     ELSE 'valid'
@@ -230,26 +235,34 @@ class TrainingAPI {
                 c.updated_at
             FROM certificates c
             LEFT JOIN employees e ON e.id = c.employee_id
-            $whereClause";
+            $certificatesWhereClause";
 
             // Combine results with pagination
-            $query = "SELECT * FROM (
-                ($degreesQuery) UNION ALL ($certificatesQuery)
-            ) as combined 
-            ORDER BY issue_date DESC, id DESC 
-            LIMIT " . (int)$limit . " OFFSET " . (int)$offset;
+            if ($type === 'certificate') {
+                // Chỉ lấy chứng chỉ
+                $query = $certificatesQuery . " ORDER BY issue_date DESC, id DESC LIMIT " . (int)$limit . " OFFSET " . (int)$offset;
+            } elseif ($type === 'degree') {
+                // Chỉ lấy bằng cấp
+                $query = $degreesQuery . " ORDER BY issue_date DESC, id DESC LIMIT " . (int)$limit . " OFFSET " . (int)$offset;
+            } else {
+                // Lấy cả hai bảng
+                $query = "SELECT * FROM ((" . $degreesQuery . ") UNION ALL (" . $certificatesQuery . ")) as combined ORDER BY issue_date DESC, id DESC LIMIT " . (int)$limit . " OFFSET " . (int)$offset;
+            }
 
             error_log("Final query: " . $query);
-            
             $stmt = $this->conn->prepare($query);
             $stmt->execute($params);
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             error_log("Query results: " . print_r($data, true));
 
             // Get total count
-            $countQuery = "SELECT COUNT(*) as count FROM (
-                ($degreesQuery) UNION ALL ($certificatesQuery)
-            ) as combined";
+            if ($type === 'certificate') {
+                $countQuery = "SELECT COUNT(*) as count FROM (" . $certificatesQuery . ") as combined";
+            } elseif ($type === 'degree') {
+                $countQuery = "SELECT COUNT(*) as count FROM (" . $degreesQuery . ") as combined";
+            } else {
+                $countQuery = "SELECT COUNT(*) as count FROM ((" . $degreesQuery . ") UNION ALL (" . $certificatesQuery . ")) as combined";
+            }
             $stmt = $this->conn->prepare($countQuery);
             $stmt->execute($params);
             $total = $stmt->fetch(PDO::FETCH_ASSOC)['count'];

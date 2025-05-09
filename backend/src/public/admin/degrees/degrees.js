@@ -220,6 +220,13 @@ class DegreesManager {
             const stats = await this.fetchData('dashboard_stats');
             this.updateDashboardStats(stats);
 
+            // Lấy tổng số chứng chỉ đã hết hạn từ API list (chỉ lấy certificates)
+            const expiredData = await this.fetchData('list', { status: 'expired', type: 'certificate', limit: 1 });
+            const expiredCountElem = document.getElementById('expiredCertificates');
+            if (expiredCountElem && expiredData && typeof expiredData.total !== 'undefined') {
+                expiredCountElem.textContent = expiredData.total;
+            }
+
             // Update loading message
             this.showLoading('Đang tải biểu đồ...');
 
@@ -340,64 +347,23 @@ class DegreesManager {
         try {
             console.log('Updating dashboard stats with data:', stats);
             
-            // Log all available elements
-            console.log('Available elements:', {
-                totalDegrees: document.getElementById('totalDegrees'),
-                totalCertificates: document.getElementById('totalCertificates'),
-                expiringCertificates: document.getElementById('expiringCertificates'),
-                totalCourses: document.getElementById('totalCourses'),
-                activeRegistrations: document.getElementById('activeRegistrations')
+            // Define all possible stat elements and their corresponding data keys
+            const statElements = {
+                'totalDegrees': 'total_degrees',
+                'totalCertificates': 'total_certificates',
+                'expiringCertificates': 'expiring_certificates',
+                'totalCourses': 'total_courses',
+                'activeRegistrations': 'active_registrations'
+            };
+
+            // Update each stat only if both the element exists and the data is available
+            Object.entries(statElements).forEach(([elementId, dataKey]) => {
+                const element = document.getElementById(elementId);
+                if (element && stats[dataKey] !== undefined) {
+                    element.textContent = stats[dataKey] || '0';
+                }
             });
-            
-            // Update total degrees
-            const totalDegreesElement = document.getElementById('totalDegrees');
-            if (totalDegreesElement) {
-                const value = stats.total_degrees || '0';
-                console.log('Setting totalDegrees to:', value);
-                totalDegreesElement.textContent = value;
-            } else {
-                console.warn('Element totalDegrees not found');
-            }
 
-            // Update total certificates
-            const totalCertificatesElement = document.getElementById('totalCertificates');
-            if (totalCertificatesElement) {
-                const value = stats.total_certificates || '0';
-                console.log('Setting totalCertificates to:', value);
-                totalCertificatesElement.textContent = value;
-            } else {
-                console.warn('Element totalCertificates not found');
-            }
-
-            // Update expiring certificates
-            const expiringCertificatesElement = document.getElementById('expiringCertificates');
-            if (expiringCertificatesElement) {
-                const value = stats.expiring_certificates || '0';
-                console.log('Setting expiringCertificates to:', value);
-                expiringCertificatesElement.textContent = value;
-            } else {
-                console.warn('Element expiringCertificates not found');
-            }
-
-            // Update total courses if element exists
-            const totalCoursesElement = document.getElementById('totalCourses');
-            if (totalCoursesElement) {
-                const value = stats.total_courses || '0';
-                console.log('Setting totalCourses to:', value);
-                totalCoursesElement.textContent = value;
-            } else {
-                console.warn('Element totalCourses not found');
-            }
-
-            // Update active registrations if element exists
-            const activeRegistrationsElement = document.getElementById('activeRegistrations');
-            if (activeRegistrationsElement) {
-                const value = stats.active_registrations || '0';
-                console.log('Setting activeRegistrations to:', value);
-                activeRegistrationsElement.textContent = value;
-            } else {
-                console.warn('Element activeRegistrations not found');
-            }
         } catch (error) {
             console.error('Error updating dashboard stats:', error);
             this.showToast('Lỗi khi cập nhật thống kê: ' + error.message, 'error');
@@ -495,35 +461,29 @@ class DegreesManager {
         }
 
         data.data.forEach((item, index) => {
-            // Log item data for debugging
-            console.log('Processing item:', item);
-            
-            // Map the correct employee_id based on type
-            let employeeId;
-            if (item.type === 'degree') {
-                // For degrees table, use id as employee_id if not provided
-                employeeId = item.employee_id || item.id;
-            } else {
-                // For certificates table, use id as employee_id if not provided
-                employeeId = item.employee_id || item.id;
+            // Log expiry_date and type for debugging
+            console.log('Row:', {
+                id: item.id,
+                type: item.type,
+                expiry_date: item.expiry_date
+            });
+            let expiryDisplay = 'Không thời hạn';
+            if (item.type === 'certificate' && item.expiry_date && item.expiry_date !== 'null' && item.expiry_date !== '') {
+                expiryDisplay = this.formatDate(item.expiry_date);
             }
-
-            // Ensure employee_id is a valid number
-            employeeId = employeeId ? parseInt(employeeId) : null;
-            if (!employeeId) {
-                console.error('Invalid employee_id for item:', item);
-                return; // Skip this item if employee_id is invalid
-            }
+            // Lưu dữ liệu gốc vào biến toàn cục để dùng lại khi sửa
+            if (!window.degreesRowData) window.degreesRowData = {};
+            window.degreesRowData[item.id] = item;
             
             const row = `
-                <tr data-id="${item.id}" data-employee-id="${employeeId}" data-type="${item.type}">
+                <tr data-id="${item.id}" data-employee-id="${item.employee_id}" data-type="${item.type}">
                     <td>${(this.currentPage - 1) * this.limit + index + 1}</td>
                     <td>${item.type === 'degree' ? 'Bằng cấp' : 'Chứng chỉ'}</td>
                     <td>${item.name || item.degree_name || ''}</td>
                     <td>${item.employee_name || ''}</td>
                     <td>${item.organization || item.issuing_organization || item.institution || ''}</td>
-                    <td>${this.formatDate(item.issue_date || item.graduation_date)}</td>
-                    <td>${item.expiry_date ? this.formatDate(item.expiry_date) : 'N/A'}</td>
+                    <td>${this.formatDate(item.issue_date)}</td>
+                    <td>${expiryDisplay}</td>
                     <td>
                         <span class="badge ${this.getStatusBadgeClass(item.status)}">
                             ${this.getStatusText(item.status)}
@@ -673,9 +633,28 @@ class DegreesManager {
 
     // Utility functions
     formatDate(dateString) {
-        if (!dateString) return 'N/A';
+        // Kiểm tra nếu là null hoặc undefined
+        if (dateString === null || dateString === undefined) {
+            return 'Không thời hạn';
+        }
+        
+        // Kiểm tra nếu là chuỗi rỗng
+        if (dateString === '') {
+            return 'Không thời hạn';
+        }
+
+        // Thử parse ngày
         const date = new Date(dateString);
-        return date.toLocaleDateString('vi-VN');
+        if (isNaN(date.getTime())) {
+            console.log('Invalid date:', dateString);
+            return 'Không thời hạn';
+        }
+
+        // Format thành dd/mm/yyyy
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
     }
 
     getStatusBadgeClass(status) {
@@ -1128,9 +1107,10 @@ class DegreesManager {
                 const filterTag = document.createElement('div');
                 filterTag.className = 'filter-tag';
                 filterTag.innerHTML = `
-                    <span>${this.getFilterLabel(key)}: ${value}</span>
-                    <span class="remove" data-filter="${key}">&times;</span>
-                `;
+                    <span>${this.getFilterLabel(key)}: ${value}</span>QT6H7JKL;'
+                    
+                    <span class="remove" data-filter="${key}">&times;</span  nbvcvbnnbvcQT6H7JKL;'
+                                    `;
                 activeFilters.appendChild(filterTag);
             }
         });
@@ -1223,6 +1203,18 @@ class DegreesManager {
         };
         return statusMap[status] || status;
     }
+
+    formatDateForInput(dateString) {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return '';
+        
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        
+        return `${year}-${month}-${day}`;
+    }
 }
 
 // Debounce function
@@ -1243,7 +1235,14 @@ let degreesManager;
 $(document).ready(() => {
     degreesManager = new DegreesManager();
 
-    // --- Inline edit events: Đặt ở đây để luôn hoạt động ---
+    // Helper function: Convert dd/mm/yyyy to yyyy-MM-dd
+    function ddmmyyyyToYyyymmdd(str) {
+        if (!str || str === 'N/A') return '';
+        const [day, month, year] = str.split('/');
+        if (!day || !month || !year) return '';
+        return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+
     $(document).on('click', '.btn-edit', function(event) {
         event.preventDefault();
         console.log('Edit clicked', event);
@@ -1257,17 +1256,39 @@ $(document).ready(() => {
         const name = cells.eq(2).text().trim();
         const employeeName = cells.eq(3).text().trim();
         const organization = cells.eq(4).text().trim();
-        const issueDate = cells.eq(5).text().trim().split('/').reverse().join('-');
-        const expiryDate = cells.eq(6).text().trim() !== 'N/A' ? cells.eq(6).text().trim().split('/').reverse().join('-') : '';
+
+        // Lấy ngày cấp từ bảng (dd/mm/yyyy) và chuyển sang yyyy-MM-dd cho input
+        const issueDateText = cells.eq(5).text().trim();
+        const issueDate = issueDateText === 'Không thời hạn' ? '' : ddmmyyyyToYyyymmdd(issueDateText);
+
+        // Lấy ngày hết hạn từ bảng (dd/mm/yyyy) và chuyển sang yyyy-MM-dd cho input
+        const expiryDateText = cells.eq(6).text().trim();
+        console.log('Expiry date text from table:', expiryDateText);
+        const expiryDate = expiryDateText === 'Không thời hạn' ? '' : ddmmyyyyToYyyymmdd(expiryDateText);
+        console.log('Converted expiry date:', expiryDate);
+
         const status = cells.eq(7).find('.badge').text().trim();
         const credentialId = cells.eq(8).text().trim();
+
+        // Lưu employee_id vào data attribute của row
+        let employeeId = $row.data('employee-id');
+        if (!employeeId || employeeId === 'undefined' || employeeId === undefined) {
+            // Lấy lại từ dữ liệu gốc
+            const rowId = $row.data('id');
+            if (window.degreesRowData && window.degreesRowData[rowId]) {
+                employeeId = window.degreesRowData[rowId].employee_id || '';
+            } else {
+                employeeId = '';
+            }
+        }
+        console.log('Employee ID from row (fixed):', employeeId);
 
         // Loại select
         const typeSelect = `<select class='form-select form-select-sm inline-type'><option value='degree' ${type==='degree'?'selected':''}>Bằng cấp</option><option value='certificate' ${type==='certificate'?'selected':''}>Chứng chỉ</option></select>`;
         // Tên
         const nameInput = `<input type='text' class='form-control form-control-sm inline-name' value="${name}">`;
         // Nhân viên (autocomplete input, tạm thời là text)
-        const employeeInput = `<input type='text' class='form-control form-control-sm inline-employee' value="${employeeName}" readonly>`;
+        const employeeInput = `<input type='text' class='form-control form-control-sm inline-employee' value="${employeeName}" readonly data-employee-id="${employeeId}">`;
         // Tổ chức cấp
         const orgInput = `<input type='text' class='form-control form-control-sm inline-org' value="${organization}">`;
         // Ngày cấp
@@ -1303,25 +1324,27 @@ $(document).ready(() => {
         
         const $row = $(this).closest('tr');
         const id = $row.data('id');
-        const employee_id = $row.data('employee-id');
         const type = $row.find('.inline-type').val();
         
-        // Log all data attributes for debugging
-        console.log('Row data attributes:', {
-            id: id,
-            employee_id: employee_id,
-            type: type,
-            allData: $row.data()
-        });
+        // Lấy employee_id từ input employee (data-employee-id)
+        const employeeInput = $row.find('.inline-employee');
+        const employeeId = employeeInput.data('employee-id');
+        console.log('Employee ID on save:', employeeId, 'Input:', employeeInput[0]);
+        
+        // Kiểm tra employee_id
+        if (!employeeId) {
+            degreesManager.showToast('Không thể sửa chứng chỉ này vì thiếu thông tin nhân viên. Vui lòng liên hệ quản trị viên để bổ sung dữ liệu.', 'error');
+            return;
+        }
         
         // Validate required fields
-        if (!id || !employee_id || !type) {
-            degreesManager.showToast('Lỗi: Thiếu thông tin cần thiết (ID, ID nhân viên hoặc loại)', 'error');
+        if (!id || !type) {
+            degreesManager.showToast('Lỗi: Thiếu thông tin cần thiết (ID hoặc loại)', 'error');
             return;
         }
 
         // Validate employee_id is a valid number
-        const employeeIdNum = parseInt(employee_id);
+        const employeeIdNum = parseInt(employeeId);
         if (isNaN(employeeIdNum)) {
             degreesManager.showToast('Lỗi: ID nhân viên không hợp lệ', 'error');
             return;
@@ -1330,7 +1353,9 @@ $(document).ready(() => {
         const name = $row.find('.inline-name').val();
         const organization = $row.find('.inline-org').val();
         const issueDate = $row.find('.inline-issue').val();
-        const expiryDate = $row.find('.inline-expiry').val();
+        const expiryDate = $row.find('.inline-expiry').val(); // yyyy-MM-dd hoặc ''
+        console.log('Expiry date from input:', expiryDate);
+
         const credentialId = $row.find('.inline-cred').val();
 
         // Validate other required fields
@@ -1338,6 +1363,9 @@ $(document).ready(() => {
             degreesManager.showToast('Vui lòng điền đầy đủ thông tin bắt buộc', 'error');
             return;
         }
+
+        // Log giá trị ngày hết hạn trước khi gửi
+        console.log('Expiry date to save:', expiryDate);
 
         // Prepare request data
         const requestData = {
@@ -1347,7 +1375,7 @@ $(document).ready(() => {
             employee_id: employeeIdNum,
             organization: organization,
             issue_date: issueDate,
-            expiry_date: expiryDate || null,
+            expiry_date: expiryDate || null, // Nếu rỗng sẽ là null
             credential_id: credentialId || null
         };
 
@@ -1368,7 +1396,7 @@ $(document).ready(() => {
             
             if (result.success) {
                 degreesManager.showToast('Cập nhật thành công', 'success');
-                degreesManager.loadData();
+                degreesManager.loadData(); // loadData sẽ render lại bảng, formatDate sẽ hiển thị dd/mm/yyyy
             } else {
                 throw new Error(result.error || result.message || 'Lỗi không xác định');
             }
