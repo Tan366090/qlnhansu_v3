@@ -18944,3 +18944,1348 @@ Stack trace:
 [09-May-2025 09:57:51 Europe/Berlin] Database connection successful
 [09-May-2025 09:57:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
 [09-May-2025 09:57:51 Europe/Berlin] Database connection successful
+[09-May-2025 10:02:22 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:02:22 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:02:22 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:02:22 Europe/Berlin] Database connection successful
+[09-May-2025 10:02:22 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:02:22 Europe/Berlin] Database connection successful
+[09-May-2025 10:02:42 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:02:42 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:02:42 Europe/Berlin] Database connection successful
+[09-May-2025 10:02:42 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:02:42 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:02:42 Europe/Berlin] Database connection successful
+[09-May-2025 10:03:09 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:03:09 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:03:09 Europe/Berlin] Database connection successful
+[09-May-2025 10:05:04 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:05:04 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:05:04 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:05:04 Europe/Berlin] Database connection successful
+[09-May-2025 10:05:04 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:05:04 Europe/Berlin] Database connection successful
+[09-May-2025 10:05:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:05:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:05:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:05:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:05:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:05:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:11:48 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:11:48 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:11:48 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:11:48 Europe/Berlin] Database connection successful
+[09-May-2025 10:11:48 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:11:48 Europe/Berlin] Database connection successful
+[09-May-2025 10:12:11 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:12:11 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:12:11 Europe/Berlin] Database connection successful
+[09-May-2025 10:12:11 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:12:11 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:12:11 Europe/Berlin] Database connection successful
+[09-May-2025 10:16:58 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:16:58 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:16:58 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:16:58 Europe/Berlin] Database connection successful
+[09-May-2025 10:16:58 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:16:58 Europe/Berlin] Database connection successful
+[09-May-2025 10:17:07 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:17:07 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:17:07 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:17:07 Europe/Berlin] Database connection successful
+[09-May-2025 10:17:07 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:17:07 Europe/Berlin] Database connection successful
+[09-May-2025 10:17:18 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:17:18 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:17:18 Europe/Berlin] Database connection successful
+[09-May-2025 10:17:18 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:17:18 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:17:18 Europe/Berlin] Database connection successful
+[09-May-2025 10:18:43 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:18:43 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:18:43 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:18:43 Europe/Berlin] Database connection successful
+[09-May-2025 10:18:43 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:18:43 Europe/Berlin] Database connection successful
+[09-May-2025 10:20:12 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:20:12 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:20:12 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:20:12 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:20:12 Europe/Berlin] Database connection successful
+[09-May-2025 10:20:12 Europe/Berlin] Database connection successful
+[09-May-2025 10:20:18 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:20:18 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:20:18 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:20:18 Europe/Berlin] Database connection successful
+[09-May-2025 10:20:18 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:20:18 Europe/Berlin] Database connection successful
+[09-May-2025 10:22:16 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:22:16 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:22:16 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:22:16 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:22:16 Europe/Berlin] Database connection successful
+[09-May-2025 10:22:16 Europe/Berlin] Database connection successful
+[09-May-2025 10:22:35 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:22:35 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:22:35 Europe/Berlin] Database connection successful
+[09-May-2025 10:22:35 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:22:35 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:22:35 Europe/Berlin] Database connection successful
+[09-May-2025 10:26:14 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:26:14 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:26:14 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:26:14 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:26:14 Europe/Berlin] Database connection successful
+[09-May-2025 10:26:14 Europe/Berlin] Database connection successful
+[09-May-2025 10:27:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:27:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:27:03 Europe/Berlin] Database connection successful
+[09-May-2025 10:27:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:27:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:27:03 Europe/Berlin] Database connection successful
+[09-May-2025 10:27:38 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:27:38 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:27:38 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:27:38 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:27:38 Europe/Berlin] Database connection successful
+[09-May-2025 10:27:38 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:30 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:30 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:30 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:30 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:30 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:30 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:30 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:30 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:30 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:30 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:30 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:30 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:30 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:30 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:30 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:49 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:49 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:49 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:49 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:49 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:49 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:55 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:55 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:28:55 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:55 Europe/Berlin] Database connection successful
+[09-May-2025 10:28:55 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:28:55 Europe/Berlin] Database connection successful
+[09-May-2025 10:33:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:33:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:33:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:33:05 Europe/Berlin] Database connection successful
+[09-May-2025 10:33:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:33:05 Europe/Berlin] Database connection successful
+[09-May-2025 10:33:30 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:33:30 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:33:30 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:33:30 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:33:30 Europe/Berlin] Database connection successful
+[09-May-2025 10:33:30 Europe/Berlin] Database connection successful
+[09-May-2025 10:33:42 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:33:42 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:33:42 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:33:42 Europe/Berlin] Database connection successful
+[09-May-2025 10:33:42 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:33:42 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:00 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:00 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:00 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:00 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:00 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:03 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:03 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:03 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:03 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:03 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:03 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:03 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:03 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:04 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:04 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:04 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:04 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:15 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:15 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:15 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:15 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:15 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:15 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:15 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:15 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:15 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:15 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:34:15 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:34:15 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:15 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:34:15 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:34:15 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:34:15 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:15 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:15 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:15 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:15 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:15 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:34:15 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:34:15 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:34:15 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:34:15 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:34:15 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:15 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:15 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:15 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:34:15 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:34:15 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:34:15 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:34:15 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:34:20 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:20 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:20 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:20 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:20 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:20 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:50 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:50 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:50 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:56 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:56 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:56 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:56 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:56 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:56 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:56 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:56 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:56 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:56 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:34:56 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:34:56 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:34:56 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:34:56 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:34:56 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:56 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:56 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:56 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:56 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:56 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:56 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:34:56 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:34:56 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:34:56 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:34:56 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:34:56 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:56 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:56 Europe/Berlin] Database connection successful
+[09-May-2025 10:34:56 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:34:56 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:34:56 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:34:56 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:34:56 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:34:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:34:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:34:59 Europe/Berlin] Database connection successful
+[09-May-2025 10:46:02 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:46:02 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:46:02 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:46:02 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:46:02 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:46:02 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:46:02 Europe/Berlin] Database connection successful
+[09-May-2025 10:46:02 Europe/Berlin] Database connection successful
+[09-May-2025 10:46:02 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:46:02 Europe/Berlin] Database connection successful
+[09-May-2025 10:46:02 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:46:02 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:46:02 Europe/Berlin] Database connection successful
+[09-May-2025 10:46:02 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:46:02 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:46:02 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:46:02 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:46:02 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:46:02 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:46:02 Europe/Berlin] Database connection successful
+[09-May-2025 10:46:02 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:46:02 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:46:02 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:46:02 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:46:02 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:46:02 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:46:02 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:46:02 Europe/Berlin] Database connection successful
+[09-May-2025 10:46:02 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:46:02 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:46:02 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:46:02 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:46:02 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:50:50 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:50:50 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:50:50 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:50:50 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:50:50 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:50:50 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:50:50 Europe/Berlin] Database connection successful
+[09-May-2025 10:50:50 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:50:50 Europe/Berlin] Database connection successful
+[09-May-2025 10:50:50 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:50:50 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:50:50 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:50:50 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:50:50 Europe/Berlin] Database connection successful
+[09-May-2025 10:50:50 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:50:50 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:50:50 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:50:50 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:50:50 Europe/Berlin] Database connection successful
+[09-May-2025 10:50:50 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:50:50 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:50:50 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:50:50 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:50:50 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:50:50 Europe/Berlin] Database connection successful
+[09-May-2025 10:50:51 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:50:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:50:51 Europe/Berlin] Database connection successful
+[09-May-2025 10:50:51 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:50:51 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:50:51 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:50:51 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:50:51 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:55:51 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:55:51 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:55:51 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:55:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:55:51 Europe/Berlin] Database connection successful
+[09-May-2025 10:55:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:55:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:55:51 Europe/Berlin] Database connection successful
+[09-May-2025 10:55:51 Europe/Berlin] Database connection successful
+[09-May-2025 10:55:51 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:55:51 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:55:51 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:55:51 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:55:51 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:55:51 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:55:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:55:51 Europe/Berlin] Database connection successful
+[09-May-2025 10:55:51 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:55:51 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:55:51 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:55:51 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:55:51 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:55:51 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:55:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:55:51 Europe/Berlin] Database connection successful
+[09-May-2025 10:55:51 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:55:51 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:55:51 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:55:51 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:55:51 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:57:08 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:57:08 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:57:08 Europe/Berlin] Database connection successful
+[09-May-2025 10:57:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:57:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:57:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:57:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:57:21 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:57:21 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:57:21 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:57:21 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:57:21 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:57:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:57:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:57:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:57:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:57:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:57:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:57:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:57:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:57:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:57:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:57:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:57:21 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:57:21 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:57:21 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:57:21 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:57:21 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:57:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:57:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:57:21 Europe/Berlin] Database connection successful
+[09-May-2025 10:57:21 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:57:21 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:57:21 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:57:21 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:57:21 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:59:40 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:59:40 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:59:40 Europe/Berlin] Database connection successful
+[09-May-2025 10:59:40 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:59:40 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:59:40 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:59:40 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:59:40 Europe/Berlin] Database connection successful
+[09-May-2025 10:59:40 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:59:40 Europe/Berlin] Database connection successful
+[09-May-2025 10:59:40 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:59:40 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:59:40 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:59:40 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:59:40 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:59:40 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:59:40 Europe/Berlin] Database connection successful
+[09-May-2025 10:59:40 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:59:40 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:59:40 Europe/Berlin] Database connection successful
+[09-May-2025 10:59:40 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:59:40 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:59:40 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:59:40 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:59:40 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 10:59:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 10:59:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 10:59:41 Europe/Berlin] Database connection successful
+[09-May-2025 10:59:41 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 10:59:41 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 10:59:41 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 10:59:41 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 10:59:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:04:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:04:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:04:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:04:41 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:04:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:04:41 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:04:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:04:41 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:04:41 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:04:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:04:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:04:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:04:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:04:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:04:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:04:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:04:41 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:04:41 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:04:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:04:41 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:04:41 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:04:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:04:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:04:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:04:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:04:41 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:04:41 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:04:41 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:04:41 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:04:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:05:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:05:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:05:59 Europe/Berlin] Database connection successful
+[09-May-2025 11:05:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:05:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:05:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:05:59 Europe/Berlin] Database connection successful
+[09-May-2025 11:05:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:05:59 Europe/Berlin] Database connection successful
+[09-May-2025 11:05:59 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:05:59 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:05:59 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:05:59 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:05:59 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:05:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:05:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:05:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:05:59 Europe/Berlin] Database connection successful
+[09-May-2025 11:05:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:05:59 Europe/Berlin] Database connection successful
+[09-May-2025 11:05:59 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:05:59 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:05:59 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:05:59 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:05:59 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:05:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:05:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:05:59 Europe/Berlin] Database connection successful
+[09-May-2025 11:05:59 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:05:59 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:05:59 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:05:59 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:05:59 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:09:17 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:09:17 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:09:17 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:09:17 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:09:17 Europe/Berlin] Database connection successful
+[09-May-2025 11:09:17 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:09:17 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:09:17 Europe/Berlin] Database connection successful
+[09-May-2025 11:09:17 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:09:17 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:09:17 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:09:17 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:09:17 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:09:17 Europe/Berlin] Database connection successful
+[09-May-2025 11:09:17 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:09:17 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:09:17 Europe/Berlin] Database connection successful
+[09-May-2025 11:09:17 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:09:17 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:09:17 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:09:17 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:09:17 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:10:57 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:10:57 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:10:57 Europe/Berlin] Database connection successful
+[09-May-2025 11:10:57 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:10:57 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:10:57 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:10:57 Europe/Berlin] Database connection successful
+[09-May-2025 11:10:57 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:10:58 Europe/Berlin] Database connection successful
+[09-May-2025 11:10:58 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:10:58 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:10:58 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:10:58 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:10:58 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:10:58 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:10:58 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:10:58 Europe/Berlin] Database connection successful
+[09-May-2025 11:10:58 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:10:58 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:10:58 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:10:58 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:10:58 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:12:40 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:12:40 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:12:40 Europe/Berlin] Database connection successful
+[09-May-2025 11:12:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:12:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:12:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:12:41 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:12:41 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:12:41 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:12:41 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:12:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:12:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:12:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:12:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:12:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:12:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:12:41 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:12:41 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:12:41 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:12:41 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:12:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:12:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:14:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:14:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:14:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:14:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:14:00 Europe/Berlin] Database connection successful
+[09-May-2025 11:14:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:14:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:14:00 Europe/Berlin] Database connection successful
+[09-May-2025 11:14:00 Europe/Berlin] Database connection successful
+[09-May-2025 11:14:00 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:14:00 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:14:00 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:14:00 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:14:00 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:14:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:14:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:14:00 Europe/Berlin] Database connection successful
+[09-May-2025 11:14:00 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:14:00 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:14:00 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:14:00 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:14:00 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:14:25 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:14:25 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:14:25 Europe/Berlin] Database connection successful
+[09-May-2025 11:14:25 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:14:25 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:14:25 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:14:25 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:14:25 Europe/Berlin] Database connection successful
+[09-May-2025 11:14:25 Europe/Berlin] Database connection successful
+[09-May-2025 11:14:25 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:14:25 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:14:25 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:14:25 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:14:25 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:14:25 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:14:25 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:14:25 Europe/Berlin] Database connection successful
+[09-May-2025 11:14:25 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:14:25 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:14:25 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:14:25 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:14:25 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:15:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:15:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:15:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:15:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:15:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:15:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:15:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:15:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:15:05 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:15:05 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:15:05 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:15:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:15:05 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:15:05 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:15:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:15:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:15:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:15:05 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:15:05 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:15:05 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:15:05 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:15:05 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:15:51 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:15:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:15:51 Europe/Berlin] Database connection successful
+[09-May-2025 11:15:51 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:15:51 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:15:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:15:51 Europe/Berlin] Database connection successful
+[09-May-2025 11:15:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:15:51 Europe/Berlin] Database connection successful
+[09-May-2025 11:15:51 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:15:51 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:15:51 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:15:51 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:15:51 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:15:51 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:15:51 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:15:51 Europe/Berlin] Database connection successful
+[09-May-2025 11:15:51 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:15:51 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:15:51 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:15:51 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:15:51 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:16:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:21 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:21 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:21 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:21 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:23 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:23 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:23 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:23 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:23 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:23 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:23 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:23 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:23 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:23 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:16:23 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:16:23 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:16:23 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:16:23 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:16:23 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:23 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:23 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:23 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:16:23 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:16:23 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:16:23 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:16:23 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:16:26 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:26 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:26 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:26 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:26 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:26 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:26 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:16:26 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:16:26 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:16:26 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:16:26 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:16:26 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:26 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:26 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:26 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:26 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:26 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:26 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:16:26 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:16:26 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:16:26 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:16:26 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:16:34 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:34 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:34 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:34 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:34 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:34 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:34 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:34 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:34 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:34 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:16:34 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:16:34 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:16:34 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:16:34 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:16:34 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:16:34 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:16:34 Europe/Berlin] Database connection successful
+[09-May-2025 11:16:34 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:16:34 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:16:34 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:16:34 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:16:34 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:20:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:20:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:20:44 Europe/Berlin] Database connection successful
+[09-May-2025 11:20:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:20:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:20:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:20:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:20:44 Europe/Berlin] Database connection successful
+[09-May-2025 11:20:44 Europe/Berlin] Database connection successful
+[09-May-2025 11:20:44 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:20:44 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:20:44 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:20:44 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:20:44 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:20:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:20:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:20:44 Europe/Berlin] Database connection successful
+[09-May-2025 11:20:44 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:20:44 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:20:44 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:20:44 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:20:44 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:20:48 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:20:48 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:20:48 Europe/Berlin] Database connection successful
+[09-May-2025 11:20:52 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:20:52 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:20:52 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:20:52 Europe/Berlin] Database connection successful
+[09-May-2025 11:20:52 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:20:52 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:20:52 Europe/Berlin] Database connection successful
+[09-May-2025 11:20:52 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:20:52 Europe/Berlin] Database connection successful
+[09-May-2025 11:20:52 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:20:52 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:20:52 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:20:52 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:20:52 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:20:52 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:20:52 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:20:52 Europe/Berlin] Database connection successful
+[09-May-2025 11:20:52 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:20:52 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:20:52 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:20:52 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:20:52 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:22:36 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:22:36 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:22:36 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:22:36 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:22:36 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:22:36 Europe/Berlin] Database connection successful
+[09-May-2025 11:22:36 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:22:36 Europe/Berlin] Database connection successful
+[09-May-2025 11:22:36 Europe/Berlin] Database connection successful
+[09-May-2025 11:22:36 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:22:36 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:22:36 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:22:36 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:22:36 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:22:36 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:22:36 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:22:36 Europe/Berlin] Database connection successful
+[09-May-2025 11:22:36 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:22:36 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:22:36 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:22:36 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:22:36 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:27:10 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:27:10 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:27:10 Europe/Berlin] Database connection successful
+[09-May-2025 11:27:10 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:27:10 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:27:10 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:27:10 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:27:10 Europe/Berlin] Database connection successful
+[09-May-2025 11:27:10 Europe/Berlin] Database connection successful
+[09-May-2025 11:27:10 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:27:10 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:27:10 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:27:10 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:27:10 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:27:10 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:27:10 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:27:10 Europe/Berlin] Database connection successful
+[09-May-2025 11:27:10 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:27:10 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:27:10 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:27:10 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:27:10 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:27:57 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:27:57 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:27:57 Europe/Berlin] Database connection successful
+[09-May-2025 11:27:57 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:27:57 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:27:57 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:27:57 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:27:57 Europe/Berlin] Database connection successful
+[09-May-2025 11:27:57 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:27:57 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:27:57 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:27:57 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:27:57 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:27:57 Europe/Berlin] Database connection successful
+[09-May-2025 11:27:57 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:27:57 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:27:57 Europe/Berlin] Database connection successful
+[09-May-2025 11:27:57 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:27:57 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:27:57 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:27:57 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:27:57 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:32:37 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:32:37 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:32:37 Europe/Berlin] Database connection successful
+[09-May-2025 11:32:37 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:32:37 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:32:37 Europe/Berlin] Database connection successful
+[09-May-2025 11:32:37 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:32:37 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:32:37 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:32:37 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:32:37 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:32:37 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:32:37 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:32:37 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:32:37 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:32:37 Europe/Berlin] Database connection successful
+[09-May-2025 11:32:37 Europe/Berlin] Database connection successful
+[09-May-2025 11:32:37 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:32:37 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:32:37 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:32:37 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:32:37 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:35:17 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:35:17 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:35:17 Europe/Berlin] Database connection successful
+[09-May-2025 11:35:17 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:35:17 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:35:17 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:35:17 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:35:17 Europe/Berlin] Database connection successful
+[09-May-2025 11:35:17 Europe/Berlin] Database connection successful
+[09-May-2025 11:35:17 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:35:17 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:35:17 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:35:17 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:35:17 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:35:17 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:35:17 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:35:17 Europe/Berlin] Database connection successful
+[09-May-2025 11:35:17 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:35:17 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:35:17 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:35:17 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:35:17 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:40:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:41 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:40:41 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:40:41 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:40:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:41 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:40:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:40:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:41 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:41 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:41 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:41 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:40:41 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:40:41 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:40:41 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:40:41 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:40:47 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:47 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:47 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:50 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:50 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:50 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:50 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:50 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:50 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:50 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:50 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:40:50 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:50 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:40:50 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:40:50 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:40:50 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:40:50 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:50 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:50 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:50 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:50 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:40:50 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:40:50 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:40:50 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:40:50 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:40:53 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:53 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:53 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:53 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:53 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:53 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:59 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:59 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:59 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:59 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:40:59 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:40:59 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:40:59 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:40:59 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:40:59 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:40:59 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:40:59 Europe/Berlin] Database connection successful
+[09-May-2025 11:40:59 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:40:59 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:40:59 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:40:59 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:40:59 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:41:01 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:01 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:01 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:03 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:03 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:03 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:41:03 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:41:03 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:41:03 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:41:03 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:41:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:03 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:03 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:03 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:03 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:03 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:41:03 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:41:03 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:41:03 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:41:03 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:41:12 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:12 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:12 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:12 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:12 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:12 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:12 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:12 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:41:12 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:41:12 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:12 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:41:12 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:41:12 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:41:12 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:12 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:12 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:12 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:12 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:41:12 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:41:12 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:41:12 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:41:12 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:41:14 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:14 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:14 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:14 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:14 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:14 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:14 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:14 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:14 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:41:14 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:41:14 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:41:14 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:14 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:41:14 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:41:14 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:41:14 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:41:14 Europe/Berlin] Database connection successful
+[09-May-2025 11:41:14 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:41:14 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:41:14 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:41:14 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:41:14 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:42:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:42:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:42:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:42:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:42:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:42:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:42:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:42:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:42:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:42:05 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:42:05 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:42:05 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:42:05 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:42:05 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:42:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:42:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:42:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:42:05 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:42:05 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:42:05 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:42:05 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:42:05 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:42:37 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:42:37 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:42:37 Europe/Berlin] Database connection successful
+[09-May-2025 11:42:37 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:42:37 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:42:37 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:42:37 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:42:37 Europe/Berlin] Database connection successful
+[09-May-2025 11:42:37 Europe/Berlin] Database connection successful
+[09-May-2025 11:42:37 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:42:37 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:42:37 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:42:37 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:42:37 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:42:37 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:42:37 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:42:37 Europe/Berlin] Database connection successful
+[09-May-2025 11:42:37 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:42:37 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:42:37 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:42:37 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:42:37 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:43:43 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:43:43 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:43:43 Europe/Berlin] Database connection successful
+[09-May-2025 11:43:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:43:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:43:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:43:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:43:44 Europe/Berlin] Database connection successful
+[09-May-2025 11:43:44 Europe/Berlin] Database connection successful
+[09-May-2025 11:43:44 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:43:44 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:43:44 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:43:44 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:43:44 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:43:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:43:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:43:44 Europe/Berlin] Database connection successful
+[09-May-2025 11:43:44 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:43:44 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:43:44 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:43:44 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:43:44 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:45:12 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:45:12 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:45:12 Europe/Berlin] Database connection successful
+[09-May-2025 11:45:52 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:45:52 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:45:52 Europe/Berlin] Database connection successful
+[09-May-2025 11:45:52 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:45:52 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:45:52 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:45:52 Europe/Berlin] Database connection successful
+[09-May-2025 11:45:52 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:45:52 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:45:52 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:45:52 Europe/Berlin] Database connection successful
+[09-May-2025 11:45:52 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:45:52 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:45:52 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:45:52 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:45:52 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:45:52 Europe/Berlin] Database connection successful
+[09-May-2025 11:45:52 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:45:52 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:45:52 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:45:52 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:45:52 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:46:02 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:46:02 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:46:02 Europe/Berlin] Database connection successful
+[09-May-2025 11:46:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:46:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:46:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:46:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:46:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:46:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:46:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:46:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:46:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:46:05 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:46:05 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:46:05 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:46:05 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:46:05 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:46:05 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:46:05 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:46:05 Europe/Berlin] Database connection successful
+[09-May-2025 11:46:05 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:46:05 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:46:05 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:46:05 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:46:05 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:50:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:50:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:50:00 Europe/Berlin] Database connection successful
+[09-May-2025 11:50:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:50:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:50:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:50:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:50:00 Europe/Berlin] Database connection successful
+[09-May-2025 11:50:00 Europe/Berlin] Database connection successful
+[09-May-2025 11:50:00 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:50:00 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:50:00 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:50:00 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:50:00 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:50:00 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:50:00 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:50:00 Europe/Berlin] Database connection successful
+[09-May-2025 11:50:00 Europe/Berlin] Today's date: 2025-05-09
+[09-May-2025 11:50:00 Europe/Berlin] Attendance counts by status: {"present_count":0,"absent_count":0,"leave_count":0,"wfh_count":0}
+[09-May-2025 11:50:00 Europe/Berlin] Total attendance records for today: 0
+[09-May-2025 11:50:00 Europe/Berlin] General Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'e.full_name' in 'field list'
+[09-May-2025 11:50:00 Europe/Berlin] Stack trace: #0 C:\xampp\htdocs\qlnhansu_V3\backend\src\public\api\dashboard_stats.php(74): PDO->prepare()
+#1 {main}
+[09-May-2025 11:50:20 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:50:20 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:50:20 Europe/Berlin] Database connection successful
+[09-May-2025 11:50:24 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:50:24 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 11:50:24 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:50:24 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 11:50:24 Europe/Berlin] Database connection successful
+[09-May-2025 11:50:24 Europe/Berlin] Database connection successful
+[09-May-2025 12:06:44 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 12:06:44 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 12:06:44 Europe/Berlin] Database connection successful
+[09-May-2025 12:06:44 Europe/Berlin] Successfully loaded database.php and functions.php
+[09-May-2025 12:06:44 Europe/Berlin] Attempting to connect to database...
+[09-May-2025 12:06:44 Europe/Berlin] Successfully connected to database
+[09-May-2025 12:06:44 Europe/Berlin] Testing database connection...
+[09-May-2025 12:06:44 Europe/Berlin] Database connection test successful
+[09-May-2025 12:06:44 Europe/Berlin] Request Method: GET
+[09-May-2025 12:06:44 Europe/Berlin] Request URI: /qlnhansu_V3/backend/src/public/admin/api/payroll.php?page=1&limit=10&search=&department=&month=&year=
+[09-May-2025 12:06:44 Europe/Berlin] GET params: Array
+(
+    [page] => 1
+    [limit] => 10
+    [search] => 
+    [department] => 
+    [month] => 
+    [year] => 
+)
+
+[09-May-2025 12:06:44 Europe/Berlin] Path parts: Array
+(
+    [0] => qlnhansu_V3
+    [1] => backend
+    [2] => src
+    [3] => public
+    [4] => admin
+    [5] => api
+    [6] => payroll.php
+)
+
+[09-May-2025 12:06:52 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 12:06:52 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 12:06:52 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 12:06:52 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 12:06:52 Europe/Berlin] Database connection successful
+[09-May-2025 12:06:52 Europe/Berlin] Database connection successful
+[09-May-2025 12:06:57 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 12:06:57 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 12:06:57 Europe/Berlin] Database connection successful
+[09-May-2025 12:07:06 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 12:07:06 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 12:07:06 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 12:07:06 Europe/Berlin] Database connection successful
+[09-May-2025 12:07:06 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 12:07:06 Europe/Berlin] Database connection successful
+[09-May-2025 12:09:17 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 12:09:17 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 12:09:17 Europe/Berlin] Database connection successful
+[09-May-2025 12:22:12 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 12:22:12 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 12:22:12 Europe/Berlin] Database connection successful
+[09-May-2025 12:41:56 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 12:41:56 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 12:41:56 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 12:41:56 Europe/Berlin] Database connection successful
+[09-May-2025 12:41:56 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 12:41:56 Europe/Berlin] Database connection successful
+[09-May-2025 13:20:33 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 13:20:33 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 13:20:33 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 13:20:33 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 13:20:33 Europe/Berlin] Database connection successful
+[09-May-2025 13:20:33 Europe/Berlin] Database connection successful
+[09-May-2025 13:20:40 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 13:20:40 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 13:20:40 Europe/Berlin] Database connection successful
+[09-May-2025 17:08:22 Europe/Berlin] Attempting to connect to database: qlnhansu
+[09-May-2025 17:08:22 Europe/Berlin] DSN: mysql:host=localhost;dbname=qlnhansu;charset=utf8mb4
+[09-May-2025 17:08:22 Europe/Berlin] Database connection successful

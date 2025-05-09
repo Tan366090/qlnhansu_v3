@@ -1,13 +1,16 @@
-export class Dashboard {
+class Dashboard {
     constructor() {
         this.charts = {};
         this.widgets = {};
         this.stats = {};
         console.log('Dashboard initialized');
+        this.init();
     }
 
     init() {
         console.log('Initializing dashboard...');
+        this.loadCharts();
+        this.loadStats();
         this.initializeCharts();
         this.initializeWidgets();
         this.loadDashboardStats();
@@ -17,7 +20,7 @@ export class Dashboard {
     async initializeCharts() {
         try {
             console.log('Fetching chart data...');
-            const response = await fetch('../api/dashboard_charts.php');
+            const response = await fetch('api/dashboard_charts.php');
             console.log('API Response:', response);
             
             if (!response.ok) {
@@ -86,28 +89,6 @@ export class Dashboard {
                 this.renderLeaveChart(data.leaves);
             } else {
                 console.error('Leave chart canvas not found');
-            }
-        }
-
-        // Recruitment Chart
-        if (data.recruitment && data.recruitment.length > 0) {
-            const recruitmentCtx = document.getElementById('recruitmentChart');
-            console.log('Recruitment chart canvas:', recruitmentCtx);
-            if (recruitmentCtx) {
-                this.renderRecruitmentChart(data.recruitment);
-            } else {
-                console.error('Recruitment chart canvas not found');
-            }
-        }
-
-        // Training Chart
-        if (data.training && data.training.length > 0) {
-            const trainingCtx = document.getElementById('trainingChart');
-            console.log('Training chart canvas:', trainingCtx);
-            if (trainingCtx) {
-                this.renderTrainingChart(data.training);
-            } else {
-                console.error('Training chart canvas not found');
             }
         }
 
@@ -234,7 +215,7 @@ export class Dashboard {
 
     async loadDashboardStats() {
         try {
-            const response = await fetch('../api/dashboard_stats.php');
+            const response = await fetch('api/dashboard_stats.php');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -298,4 +279,10 @@ export class Dashboard {
         }
         console.error(message);
     }
-} 
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const dashboard = new Dashboard();
+    dashboard.init();
+}); 

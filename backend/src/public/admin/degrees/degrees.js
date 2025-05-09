@@ -55,6 +55,8 @@ document.head.innerHTML += `
             opacity: 0;
         }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 `;
 
 class DegreesManager {
@@ -692,6 +694,29 @@ class DegreesManager {
             </div>
         `;
 
+        // Initialize Flatpickr for date inputs
+        let issuePicker = null;
+        let expiryPicker = null;
+        if (window.flatpickr) {
+            issuePicker = flatpickr("#issueDate", {
+                dateFormat: "d/m/Y",
+                allowInput: true
+            });
+            expiryPicker = flatpickr("#expiryDate", {
+                dateFormat: "d/m/Y",
+                allowInput: true
+            });
+            // Add click event for calendar icons
+            const calendarIssue = document.getElementById('calendar-issueDate');
+            if (calendarIssue && issuePicker) {
+                calendarIssue.onclick = () => issuePicker.open();
+            }
+            const calendarExpiry = document.getElementById('calendar-expiryDate');
+            if (calendarExpiry && expiryPicker) {
+                calendarExpiry.onclick = () => expiryPicker.open();
+            }
+        }
+
         // Show/hide fields based on type
         const degreeType = document.getElementById('degreeType');
         const degreeFields = document.querySelectorAll('.degree-fields');
@@ -806,7 +831,7 @@ class DegreesManager {
             }
 
             // Send request
-            const apiUrl = '/qlnhansu_V3/backend/src/api/degrees.php?action=create';
+            const apiUrl = '/qlnhansu_V3/backend/src/public/admin/api/degrees.php?action=create';
             console.log('Sending request to:', apiUrl);
 
             try {
@@ -1223,7 +1248,33 @@ class DegreesManager {
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const year = date.getFullYear();
         
-        return `${year}-${month}-${day}`;
+        return `${day}/${month}/${year}`;
+    }
+
+    // Add new method to handle date input display
+    initializeDateInputs() {
+        const issueDateInput = document.getElementById('issueDate');
+        const expiryDateInput = document.getElementById('expiryDate');
+
+        if (issueDateInput) {
+            issueDateInput.addEventListener('change', (e) => {
+                const date = e.target.value;
+                if (date) {
+                    const formattedDate = this.formatDateForInput(date);
+                    e.target.setAttribute('data-formatted', formattedDate);
+                }
+            });
+        }
+
+        if (expiryDateInput) {
+            expiryDateInput.addEventListener('change', (e) => {
+                const date = e.target.value;
+                if (date) {
+                    const formattedDate = this.formatDateForInput(date);
+                    e.target.setAttribute('data-formatted', formattedDate);
+                }
+            });
+        }
     }
 }
 
@@ -1241,9 +1292,8 @@ function debounce(func, wait) {
 }
 
 // Initialize the manager when document is ready
-let degreesManager;
 $(document).ready(() => {
-    degreesManager = new DegreesManager();
+    window.degreesManager = new DegreesManager();
 
     // Helper function: Convert dd/mm/yyyy to yyyy-MM-dd
     function ddmmyyyyToYyyymmdd(str) {

@@ -15,6 +15,7 @@ try {
         FROM employees
     ")->fetch(PDO::FETCH_ASSOC);
 
+    /* Commented out Finance data query
     // Get finance data for 2023
     $financeData = $db->query("
         SELECT 
@@ -25,7 +26,9 @@ try {
         GROUP BY MONTH(pay_period_start)
         ORDER BY month
     ")->fetchAll(PDO::FETCH_ASSOC);
+    */
 
+    /* Commented out Training data query
     // Get training data for 2023
     $trainingData = $db->query("
         SELECT 
@@ -42,7 +45,9 @@ try {
         GROUP BY MONTH(tc.created_at)
         ORDER BY month
     ")->fetchAll(PDO::FETCH_ASSOC);
+    */
 
+    /* Commented out Recruitment data query
     // Get recruitment data for 2023
     $recruitmentData = $db->query("
         SELECT 
@@ -55,6 +60,7 @@ try {
         GROUP BY MONTH(applied_at)
         ORDER BY month
     ")->fetchAll(PDO::FETCH_ASSOC);
+    */
 
     // Get debug data
     $debugData = $db->query("
@@ -74,9 +80,11 @@ try {
         'success' => true,
         'data' => [
             'hr' => $hrData,
+            /* Commented out unused chart data
             'finance' => $financeData,
             'training' => $trainingData,
             'recruitment' => $recruitmentData,
+            */
             'debug' => $debugData
         ]
     ];

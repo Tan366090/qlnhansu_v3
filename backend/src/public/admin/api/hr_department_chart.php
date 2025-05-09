@@ -49,52 +49,22 @@ try {
         'Logistics' => '#1cc88a'     // Green
     ];
 
-    // Prepare response data
-    $departments = [];
-    foreach ($result as $row) {
-        if (!empty($row['department_name'])) {
-            $departments[] = [
-                'name' => $row['department_name'],
-                'count' => (int)$row['employee_count'],
-                'color' => $departmentColors[$row['department_name']] ?? '#858796'
-            ];
-        }
-    }
-
-    if (empty($departments)) {
-        throw new Exception("No valid department data found");
-    }
-
+    // Format the response
     $response = [
         'success' => true,
-        'data' => $departments
+        'data' => [
+            'departments' => $result,
+            'colors' => $departmentColors
+        ]
     ];
 
-    error_log("Sending response: " . json_encode($response));
     echo json_encode($response);
 
-} catch (PDOException $e) {
-    error_log("Database error in HR department chart: " . $e->getMessage());
-    http_response_code(500);
+} catch(Exception $e) {
+    error_log("Error in HR department chart API: " . $e->getMessage());
     echo json_encode([
         'success' => false,
-        'message' => 'Database error: ' . $e->getMessage(),
-        'error_details' => [
-            'code' => $e->getCode(),
-            'file' => $e->getFile(),
-            'line' => $e->getLine()
-        ]
+        'message' => $e->getMessage()
     ]);
-} catch (Exception $e) {
-    error_log("General error in HR department chart: " . $e->getMessage());
-    http_response_code(500);
-    echo json_encode([
-        'success' => false,
-        'message' => 'General error: ' . $e->getMessage(),
-        'error_details' => [
-            'code' => $e->getCode(),
-            'file' => $e->getFile(),
-            'line' => $e->getLine()
-        ]
-    ]);
-} 
+}
+?> 

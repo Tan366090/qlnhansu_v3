@@ -1,92 +1,85 @@
-export class MenuHandler {
+class MenuHandler {
     constructor() {
         this.menuItems = [];
         this.activeItem = null;
+        this.mobileMenu = null;
+        this.mobileMenuToggle = null;
+        this.init();
     }
 
-    initialize() {
+    init() {
         this.loadMenuItems();
         this.setupEventListeners();
-    }
-
-    loadMenuItems() {
-        const menuContainer = document.querySelector('.sidebar-menu');
-        if (!menuContainer) return;
-
-        this.menuItems = Array.from(menuContainer.querySelectorAll('.menu-item'));
         this.setActiveMenuItem();
     }
 
+    loadMenuItems() {
+        // Load menu items from the DOM
+        this.menuItems = Array.from(document.querySelectorAll('.nav-item'));
+        this.mobileMenu = document.querySelector('.mobile-menu');
+        this.mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    }
+
     setupEventListeners() {
+        // Add click event listeners to menu items
         this.menuItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.handleMenuItemClick(item);
-            });
+            item.addEventListener('click', (e) => this.handleMenuItemClick(e, item));
         });
 
         // Mobile menu toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => {
-                this.toggleMobileMenu();
-            });
+        if (this.mobileMenuToggle) {
+            this.mobileMenuToggle.addEventListener('click', () => this.toggleMobileMenu());
         }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (this.mobileMenu && this.mobileMenu.classList.contains('active') && 
+                !e.target.closest('.mobile-menu') && 
+                !e.target.closest('.mobile-menu-toggle')) {
+                this.mobileMenu.classList.remove('active');
+            }
+        });
     }
 
-    handleMenuItemClick(item) {
-        if (this.activeItem) {
-            this.activeItem.classList.remove('active');
-        }
-        item.classList.add('active');
-        this.activeItem = item;
-
-        // Handle submenu if exists
+    handleMenuItemClick(e, item) {
         const submenu = item.querySelector('.submenu');
         if (submenu) {
+            e.preventDefault();
             this.toggleSubmenu(submenu);
         }
-
-        // Update URL if needed
-        const href = item.getAttribute('href');
-        if (href && href !== '#') {
-            window.location.href = href;
-        }
+        this.setActiveMenuItem(item);
     }
 
     toggleSubmenu(submenu) {
-        const isOpen = submenu.style.display === 'block';
-        submenu.style.display = isOpen ? 'none' : 'block';
+        submenu.classList.toggle('active');
     }
 
     toggleMobileMenu() {
-        const sidebar = document.querySelector('.sidebar');
-        if (sidebar) {
-            sidebar.classList.toggle('mobile-open');
+        if (this.mobileMenu) {
+            this.mobileMenu.classList.toggle('active');
         }
     }
 
-    setActiveMenuItem() {
-        const currentPath = window.location.pathname;
-        const activeItem = this.menuItems.find(item => {
-            const href = item.getAttribute('href');
-            return href && currentPath.includes(href);
-        });
-
-        if (activeItem) {
-            this.handleMenuItemClick(activeItem);
+    setActiveMenuItem(item = null) {
+        if (item) {
+            this.activeItem = item;
+        } else {
+            // Set active menu item based on current URL
+            const currentPath = window.location.pathname;
+            this.menuItems.forEach(menuItem => {
+                const link = menuItem.querySelector('a');
+                if (link && currentPath.includes(link.getAttribute('href'))) {
+                    this.activeItem = menuItem;
+                    menuItem.classList.add('active');
+                } else {
+                    menuItem.classList.remove('active');
+                }
+            });
         }
     }
 }
 
 // Initialize when DOM is loaded
-if (typeof document !== 'undefined') {
-    document.addEventListener('DOMContentLoaded', () => {
-        new MenuHandler();
-    });
-}
-
-// Export for testing
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = MenuHandler;
-} 
+document.addEventListener('DOMContentLoaded', () => {
+    window.menuHandler = new MenuHandler();
+}); 
