@@ -50,7 +50,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%236366f1' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-0.895 2-2s-0.895-2-2-2-2 0.895-2 2 0.895 2 2 2zM60 91c1.105 0 2-0.895 2-2s-0.895-2-2-2-2 0.895-2 2 0.895 2 2 2zM35 41c1.105 0 2-0.895 2-2s-0.895-2-2-2-2 0.895-2 2 0.895 2 2 2zM12 60c1.105 0 2-0.895 2-2s-0.895-2-2-2-2 0.895-2 2 0.895 2 2 2z' fill='%236366f1' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
     opacity: 0.5;
     z-index: 0;
 }
@@ -167,15 +167,13 @@
     flex-direction: row-reverse;
 }
 .message-bubble {
-    max-width: 85%;
-    padding: 12px 16px;
+    max-width: 100%;
+    padding: 10px 15px;
     border-radius: 18px;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 15px;
     box-shadow: var(--shadow-sm);
     word-break: break-word;
     position: relative;
-    transition: all 0.3s ease;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
@@ -183,16 +181,11 @@
     background: #3b82f6;
     color: #fff;
     border-bottom-right-radius: 4px;
-    transform-origin: right bottom;
 }
 .message-row.bot .message-bubble {
     background: #f3f4f6;
     color: #222;
     border-bottom-left-radius: 4px;
-    transform-origin: left bottom;
-}
-.message-bubble:hover {
-    transform: scale(1.02);
 }
 .message-avatar {
     width: 32px;
@@ -204,7 +197,6 @@
     justify-content: center;
     font-size: 1.2rem;
     box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
@@ -217,9 +209,6 @@
     bottom: 0;
     background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
     border-radius: 50%;
-}
-.message-row:hover .message-avatar {
-    transform: scale(1.1) rotate(5deg);
 }
 .message-row.user .message-avatar {
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -525,10 +514,6 @@
 .message-bubble {
     position: relative;
     margin-bottom: 2px;
-    transition: all 0.2s;
-}
-.message-row:hover .message-bubble {
-    transform: translateY(-2px);
 }
 /* Dark mode adjustments */
 @media (prefers-color-scheme: dark) {
@@ -730,8 +715,6 @@ html, body {
     <div class="chat-widget-header">
         <div class="title">
             <span class="status-dot"></span>
-            <img src="chat.png" alt="Chat Icon" style="width:28px;height:28px;margin-right:8px;object-fit:cover;vertical-align:middle;"> 
-            <span>Chat QLNS</span>
         </div>
         <div class="header-actions">
             <button class="clear-btn" title="Xóa tất cả tin nhắn">
@@ -942,31 +925,12 @@ function appendMessage(message, sender) {
                         <i class="fas fa-check"></i> Đã gửi
                     </div>
                 </div>
-                <div class="message-actions">
-                    <button class="message-action-btn" onclick="setReplyTo('${messageId}', '${message.substring(0, 30)}...')" title="Reply">
-                        <i class="fas fa-reply"></i>
-                        <span>Reply</span>
-                    </button>
-                    <button class="message-action-btn" onclick="copyMessage('${messageId}')" title="Copy">
-                        <i class="fas fa-copy"></i>
-                        <span>Copy</span>
-                    </button>
-                </div>
             </div>
         </div>
     `).hide();
     
     $('#chatMessages').append(messageRow);
     messageRow.fadeIn(300);
-    
-    // Calculate and adjust message width
-    const messageWidth = messageRow.find('.message-bubble').width();
-    const actionsWidth = messageRow.find('.message-actions').width();
-    
-    if (messageWidth < actionsWidth) {
-        messageRow.find('.message-actions').css('width', messageWidth + 'px');
-    }
-    
     scrollToBottom();
 }
 
@@ -1026,12 +990,39 @@ $(document).ready(function() {
     // Clear chat functionality
     $('.clear-btn').on('click', function() {
         if(confirm('Bạn có chắc muốn xóa tất cả tin nhắn?')) {
-            // Keep only the welcome message and suggestion chips
-            const welcomeMessage = $('#chatMessages .message-row.bot').first();
-            const suggestionChips = $('#chatMessages .suggestion-chips');
+            // Clear all messages
             $('#chatMessages').empty();
+            
+            // Add welcome message back
+            const welcomeMessage = `
+                <div class="message-row bot">
+                    <div class="message-avatar"><img src="smile.png" alt="Bot" style="width:32px;height:32px;border-radius:50%;object-fit:cover;"></div>
+                    <div class="message-bubble">
+                        Xin chào! Tôi có thể giúp gì cho bạn về hệ thống quản lý nhân sự?
+                        <div class="message-status">
+                            <i class="fas fa-check"></i> Đã gửi
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add suggestion chips back
+            const suggestionChips = `
+                <div class="suggestion-chips">
+                    <button class="suggestion-chip"><span>Tổng số nhân viên</span></button>
+                    <button class="suggestion-chip"><span>Thông tin phòng ban</span></button>
+                    <button class="suggestion-chip"><span>Thống kê lương</span></button>
+                    <button class="suggestion-chip"><span>Thống kê nghỉ phép</span></button>
+                    <button class="suggestion-chip"><span>Nhân viên mới</span></button>
+                </div>
+            `;
+            
+            // Append welcome message and suggestion chips
             $('#chatMessages').append(welcomeMessage);
             $('#chatMessages').append(suggestionChips);
+            
+            // Focus input for new conversation
+            $('#userInput').focus();
         }
     });
     
@@ -1041,10 +1032,6 @@ $(document).ready(function() {
         const userInput = $('#userInput').val().trim();
         if(userInput) {
             let message = userInput;
-            if (replyingTo) {
-                message = `Replying to: ${replyingTo.content}\n\n${userInput}`;
-                cancelReply();
-            }
             
             appendMessage(message, 'user');
             $('#userInput').val('');
@@ -1056,8 +1043,7 @@ $(document).ready(function() {
                 url: 'process_chat.php',
                 method: 'POST',
                 data: { 
-                    message: userInput,
-                    replyTo: replyingTo ? replyingTo.id : null
+                    message: userInput
                 },
                 success: function(response) {
                     setTimeout(function() {
@@ -1072,12 +1058,14 @@ $(document).ready(function() {
             });
         }
     });
-    // Gợi ý nhanh
-    $('.suggestion-chip').on('click', function() {
+    
+    // Gợi ý nhanh - Sử dụng event delegation
+    $(document).on('click', '.suggestion-chip', function() {
         const text = $(this).text();
         $('#userInput').val(text);
         $('#chatForm').submit();
     });
+    
     // Đóng chat nếu click nút X (gửi message cho parent window)
     window.addEventListener('message', function(event) {
         if(event.data === 'closeChatModal') {
@@ -1086,6 +1074,7 @@ $(document).ready(function() {
             }
         }
     });
+    
     // Focus input khi load
     $('#userInput').focus();
 });
