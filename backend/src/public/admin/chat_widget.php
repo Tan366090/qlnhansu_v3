@@ -18,10 +18,13 @@
     --gradient-primary: linear-gradient(135deg, #6366f1, #4f46e5);
     --gradient-secondary: linear-gradient(135deg, #8b5cf6, #6366f1);
 }
+
+/* Updated chat widget size */
 .chat-widget-box {
     width: 100%;
-    height: 100%;
-    margin: 0;
+    height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-lg);
     background: #fff;
@@ -54,10 +57,12 @@
     opacity: 0.5;
     z-index: 0;
 }
+
+/* Updated header size */
 .chat-widget-header {
     background: linear-gradient(90deg, #36d1c4 0%, #5b6eff 50%, #a66cff 100%);
     color: #fff;
-    padding: 16px 20px;
+    padding: 12px 16px; /* Reduced padding */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -66,6 +71,7 @@
     z-index: 1;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    font-size: 0.95rem; /* Smaller font size */
 }
 .chat-widget-header .title {
     font-size: 1.1rem;
@@ -118,15 +124,17 @@
     background: rgba(255,255,255,0.2);
     transform: rotate(90deg);
 }
+
+/* Updated messages area */
 .chat-widget-messages {
     flex: 1;
     overflow-y: auto;
-    padding: 18px 16px 8px 16px;
+    padding: 16px 12px 8px 12px; /* Reduced padding */
     background: url('background_Chat.jpg') center center repeat;
     background-size: cover;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 12px; /* Reduced gap */
     scroll-behavior: smooth;
     position: relative;
     z-index: 1;
@@ -167,10 +175,10 @@
     flex-direction: row-reverse;
 }
 .message-bubble {
-    max-width: 100%;
-    padding: 10px 15px;
+    padding: 10px 16px; /* Reduced padding */
+    font-size: 0.95rem; /* Smaller font size */
+    max-width: 100%; /* Increased max-width */
     border-radius: 18px;
-    font-size: 15px;
     box-shadow: var(--shadow-sm);
     word-break: break-word;
     position: relative;
@@ -188,14 +196,14 @@
     border-bottom-left-radius: 4px;
 }
 .message-avatar {
-    width: 32px;
-    height: 32px;
+    width: 32px; /* Reduced size */
+    height: 32px; /* Reduced size */
     border-radius: 50%;
     background: var(--gradient-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Smaller font size */
     box-shadow: var(--shadow-sm);
     position: relative;
     overflow: hidden;
@@ -214,23 +222,25 @@
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: #fff;
 }
+
+/* Updated suggestion chips */
 .suggestion-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin: 8px 0 0 0;
-    padding: 0 40px;
+    gap: 8px; /* Reduced gap */
+    margin: 8px 0; /* Reduced margin */
+    padding: 0 40px; /* Reduced padding */
     justify-content: flex-start;
 }
 .suggestion-chip {
     flex: 0 1 auto;
-    min-width: 120px;
-    max-width: 200px;
+    min-width: 140px; /* Reduced min-width */
+    max-width: 180px;
     background: var(--suggest-bg);
     color: #222;
-    padding: 8px 16px;
-    border-radius: 16px;
-    font-size: 0.95em;
+    padding: 8px 16px; /* Reduced padding */
+    border-radius: 12px; /* Reduced border radius */
+    font-size: 0.9rem; /* Smaller font size */
     cursor: pointer;
     border: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -269,16 +279,17 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 8px 0 0 40px;
+    margin: 4px 0 0 32px; /* Reduced margin */
     animation: fadeIn 0.3s ease;
+    font-size: 0.85rem; /* Smaller font size */
 }
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 .typing-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px; /* Reduced size */
+    height: 6px; /* Reduced size */
     background: #a5b4fc;
     border-radius: 50%;
     display: inline-block;
@@ -290,8 +301,10 @@
     0%, 80%, 100% { transform: scale(0.7); opacity: 0.7; }
     40% { transform: scale(1.2); opacity: 1; }
 }
+
+/* Updated input area */
 .chat-widget-input {
-    padding: 14px 16px;
+    padding: 12px 16px; /* Reduced padding */
     background: rgba(255, 255, 255, 0.9);
     border-top: 1px solid #e5e7eb;
     display: flex;
@@ -311,11 +324,11 @@
 }
 .chat-widget-input input {
     flex: 1;
-    border-radius: 20px;
+    border-radius: 20px; /* Reduced border radius */
     border: 1px solid #d1d5db;
-    padding: 10px 16px;
+    padding: 10px 16px; /* Reduced padding */
     padding-right: 40px;
-    font-size: 1rem;
+    font-size: 0.95rem; /* Smaller font size */
     outline: none;
     transition: all 0.3s ease;
     background: rgba(249, 250, 251, 0.8);
@@ -351,12 +364,12 @@
     color: #fff;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 40px; /* Reduced size */
+    height: 40px; /* Reduced size */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Smaller icon */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--shadow-sm);
     position: relative;
@@ -441,9 +454,9 @@
 /* Message actions - Improved positioning */
 .message-actions {
     display: none;
-    gap: 8px;
-    margin-top: 4px;
-    padding: 4px 8px;
+    gap: 6px; /* Reduced gap */
+    margin-top: 2px; /* Reduced margin */
+    padding: 3px 6px; /* Reduced padding */
     border-radius: 12px;
     background: rgba(0,0,0,0.03);
     width: fit-content;
@@ -459,13 +472,13 @@
     transform: translateY(0);
 }
 .message-action-btn {
-    padding: 6px 12px;
+    padding: 4px 8px; /* Reduced padding */
     border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 6px;
     color: #666;
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Smaller font size */
     transition: all 0.2s;
     background: transparent;
     border: none;
@@ -554,11 +567,12 @@
 .code-block {
     background: #1e293b;
     color: #e2e8f0;
-    padding: 12px;
+    padding: 8px; /* Reduced padding */
     border-radius: 8px;
     font-family: monospace;
     margin: 8px 0;
     position: relative;
+    font-size: 0.9rem; /* Smaller font size */
 }
 .code-block .copy-btn {
     position: absolute;
@@ -567,9 +581,9 @@
     background: rgba(255,255,255,0.1);
     border: none;
     color: #e2e8f0;
-    padding: 4px 8px;
+    padding: 3px 6px; /* Reduced padding */
     border-radius: 4px;
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* Smaller font size */
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -578,9 +592,9 @@
 }
 /* Message Status */
 .message-status {
-    font-size: 0.75rem;
+    font-size: 0.7rem; /* Smaller font size */
     color: #6b7280;
-    margin-top: 4px;
+    margin-top: 2px; /* Reduced margin */
     display: flex;
     align-items: center;
     gap: 4px;
@@ -606,19 +620,29 @@
     }
     
     .chat-widget-header {
-        padding: 12px 10px;
+        padding: 10px 14px;
     }
     
     .chat-widget-messages {
-        padding: 10px 6px 4px 6px;
+        padding: 12px 10px 6px 10px;
     }
     
     .chat-widget-input {
-        padding: 8px 6px;
+        padding: 10px 14px;
     }
     
     .suggestion-chips {
-        padding: 0 20px;
+        padding: 0 16px;
+    }
+    
+    .message-bubble {
+        font-size: 0.9rem;
+        padding: 8px 14px;
+    }
+    
+    .suggestion-chip {
+        font-size: 0.85rem;
+        padding: 6px 12px;
     }
 }
 /* Ensure the chat container takes full height of its parent */
@@ -688,11 +712,11 @@ html, body {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 12px;
+    padding: 6px 10px; /* Reduced padding */
     background: var(--primary-light);
     border-radius: 8px;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
+    margin-bottom: 6px; /* Reduced margin */
+    font-size: 0.85rem; /* Smaller font size */
 }
 
 .reply-preview .reply-content {
@@ -709,6 +733,348 @@ html, body {
 
 .reply-preview .cancel-reply:hover {
     background: rgba(0,0,0,0.05);
+}
+
+/* Statistics Table */
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    table-layout: fixed;
+}
+
+.stats-table th,
+.stats-table td {
+    padding: 12px; /* Reduced padding */
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    font-size: 0.95rem; /* Smaller font size */
+}
+
+.stats-table th {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Column widths */
+.stats-table th:nth-child(1), /* Phòng ban */
+.stats-table td:nth-child(1) {
+    width: 25%;
+}
+
+.stats-table th:nth-child(2), /* Số NV */
+.stats-table td:nth-child(2) {
+    width: 10%;
+}
+
+.stats-table th:nth-child(3), /* Lương TB */
+.stats-table td:nth-child(3) {
+    width: 15%;
+}
+
+.stats-table th:nth-child(4), /* Lương thấp nhất */
+.stats-table td:nth-child(4) {
+    width: 15%;
+}
+
+.stats-table th:nth-child(5), /* Lương cao nhất */
+.stats-table td:nth-child(5) {
+    width: 15%;
+}
+
+.stats-table th:nth-child(6), /* Tổng lương */
+.stats-table td:nth-child(6) {
+    width: 20%;
+}
+
+.stats-table tr:last-child td {
+    border-bottom: none;
+}
+
+.stats-table tr:hover td {
+    background: var(--primary-light);
+}
+
+.stats-table .highlight {
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+.stats-table .number {
+    text-align: right;
+    font-family: 'Roboto Mono', monospace;
+    white-space: nowrap;
+}
+
+.stats-table .status {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Responsive table */
+@media screen and (max-width: 768px) {
+    .stats-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .stats-table th,
+    .stats-table td {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+    
+    .stats-table .number {
+        font-size: 0.85em;
+    }
+}
+
+/* Text truncation for long content */
+.stats-table td {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+/* Hover effect to show full content */
+.stats-table td:hover {
+    white-space: normal;
+    overflow: visible;
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Status colors */
+.stats-table .status.approved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.stats-table .status.pending {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.stats-table .status.rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.stats-table .status.cancelled {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+/* Empty state styling */
+.stats-table tr.no-data td {
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Loading state */
+.stats-table.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.stats-table.loading::after {
+    content: 'Đang tải...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* New Components Styling */
+.employee-details,
+.salary-history,
+.bonuses-list,
+.org-structure,
+.training-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 8px 0;
+}
+
+.employee-card,
+.salary-record,
+.bonus-item,
+.department-card,
+.training-record {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px; /* Reduced padding */
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+    margin-bottom: 16px; /* Reduced margin */
+}
+
+.employee-card:hover,
+.salary-record:hover,
+.bonus-item:hover,
+.department-card:hover,
+.training-record:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.employee-card h3,
+.salary-record h3,
+.bonus-item h3,
+.department-card h3,
+.training-record h3 {
+    color: var(--primary-dark);
+    margin: 0 0 12px 0; /* Reduced margin */
+    font-size: 1.1rem; /* Smaller font size */
+    font-weight: 600;
+}
+
+.employee-card p,
+.salary-record p,
+.bonus-item p,
+.department-card p,
+.training-record p {
+    margin: 8px 0; /* Reduced margin */
+    color: #4b5563;
+    font-size: 0.95rem; /* Smaller font size */
+    line-height: 1.5;
+}
+
+.employee-card strong,
+.salary-record strong,
+.bonus-item strong,
+.department-card strong,
+.training-record strong {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 3px 6px; /* Reduced padding */
+    border-radius: 12px;
+    font-size: 0.8rem; /* Smaller font size */
+    font-weight: 500;
+    margin-left: 8px;
+}
+
+.status-badge.approved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-badge.pending {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.status-badge.rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.status-badge.cancelled {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .employee-card,
+    .salary-record,
+    .bonus-item,
+    .department-card,
+    .training-record {
+        padding: 12px;
+    }
+
+    .employee-card h3,
+    .salary-record h3,
+    .bonus-item h3,
+    .department-card h3,
+    .training-record h3 {
+        font-size: 1rem;
+    }
+
+    .employee-card p,
+    .salary-record p,
+    .bonus-item p,
+    .department-card p,
+    .training-record p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Updated stats table */
+.stats-table th,
+.stats-table td {
+    padding: 12px; /* Reduced padding */
+    font-size: 0.95rem; /* Smaller font size */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .chat-widget-box {
+        max-width: 100%;
+        height: 100vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .chat-widget-box {
+        border-radius: 0;
+    }
+    
+    .chat-widget-header {
+        padding: 10px 14px;
+    }
+    
+    .chat-widget-messages {
+        padding: 12px 10px 6px 10px;
+    }
+    
+    .chat-widget-input {
+        padding: 10px 14px;
+    }
+    
+    .suggestion-chips {
+        padding: 0 16px;
+    }
+    
+    .message-bubble {
+        font-size: 0.9rem;
+        padding: 8px 14px;
+    }
+    
+    .suggestion-chip {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
 }
 </style>
 <div class="chat-widget-box">
@@ -741,6 +1107,11 @@ html, body {
             <button class="suggestion-chip"><span>Thống kê lương</span></button>
             <button class="suggestion-chip"><span>Thống kê nghỉ phép</span></button>
             <button class="suggestion-chip"><span>Nhân viên mới</span></button>
+            <button class="suggestion-chip"><span>Thông tin chi tiết nhân viên</span></button>
+            <button class="suggestion-chip"><span>Lịch sử lương</span></button>
+            <button class="suggestion-chip"><span>Thưởng và phúc lợi</span></button>
+            <button class="suggestion-chip"><span>Cơ cấu tổ chức</span></button>
+            <button class="suggestion-chip"><span>Thông tin đào tạo</span></button>
         </div>
     </div>
     <div class="typing-indicator" id="typingIndicator" style="display:none;">
@@ -834,8 +1205,175 @@ $(document).on('click', '.remove-file', function() {
     $(this).closest('.file-preview').remove();
 });
 
+// Add new message handling functions
+function handleEmployeeDetails(data) {
+    let message = '<div class="employee-details">';
+    data.forEach(employee => {
+        message += `
+            <div class="employee-card">
+                <h3>${employee.name}</h3>
+                <p><strong>Email:</strong> ${employee.email}</p>
+                <p><strong>Phone:</strong> ${employee.phone}</p>
+                <p><strong>Mã nhân viên:</strong> ${employee.employee_code}</p>
+                <p><strong>Phòng ban:</strong> ${employee.department_name}</p>
+                <p><strong>Chức vụ:</strong> ${employee.position_name}</p>
+                <p><strong>Ngày sinh:</strong> ${employee.date_of_birth}</p>
+                <p><strong>Giới tính:</strong> ${employee.gender}</p>
+                <p><strong>Địa chỉ thường trú:</strong> ${employee.permanent_address}</p>
+                <p><strong>Địa chỉ hiện tại:</strong> ${employee.current_address}</p>
+                <p><strong>Người liên hệ khẩn cấp:</strong> ${employee.emergency_contact_name}</p>
+                <p><strong>Số điện thoại liên hệ khẩn cấp:</strong> ${employee.emergency_contact_phone}</p>
+                <p><strong>Loại hợp đồng:</strong> ${employee.contract_type}</p>
+                <p><strong>Ngày bắt đầu hợp đồng:</strong> ${employee.contract_start_date}</p>
+                <p><strong>Ngày kết thúc hợp đồng:</strong> ${employee.contract_end_date}</p>
+                <p><strong>Lương cơ bản:</strong> ${employee.base_salary}</p>
+            </div>
+        `;
+    });
+    message += '</div>';
+    return message;
+}
+
+function handleSalaryHistory(data) {
+    let message = '<div class="salary-history">';
+    data.forEach(record => {
+        message += `
+            <div class="salary-record">
+                <h3>${record.employee_name}</h3>
+                <p><strong>Ngày hiệu lực:</strong> ${record.effective_date}</p>
+                <p><strong>Lương cũ:</strong> ${record.previous_salary}</p>
+                <p><strong>Lương mới:</strong> ${record.new_salary}</p>
+                <p><strong>Lý do:</strong> ${record.reason}</p>
+                <p><strong>Ngày tạo:</strong> ${record.created_at}</p>
+            </div>
+        `;
+    });
+    message += '</div>';
+    return message;
+}
+
+function handleBonuses(data) {
+    let message = '<div class="bonuses-list">';
+    data.forEach(bonus => {
+        message += `
+            <div class="bonus-item">
+                <h3>${bonus.employee_name}</h3>
+                <p><strong>Loại thưởng:</strong> ${bonus.bonus_type}</p>
+                <p><strong>Số tiền:</strong> ${bonus.amount}</p>
+                <p><strong>Ngày hiệu lực:</strong> ${bonus.effective_date}</p>
+                <p><strong>Lý do:</strong> ${bonus.reason}</p>
+                <p><strong>Trạng thái:</strong> ${bonus.status}</p>
+            </div>
+        `;
+    });
+    message += '</div>';
+    return message;
+}
+
+function handleOrganizationStructure(data) {
+    let message = '<div class="org-structure">';
+    data.forEach(dept => {
+        message += `
+            <div class="department-card">
+                <h3>${dept.department_name}</h3>
+                <p><strong>Mô tả:</strong> ${dept.description}</p>
+                <p><strong>Số nhân viên:</strong> ${dept.employee_count}</p>
+                <p><strong>Trưởng phòng:</strong> ${dept.manager_name}</p>
+                <p><strong>Phòng ban cha:</strong> ${dept.parent_department}</p>
+            </div>
+        `;
+    });
+    message += '</div>';
+    return message;
+}
+
+function handleTrainingInfo(data) {
+    let message = '<div class="training-info">';
+    data.forEach(record => {
+        message += `
+            <div class="training-record">
+                <h3>${record.employee_name}</h3>
+                <p><strong>Khóa học:</strong> ${record.course_name}</p>
+                <p><strong>Ngày đăng ký:</strong> ${record.registration_date}</p>
+                <p><strong>Trạng thái:</strong> ${record.course_status}</p>
+                <p><strong>Ngày hoàn thành:</strong> ${record.completion_date}</p>
+                <p><strong>Điểm số:</strong> ${record.score}</p>
+                <p><strong>Chứng chỉ:</strong> ${record.certificate_name}</p>
+                <p><strong>Tổ chức cấp:</strong> ${record.issuing_organization}</p>
+                <p><strong>Ngày cấp:</strong> ${record.issue_date}</p>
+                <p><strong>Ngày hết hạn:</strong> ${record.expiry_date}</p>
+            </div>
+        `;
+    });
+    message += '</div>';
+    return message;
+}
+
 // Enhanced message formatting with markdown support
 function formatMessage(message) {
+    // Handle JSON responses for new queries
+    if (typeof message === 'object' || (typeof message === 'string' && message.startsWith('{'))) {
+        try {
+            const data = typeof message === 'string' ? JSON.parse(message) : message;
+            if (data.type === 'employee_details') {
+                return handleEmployeeDetails(data.data);
+            } else if (data.type === 'salary_history') {
+                return handleSalaryHistory(data.data);
+            } else if (data.type === 'bonuses') {
+                return handleBonuses(data.data);
+            } else if (data.type === 'org_structure') {
+                return handleOrganizationStructure(data.data);
+            } else if (data.type === 'training_info') {
+                return handleTrainingInfo(data.data);
+            }
+        } catch (e) {
+            console.error('Error parsing JSON response:', e);
+            return message; // Return original message if parsing fails
+        }
+    }
+
+    // Ensure message is a string before using string methods
+    if (typeof message !== 'string') {
+        message = String(message);
+    }
+
+    // Handle statistics tables
+    message = message.replace(/\[TABLE\]([\s\S]*?)\[\/TABLE\]/g, function(match, tableData) {
+        try {
+            const data = JSON.parse(tableData);
+            let html = '<table class="stats-table">';
+            
+            // Add headers
+            if (data.headers) {
+                html += '<thead><tr>';
+                data.headers.forEach(header => {
+                    html += `<th>${header}</th>`;
+                });
+                html += '</tr></thead>';
+            }
+            
+            // Add rows
+            if (data.rows) {
+                html += '<tbody>';
+                data.rows.forEach(row => {
+                    html += '<tr>';
+                    row.forEach((cell, index) => {
+                        const cellClass = data.cellClasses && data.cellClasses[index] ? data.cellClasses[index] : '';
+                        html += `<td class="${cellClass}">${cell}</td>`;
+                    });
+                    html += '</tr>';
+                });
+                html += '</tbody>';
+            }
+            
+            html += '</table>';
+            return html;
+        } catch (e) {
+            console.error('Error parsing table data:', e);
+            return match;
+        }
+    });
+    
     // Handle code blocks with syntax highlighting
     message = message.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
         return formatCodeBlock(code.trim(), lang);
@@ -1014,6 +1552,11 @@ $(document).ready(function() {
                     <button class="suggestion-chip"><span>Thống kê lương</span></button>
                     <button class="suggestion-chip"><span>Thống kê nghỉ phép</span></button>
                     <button class="suggestion-chip"><span>Nhân viên mới</span></button>
+                    <button class="suggestion-chip"><span>Thông tin chi tiết nhân viên</span></button>
+                    <button class="suggestion-chip"><span>Lịch sử lương</span></button>
+                    <button class="suggestion-chip"><span>Thưởng và phúc lợi</span></button>
+                    <button class="suggestion-chip"><span>Cơ cấu tổ chức</span></button>
+                    <button class="suggestion-chip"><span>Thông tin đào tạo</span></button>
                 </div>
             `;
             
@@ -1045,15 +1588,48 @@ $(document).ready(function() {
                 data: { 
                     message: userInput
                 },
+                dataType: 'json',
                 success: function(response) {
                     setTimeout(function() {
                         $('#typingIndicator').hide();
-                        appendMessage(response, 'bot');
+                        try {
+                            if (typeof response === 'string') {
+                                response = JSON.parse(response);
+                            }
+                            
+                            if (response && response.success) {
+                                appendMessage(response.response || 'Không có phản hồi', 'bot');
+                            } else {
+                                const errorMsg = response && response.error ? response.error : 'Vui lòng thử lại sau.';
+                                console.error('Chat error:', errorMsg);
+                                appendMessage('Xin lỗi, đã có lỗi xảy ra: ' + errorMsg, 'bot');
+                            }
+                        } catch (e) {
+                            console.error('Parse error:', e);
+                            appendMessage('Xin lỗi, đã có lỗi xảy ra khi xử lý phản hồi. Vui lòng thử lại sau.', 'bot');
+                        }
                     }, 600);
                 },
-                error: function() {
+                error: function(xhr, status, error) {
                     $('#typingIndicator').hide();
-                    appendMessage('Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau.', 'bot');
+                    let errorMessage = 'Xin lỗi, đã có lỗi xảy ra khi kết nối với server.';
+                    
+                    try {
+                        const response = xhr.responseText ? JSON.parse(xhr.responseText) : null;
+                        if (response && response.error) {
+                            errorMessage += ' Chi tiết: ' + response.error;
+                        }
+                    } catch (e) {
+                        console.error('Error parsing response:', e);
+                    }
+                    
+                    console.error('Chat error:', {
+                        status: status,
+                        error: error,
+                        response: xhr.responseText
+                    });
+                    
+                    appendMessage(errorMessage, 'bot');
                 }
             });
         }

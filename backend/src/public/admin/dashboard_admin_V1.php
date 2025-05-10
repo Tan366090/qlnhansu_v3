@@ -194,10 +194,10 @@
 
 <!-- Chat Modal -->
 <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" style="max-width: 900px; margin: 1.75rem auto;">
+    <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 1200px; margin: 1.75rem auto; max-height: 98vh;">
         <div class="modal-content" style="background: transparent; border: none; box-shadow: none;">
             <div class="modal-body p-0" style="background: transparent;">
-                <iframe src="chat_widget.php" style="width: 100%; height: 600px; border: none; border-radius: 16px; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);"></iframe>
+                <iframe src="chat_widget.php" style="width: 100%; height: 800px; max-height: 90vh; border: none; border-radius: 16px; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);"></iframe>
             </div>
         </div>
     </div>

@@ -654,7 +654,7 @@ class ChatEngine {
                 'success' => true,
                 'response' => "Hiện tại có " . $data['total'] . " nhân viên trong công ty.",
                 'relevant_data' => [
-                    'employees' => [$data]
+                    'employees' => $data
                 ],
                 'context' => [
                     'time' => [],

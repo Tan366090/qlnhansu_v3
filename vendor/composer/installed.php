@@ -3,7 +3,7 @@
         'name' => 'qlnhansu/v2',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'f962d9d1a81ce4dfc5dff5b100300cb3661e01ac',
+        'reference' => '4eb701818e5837c56978bfae080924d720b33344',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -412,7 +412,7 @@
         'qlnhansu/v2' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'f962d9d1a81ce4dfc5dff5b100300cb3661e01ac',
+            'reference' => '4eb701818e5837c56978bfae080924d720b33344',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

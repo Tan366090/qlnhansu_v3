@@ -18,8 +18,8 @@
     },
     "require-dev": {
         "codeigniter4/codeigniter4-standard": "^1.0",
-        "phpunit/phpunit": "^9.0",
-        "fakerphp/faker": "^1.9"
+        "fakerphp/faker": "^1.9",
+        "phpunit/phpunit": "^9.6"
     },
     "autoload": {
         "psr-4": {
