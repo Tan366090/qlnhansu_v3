@@ -190,11 +190,161 @@
     color: #fff;
     border-bottom-right-radius: 4px;
 }
-.message-row.bot .message-bubble {
-    background: #f3f4f6;
+.message-row.bot .message-bubble {                                                                                                                                                                      
+    background: #fff;
     color: #222;
     border-bottom-left-radius: 4px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
 }
+.message-row.bot .message-bubble::before {
+    display: none;
+}
+
+/* Format cho các loại nội dung khác nhau */
+.message-row.bot .message-bubble .content-section {
+    margin-bottom: 12px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.message-row.bot .message-bubble .content-section:last-child {
+    margin-bottom: 0;
+}
+
+.message-row.bot .message-bubble .content-title {
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.message-row.bot .message-bubble .content-title i {
+    color: var(--primary);
+}
+
+.message-row.bot .message-bubble .content-body {
+    color: #4b5563;
+    line-height: 1.5;
+}
+
+.message-row.bot .message-bubble .content-footer {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 0.85rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Format cho code blocks */
+.message-row.bot .message-bubble .code-block {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: monospace;
+    margin: 8px 0;
+    position: relative;
+    overflow-x: auto;
+}
+
+/* Format cho tables */
+.message-row.bot .message-bubble .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.message-row.bot .message-bubble .info-table th,
+.message-row.bot .message-bubble .info-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.message-row.bot .message-bubble .info-table th {
+    background: #f8fafc;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+/* Format cho lists */
+.message-row.bot .message-bubble .info-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+}
+
+.message-row.bot .message-bubble .info-list li {
+    padding: 8px 12px;
+    margin-bottom: 4px;
+    background: #f8fafc;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.message-row.bot .message-bubble .info-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* Format cho highlights */
+.message-row.bot .message-bubble .highlight {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* Format cho tags */
+.message-row.bot .message-bubble .tag {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #e0e7ff;
+    color: var(--primary-dark);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin: 2px;
+}
+
+/* Format cho buttons */
+.message-row.bot .message-bubble .action-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.message-row.bot .message-bubble .action-button {
+    padding: 6px 12px;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.message-row.bot .message-bubble .action-button:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
 .message-avatar {
     width: 32px; /* Reduced size */
     height: 32px; /* Reduced size */
@@ -1076,6 +1226,145 @@ html, body {
         padding: 6px 12px;
     }
 }
+
+.content-section {
+    background: #fff;
+    border-radius: 8px;
+    margin: 8px 0;
+    overflow: hidden;
+}
+
+.content-body {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+.content-footer {
+    padding: 8px 16px;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.department-info {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.department-info:last-child {
+    border-bottom: none;
+}
+
+.content-body ul {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.content-body li {
+    margin: 4px 0;
+}
+
+.content-body strong {
+    color: #2c3e50;
+}
+
+.content-body small {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.content-title {
+    padding: 12px 16px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.content-title i {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-item i {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+}
+
+.text-success { color: #28a745; }
+.text-primary { color: #007bff; }
+.text-warning { color: #ffc107; }
+.text-danger { color: #dc3545; }
+
+.department-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.department-info i {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.employee-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.employee-info i {
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin-top: 4px;
+}
+
+.employee-info small {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.content-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.content-footer i {
+    color: #ffc107;
+}
 </style>
 <div class="chat-widget-box">
     <div class="chat-widget-header">
@@ -1315,35 +1604,179 @@ function formatMessage(message) {
     if (typeof message === 'object' || (typeof message === 'string' && message.startsWith('{'))) {
         try {
             const data = typeof message === 'string' ? JSON.parse(message) : message;
-            if (data.type === 'employee_details') {
-                return handleEmployeeDetails(data.data);
-            } else if (data.type === 'salary_history') {
-                return handleSalaryHistory(data.data);
-            } else if (data.type === 'bonuses') {
-                return handleBonuses(data.data);
-            } else if (data.type === 'org_structure') {
-                return handleOrganizationStructure(data.data);
-            } else if (data.type === 'training_info') {
-                return handleTrainingInfo(data.data);
+            let formattedMessage = '';
+            
+            // Format based on response type
+            if (data.type === 'employee_count') {
+                formattedMessage = `
+                    <div class="content-section">
+                        <div class="content-title">
+                            <i class="fas fa-users"></i> Thống kê nhân viên
+                        </div>
+                        <div class="content-body">
+                            <div class="stat-item">
+                                <i class="fas fa-user-check text-success"></i>
+                                Tổng số nhân viên của tháng này là <strong>${data.total}</strong> người
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-user-clock text-primary"></i>
+                                Trong đó có <strong>${data.active_count}</strong> nhân viên đang làm việc
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-user-clock text-warning"></i>
+                                <strong>${data.on_leave_count}</strong> người đang nghỉ phép
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-user-times text-danger"></i>
+                                <strong>${data.inactive_count}</strong> người đã nghỉ việc
+                            </div>
+                        </div>
+                        <div class="content-footer">
+                            <i class="fas fa-lightbulb"></i>
+                            Bạn có muốn xem thêm thông tin chi tiết về nhân viên không?
+                        </div>
+                    </div>
+                `;
+            } else if (data.type === 'department_info') {
+                formattedMessage = `
+                    <div class="content-section">
+                        <div class="content-title">
+                            <i class="fas fa-building"></i> Thông tin phòng ban
+                        </div>
+                        <div class="content-body">
+                            ${data.departments.map(dept => `
+                                <div class="department-info">
+                                    <i class="fas fa-door-open"></i>
+                                    <strong>${dept.name}</strong>: ${dept.employee_count} nhân viên
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="content-footer">
+                            <i class="fas fa-lightbulb"></i>
+                            Bạn muốn xem thông tin chi tiết về phòng ban nào?
+                        </div>
+                    </div>
+                `;
+            } else if (data.type === 'salary_stats') {
+                formattedMessage = `
+                    <div class="content-section">
+                        <div class="content-title">
+                            <i class="fas fa-money-bill-wave"></i> Thống kê lương
+                        </div>
+                        <div class="content-body">
+                            <div class="stat-item">
+                                <i class="fas fa-calculator text-primary"></i>
+                                Lương trung bình: <strong>${data.avg_salary}</strong>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-arrow-up text-success"></i>
+                                Lương cao nhất: <strong>${data.max_salary}</strong>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-arrow-down text-danger"></i>
+                                Lương thấp nhất: <strong>${data.min_salary}</strong>
+                            </div>
+                        </div>
+                        <div class="content-footer">
+                            <i class="fas fa-lightbulb"></i>
+                            Bạn có muốn xem thống kê chi tiết theo phòng ban không?
+                        </div>
+                    </div>
+                `;
+            } else if (data.type === 'leave_stats') {
+                formattedMessage = `
+                    <div class="content-section">
+                        <div class="content-title">
+                            <i class="fas fa-calendar-alt"></i> Thống kê nghỉ phép
+                        </div>
+                        <div class="content-body">
+                            <div class="stat-item">
+                                <i class="fas fa-file-alt text-primary"></i>
+                                Tổng số đơn: <strong>${data.total}</strong>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-check-circle text-success"></i>
+                                Đã duyệt: <strong>${data.approved}</strong>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-clock text-warning"></i>
+                                Đang chờ: <strong>${data.pending}</strong>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-times-circle text-danger"></i>
+                                Đã từ chối: <strong>${data.rejected}</strong>
+                            </div>
+                        </div>
+                        <div class="content-footer">
+                            <i class="fas fa-lightbulb"></i>
+                            Bạn muốn xem danh sách nhân viên đang nghỉ phép không?
+                        </div>
+                    </div>
+                `;
+            } else if (data.type === 'new_employees') {
+                formattedMessage = `
+                    <div class="content-section">
+                        <div class="content-title">
+                            <i class="fas fa-user-plus"></i> Danh sách nhân viên mới
+                        </div>
+                        <div class="content-body">
+                            ${data.employees.map(emp => `
+                                <div class="employee-info">
+                                    <i class="fas fa-user-circle"></i>
+                                    <strong>${emp.name}</strong> - ${emp.position}
+                                    <br>
+                                    <small><i class="fas fa-calendar-day"></i> Ngày vào: ${emp.hire_date}</small>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="content-footer">
+                            <i class="fas fa-lightbulb"></i>
+                            Bạn có muốn xem thông tin chi tiết về nhân viên mới không?
+                        </div>
+                    </div>
+                `;
             }
+            
+            return formattedMessage || message;
         } catch (e) {
             console.error('Error parsing JSON response:', e);
-            return message; // Return original message if parsing fails
+            return message;
         }
     }
 
-    // Ensure message is a string before using string methods
+    // Ensure message is a string
     if (typeof message !== 'string') {
         message = String(message);
     }
 
-    // Handle statistics tables
+    // Format code blocks
+    message = message.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+        return `<div class="code-block"><pre><code class="language-${lang || 'plaintext'}">${escapeHtml(code.trim())}</code></pre></div>`;
+    });
+
+    // Format inline code
+    message = message.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    // Format color codes
+    message = message.replace(/#([0-9A-Fa-f]{6})/g, (match, color) => {
+        return `<span class="color-code" style="display:inline-block;width:12px;height:12px;background:#${color};border-radius:2px;vertical-align:middle;margin-right:4px;"></span><code>#${color}</code>`;
+    });
+
+    // Format RGB values
+    message = message.replace(/RGB\((\d+),\s*(\d+),\s*(\d+)\)/gi, (match, r, g, b) => {
+        return `<span class="color-code" style="display:inline-block;width:12px;height:12px;background:rgb(${r},${g},${b});border-radius:2px;vertical-align:middle;margin-right:4px;"></span><code>RGB(${r}, ${g}, ${b})</code>`;
+    });
+
+    // Format lists
+    message = message.replace(/^[-*]\s+(.+)$/gm, '<li>$1</li>');
+    message = message.replace(/(<li>.*<\/li>)/s, '<ul class="info-list">$1</ul>');
+
+    // Format tables
     message = message.replace(/\[TABLE\]([\s\S]*?)\[\/TABLE\]/g, function(match, tableData) {
         try {
             const data = JSON.parse(tableData);
-            let html = '<table class="stats-table">';
+            let html = '<table class="info-table">';
             
-            // Add headers
             if (data.headers) {
                 html += '<thead><tr>';
                 data.headers.forEach(header => {
@@ -1352,7 +1785,6 @@ function formatMessage(message) {
                 html += '</tr></thead>';
             }
             
-            // Add rows
             if (data.rows) {
                 html += '<tbody>';
                 data.rows.forEach(row => {
@@ -1373,24 +1805,24 @@ function formatMessage(message) {
             return match;
         }
     });
-    
-    // Handle code blocks with syntax highlighting
-    message = message.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
-        return formatCodeBlock(code.trim(), lang);
-    });
-    
-    // Handle inline code
-    message = message.replace(/`([^`]+)`/g, '<code>$1</code>');
-    
-    // Handle blockquotes
-    message = message.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
-    
-    // Handle links
+
+    // Format sections
+    message = message.replace(/^([^:]+):\s*$/gm, '<div class="content-title"><i class="fas fa-info-circle"></i>$1</div>');
+    message = message.replace(/(<div class="content-title">.*?<\/div>)([\s\S]*?)(?=<div class="content-title">|$)/g, 
+        '<div class="content-section">$1<div class="content-body">$2</div></div>');
+
+    // Format highlights
+    message = message.replace(/\*\*(.*?)\*\*/g, '<span class="highlight">$1</span>');
+
+    // Format tags
+    message = message.replace(/#(\w+)/g, '<span class="tag">#$1</span>');
+
+    // Format links
     message = message.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
-    
-    // Handle line breaks
+
+    // Format line breaks
     message = message.replace(/\n/g, '<br>');
-    
+
     return message;
 }
 

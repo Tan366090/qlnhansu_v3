@@ -66,3 +66,11 @@
 [2025-05-10 18:32:10] User message: <!-- Chat Modal --><!-- Chat Modal --><!-- Chat Modal --><!-- Chat Modal --><!-- Chat Modal --><!-- Chat Modal --><!-- Chat Modal -->
 [2025-05-10 18:32:11] AI Response: Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau.
 [2025-05-10 18:32:27] User message: ce_type`, `policy_number`, `provider`, `start_date`, `end_date`, `employee_contribution`, `employer_contribution`, `status`, `created_at`, `updated_at`) VALUES (1, 1, 'Social', 'SOC-001', 'Bảo hiểm Xã hội', '2020-01-01', NULL, 800000.00, 1600000.00, 'active', '2025-04-30 04:57:06', '2025-04-30 04:57:06'), (2, 2, 'Health', 'HLT-002', 'Bảo hiểm Y tế', '2020-02-01', NULL, 500000.00, 1000000.00, 'active', '2025-04-30 04:57:06', '2025-04-30 04:57:06'), (3, 3, 'Unemployment', 'UNE-003', 'Bảo hiểm Thất nghiệp', '2020-03-01', NULL, 200000.00, 400000.00, 'active', '2025-04-30 04:57:06', '2025-04-30 04:57:06'), (4, 4, 'Social', 'SOC-004', 'Bảo hiểm Xã hội', '2020-04-01', NULL, 800000.00, 1600000.00, 'active', '2025-04-30 04:57:06', '2025-04-30 04:57:06'), (5, 5, 'Health', 'HLT-005', 'Bảo hiểm Y tế', '2020-05-01', NULL, 500000.00, 1000000.00, 'active', '2025-04-30 04:57:06', '2025-04-30 04:57:06'), (6, 6, 'Social', 'SOC-006', 'Bảo hiểm Xã hội', '2020-06-01', NULL, 800000.00, 1600000.00, 'active', '2025-04-30 04:57:06', '2025-04-30 04:57:
+[2025-05-10 18:36:30] User message: Tổng số nhân viên
+[2025-05-10 18:36:36] User message: Thông tin phòng ban
+[2025-05-10 18:40:54] User message: Tổng số nhân viên
+[2025-05-10 18:41:04] User message: Cơ cấu tổ chức
+[2025-05-10 18:42:15] User message: Tổng số nhân viên
+[2025-05-10 18:42:27] User message: Thông tin phòng ban
+[2025-05-10 18:42:36] User message: thông tin lương
+[2025-05-10 18:43:34] User message: phòng ban Finance có bao nhiêu nhân viên
