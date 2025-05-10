@@ -23,14 +23,6 @@
     <link rel="stylesheet" href="css/libs/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/libs/roboto.css">
 
-    <style>
-        .sidebar {
-            background-color: #E5E5E5;
-        }
-        .main-content {
-            background-color: #F2F2F2;
-        }
-    </style>
 
     <!-- Thêm Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -42,8 +34,15 @@
     <!-- JavaScript -->
     <script src="js/libs/jquery-3.7.1.min.js"></script>
     <script src="js/libs/bootstrap.bundle.min.js"></script>
+    <style>
+        .stat-info h3 {
+    color: #222 !important;
+    font-weight: bold;
+    font-family: 'Roboto', Arial, sans-serif;
+    letter-spacing: -0.5px;
+}
+    </style>
 </head>
-
 <body>
 <div class="dashboard-container">
     <!-- Sidebar -->
@@ -105,18 +104,21 @@
             </ul>
         </nav>
     </aside>
-
-    <div class="wrapper">
+ 
+   <div style ="background-color: #f8f6f4;"class="wrapper">
         <!-- Header -->
         <header class="header">
             <div class="header-center">
                 <input type="text" class="form-control search-box" placeholder="Tìm kiếm...">
             </div>
             <div class="header-right">
-            <button class="btn btn-link notification-bell" type="button" id="notificationsDropdown" data-bs-toggle="dropdown">
+                <button class="btn btn-link notification-bell" type="button" id="notificationsDropdown" data-bs-toggle="dropdown">
                     <i class="fas fa-bell"></i>
                     <span class="badge">3</span>
-            </button>
+                </button>
+                <button class="btn btn-link chat-bell" type="button" id="chatButton">
+                    <img src="chat.png" alt="Chat" style="width:28px;height:28px;object-fit:cover;vertical-align:middle;">
+                </button>
                 <div class="dropdown d-inline-block">
                     <button class="btn btn-link p-0" type="button" id="userDropdown" data-bs-toggle="dropdown">
                         <img src="male.png" alt="User" class="rounded-circle" width="32" height="32">
@@ -140,7 +142,7 @@
         </header>
 
         <!-- Main Content -->
-        <main class="main-content" id="mainContent" role="main">
+        <main style ="background-color: #f8f6f4;" class="main-content" id="mainContent" role="main">
             <!-- Statistics Cards -->
             <div class="dashboard-stats-grid">
                 <div class="dashboard-stat-card">
@@ -185,59 +187,78 @@
                 </div>
             </div>
 
-            <!-- Charts Section + Recent Activities Row -->
-            <!-- Đã xóa biểu đồ ở đây -->
-            <!-- End Charts Section + Recent Activities Row -->
+           
         </main>
     </div>
 </div>
 
+<!-- Chat Modal -->
+<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="max-width: 900px; margin: 1.75rem auto;">
+        <div class="modal-content" style="background: transparent; border: none; box-shadow: none;">
+            <div class="modal-body p-0" style="background: transparent;">
+                <iframe src="chat_widget.php" style="width: 100%; height: 600px; border: none; border-radius: 16px; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay for chat modal -->
+<div id="chatOverlay" style="display:none;"></div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize charts
-    const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
-    new Chart(attendanceCtx, {
-        type: 'line',
-        data: {
-            labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
-            datasets: [{
-                label: 'Đi làm đúng giờ',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            }]
-        }
-    });
-
-    const distributionCtx = document.getElementById('employeeDistributionChart').getContext('2d');
-    new Chart(distributionCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Kỹ thuật', 'Kinh doanh', 'Hành chính', 'Khác'],
-            datasets: [{
-                data: [30, 25, 25, 20],
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)'
-                ]
-            }]
-        }
-    });
+    // Mobile menu functionality
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    
+    if (menuToggle && sidebar && overlay) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('sidebar-open');
+        });
+        
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('sidebar-open');
+        });
+    }
 
     // Initialize tooltips
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
+    if (tooltipTriggerList.length > 0) {
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    }
+
+    // Chat functionality
+    const chatButton = document.getElementById('chatButton');
+    const chatModal = new bootstrap.Modal(document.getElementById('chatModal'));
+    const chatOverlay = document.getElementById('chatOverlay');
+    
+    chatButton.addEventListener('click', function() {
+        chatModal.show();
+        chatOverlay.style.display = 'block';
     });
 
-    // Dark mode toggle
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    darkModeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
+    // Khi modal đóng (bằng nút X hoặc sự kiện khác)
+    document.getElementById('chatModal').addEventListener('hidden.bs.modal', function () {
+        chatOverlay.style.display = 'none';
+    });
+
+    // Listen for close message from iframe
+    window.addEventListener('message', function(event) {
+        if(event.data === 'closeChatModal') {
+            chatModal.hide();
+            chatOverlay.style.display = 'none';
+        }
     });
 });
 </script>
+
 </body>
 </html>
